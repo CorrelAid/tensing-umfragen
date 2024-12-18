@@ -1,0 +1,44 @@
+---
+title: "Dev containers with R and Quarto"
+author: "James Goldie"
+format: html
+---
+
+This is a sample dev container! It's set up particularly for R and Quarto development.
+
+To render this document, hit the Render button up the top-right of the tab in VSCode, or open a terminal with {{< kbd mac=Shift-Command-P win=Shift-Control-P linux=Shift-Ctrl-P >}} and run `quarto render`.
+
+::: {.aside}
+If you're interested in learning more about using dev containers this way, check out [my blog post on the subject](https://jamesgoldie.dev/writing/dev-containers-in-r).
+</br></br>
+To customise the dev container, modify [devcontainer.json](.devcontainer/devcontainer.json).
+:::
+
+Now, let's see what we can do. How about some R code?
+
+```{r}
+#| label: rtest
+
+library(tibble)
+
+mydata <- tibble(x = 1:10, y = x^2)
+print(mydata)
+ojs_define(mydata)
+```
+
+And we can take the data that we've exported with `ojs_define` and send it to an Observable chart:
+
+```{ojs}
+//| label: somechart
+
+Plot.plot({
+  marks: [
+    Plot.barY(transpose(mydata), {
+      x: "x",
+      y: "y"
+    })
+  ]
+})
+```
+
+Great!
