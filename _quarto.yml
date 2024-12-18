@@ -1,7 +1,28 @@
 project:
   type: website
   output-dir: out
+  render: 
+    - "!LICENSE"
+    - "*qmd"
   
 # only re-render if the source changes or if we specifically render that file
 execute:
   freeze: auto
+
+format:
+  html:
+    theme: materia
+    css: styles.css
+    toc: true
+
+website:
+  navbar:
+    left:
+      - text: "Home"
+        href: "index.html"
+      - deskriptiv.qmd
+      - kern.qmd
+    right:
+      - icon: github
+        href: https://github.com/
+        aria-label: GitHub

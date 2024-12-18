@@ -1,0 +1,57 @@
+---
+title: "Deskriptives"
+execute:
+  echo: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(hrbrthemes)
+
+ts_col <- "#b5c948"
+
+og <- readr::read_csv2("data/raw/og.csv")
+
+ggplot2::theme_set(theme_ipsum())
+```
+
+
+Insgesamt haben **`{r} nrow(og)` Ortsgruppen** den Fragebogen ausgefüllt.
+
+
+## Wie viele Aktive gibt es? 
+
+
+```{r}
+og <- og %>%
+    tidyr::replace_na(list("Mitarbeitende (inkl. Leitung):" = 0, "Teilnehmende:" = 0)) %>%
+    dplyr::mutate(tn_leitung = `Mitarbeitende (inkl. Leitung):` + `Teilnehmende:`)
+
+ggplot(og, aes(x = tn_leitung))+
+    geom_histogram()+
+    labs(x = "Mitarbeitende (inkl. Leitung)", y = "Anzahl Gruppen")
+```
+
+Durchschnittliche Anzahl von Teilnehmenden: `{r} mean(og$tn_leitung) %>% round(2)`. 
+
+
+## Geschlecht
+
+::: {.panel-tabset}
+
+## Mitarbeitende (inkl. Leitung)
+
+## Teilnehmende
+
+:::
+
+
+::: {.panel-tabset}
+
+## Mitarbeitende (inkl. Leitung)
+
+## Teilnehmende
+
+:::
+
