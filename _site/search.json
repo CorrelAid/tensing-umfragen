@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "kern.html",
+    "href": "kern.html",
+    "title": "Kern von TenSing",
+    "section": "",
+    "text": "Eigenschaften\nwordcloud\nZustimmung zu Eigenschaften/Aussagen\n…"
+  },
+  {
+    "objectID": "deskriptiv.html",
+    "href": "deskriptiv.html",
+    "title": "Deskriptives",
+    "section": "",
+    "text": "Insgesamt haben 38 Ortsgruppen den Fragebogen ausgefüllt."
+  },
+  {
+    "objectID": "deskriptiv.html#wie-viele-aktive-gibt-es",
+    "href": "deskriptiv.html#wie-viele-aktive-gibt-es",
+    "title": "Deskriptives",
+    "section": "Wie viele Aktive gibt es?",
+    "text": "Wie viele Aktive gibt es?\n\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nDurchschnittliche Anzahl von Teilnehmenden: 7.24."
+  },
+  {
+    "objectID": "deskriptiv.html#geschlecht",
+    "href": "deskriptiv.html#geschlecht",
+    "title": "Deskriptives",
+    "section": "Geschlecht",
+    "text": "Geschlecht\n\nMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\n\n\n\n\n\n\n\nMitarbeitende (inkl. Leitung)Teilnehmende"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "TenSing Auswertung 2024",
+    "section": "",
+    "text": "::: {.card title=“Ortsgruppen”}\nWillkommen zur Auswertung der Umfrage"
+  }
+]

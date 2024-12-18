@@ -1,6 +1,6 @@
 project:
   type: website
-  output-dir: out
+  output-dir: _site
   render: 
     - "!LICENSE"
     - "*qmd"
