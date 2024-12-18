@@ -8,7 +8,6 @@ execute:
 #| include: false
 library(tidyverse)
 library(hrbrthemes)
-library(wordcloud)
 
 ts_col <- "#b5c948"
 

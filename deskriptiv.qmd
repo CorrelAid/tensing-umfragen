@@ -13,7 +13,7 @@ ts_col <- "#b5c948"
 
 og <- readr::read_csv2("data/raw/og.csv")
 
-ggplot2::theme_set(theme_ipsum())
+ggplot2::theme_set(theme_minimal())
 ```
 
 
