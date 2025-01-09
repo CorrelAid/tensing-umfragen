@@ -18,3 +18,7 @@ Thumbs.db
 # output folder (you may want to exclude files when we publish!)
 /out/*
 !/out
+.Rproj.user
+
+# raw data
+data/raw
