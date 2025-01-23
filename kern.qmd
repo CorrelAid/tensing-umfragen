@@ -12,8 +12,9 @@ library(wordcloud)
 
 ts_col <- "#b5c948"
 
-og <- readr::read_csv2("data/raw/og.csv")
+og <- readr::read_rds("data/cleaned/og.rds")
 
+names(og$long)
 ggplot2::theme_set(theme_ipsum())
 ```
 

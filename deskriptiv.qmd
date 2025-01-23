@@ -11,29 +11,38 @@ library(hrbrthemes)
 
 ts_col <- "#b5c948"
 
-og <- readr::read_csv2("data/raw/og.csv")
+og <- readr::read_rds("data/cleaned/og.rds")
+og_data <- og$data
+og_data <- og_data %>% 
+  mutate(anzahl_insg = anzahl_tn + anzahl_ma_leitung)
 
 ggplot2::theme_set(theme_ipsum())
 ```
 
 
-Insgesamt haben **`{r} nrow(og)` Ortsgruppen** den Fragebogen ausgefüllt.
+## Überblick
+
+- Ortsgruppen:  `{r} nrow(og_data)`
+- Aktive: `{r} sum(og_data$anzahl_insg, na.rm = T)`
+  - Teilnehmende: `{r} sum(og_data$anzahl_tn, na.rm = T)`
+  - Leitung + Mitarbeitende: `{r} sum(og_data$anzahl_ma_leitung, na.rm = T)`
 
 
 ## Wie viele Aktive gibt es? 
 
 
 ```{r}
-og <- og %>%
-    tidyr::replace_na(list("Mitarbeitende (inkl. Leitung):" = 0, "Teilnehmende:" = 0)) %>%
-    dplyr::mutate(tn_leitung = `Mitarbeitende (inkl. Leitung):` + `Teilnehmende:`)
 
-ggplot(og, aes(x = tn_leitung))+
-    geom_histogram()+
-    labs(x = "Mitarbeitende (inkl. Leitung)", y = "Anzahl Gruppen")
 ```
 
-Durchschnittliche Anzahl von Teilnehmenden: `{r} mean(og$tn_leitung) %>% round(2)`. 
+```{r}
+ggplot(og_data, aes(x = anzahl_insg))+
+    geom_density()+
+    geom_histogram()+
+    labs(x = "Größe der Gruppen", y = "Anzahl Gruppen", title = "Anzahl der Aktiven")
+```
+
+Durchschnittliche Anzahl von Aktiven: `{r} mean(og_data$anzahl_insg, na.rm = T) %>% round(2)`. 
 
 
 ## Geschlecht

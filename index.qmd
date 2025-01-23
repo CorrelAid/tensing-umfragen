@@ -8,10 +8,21 @@ execute:
 #| include: false
 library(tidyverse)
 
-og <- readr::read_csv("data/raw/og.csv")
+og <- readr::read_rds("data/cleaned/og.rds")
+tn <- readr::read_rds("data/cleaned/tn.rds")
+```
+
+# Daten Ortsgruppen
+```{r}
+str(og, max.level = 2)
+print(colnames(og$data))
 ```
 
 
-::: {.card title="Ortsgruppen"}
+# Teilnehmer*innendaten
 
-Willkommen zur Auswertung der Umfrage
+```{r}
+str(tn, max.level = 2)
+print(colnames(tn$data))
+```
+
