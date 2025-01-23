@@ -144,7 +144,14 @@ col_name_ortsgruppe_name <- q$`$xpath`
 TN_DATA$data$og_name <- tn_df %>% 
     pull(!!col_name_ortsgruppe_name)
 
+# read in ref
+ref_og <- readr::read_csv("data/ref/og_names.csv")
 
+TN_DATA$data <- TN_DATA$data %>% 
+    dplyr::mutate(og_name = if_else(!is.na(og_name), og_name, "")) %>% 
+    mutate(og_name = str_remove_all(og_name, stringr::regex("tensing|ten sing|ten-sing", ignore_case = TRUE)) %>% stringr::str_trim()) %>% 
+    fuzzyjoin::stringdist_left_join(ref_og, max_dist = 2, by = c("og_name" = "og_ref")) %>% 
+    rename(og_name_clean = og_ref)
 
 # ORTSUEBERGREIFENDE ANGEBOTE ------------
 q <- find_q(tn_survey, "label", "ortsgruppenübergreifenden")
@@ -290,3 +297,4 @@ TN_DATA$demo$kontakt_chrgl <- sample(kontaktpunkte, length(kontaktpunkte))
 
 
 readr::write_rds(TN_DATA, "data/cleaned/tn.rds")
+
