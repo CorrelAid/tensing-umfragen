@@ -26,7 +26,7 @@ drop_system_columns <- function(submissions_df) {
 }
 
 make_multiselect_long <- function(df, msq_col_name)  {
-    og_df %>% 
+    df %>% 
         tidyr::separate_rows(!!msq_col_name, sep = " ")  %>% 
         select(ends_with("_id"), !!msq_col_name) %>% 
         filter(!is.na(.data[[msq_col_name]]))
