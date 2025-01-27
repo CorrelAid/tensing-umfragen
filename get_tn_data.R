@@ -1,6 +1,7 @@
 library(kbtbr)
 library(dotenv)
 library(dplyr)
+library(readr)
 source("utils.R")
 source("tn_config.R")
 
@@ -8,7 +9,7 @@ dotenv::load_dot_env()
 kobo <- kbtbr::Kobo$new("https://eu.kobotoolbox.org/", kobo_token = Sys.getenv("KOBO_EU_TOKEN"))
 
 
-# Ortsgruppe Survey Daten ---------
+# TN Survey Daten ---------
 tn_id <- Sys.getenv("2024_TN")
 tn_asset <- kobo$get(sprintf("assets/%s", tn_id))
 tn_survey <- tn_asset$content$survey
@@ -45,6 +46,11 @@ TN_DATA <- list(
     data = tibble(tn_id = tn_df$tn_id) # tibble with the rest of the variables
 )
 
+# to store metadata like question formulation 
+TN_QS <- list() # TODO: this a good idea??
+
+# WORTER
+TN_DATA$long$woerter <- pivot_cols_long(tn_df, QS_WORT$col_name, "wort") %>% select(tn_id, wort)
 
 # EIGENSCHAFTEN -----------
 start_group <- find_q(tn_survey, "label", "Eigenschaften")
@@ -60,6 +66,12 @@ eig_long <- eig_long %>%
     select(tn_id, eig = name, eig_label = label, value)
 
 TN_DATA$long$tensing_eigenschaften <- eig_long
+
+
+# TODO: make better system
+eig_qs %>% write_csv("data/meta/tn/tensing_eigenschaften.csv")
+eig_qs %>% write_csv("data/meta/tn/eig_long.csv")
+
 
 # WEG ZU TENSING -------
 zugangsweg_qs <- find_qs(tn_survey, "$xpath", "zugangsweg")

@@ -20,8 +20,8 @@ tn_survey <- tn_survey %>%
     rename(col_name = "$xpath")
 
 # IDENTIFY QUESTIONS --
+QS_WORT <- find_qs(tn_survey, "col_name", "Wort")
 
-source("utils.R")
 Q_VERANTWORTUNG_JANEIN <- find_q(tn_survey, "label", "Übernimmst.+?Verantwortung\\?$")
 CN_VERANTWORTUNG_JANEIN <- Q_VERANTWORTUNG_JANEIN$col_name
 
