@@ -1,0 +1,203 @@
+---
+title: "Bedarfe"
+execute:
+  echo: false
+  warning: false
+---
+
+
+```{r}
+
+#| include: false
+library(tidyverse)
+library(ggiraph)
+source("config/viz_config.R")
+source("R/quarto-utils.R")
+ggplot2::theme_set(theme_ts) # defined in viz_config
+
+tn <- readr::read_rds("data/cleaned/tn.rds")
+tn_data <- tn$data
+
+og <- readr::read_rds("data/cleaned/og.rds")
+og_data <- og$data %>% ungroup()
+og_cfg <- readr::read_rds("config/og_cfg.rds")
+og_choices <- readr::read_csv("data/meta/og_choices.csv")
+
+tn_survey <- readr::read_csv("data/meta/tn_survey.csv")
+
+```
+
+
+## Unterstützungsbedarfe
+
+::: {.panel-tabset}
+
+```{r}
+# get values
+order_df <- og_choices %>% 
+  filter(list_name %in% og_cfg$QS_UNTERSTUETZUNGSBEDARFE$select_from_list_name) %>% 
+  mutate(order = c(1:2, 4:5, 3)) %>% 
+  select(order, bedarf_value = label) %>% 
+  arrange(order)
+
+unterst_long_plotdata <- og$long$unterstuetzungsbedarfe %>% 
+  left_join(order_df) %>% 
+  add_count(bedarf, name = "n_antwort") %>% 
+  count(bedarf, n_antwort, bedarf_value, order, .drop = FALSE) %>% 
+  mutate(prop = n / n_antwort) 
+
+```
+
+::: {.callout-note collapse="true"}
+
+## Datenquelle
+
+**Frage:** `{r} fmt_source(og_cfg$Q_BEGIN_UNTERSTUETZUNGSBEDARFE, "og")`
+
+Spalten im Roh-Datensatz:
+
+```{r}
+og_cfg$QS_UNTERSTUETZUNGSBEDARFE %>% pull(col_name)
+```
+:::
+
+## Balkendiagramm
+
+
+```{r}
+#| out-width: "100%"
+#| fig-width: 8
+
+
+# long format 
+p <- ggplot(unterst_long_plotdata, aes(fill = bedarf_value, y = bedarf, x = prop, tooltip = paste0(bedarf, "\n", bedarf_value, ": ", round(prop * 100), "% der Ortsgruppen")))+
+  geom_col_interactive(position = position_stack(reverse = TRUE))+
+  scale_x_continuous(labels = scales::percent)+
+  scale_y_discrete(labels = scales::label_wrap(30))+
+  scale_fill_manual_interactive(labels = order_df$bedarf_value, values = hcl.colors(5, "Purple-Green"))+
+  labs(fill = NULL, y = NULL, x = "% der Ortsgruppen", title = "Unterstützungsbedarfe in den Ortsgruppen")+
+  theme(legend.position = "top", axis.text.y = element_text(size = 12))
+
+ggiraph::girafe(ggobj = p)
+```
+## Heatmap
+
+```{r}
+
+  
+p_unterst_heatmap <-
+  ggplot(
+    unterst_long_plotdata,
+    aes(
+      y = bedarf,
+      x = fct_reorder(bedarf_value, order),
+      group = bedarf_value,
+      fill = prop * 100,
+      label = scales::percent(prop, accuracy = 1)
+    )
+  ) +
+  geom_tile() +
+  scale_y_discrete(labels = scales::label_wrap(30))+
+  geom_text(color = "white", size = 3) +
+  scale_fill_continuous(limits = c(0, 100)) +
+  labs(y = NULL, x = NULL, title = "Unterstützungsbedarfe in den Ortsgruppen", fill = "% der Ortsgruppen") +
+  theme(legend.position = "bottom")
+
+ggiraph::girafe(ggobj = p_unterst_heatmap)
+```
+
+:::
+
+
+
+::: {.callout-tip appearance="simple" collapse="true"}
+
+## Weitere Unterstützungsbedarfe (offene Antworten):
+
+```{r}
+#| results: asis
+answers <- og_data %>% 
+  filter(!is.na(unterstuetzungsbedarfe_weitere)) %>% 
+  pull(unterstuetzungsbedarfe_weitere)
+cat(paste("- ", answers, collapse = "\n"))
+```
+
+:::
+
+## Teilnehmendengewinnung
+::: {.panel-tabset}
+
+```{r}
+order_df <- og_choices %>% 
+  filter(list_name %in% og_cfg$Q_TN_GEWINNUNG_PROB$select_from_list_name) %>% 
+  mutate(order = rev(1:n())) %>% 
+  select(order, hat_probleme_tn_gewinnung = label) %>% 
+  arrange(order)
+
+
+tng_prob <- og_data %>% 
+  left_join(order_df, by = "hat_probleme_tn_gewinnung")
+```
+## Balkendiagramm
+
+```{r}
+ggplot(tng_prob, aes(x = fct_reorder(hat_probleme_tn_gewinnung, order), fill = fct_reorder(hat_probleme_tn_gewinnung, order)))+
+  geom_bar()+
+  scale_fill_manual(guide = "none", values = fct_rev(PAL_AMPEL))+
+  scale_x_discrete(guide = guide_axis(angle = 45))+
+  scale_y_continuous(breaks = scales::breaks_pretty())+
+  labs(x = NULL, title = "Probleme bei der Gewinnung von Teilnehmenden", y = "Anzahl Ortsgruppen", fill = NULL)
+```
+
+
+
+## Pie Chart
+
+```{r}
+tng_pc <- og_data %>%
+  left_join(order_df, by = "hat_probleme_tn_gewinnung") %>% 
+  get_pie_chart_data(order)
+
+# TODO Fix label positions (due to fct_reorder)
+ggplot(tng_pc, aes(x = "", y = n, fill = as.character(order))) +
+  geom_col() +
+  ggrepel::geom_label_repel(
+    aes(y = pos, label = paste0(perc, "%")),
+    size = 4.5,
+    nudge_x = 1,
+    show.legend = FALSE
+  ) +
+  scale_fill_manual(values = fct_rev(PAL_AMPEL), labels = order_df$hat_probleme_tn_gewinnung) + 
+  labs(title = "Probleme bei der Gewinnung von Teilnehmenden",
+       x = NULL,
+       y = NULL, 
+       fill = NULL) +
+  theme(panel.grid = element_blank(),
+        axis.text.x = element_blank()) +
+  coord_polar(theta = "y")
+```
+
+:::
+
+### Wie sind Leute zu Ten Sing gekommen?
+
+```{r}
+
+```
+
+```{r}
+# split 
+tn$long$zugangsweg 
+```
+
+### Maßnahmen 
+```{r}
+mass_long <- og$long$tn_gewinnung_massnahmen %>% 
+  left_join(og_data %>% select(og_id, hat_probleme_tn_gewinnung))
+
+ggplot(mass_long, aes(x = massnahme))+
+  geom_bar()+
+  facet_grid(~hat_probleme_tn_gewinnung)
+```
+
+

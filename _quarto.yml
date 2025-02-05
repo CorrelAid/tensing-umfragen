@@ -22,6 +22,9 @@ website:
         href: "index.html"
       - deskriptiv.qmd
       - kern.qmd
+      - evaluation-pg.qmd
+      - bedarfe.qmd
+
     right:
       - icon: github
         href: https://github.com/

@@ -1,0 +1,123 @@
+---
+title: "Evaluation PG-Arbeit"
+execute:
+  echo: false
+  warning: false
+---
+
+
+```{r}
+
+#| include: false
+library(tidyverse)
+library(ggiraph)
+library(patchwork)
+source("viz_config.R")
+ggplot2::theme_set(theme_ts) # defined in viz_config
+
+tn <- readr::read_rds("data/cleaned/tn.rds")
+tn_data <- tn$data
+
+og <- readr::read_rds("data/cleaned/og.rds")
+og_data <- og$data
+
+tn_survey <- readr::read_csv("data/meta/tn_survey.csv")
+
+```
+
+
+# Informationskanäle 
+
+```{r}
+info_komplett_data <- tn_data %>% 
+  count(info_komplett) %>% 
+  mutate(csum = rev(cumsum(rev(n))),
+         perc = round(n * 100 / nrow(tn_data), 1),
+         pos = n/2 + lead(csum, 1),
+         pos = if_else(is.na(pos), n/2, pos)) 
+
+ja_share <- info_komplett_data %>% 
+  filter(info_komplett == "ja") %>% pull(perc)
+
+# aenderungswunsch
+info_aenderung <- tn_data %>% 
+  count(info_wege_aenderung) %>% 
+  mutate(csum = rev(cumsum(rev(n))),
+       perc = round(n * 100 / nrow(tn_data), 1),
+       pos = n/2 + lead(csum, 1),
+       pos = if_else(is.na(pos), n/2, pos)) 
+
+ja_change <- info_aenderung %>% 
+  filter(stringr::str_starts(info_wege_aenderung, "Auf")) %>% pull(perc)
+
+nein_change <- info_aenderung %>% 
+  filter(stringr::str_starts(info_wege_aenderung, "Genau")) %>% pull(perc)
+```
+
+
+Die TEN SINGenden fühlen sich zu `{r} ja_share`% gut informiert. 
+
+`{r} ja_change`% möchten auf anderem Wege informiert werden, `{r} nein_change`% sind mit den bisherigen Informationskanälen zufrieden. 
+
+::: {.panel-tabset}
+
+## Sind TN informiert?
+
+```{r}
+info_komplett_plot <- ggplot(info_komplett_data, aes(x = "", y = n, fill = info_komplett)) +
+  geom_col() +
+  ggrepel::geom_label_repel(
+    aes(y = pos, label = paste0(perc, "%")),
+    size = 4.5,
+    nudge_x = 1,
+    show.legend = FALSE
+  ) +
+  coord_polar(theta = "y") +
+  labs(title = "Fühlen sich TN komplett informiert?",
+       x = NULL,
+       y = NULL,
+       fill = NULL) +
+  theme(panel.grid = element_blank(),
+        axis.text.x = element_blank()) +
+  scale_fill_manual(values = cols_4[c(1, 3, 4)])
+
+info_komplett_plot
+```
+
+## Änderungswunsch Informationskanäle
+
+```{r}
+info_aenderung_plot <- ggplot(info_aenderung, aes(x = "", y = n, fill = fct_rev(info_wege_aenderung))) +
+  geom_col() +
+  ggrepel::geom_label_repel(
+    aes(y = pos, label = paste0(perc, "%")),
+    size = 4.5,
+    nudge_x = 1,
+    show.legend = FALSE
+  ) +
+  coord_polar(theta = "y") +
+  labs(title = "Möchten die TN anders informiert werden?",
+       x = NULL,
+       y = NULL,
+       fill = NULL) +
+  theme(panel.grid = element_blank(),
+        axis.text.x = element_blank())  +
+  scale_fill_manual(values = cols_4[c(1, 3, 4)])
+
+info_aenderung_plot
+```
+:::
+
+::: {.callout-note}
+## Quelle
+
+TN-Fragebogen -> Frage _"..."_ 
+:::
+
+
+# Deutschlandweites Netzwerk
+```{r}
+
+```
+
+

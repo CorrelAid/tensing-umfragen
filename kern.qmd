@@ -2,28 +2,209 @@
 title: "Kern von TenSing"
 execute:
   echo: false
+  warning: false
 ---
 
 ```{r}
 #| include: false
 library(tidyverse)
-library(hrbrthemes)
-library(wordcloud)
+library(wordcloud2)
+library(ggiraph)
+source("config/viz_config.R")
+source("R/quarto-utils.R")
 
-ts_col <- "#b5c948"
+ggplot2::theme_set(theme_ts) # defined in viz_config
+
+tn <- readr::read_rds("data/cleaned/tn.rds")
+tn_data <- tn$data
+tn_cfg <- readr::read_rds("config/tn_cfg.rds")
 
 og <- readr::read_rds("data/cleaned/og.rds")
+og_data <- og$data
 
-names(og$long)
-ggplot2::theme_set(theme_ipsum())
+tn_survey <- readr::read_csv("data/meta/tn_survey.csv")
+
 ```
 
 
-# Eigenschaften 
+# Was verbinden die TN mit TEN SING?
 
-_wordcloud_
+::: {.callout-note collapse="true"}
+## Datenquelle 
 
-Zustimmung zu Eigenschaften/Aussagen
+**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_WORT, "tn")`
 
-...
+Spalten im Roh-Datensatz: 
 
+```{r}
+tn_cfg$QS_WORT %>% select(name, col_name)
+```
+
+:::
+
+```{r}
+woerter <- tn$long$woerter
+colorVec = rep(c(TS_GREEN, 'black'), length.out=nrow(demoFreq))
+
+woerter %>% 
+  rename(word = wort) %>% 
+  count(word, name = "freq") %>% 
+  wordcloud2::wordcloud2(color = colorVec, shape = "square")
+```
+
+# Was denken die TN über TEN SING?
+
+
+## Aussagen
+
+::: {.callout-note collapse="true"}
+## Datenquelle 
+
+**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_AUSSAGEN_LIKERT, "tn")`
+
+Spalten im Roh-Datensatz: 
+
+```{r}
+tn_cfg$QS_AUSSAGEN_LIKERT %>% select(name, col_name)
+```
+
+::: 
+```{r}
+#| out-width: "100%"
+#| fig-width: 10
+#| fig-height: 6
+
+meta_aussagen <- readr::read_csv("data/meta/tn/aussagen.csv")
+meta_aussagen_choices <- readr::read_csv("data/meta/tn/aussagen_choices.csv") %>% 
+  mutate(name = as.character(name))
+
+# long format 
+aussagen_long <- tn$wide$aussagen %>% tidyr::pivot_longer(-tn_id, names_to = "aussage")
+aussagen_long <- aussagen_long %>% left_join(meta_aussagen %>% rename(q_label = label), by = c("aussage" = "$autoname"))
+aussagen_long <- aussagen_long %>% left_join(meta_aussagen_choices %>% rename(ch_label = label), by = c("value" = "name"))
+p <- aussagen_long %>% 
+  group_by(aussage, q_label, value, ch_label) %>% 
+  summarize(n = n(), 
+            perc = n / nrow(tn_data)) %>% 
+  ggplot(aes(fill = value, y = aussage, x = perc, tooltip = q_label))+
+  geom_col_interactive(position = position_stack(reverse = TRUE))+
+  scale_x_continuous(labels = scales::percent)+
+  scale_y_discrete(labels = scales::label_wrap(60))+
+  scale_fill_manual_interactive(labels = meta_aussagen_choices$label, values = hcl.colors(6, "Purple-Green"))+
+  labs(fill = NULL, y = NULL, x = NULL, title = "Aussagen über TEN SING")+
+  theme(legend.position = "top", axis.text.y = element_text(size = 12))
+
+ggiraph::girafe(ggobj = p)
+```
+
+
+## Eigenschaften
+
+::: {.callout-note collapse="true"}
+## Datenquelle 
+
+**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_EIGENSCHAFTEN, "tn")`
+
+Spalten im Roh-Datensatz: 
+
+```{r}
+tn_cfg$QS_EIGENSCHAFTEN %>% select(name, col_name)
+```
+
+::: 
+
+```{r}
+meta_eig <- readr::read_csv("data/meta/tn/eig.csv")
+meta_eig_choices <- readr::read_csv("data/meta/tn/eig_choices.csv") %>% # here every question has its own scale
+  mutate(value = as.character(name)) %>% 
+  rename(label_value = label)
+
+meta_eig <- meta_eig %>% 
+  mutate(label_short = str_remove_all(label, "(Bei )?TEN SING.+?auf einer Skala"),
+         label_short = str_remove_all(label_short, ":"),
+         label_short = str_replace_all(label_short, "bis|und", "SEP"),
+         label_short = str_replace_all(label_short, "von|zwischen", ""),
+         label_short = str_remove_all(label_short, "\"")) %>% 
+  mutate(y = 1:n())
+
+eig_long <- tn$long$tensing_eigenschaften %>%
+  left_join(meta_eig, by = c("eig" = "name")) %>% 
+  left_join(meta_eig_choices, by = c("select_from_list_name" = "list_name", "value"))
+```
+
+
+
+::: {.panel-tabset}
+
+
+## Balkendiagramm
+
+
+```{r}
+p_eig <- eig_long %>% 
+  count(label_short, label_value, value) %>% 
+  ggplot(aes(y = label_short, x = n, group = value, fill = value, tooltip = paste("Antwortoption:", label_value)))+
+  geom_col_interactive(position = "stack")+
+  scale_y_discrete(
+    labels = str_split_i(meta_eig$label_short, "SEP", 2),
+    breaks = meta_eig$label_short,
+    sec.axis = dup_axis(
+      labels = str_split_i(meta_eig$label_short, "SEP", 1)
+    )
+  )+ 
+  scale_fill_manual_interactive(values = hcl.colors(6, "Purple-Green", rev = TRUE))+
+  guides(fill = "none")+
+  labs(y = NULL, title = "Eigenschaften von TEN SING")
+
+ggiraph::girafe(ggobj = p_eig)
+
+```
+
+## Heatmap
+
+```{r}
+eig_long_plotdata <- eig_long %>% 
+  add_count(label_short, name = "n_antwort") %>% 
+  count(label_short, n_antwort, label_value, value, .drop = FALSE) %>% 
+  mutate(perc = 100 * n / n_antwort) 
+  
+  
+p_eig_heatmap <-
+  ggplot(
+    eig_long_plotdata,
+    aes(
+      y = label_short,
+      x = fct_rev(value),
+      group = value,
+      fill = perc,
+      label = paste0(round(perc, 0), "%")
+    )
+  ) +
+  geom_tile() +
+  geom_text(color = "white", size = 3) +
+  scale_y_discrete(
+    labels = str_split_i(meta_eig$label_short, "SEP", 2),
+    breaks = meta_eig$label_short,
+    sec.axis = dup_axis(labels = str_split_i(meta_eig$label_short, "SEP", 1))
+  ) +
+  scale_fill_continuous(limits = c(0, 100)) +
+  labs(y = NULL, x = "Antwortoption", title = "Eigenschaften von TEN SING - Heatmap Ansicht") +
+  theme(legend.position = "bottom")
+
+ggiraph::girafe(ggobj = p_eig_heatmap)
+
+```
+
+
+## Daten
+```{r}
+eig_long_plotdata %>% 
+  arrange(label_short, value) %>% 
+  select(label_short, label_value, n, perc) %>% 
+  knitr::kable()
+```
+
+:::
+
+
+### 

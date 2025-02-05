@@ -7,22 +7,21 @@ execute:
 ```{r}
 #| include: false
 library(tidyverse)
+library(hrbrthemes)
+
+ts_col <- "#b5c948"
+tn <- readr::read_rds("data/cleaned/tn.rds")
+tn_data <- tn$data
 
 og <- readr::read_rds("data/cleaned/og.rds")
-tn <- readr::read_rds("data/cleaned/tn.rds")
-```
+og_data <- og$data
+og_data <- og_data %>% 
+  mutate(anzahl_insg = anzahl_tn + anzahl_ma_leitung)
 
-# Daten Ortsgruppen
-```{r}
-str(og, max.level = 2)
-print(colnames(og$data))
 ```
 
 
-# Teilnehmer*innendaten
 
-```{r}
-str(tn, max.level = 2)
-print(colnames(tn$data))
-```
+## Hinweise zur Benutzung
 
+Hier Hinweise wo was gefunden werden kann, z.B. in den INfoboxes. 
