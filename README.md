@@ -35,3 +35,7 @@ find_q multiple conditions, named vector / list of str_detect matches, mutliple 
 
 anonymity of age
 funtion shuffle vector
+
+# Fragen an TenSING
+
+TODO: how to deal with NA in og_name? and TODO: How to deal with duplicate entries for one OG?
