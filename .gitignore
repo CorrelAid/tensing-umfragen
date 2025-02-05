@@ -26,3 +26,7 @@ data/cleaned
 
 # .env
 .env
+
+# quarto website
+_freeze/
+_site/
