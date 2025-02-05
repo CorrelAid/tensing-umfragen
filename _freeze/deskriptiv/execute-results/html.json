@@ -1,0 +1,17 @@
+{
+  "hash": "7a7beb9be6f9cebe4d7f84ae90c44bdc",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Deskriptives\"\nexecute:\n  echo: false\n---\n\n\n\n\nInsgesamt haben **38 Ortsgruppen** den Fragebogen ausgefüllt.\n\n\n## Wie viele Aktive gibt es? \n\n\n::: {.cell}\n::: {.cell-output .cell-output-stderr}\n\n```\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n```\n\n\n:::\n\n::: {.cell-output-display}\n![](deskriptiv_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\nDurchschnittliche Anzahl von Teilnehmenden: 7.24. \n\n\n## Geschlecht\n\n::: {.panel-tabset}\n\n## Mitarbeitende (inkl. Leitung)\n\n## Teilnehmende\n\n:::\n\n\n::: {.panel-tabset}\n\n## Mitarbeitende (inkl. Leitung)\n\n## Teilnehmende\n\n:::\n\n",
+    "supporting": [
+      "deskriptiv_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
