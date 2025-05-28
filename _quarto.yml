@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: _site
+  pre-render: 
+    - R/utils.R
   render: 
     - "!LICENSE"
     - "*qmd"
@@ -18,14 +20,19 @@ format:
 website:
   navbar:
     left:
-      - text: "Home"
+      - text: "Start"
         href: "index.html"
       - deskriptiv.qmd
       - kern.qmd
       - evaluation-pg.qmd
       - bedarfe.qmd
-
+      - trends.qmd
+      
     right:
+      - text: "Hilfe"
+        href: "hilfe.html"
       - icon: github
         href: https://github.com/
         aria-label: GitHub
+
+  page-navigation: true
