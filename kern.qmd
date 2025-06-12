@@ -12,6 +12,7 @@ library(wordcloud2)
 library(ggiraph)
 source("config/viz_config.R")
 source("R/quarto-utils.R")
+source("R/utils.R")
 
 ggplot2::theme_set(theme_ts) # defined in viz_config
 
@@ -23,23 +24,21 @@ og <- readr::read_rds("data/cleaned/og.rds")
 og_data <- og$data
 
 tn_survey <- readr::read_csv("data/meta/tn_survey.csv")
-
+tn_choices <- readr::read_csv("data/meta/tn_choices.csv")
 ```
-
 
 # Was verbinden die TN mit TEN SING?
 
 ::: {.callout-note collapse="true"}
-## Datenquelle 
+## Datenquelle
 
 **Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_WORT, "tn")`
 
-Spalten im Roh-Datensatz: 
+Spalten im Roh-Datensatz:
 
 ```{r}
 tn_cfg$QS_WORT %>% select(name, col_name)
 ```
-
 :::
 
 ```{r}
@@ -49,30 +48,27 @@ colorVec = rep(c(TS_GREEN, 'black'), length.out=nrow(demoFreq))
 woerter %>% 
   rename(word = wort) %>% 
   count(word, name = "freq") %>% 
+  filter(freq > 4) %>% 
   wordcloud2::wordcloud2(color = colorVec, shape = "square")
 ```
 
 # Was denken die TN über TEN SING?
 
 
-## Aussagen
-
 ::: {.callout-note collapse="true"}
-## Datenquelle 
+## Datenquelle
 
 **Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_AUSSAGEN_LIKERT, "tn")`
 
-Spalten im Roh-Datensatz: 
+Spalten im Roh-Datensatz:
 
 ```{r}
 tn_cfg$QS_AUSSAGEN_LIKERT %>% select(name, col_name)
 ```
+:::
 
-::: 
 ```{r}
 #| out-width: "100%"
-#| fig-width: 10
-#| fig-height: 6
 
 meta_aussagen <- readr::read_csv("data/meta/tn/aussagen.csv")
 meta_aussagen_choices <- readr::read_csv("data/meta/tn/aussagen_choices.csv") %>% 
@@ -90,28 +86,28 @@ p <- aussagen_long %>%
   geom_col_interactive(position = position_stack(reverse = TRUE))+
   scale_x_continuous(labels = scales::percent)+
   scale_y_discrete(labels = scales::label_wrap(60))+
-  scale_fill_manual_interactive(labels = meta_aussagen_choices$label, values = hcl.colors(6, "Purple-Green"))+
+  scale_fill_manual_interactive(labels = meta_aussagen_choices$label, values = COLS_6)+
   labs(fill = NULL, y = NULL, x = NULL, title = "Aussagen über TEN SING")+
-  theme(legend.position = "top", axis.text.y = element_text(size = 12))
+  theme(legend.position = "top", 
+        axis.text.y = element_text(size = 12),
+        legend.text = element_text(size = 10))
 
 ggiraph::girafe(ggobj = p)
 ```
 
-
 ## Eigenschaften
 
 ::: {.callout-note collapse="true"}
-## Datenquelle 
+## Datenquelle
 
 **Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_EIGENSCHAFTEN, "tn")`
 
-Spalten im Roh-Datensatz: 
+Spalten im Roh-Datensatz:
 
 ```{r}
 tn_cfg$QS_EIGENSCHAFTEN %>% select(name, col_name)
 ```
-
-::: 
+:::
 
 ```{r}
 meta_eig <- readr::read_csv("data/meta/tn/eig.csv")
@@ -132,13 +128,14 @@ eig_long <- tn$long$tensing_eigenschaften %>%
   left_join(meta_eig_choices, by = c("select_from_list_name" = "list_name", "value"))
 ```
 
+::: callout-warning
+## Skalen uneinheitlich!
 
+Die Antwortoptionen waren bei diesem Fragenblock nicht ganz einheitlich ausgestaltet. Jede Unterfrage hatte eine eigene sechsstufige Skala, deren Endpunkte unterschiedlich waren. Wenn ihr im Balkendiagramm mit der Maus über die Balken geht, könnt ihr die ganz ausformulierten Endpunkte sehen (in der Grafik nur verkürzt dargestellt) und natürlich im `{r} fmt_fragebogen("tn")`.
+:::
 
-::: {.panel-tabset}
-
-
+::: panel-tabset
 ## Balkendiagramm
-
 
 ```{r}
 p_eig <- eig_long %>% 
@@ -146,15 +143,16 @@ p_eig <- eig_long %>%
   ggplot(aes(y = label_short, x = n, group = value, fill = value, tooltip = paste("Antwortoption:", label_value)))+
   geom_col_interactive(position = "stack")+
   scale_y_discrete(
-    labels = str_split_i(meta_eig$label_short, "SEP", 2),
+    labels = str_wrap(str_split_i(meta_eig$label_short, "SEP", 2), 20),
     breaks = meta_eig$label_short,
     sec.axis = dup_axis(
-      labels = str_split_i(meta_eig$label_short, "SEP", 1)
+      labels = str_wrap(str_split_i(meta_eig$label_short, "SEP", 1), 20)
     )
   )+ 
-  scale_fill_manual_interactive(values = hcl.colors(6, "Purple-Green", rev = TRUE))+
+  scale_fill_manual_interactive(values = rev(COLS_6))+ 
   guides(fill = "none")+
-  labs(y = NULL, title = "Eigenschaften von TEN SING")
+  labs(y = NULL, title = "Eigenschaften von TEN SING")+
+  theme(axis.text.y = element_text(size = 10))
 
 ggiraph::girafe(ggobj = p_eig)
 
@@ -183,28 +181,212 @@ p_eig_heatmap <-
   geom_tile() +
   geom_text(color = "white", size = 3) +
   scale_y_discrete(
-    labels = str_split_i(meta_eig$label_short, "SEP", 2),
+    labels = str_wrap(str_split_i(meta_eig$label_short, "SEP", 2), 20),
     breaks = meta_eig$label_short,
-    sec.axis = dup_axis(labels = str_split_i(meta_eig$label_short, "SEP", 1))
+    sec.axis = dup_axis(
+      labels = str_wrap(str_split_i(meta_eig$label_short, "SEP", 1), 20)
+    )
   ) +
   scale_fill_continuous(limits = c(0, 100)) +
   labs(y = NULL, x = "Antwortoption", title = "Eigenschaften von TEN SING - Heatmap Ansicht") +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom", axis.text.y = element_text(size = 10))
 
 ggiraph::girafe(ggobj = p_eig_heatmap)
 
 ```
 
-
 ## Daten
+
 ```{r}
 eig_long_plotdata %>% 
   arrange(label_short, value) %>% 
   select(label_short, label_value, n, perc) %>% 
   knitr::kable()
 ```
+:::
+
+# Wie setzen sich Aktive mit ihrem Glauben auseinander? 
+
+```{r}
+# does the person have any contact to christian faith outside of TEN SING?
+kontaktpunkt_data <- tn$long$kontakt_chrgl |> 
+  group_by(tn_id) |> 
+  summarize(has_kontaktpunkt = if_else(any(str_starts(kontaktpunkt, "Ja")), "Kontakt", "Kein Kontakt außerhalb von TEN SING")) |> 
+  filter(!is.na(has_kontaktpunkt))
+
+kontaktpunkt_pie <- get_pie_chart_data(kontaktpunkt_data, has_kontaktpunkt)
+```
+
+```{r}
+glaube_rolle <- aussagen_long |> 
+  filter(aussage == "glaube_spiritualitaet") |> 
+  left_join(kontaktpunkt_data, by = "tn_id") |> 
+  filter(!is.na(has_kontaktpunkt)) # filter out missings
+
+glaube_rolle_q <- tn_cfg$QS_AUSSAGEN_LIKERT |> filter(name == "glaube_spiritualitaet")
+glaube_rolle_agg <- janitor::tabyl(glaube_rolle, value, show_na = FALSE)
+share_eher_yes <- sum(glaube_rolle_agg$percent[glaube_rolle_agg$value >= 4])
+```
+
+In der Mehrzahl setzen sich Aktive bei TEN SING mit ihrem Glauben auseinander. `{r} round(share_eher_yes * 100, 2)`% der Aktiven bewerten die Aussage "*`{r} glaube_rolle_q$label`*" eher bis voll und ganz zutreffend.
+
+```{r}
+
+glaube_rolle_agg |> 
+  ggplot(aes(x = value, fill = value, y = percent))+
+  geom_col()+
+  scale_fill_manual(values = COLS_6)+
+  #scale_x_discrete(labels = meta_aussagen_choices$label)+
+  scale_y_continuous(labels = scales::label_percent())+
+  labs(y = "% Aktive", title = str_wrap(glaube_rolle_q$label, 60), fill = NULL, x = "Bewertung",
+  subtitle = "Bewertung von trifft überhaupt nicht zu (1) zu trifft voll und ganz zu (6)")+
+  guides(fill = "none")
+```
+
+
+FRAGE: nur jugendliche??
+
+### TEN SING als einziger Kontakt zum christlichen Glauben? 
+
+**`{r} kontaktpunkt_pie$perc[kontaktpunkt_pie$has_kontaktpunkt == "Kontakt"]`%** der Aktiven haben außerhalb von TEN SING Kontakt zum christlichen Glauben, **`{r} kontaktpunkt_pie$perc[kontaktpunkt_pie$has_kontaktpunkt == "Kein Kontakt"]`%** haben nur über TEN SING Kontakt. 
+
+::: {.callout-tip collapse="true"}
+## Tortendiagramm
+
+```{r}
+kontakt_pie_plot <- ggplot(kontaktpunkt_pie, aes(x = "", y = n, fill = has_kontaktpunkt)) +
+  geom_col() +
+  ggrepel::geom_label_repel(
+aes(y = pos, label = paste0(perc, "%")),
+    size = 4.5,
+    nudge_x = 1,
+    show.legend = FALSE
+  ) +
+    coord_polar(theta = "y") +
+  labs(title = "Kontakt zum christlichen Glauben",
+subtitle = "außerhalb von Ten Sing",
+       x = NULL,
+       y = NULL,
+       fill = NULL) +
+         theme(panel.grid = element_blank(),
+        axis.text.x = element_blank()) +
+          scale_fill_manual(values = cols_4[c(1, 3, 4)])
+        
+        kontakt_pie_plot
+```
 
 :::
 
+Es zeigt sich ein leichter Unterschied zwischen den Gruppen - Aktive, die auch außerhalb von TEN SING Kontakt mit dem christlichen Glauben haben, setzen sich eher auch bei TEN SING mit ihm auseinander. 
 
-### 
+::: panel-tabset
+## Balkendiagramm
+
+```{r}
+glaube_rolle |> 
+  group_by(has_kontaktpunkt, value) |> 
+  tally(name = "nn") |>
+  group_by(has_kontaktpunkt) |> 
+  mutate(percent = nn / sum(nn)) |>
+  ggplot(aes(x = value, fill = has_kontaktpunkt, y = percent, group = has_kontaktpunkt))+
+  geom_col(position = "dodge")+
+  scale_fill_manual(values = cols_4)+
+  #scale_x_discrete(labels = meta_aussagen_choices$label)+
+  scale_y_continuous(labels = scales::label_percent())+
+  labs(y = "% Aktive", title = str_wrap(glaube_rolle_q$label, 60), x = "Bewertung",
+  subtitle = "Bewertung von trifft überhaupt nicht zu (1) zu trifft voll und ganz zu (6)")
+```
+
+## Density Plot
+
+```{r}
+
+ggplot(glaube_rolle, aes(x = as.numeric(value), fill = has_kontaktpunkt)) +
+  geom_density(alpha = 0.6)+
+  scale_fill_manual(name = NULL, values = cols_4)+
+  labs(title = str_wrap(glaube_rolle_q$label, 60), x = "Bewertung",
+  subtitle = "Bewertung von trifft überhaupt nicht zu (1) zu trifft voll und ganz zu (6)")
+```
+
+:::
+
+::: panel-tabset
+## Balkendiagramm
+
+```{r}
+offenheit_religionen <- eig_long |> 
+  filter(eig == "tensing_offen_religionen") |> 
+  inner_join(kontaktpunkt_data, by = "tn_id")
+
+question <- offenheit_religionen$eig_label[1]
+```
+```{r}
+offenheit_religionen |> 
+  group_by(has_kontaktpunkt, value, .drop = TRUE) |> 
+  tally(name = "nn") |>
+  group_by(has_kontaktpunkt) |> 
+  mutate(percent = nn / sum(nn)) |>
+  ggplot(aes(x = value, fill = has_kontaktpunkt, y = percent, group = has_kontaktpunkt))+
+  geom_col(position = "dodge")+
+  scale_fill_manual(values = cols_4)+
+  #scale_x_discrete(labels = meta_aussagen_choices$label)+
+  scale_y_continuous(labels = scales::label_percent())+
+  labs(y = "% Aktive", title = str_wrap(question, 60), x = "Bewertung", fill = NULL)+
+  theme(legend.position = "bottom")
+```
+
+## Density Plot 
+
+```{r}
+
+ggplot(offenheit_religionen, aes(x = as.numeric(value), fill = has_kontaktpunkt)) +
+  geom_density(alpha = 0.6)+
+  scale_fill_manual(name = NULL, values = cols_4)+
+  labs(title = str_wrap(question, 60), x = "von exklusiv")
+```
+
+::: 
+
+
+
+
+```{r}
+build_continent_report <- function(aussage) {
+  #name_for_labels <- janitor::make_clean_names(continent_report_items$continent[[i]])
+
+  # Quarto and RStudio and Positron all really struggle with syntax highlighting 
+  # and parsing when there are multiple ```s inside a string, so we can make 
+  # life easier by splitting the output into a few parts here, ensuring that 
+  # there's a maximum of one set of triple backticks
+
+  output_first_part <- glue::glue('
+  ### `{r} {aussage}`', .open = "<<", .close = ">>")
+
+  output_first_part
+}
+```
+
+# Angebote von TEN SING
+
+```{r}
+continent_reports <- map_chr(meta_aussagen$name, 
+  function(aussage) build_continent_report(aussage)
+)
+```
+
+
+### Welche Angebote finden Personen besonders wichtig? Welche werden angeboten?
+
+```{r}
+#| output: asis
+#| echo: false
+res <- purrr::map_chr(unique(meta_aussagen$name), function(aussage, data = aussagen_long) {
+    knitr::knit_child(
+      input = "_child_aussagen.qmd", 
+      envir = environment(), 
+      quiet = TRUE
+      ) 
+  })
+
+cat(res, sep = '\n')
+```

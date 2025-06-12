@@ -239,23 +239,30 @@ schule <- tn_df %>%
 
 TN_DATA$demo$schule <- sample(schule, length(schule))
 
-# Kontakt christlicher glauben
 # Hilfe für mehr Verantwortungsübernahme
-# sonstiges 
-kontakt_sonst <- tn_df %>%
-    filter(!is.na(.data[[tn_cfg$CN_CHR_GLAUBEN_KONTAKT_SONST]])) %>% 
-    pull(!!tn_cfg$CN_CHR_GLAUBEN_KONTAKT_SONST)
-TN_DATA$demo$kontakt_chrgl_sonst <- sample(kontakt_sonst, length(kontakt_sonst))
+# KONTAKT CHRISTLICHER GLAUBEN -----
+
+m_kontakt <- get_mapping(tn_choices, tn_cfg$Q_CHR_GLAUBEN_KONTAKT$select_from_list_name)
+kontakt_sonst <- tn_df %>% # sonstiges 
+    select(tn_id, kontakt_chrgl_sonst = !!tn_cfg$CN_CHR_GLAUBEN_KONTAKT_SONST) |> 
+    filter(!is.na(kontakt_chrgl_sonst)) |> 
+    mutate(kontaktpunkt = "ja_andere")
+
+
+
+TN_DATA$demo$kontakt_chrgl_sonst <- sample(kontakt_sonst$kontakt_chrgl_sonst, length(kontakt_sonst$kontakt_chrgl_sonst))
 
 # all other ones 
-m_kontakt <- get_mapping(tn_choices, tn_cfg$Q_CHR_GLAUBEN_KONTAKT$select_from_list_name)
-kontaktpunkte <- make_multiselect_long(tn_df, tn_cfg$CN_CHR_GLAUBEN_KONTAKT) %>% 
-    recode_values(m_kontakt, tn_cfg$CN_CHR_GLAUBEN_KONTAKT) %>% 
-    rename(kontaktpunkt = !!tn_cfg$CN_CHR_GLAUBEN_KONTAKT)  %>% 
-    pull(kontaktpunkt)
+kontaktpunkte_long <- make_multiselect_long(tn_df, tn_cfg$CN_CHR_GLAUBEN_KONTAKT) %>% 
+    rename(kontaktpunkt = !!tn_cfg$CN_CHR_GLAUBEN_KONTAKT) |> 
+    left_join(kontakt_sonst, by = c("tn_id", "kontaktpunkt")) |> 
+    recode_values(m_kontakt, "kontaktpunkt")
 
-TN_DATA$demo$kontakt_chrgl <- sample(kontaktpunkte, length(kontaktpunkte))
 
+TN_DATA$demo$kontakt_chrgl <- sample(kontaktpunkte_long$kontaktpunkt, length(kontaktpunkte_long$kontaktpunkt))
+
+# Datenschutz?
+TN_DATA$long$kontakt_chrgl <- kontaktpunkte_long
 
 readr::write_rds(TN_DATA, "data/cleaned/tn.rds")
 

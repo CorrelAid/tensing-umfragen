@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.4">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -35,10 +35,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c9f28ac3654e8145e3f329489cfce6b3.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c003d7bcb19510747d43a84e3d8ebfcb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -66,6 +66,19 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet">
+<script src="site_libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
+<script src="site_libs/wordcloud2-0.0.1/hover.js"></script>
+<script src="site_libs/wordcloud2-binding-0.2.2/wordcloud2.js"></script>
+<script src="site_libs/d3-bundle-5.16.0/d3-bundle.min.js"></script>
+<script src="site_libs/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+<script src="site_libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script>
+<script src="site_libs/flatbush-4.4.0/flatbush.min.js"></script>
+<link href="site_libs/ggiraphjs-0.8.10/ggiraphjs.min.css" rel="stylesheet">
+<script src="site_libs/ggiraphjs-0.8.10/ggiraphjs.min.js"></script>
+<script src="site_libs/girafe-binding-0.8.12/girafe.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -78,25 +91,76 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
+<span class="menu-text">Start</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./deskriptiv.html"> 
-<span class="menu-text">Deskriptives</span></a>
+    <a class="nav-link" href="./ueberblick.html"> 
+<span class="menu-text">Überblick</span></a>
   </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-regionen" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Regionen</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-regionen">    
+        <li>
+    <a class="dropdown-item" href="./region/ostwerk.html">
+ <span class="dropdown-text">Ostwerk</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/nord.html">
+ <span class="dropdown-text">nord.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/niederrhein.html">
+ <span class="dropdown-text">niederrhein.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/blrg.html">
+ <span class="dropdown-text">blrg.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/sachsen.html">
+ <span class="dropdown-text">sachsen.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/thueringen.html">
+ <span class="dropdown-text">thueringen.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/hessen.html">
+ <span class="dropdown-text">hessen.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/owl.html">
+ <span class="dropdown-text">owl.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/sueden.html">
+ <span class="dropdown-text">sueden.html</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link active" href="./kern.html" aria-current="page"> 
 <span class="menu-text">Kern von TenSing</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./wirkung-pg.html"> 
+<span class="menu-text">Wirkung PG</span></a>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./hilfe.html"> 
+<span class="menu-text">Hilfe</span></a>
+  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -104,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -118,7 +182,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#eigenschaften" id="toc-eigenschaften" class="nav-link active" data-scroll-target="#eigenschaften">Eigenschaften</a></li>
+  <li><a href="#was-verbinden-die-tn-mit-ten-sing" id="toc-was-verbinden-die-tn-mit-ten-sing" class="nav-link active" data-scroll-target="#was-verbinden-die-tn-mit-ten-sing">Was verbinden die TN mit TEN SING?</a></li>
+  <li><a href="#was-denken-die-tn-über-ten-sing" id="toc-was-denken-die-tn-über-ten-sing" class="nav-link" data-scroll-target="#was-denken-die-tn-über-ten-sing">Was denken die TN über TEN SING?</a>
+  <ul class="collapse">
+  <li><a href="#eigenschaften" id="toc-eigenschaften" class="nav-link" data-scroll-target="#eigenschaften">Eigenschaften</a></li>
+  </ul></li>
+  <li><a href="#wie-setzen-sich-aktive-mit-ihrem-glauben-auseinander" id="toc-wie-setzen-sich-aktive-mit-ihrem-glauben-auseinander" class="nav-link" data-scroll-target="#wie-setzen-sich-aktive-mit-ihrem-glauben-auseinander">Wie setzen sich Aktive mit ihrem Glauben auseinander?</a>
+  <ul class="collapse">
+  <li><a href="#ten-sing-als-einziger-kontakt-zum-christlichen-glauben" id="toc-ten-sing-als-einziger-kontakt-zum-christlichen-glauben" class="nav-link" data-scroll-target="#ten-sing-als-einziger-kontakt-zum-christlichen-glauben">TEN SING als einziger Kontakt zum christlichen Glauben?</a></li>
+  </ul></li>
+  <li><a href="#angebote-von-ten-sing" id="toc-angebote-von-ten-sing" class="nav-link" data-scroll-target="#angebote-von-ten-sing">Angebote von TEN SING</a>
+  <ul class="collapse">
+  <li><a href="#welche-angebote-finden-personen-besonders-wichtig-welche-werden-angeboten" id="toc-welche-angebote-finden-personen-besonders-wichtig-welche-werden-angeboten" class="nav-link" data-scroll-target="#welche-angebote-finden-personen-besonders-wichtig-welche-werden-angeboten">Welche Angebote finden Personen besonders wichtig? Welche werden angeboten?</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -144,13 +220,873 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="eigenschaften" class="level1">
-<h1>Eigenschaften</h1>
-<p><em>wordcloud</em></p>
-<p>Zustimmung zu Eigenschaften/Aussagen</p>
-<p>…</p>
+<section id="was-verbinden-die-tn-mit-ten-sing" class="level1">
+<h1>Was verbinden die TN mit TEN SING?</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Datenquelle
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Frage:</strong> “<em>Mit welchen drei Worten verbindest du TEN SING?</em>” im <a href="https://ee-eu.kobotoolbox.org/single/UgaA9dLH">Teilnehmer*innen Fragebogen</a></p>
+<p>Spalten im Roh-Datensatz:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name   col_name            
+  &lt;chr&gt;  &lt;chr&gt;               
+1 Wort_1 group_aa5ex58/Wort_1
+2 Wort_2 group_aa5ex58/Wort_2
+3 Wort_3 group_aa5ex58/Wort_3</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="wordcloud2 html-widget html-fill-item" id="htmlwidget-770c26f79d2079305d67" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-770c26f79d2079305d67">{"x":{"word":["Akzeptanz","Ausprobieren","Familie","Freizeit","Freude","Freunde","Freundschaft","Gemeinschaft","Glaube","Kreativität","Liebe","Lustig","Musik","Show","Sicherheit","Singen","Spaß","Theater","Zuhause","Zusammenhalt"],"freq":[8,5,38,5,17,52,19,89,6,32,15,5,54,5,5,22,148,9,9,26],"fontFamily":"Segoe UI","fontWeight":"bold","color":["#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948","black","#b5c948"],"minSize":0,"weightFactor":1.216216216216216,"backgroundColor":"white","gridSize":0,"minRotation":-0.7853981633974483,"maxRotation":0.7853981633974483,"shuffle":true,"rotateRatio":0.4,"shape":"square","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="was-denken-die-tn-über-ten-sing" class="level1">
+<h1>Was denken die TN über TEN SING?</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Datenquelle
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Frage:</strong> “<em>Bei TEN SING…</em>” im <a href="https://ee-eu.kobotoolbox.org/single/UgaA9dLH">Teilnehmer*innen Fragebogen</a></p>
+<p>Spalten im Roh-Datensatz:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 2
+   name                   col_name                                             
+   &lt;chr&gt;                  &lt;chr&gt;                                                
+ 1 entfaltung_kreativitae group_bc7fc89/aussagen_tensing/entfaltung_kreativitae
+ 2 selbst_sein            group_bc7fc89/aussagen_tensing/selbst_sein           
+ 3 neues_lernen           group_bc7fc89/aussagen_tensing/neues_lernen          
+ 4 fehlerkultur           group_bc7fc89/aussagen_tensing/fehlerkultur          
+ 5 ideeneinbringen        group_bc7fc89/aussagen_tensing/ideeneinbringen       
+ 6 eigene_entwicklung     group_bc7fc89/aussagen_tensing/eigene_entwicklung    
+ 7 gute_entscheidung      group_bc7fc89/aussagen_tensing/gute_entscheidung     
+ 8 dinge_zutrauen         group_bc7fc89/aussagen_tensing/dinge_zutrauen        
+ 9 selbstbewusstsein      group_bc7fc89/aussagen_tensing/selbstbewusstsein     
+10 transfer               group_bc7fc89/aussagen_tensing/transfer              
+11 internationale_projekt group_bc7fc89/aussagen_tensing/internationale_projekt
+12 glaube_spiritualitaet  group_bc7fc89/aussagen_tensing/glaube_spiritualitaet </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="girafe html-widget html-fill-item" id="htmlwidget-e65351e03bcdb2f4f7d6" style="width:100%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-e65351e03bcdb2f4f7d6">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd' viewBox='0 0 504 360'>\n <defs id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_defs'>\n  <clipPath id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_c1'>\n   <rect x='0' y='0' width='504' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_c2'>\n   <rect x='128.04' y='97.14' width='368.99' height='239.97'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_c1)'>\n   <rect x='0' y='0' width='504' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n  <\/g>\n  <g clip-path='url(#svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_c2)'>\n   <polyline points='186.74,337.12 186.74,97.14' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='270.60,337.12 270.60,97.14' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='354.46,337.12 354.46,97.14' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='438.32,337.12 438.32,97.14' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='128.04,325.31 497.03,325.31' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='128.04,305.64 497.03,305.64' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='128.04,285.97 497.03,285.97' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='128.04,266.30 497.03,266.30' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='128.04,246.63 497.03,246.63' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='128.04,226.96 497.03,226.96' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='128.04,207.29 497.03,207.29' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='128.04,187.62 497.03,187.62' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='128.04,167.95 497.03,167.95' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='128.04,148.29 497.03,148.29' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='128.04,128.62 497.03,128.62' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='128.04,108.95 497.03,108.95' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='144.81,337.12 144.81,97.14' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='228.67,337.12 228.67,97.14' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='312.53,337.12 312.53,97.14' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='396.39,337.12 396.39,97.14' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='480.25,337.12 480.25,97.14' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e1' x='144.81' y='316.46' width='37.4' height='17.7' fill='#8C510A' fill-opacity='1' stroke='none' title='Ich traue mir bei TEN SING Sachen zu, die ich mich davor nicht getraut habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e2' x='182.21' y='316.46' width='26.88' height='17.7' fill='#D8B365' fill-opacity='1' stroke='none' title='Ich traue mir bei TEN SING Sachen zu, die ich mich davor nicht getraut habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e3' x='209.1' y='316.46' width='49.09' height='17.7' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Ich traue mir bei TEN SING Sachen zu, die ich mich davor nicht getraut habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e4' x='258.18' y='316.46' width='58.44' height='17.7' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Ich traue mir bei TEN SING Sachen zu, die ich mich davor nicht getraut habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e5' x='316.62' y='316.46' width='64.28' height='17.7' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Ich traue mir bei TEN SING Sachen zu, die ich mich davor nicht getraut habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e6' x='380.91' y='316.46' width='93.5' height='17.7' fill='#01665E' fill-opacity='1' stroke='none' title='Ich traue mir bei TEN SING Sachen zu, die ich mich davor nicht getraut habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e7' x='474.41' y='316.46' width='5.84' height='17.7' fill='#7F7F7F' fill-opacity='1' stroke='none' title='Ich traue mir bei TEN SING Sachen zu, die ich mich davor nicht getraut habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e8' x='144.81' y='296.79' width='36.23' height='17.7' fill='#8C510A' fill-opacity='1' stroke='none' title='Ich habe das Gefühl, dass ich mich, seitdem ich bei TEN SING bin, weiterentwickelt habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e9' x='181.04' y='296.79' width='3.51' height='17.7' fill='#D8B365' fill-opacity='1' stroke='none' title='Ich habe das Gefühl, dass ich mich, seitdem ich bei TEN SING bin, weiterentwickelt habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e10' x='184.55' y='296.79' width='1.17' height='17.7' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Ich habe das Gefühl, dass ich mich, seitdem ich bei TEN SING bin, weiterentwickelt habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e11' x='185.72' y='296.79' width='8.18' height='17.7' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Ich habe das Gefühl, dass ich mich, seitdem ich bei TEN SING bin, weiterentwickelt habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e12' x='193.9' y='296.79' width='22.21' height='17.7' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Ich habe das Gefühl, dass ich mich, seitdem ich bei TEN SING bin, weiterentwickelt habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e13' x='216.11' y='296.79' width='257.13' height='17.7' fill='#01665E' fill-opacity='1' stroke='none' title='Ich habe das Gefühl, dass ich mich, seitdem ich bei TEN SING bin, weiterentwickelt habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e14' x='473.24' y='296.79' width='7.01' height='17.7' fill='#7F7F7F' fill-opacity='1' stroke='none' title='Ich habe das Gefühl, dass ich mich, seitdem ich bei TEN SING bin, weiterentwickelt habe.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e15' x='144.81' y='277.12' width='22.21' height='17.7' fill='#8C510A' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich meine Kreativität voll und ganz entfalten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e16' x='167.02' y='277.12' width='17.53' height='17.7' fill='#D8B365' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich meine Kreativität voll und ganz entfalten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e17' x='184.55' y='277.12' width='26.88' height='17.7' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich meine Kreativität voll und ganz entfalten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e18' x='211.43' y='277.12' width='31.56' height='17.7' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich meine Kreativität voll und ganz entfalten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e19' x='242.99' y='277.12' width='57.27' height='17.7' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich meine Kreativität voll und ganz entfalten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e20' x='300.26' y='277.12' width='172.98' height='17.7' fill='#01665E' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich meine Kreativität voll und ganz entfalten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e21' x='473.24' y='277.12' width='7.01' height='17.7' fill='#7F7F7F' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich meine Kreativität voll und ganz entfalten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e22' x='144.81' y='257.45' width='29.22' height='17.7' fill='#8C510A' fill-opacity='1' stroke='none' title='Wenn mir bei TEN SING mal ein Fehler passiert, ist das überhaupt nicht schlimm.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e23' x='174.03' y='257.45' width='12.86' height='17.7' fill='#D8B365' fill-opacity='1' stroke='none' title='Wenn mir bei TEN SING mal ein Fehler passiert, ist das überhaupt nicht schlimm.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e24' x='186.89' y='257.45' width='15.19' height='17.7' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Wenn mir bei TEN SING mal ein Fehler passiert, ist das überhaupt nicht schlimm.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e25' x='202.08' y='257.45' width='22.21' height='17.7' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Wenn mir bei TEN SING mal ein Fehler passiert, ist das überhaupt nicht schlimm.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e26' x='224.29' y='257.45' width='80.65' height='17.7' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Wenn mir bei TEN SING mal ein Fehler passiert, ist das überhaupt nicht schlimm.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e27' x='304.94' y='257.45' width='170.64' height='17.7' fill='#01665E' fill-opacity='1' stroke='none' title='Wenn mir bei TEN SING mal ein Fehler passiert, ist das überhaupt nicht schlimm.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e28' x='475.58' y='257.45' width='4.68' height='17.7' fill='#7F7F7F' fill-opacity='1' stroke='none' title='Wenn mir bei TEN SING mal ein Fehler passiert, ist das überhaupt nicht schlimm.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e29' x='144.81' y='237.78' width='25.71' height='17.7' fill='#8C510A' fill-opacity='1' stroke='none' title='Bei TEN SING setzte ich mich mit meinem Glauben / Spiritualität auseinander.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e30' x='170.53' y='237.78' width='16.36' height='17.7' fill='#D8B365' fill-opacity='1' stroke='none' title='Bei TEN SING setzte ich mich mit meinem Glauben / Spiritualität auseinander.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e31' x='186.89' y='237.78' width='37.4' height='17.7' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Bei TEN SING setzte ich mich mit meinem Glauben / Spiritualität auseinander.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e32' x='224.29' y='237.78' width='64.28' height='17.7' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Bei TEN SING setzte ich mich mit meinem Glauben / Spiritualität auseinander.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e33' x='288.57' y='237.78' width='78.31' height='17.7' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Bei TEN SING setzte ich mich mit meinem Glauben / Spiritualität auseinander.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e34' x='366.88' y='237.78' width='108.7' height='17.7' fill='#01665E' fill-opacity='1' stroke='none' title='Bei TEN SING setzte ich mich mit meinem Glauben / Spiritualität auseinander.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e35' x='475.58' y='237.78' width='4.68' height='17.7' fill='#7F7F7F' fill-opacity='1' stroke='none' title='Bei TEN SING setzte ich mich mit meinem Glauben / Spiritualität auseinander.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e36' x='144.81' y='218.11' width='28.05' height='17.7' fill='#8C510A' fill-opacity='1' stroke='none' title='Es war eine gute Entscheidung in die TEN SING Gruppe zu gehen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e37' x='172.86' y='218.11' width='12.86' height='17.7' fill='#D8B365' fill-opacity='1' stroke='none' title='Es war eine gute Entscheidung in die TEN SING Gruppe zu gehen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e38' x='185.72' y='218.11' width='8.18' height='17.7' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Es war eine gute Entscheidung in die TEN SING Gruppe zu gehen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e39' x='193.9' y='218.11' width='37.4' height='17.7' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Es war eine gute Entscheidung in die TEN SING Gruppe zu gehen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e40' x='231.3' y='218.11' width='101.68' height='17.7' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Es war eine gute Entscheidung in die TEN SING Gruppe zu gehen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e41' x='332.99' y='218.11' width='141.42' height='17.7' fill='#01665E' fill-opacity='1' stroke='none' title='Es war eine gute Entscheidung in die TEN SING Gruppe zu gehen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e42' x='474.41' y='218.11' width='5.84' height='17.7' fill='#7F7F7F' fill-opacity='1' stroke='none' title='Es war eine gute Entscheidung in die TEN SING Gruppe zu gehen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e43' x='144.81' y='198.44' width='52.6' height='17.7' fill='#8C510A' fill-opacity='1' stroke='none' title='Ich kann bei TEN SING meine eigenen Ideen einbringen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e44' x='197.41' y='198.44' width='37.4' height='17.7' fill='#D8B365' fill-opacity='1' stroke='none' title='Ich kann bei TEN SING meine eigenen Ideen einbringen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e45' x='234.81' y='198.44' width='47.92' height='17.7' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Ich kann bei TEN SING meine eigenen Ideen einbringen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e46' x='282.73' y='198.44' width='71.3' height='17.7' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Ich kann bei TEN SING meine eigenen Ideen einbringen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e47' x='354.02' y='198.44' width='65.45' height='17.7' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Ich kann bei TEN SING meine eigenen Ideen einbringen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e48' x='419.48' y='198.44' width='51.43' height='17.7' fill='#01665E' fill-opacity='1' stroke='none' title='Ich kann bei TEN SING meine eigenen Ideen einbringen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e49' x='470.9' y='198.44' width='9.35' height='17.7' fill='#7F7F7F' fill-opacity='1' stroke='none' title='Ich kann bei TEN SING meine eigenen Ideen einbringen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e50' x='144.81' y='178.77' width='29.22' height='17.7' fill='#8C510A' fill-opacity='1' stroke='none' title='Ich habe Interesse an internationalen TEN SING Projekten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e51' x='174.03' y='178.77' width='17.53' height='17.7' fill='#D8B365' fill-opacity='1' stroke='none' title='Ich habe Interesse an internationalen TEN SING Projekten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e52' x='191.56' y='178.77' width='18.7' height='17.7' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Ich habe Interesse an internationalen TEN SING Projekten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e53' x='210.26' y='178.77' width='49.09' height='17.7' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Ich habe Interesse an internationalen TEN SING Projekten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e54' x='259.35' y='178.77' width='61.95' height='17.7' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Ich habe Interesse an internationalen TEN SING Projekten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e55' x='321.3' y='178.77' width='153.11' height='17.7' fill='#01665E' fill-opacity='1' stroke='none' title='Ich habe Interesse an internationalen TEN SING Projekten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e56' x='474.41' y='178.77' width='5.84' height='17.7' fill='#7F7F7F' fill-opacity='1' stroke='none' title='Ich habe Interesse an internationalen TEN SING Projekten.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e57' x='144.81' y='159.1' width='22.21' height='17.7' fill='#8C510A' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich neue Dinge lernen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e58' x='167.02' y='159.1' width='18.7' height='17.7' fill='#D8B365' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich neue Dinge lernen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e59' x='185.72' y='159.1' width='5.84' height='17.7' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich neue Dinge lernen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e60' x='191.56' y='159.1' width='31.56' height='17.7' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich neue Dinge lernen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e61' x='223.12' y='159.1' width='140.25' height='17.7' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich neue Dinge lernen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e62' x='363.38' y='159.1' width='108.7' height='17.7' fill='#01665E' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich neue Dinge lernen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e63' x='472.07' y='159.1' width='8.18' height='17.7' fill='#7F7F7F' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich neue Dinge lernen.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e64' x='144.81' y='139.43' width='29.22' height='17.7' fill='#8C510A' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich so sein wie ich möchte.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e65' x='174.03' y='139.43' width='12.86' height='17.7' fill='#D8B365' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich so sein wie ich möchte.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e66' x='186.89' y='139.43' width='11.69' height='17.7' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich so sein wie ich möchte.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e67' x='198.58' y='139.43' width='29.22' height='17.7' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich so sein wie ich möchte.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e68' x='227.8' y='139.43' width='51.43' height='17.7' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich so sein wie ich möchte.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e69' x='279.22' y='139.43' width='195.19' height='17.7' fill='#01665E' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich so sein wie ich möchte.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e70' x='474.41' y='139.43' width='5.84' height='17.7' fill='#7F7F7F' fill-opacity='1' stroke='none' title='Bei TEN SING kann ich so sein wie ich möchte.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e71' x='144.81' y='119.76' width='29.22' height='17.7' fill='#8C510A' fill-opacity='1' stroke='none' title='Ich merke, dass ich selbstbewusster bin, seitdem ich bei TEN SING bin.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e72' x='174.03' y='119.76' width='11.69' height='17.7' fill='#D8B365' fill-opacity='1' stroke='none' title='Ich merke, dass ich selbstbewusster bin, seitdem ich bei TEN SING bin.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e73' x='185.72' y='119.76' width='8.18' height='17.7' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Ich merke, dass ich selbstbewusster bin, seitdem ich bei TEN SING bin.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e74' x='193.9' y='119.76' width='38.57' height='17.7' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Ich merke, dass ich selbstbewusster bin, seitdem ich bei TEN SING bin.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e75' x='232.47' y='119.76' width='90' height='17.7' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Ich merke, dass ich selbstbewusster bin, seitdem ich bei TEN SING bin.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e76' x='322.47' y='119.76' width='153.11' height='17.7' fill='#01665E' fill-opacity='1' stroke='none' title='Ich merke, dass ich selbstbewusster bin, seitdem ich bei TEN SING bin.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e77' x='475.58' y='119.76' width='4.68' height='17.7' fill='#7F7F7F' fill-opacity='1' stroke='none' title='Ich merke, dass ich selbstbewusster bin, seitdem ich bei TEN SING bin.'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e78' x='144.81' y='100.09' width='29.22' height='17.7' fill='#8C510A' fill-opacity='1' stroke='none' title='Dinge, die ich bei TEN SING gelernt habe, kann ich auch woanders einsetzten (z. B. Schule, in der Arbeit).'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e79' x='174.03' y='100.09' width='9.35' height='17.7' fill='#D8B365' fill-opacity='1' stroke='none' title='Dinge, die ich bei TEN SING gelernt habe, kann ich auch woanders einsetzten (z. B. Schule, in der Arbeit).'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e80' x='183.38' y='100.09' width='18.7' height='17.7' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Dinge, die ich bei TEN SING gelernt habe, kann ich auch woanders einsetzten (z. B. Schule, in der Arbeit).'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e81' x='202.08' y='100.09' width='15.19' height='17.7' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Dinge, die ich bei TEN SING gelernt habe, kann ich auch woanders einsetzten (z. B. Schule, in der Arbeit).'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e82' x='217.28' y='100.09' width='63.11' height='17.7' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Dinge, die ich bei TEN SING gelernt habe, kann ich auch woanders einsetzten (z. B. Schule, in der Arbeit).'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e83' x='280.39' y='100.09' width='194.02' height='17.7' fill='#01665E' fill-opacity='1' stroke='none' title='Dinge, die ich bei TEN SING gelernt habe, kann ich auch woanders einsetzten (z. B. Schule, in der Arbeit).'/>\n   <rect id='svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_e84' x='474.41' y='100.09' width='5.84' height='17.7' fill='#7F7F7F' fill-opacity='1' stroke='none' title='Dinge, die ich bei TEN SING gelernt habe, kann ich auch woanders einsetzten (z. B. Schule, in der Arbeit).'/>\n  <\/g>\n  <g clip-path='url(#svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd_c1)'>\n   <text x='41.45' y='329.32' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>dinge_zutrauen<\/text>\n   <text x='18.42' y='309.65' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>eigene_entwicklung<\/text>\n   <text x='8.31' y='289.98' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>entfaltung_kreativitae<\/text>\n   <text x='62' y='270.31' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>fehlerkultur<\/text>\n   <text x='14.8' y='250.64' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>glaube_spiritualitaet<\/text>\n   <text x='22.08' y='230.98' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>gute_entscheidung<\/text>\n   <text x='35.29' y='211.31' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>ideeneinbringen<\/text>\n   <text x='6.97' y='191.64' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>internationale_projekt<\/text>\n   <text x='52.43' y='171.97' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>neues_lernen<\/text>\n   <text x='63.67' y='152.3' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>selbst_sein<\/text>\n   <text x='25.68' y='132.63' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>selbstbewusstsein<\/text>\n   <text x='80.99' y='112.96' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>transfer<\/text>\n   <text x='136' y='350.87' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>0%<\/text>\n   <text x='217.15' y='350.87' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>25%<\/text>\n   <text x='300.46' y='350.87' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>50%<\/text>\n   <text x='385.09' y='350.87' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>75%<\/text>\n   <text x='465.57' y='350.87' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>100%<\/text>\n   <rect x='130.42' y='35.4' width='15.86' height='15.86' fill='#8C510A' fill-opacity='1' stroke='none'/>\n   <rect x='130.42' y='59.65' width='15.86' height='15.86' fill='#D8B365' fill-opacity='1' stroke='none'/>\n   <rect x='280.79' y='35.4' width='15.86' height='15.86' fill='#F6E8C3' fill-opacity='1' stroke='none'/>\n   <rect x='280.79' y='59.65' width='15.86' height='15.86' fill='#C7EAE5' fill-opacity='1' stroke='none'/>\n   <rect x='318.16' y='35.4' width='15.86' height='15.86' fill='#5AB4AC' fill-opacity='1' stroke='none'/>\n   <rect x='318.16' y='59.65' width='15.86' height='15.86' fill='#01665E' fill-opacity='1' stroke='none'/>\n   <rect x='458.66' y='35.4' width='15.86' height='15.86' fill='#7F7F7F' fill-opacity='1' stroke='none'/>\n   <text x='153.96' y='46.67' font-size='7.5pt' font-family='Atkinson Hyperlegible'>Trifft überhaupt nicht zu (1)<\/text>\n   <text x='153.96' y='70.92' font-size='7.5pt' font-family='Atkinson Hyperlegible'>2<\/text>\n   <text x='304.33' y='46.67' font-size='7.5pt' font-family='Atkinson Hyperlegible'>3<\/text>\n   <text x='304.33' y='70.92' font-size='7.5pt' font-family='Atkinson Hyperlegible'>4<\/text>\n   <text x='341.7' y='46.67' font-size='7.5pt' font-family='Atkinson Hyperlegible'>5<\/text>\n   <text x='341.7' y='70.92' font-size='7.5pt' font-family='Atkinson Hyperlegible'>Trifft voll und ganz zu (6)<\/text>\n   <text x='482.21' y='46.67' font-size='7.5pt' font-family='Atkinson Hyperlegible'>NA<\/text>\n   <text x='6.97' y='17.67' font-size='12pt' font-weight='bold' font-family='Atkinson Hyperlegible'>Aussagen über TEN SING<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_1c714aa0_2bce_4ddf_b5a5_3957d332d2fd","ratio":1.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<section id="eigenschaften" class="level2">
+<h2 class="anchored" data-anchor-id="eigenschaften">Eigenschaften</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Datenquelle
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Frage:</strong> “<em>Nachfolgend findest du Eigenschaften. Bitte entscheide, wie sehr diese auf TEN SING zutreffen:</em>” im <a href="https://ee-eu.kobotoolbox.org/single/UgaA9dLH">Teilnehmer*innen Fragebogen</a></p>
+<p>Spalten im Roh-Datensatz:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 2
+  name                           col_name                                       
+  &lt;chr&gt;                          &lt;chr&gt;                                          
+1 tengsing_geschuetzt            group_aa5ex58/group_ze8px94/tengsing_geschuetzt
+2 tensing_modern_traditionell_00 group_aa5ex58/group_ze8px94/tensing_modern_tra…
+3 tensing_abwechslung            group_aa5ex58/group_ze8px94/tensing_abwechslung
+4 tensing_gemeinschaft           group_aa5ex58/group_ze8px94/tensing_gemeinscha…
+5 tensing_offen_exklusiv         group_aa5ex58/group_ze8px94/tensing_offen_exkl…
+6 tensing_offen_religionen       group_aa5ex58/group_ze8px94/tensing_offen_reli…
+7 tensing_kreativ_unkreativ      group_aa5ex58/group_ze8px94/tensing_kreativ_un…
+8 tensing_achtenaufandere        group_aa5ex58/group_ze8px94/tensing_achtenaufa…
+9 tensing_ausprobieren           group_aa5ex58/group_ze8px94/tensing_ausprobier…</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Skalen uneinheitlich!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die Antwortoptionen waren bei diesem Fragenblock nicht ganz einheitlich ausgestaltet. Jede Unterfrage hatte eine eigene sechsstufige Skala, deren Endpunkte unterschiedlich waren. Wenn ihr im Balkendiagramm mit der Maus über die Balken geht, könnt ihr die ganz ausformulierten Endpunkte sehen (in der Grafik nur verkürzt dargestellt) und natürlich im <a href="https://ee-eu.kobotoolbox.org/single/UgaA9dLH">Teilnehmer*innen Fragebogen</a>.</p>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Balkendiagramm</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Heatmap</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Daten</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="girafe html-widget html-fill-item" id="htmlwidget-cf27f38da545d95bf96f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-cf27f38da545d95bf96f">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67' viewBox='0 0 504 360'>\n <defs id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_defs'>\n  <clipPath id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_c1'>\n   <rect x='0' y='0' width='504' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_c2'>\n   <rect x='111.95' y='27.71' width='295.22' height='293.87'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_c1)'>\n   <rect x='0' y='0' width='504' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n  <\/g>\n  <g clip-path='url(#svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_c2)'>\n   <polyline points='172.62,321.58 172.62,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='267.12,321.58 267.12,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='361.62,321.58 361.62,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,238.53 407.17,238.53' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,110.76 407.17,110.76' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,302.42 407.17,302.42' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,270.48 407.17,270.48' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,46.88 407.17,46.88' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,78.82 407.17,78.82' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,206.59 407.17,206.59' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,174.65 407.17,174.65' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,142.71 407.17,142.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='125.37,321.58 125.37,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='219.87,321.58 219.87,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='314.37,321.58 314.37,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e1' x='164.11' y='256.1' width='119.07' height='28.75' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Antwortoption: 2'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e2' x='132.93' y='256.1' width='31.19' height='28.75' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Antwortoption: 3'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e3' x='126.31' y='256.1' width='6.62' height='28.75' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Antwortoption: 4'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e4' x='283.19' y='256.1' width='110.57' height='28.75' fill='#01665E' fill-opacity='1' stroke='none' title='Antwortoption: Alle helfen zusammen und sind eine Gemeinschaft (1)'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e5' x='125.37' y='256.1' width='0.95' height='28.75' fill='#8C510A' fill-opacity='1' stroke='none' title='Antwortoption: Jeder macht sein Ding (6)'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e6' x='135.76' y='192.22' width='62.37' height='28.75' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Antwortoption: 2'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e7' x='126.31' y='192.22' width='9.45' height='28.75' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Antwortoption: 3'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e8' x='125.37' y='192.22' width='0.95' height='28.75' fill='#D8B365' fill-opacity='1' stroke='none' title='Antwortoption: 5'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e9' x='198.13' y='192.22' width='193.73' height='28.75' fill='#01665E' fill-opacity='1' stroke='none' title='Antwortoption: Kreativ (1)'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e10' x='152.77' y='160.27' width='81.27' height='28.75' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Antwortoption: 2'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e11' x='131.98' y='160.27' width='20.79' height='28.75' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Antwortoption: 3'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e12' x='125.37' y='160.27' width='6.62' height='28.75' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Antwortoption: 4'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e13' x='234.04' y='160.27' width='159.71' height='28.75' fill='#01665E' fill-opacity='1' stroke='none' title='Antwortoption: Man achtet aufeinander (1)'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e14' x='150.88' y='128.33' width='101.12' height='28.75' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Antwortoption: 2'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e15' x='128.2' y='128.33' width='22.68' height='28.75' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Antwortoption: 3'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e16' x='126.31' y='128.33' width='1.89' height='28.75' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Antwortoption: 4'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e17' x='125.37' y='128.33' width='0.95' height='28.75' fill='#D8B365' fill-opacity='1' stroke='none' title='Antwortoption: 5'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e18' x='252' y='128.33' width='141.75' height='28.75' fill='#01665E' fill-opacity='1' stroke='none' title='Antwortoption: Man kann sich als Person ausprobieren (1)'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e19' x='179.23' y='64.45' width='78.44' height='28.75' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Antwortoption: 2'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e20' x='140.49' y='64.45' width='38.75' height='28.75' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Antwortoption: 3'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e21' x='131.04' y='64.45' width='9.45' height='28.75' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Antwortoption: 4'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e22' x='125.37' y='64.45' width='5.67' height='28.75' fill='#D8B365' fill-opacity='1' stroke='none' title='Antwortoption: 5'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e23' x='257.67' y='64.45' width='133.25' height='28.75' fill='#01665E' fill-opacity='1' stroke='none' title='Antwortoption: Offen für alle Religionen (1)'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e24' x='142.38' y='32.51' width='62.37' height='28.75' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Antwortoption: 2'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e25' x='131.04' y='32.51' width='11.34' height='28.75' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Antwortoption: 3'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e26' x='126.31' y='32.51' width='4.73' height='28.75' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Antwortoption: 4'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e27' x='125.37' y='32.51' width='0.95' height='28.75' fill='#D8B365' fill-opacity='1' stroke='none' title='Antwortoption: 5'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e28' x='204.75' y='32.51' width='187.11' height='28.75' fill='#01665E' fill-opacity='1' stroke='none' title='Antwortoption: Offen für alle (1)'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e29' x='219.87' y='288.04' width='111.51' height='28.75' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Antwortoption: 2'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e30' x='142.38' y='288.04' width='77.49' height='28.75' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Antwortoption: 3'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e31' x='128.2' y='288.04' width='14.18' height='28.75' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Antwortoption: 4'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e32' x='125.37' y='288.04' width='2.84' height='28.75' fill='#D8B365' fill-opacity='1' stroke='none' title='Antwortoption: 5'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e33' x='331.38' y='288.04' width='60.48' height='28.75' fill='#01665E' fill-opacity='1' stroke='none' title='Antwortoption: Abwechslungsreich (1)'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e34' x='140.49' y='224.16' width='89.78' height='28.75' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Antwortoption: 2'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e35' x='129.15' y='224.16' width='11.34' height='28.75' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Antwortoption: 3'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e36' x='126.31' y='224.16' width='2.84' height='28.75' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Antwortoption: 4'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e37' x='230.26' y='224.16' width='153.09' height='28.75' fill='#01665E' fill-opacity='1' stroke='none' title='Antwortoption: Geschützter Raum (1)'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e38' x='125.37' y='224.16' width='0.95' height='28.75' fill='#8C510A' fill-opacity='1' stroke='none' title='Antwortoption: Kein geschützter Raum (6)'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e39' x='200.97' y='96.39' width='118.13' height='28.75' fill='#5AB4AC' fill-opacity='1' stroke='none' title='Antwortoption: 2'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e40' x='138.6' y='96.39' width='62.37' height='28.75' fill='#C7EAE5' fill-opacity='1' stroke='none' title='Antwortoption: 3'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e41' x='129.15' y='96.39' width='9.45' height='28.75' fill='#F6E8C3' fill-opacity='1' stroke='none' title='Antwortoption: 4'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e42' x='128.2' y='96.39' width='0.95' height='28.75' fill='#D8B365' fill-opacity='1' stroke='none' title='Antwortoption: 5'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e43' x='319.1' y='96.39' width='70.88' height='28.75' fill='#01665E' fill-opacity='1' stroke='none' title='Antwortoption: Modernes Angebot (1)'/>\n   <rect id='svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_e44' x='125.37' y='96.39' width='2.84' height='28.75' fill='#8C510A' fill-opacity='1' stroke='none' title='Antwortoption: Traditionelles Angebot (6)'/>\n  <\/g>\n  <g clip-path='url(#svg_4b109f3d_84d3_4fd9_b350_326bf0151f67_c1)'>\n   <text x='24.52' y='236.47' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>nicht geschütztem<\/text>\n   <text x='80.46' y='247.27' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Raum<\/text>\n   <text x='41.75' y='114.1' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>traditionell ein<\/text>\n   <text x='22.55' y='305.76' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>immer das Gleiche<\/text>\n   <text x='29.44' y='268.42' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Jeder macht sein<\/text>\n   <text x='85.1' y='279.22' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Ding<\/text>\n   <text x='70.83' y='50.22' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Exklusiv<\/text>\n   <text x='21.86' y='82.16' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Nur für Christinnen<\/text>\n   <text x='47.86' y='209.93' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Nicht-Kreativ<\/text>\n   <text x='32.38' y='172.59' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Jeder schaut auf<\/text>\n   <text x='87.72' y='183.39' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>sich<\/text>\n   <text x='6.97' y='140.65' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Man macht immer das<\/text>\n   <text x='72.16' y='151.45' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Gleiche<\/text>\n   <text x='440.61' y='241.87' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>geschütztem<\/text>\n   <text x='463.21' y='114.1' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>modern<\/text>\n   <text x='413.45' y='305.76' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>abwechslungsreich<\/text>\n   <text x='450.59' y='273.82' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Alle helfen<\/text>\n   <text x='439.77' y='50.22' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Offen für alle<\/text>\n   <text x='439.77' y='76.76' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Offen für alle<\/text>\n   <text x='450.07' y='87.56' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Religionen<\/text>\n   <text x='466.27' y='209.93' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Kreativ<\/text>\n   <text x='447.71' y='172.59' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Man achtet<\/text>\n   <text x='444.51' y='183.39' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>aufeinander<\/text>\n   <text x='433.47' y='140.65' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Man kann sich<\/text>\n   <text x='439.03' y='151.45' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>ausprobieren<\/text>\n   <text x='121.74' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>0<\/text>\n   <text x='210.37' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>100<\/text>\n   <text x='304.05' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>200<\/text>\n   <text x='255.74' y='350.33' font-size='10.5pt' font-family='Atkinson Hyperlegible'>n<\/text>\n   <text x='6.97' y='17.67' font-size='12pt' font-weight='bold' font-family='Atkinson Hyperlegible'>Eigenschaften von TEN SING<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_4b109f3d_84d3_4fd9_b350_326bf0151f67","ratio":1.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="girafe html-widget html-fill-item" id="htmlwidget-8555bfd2e3b50a4688fd" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-8555bfd2e3b50a4688fd">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_6debb8e5_a353_425a_9053_c69d9c60be45' viewBox='0 0 504 360'>\n <defs id='svg_6debb8e5_a353_425a_9053_c69d9c60be45_defs'>\n  <clipPath id='svg_6debb8e5_a353_425a_9053_c69d9c60be45_c1'>\n   <rect x='0' y='0' width='504' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_6debb8e5_a353_425a_9053_c69d9c60be45_c2'>\n   <rect x='111.95' y='27.71' width='295.22' height='232.09'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_6debb8e5_a353_425a_9053_c69d9c60be45_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_6debb8e5_a353_425a_9053_c69d9c60be45_c1)'>\n   <rect x='0' y='0' width='504' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n  <\/g>\n  <g clip-path='url(#svg_6debb8e5_a353_425a_9053_c69d9c60be45_c2)'>\n   <polyline points='111.95,194.21 407.17,194.21' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,93.30 407.17,93.30' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,244.66 407.17,244.66' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,219.44 407.17,219.44' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,42.85 407.17,42.85' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,68.08 407.17,68.08' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,168.98 407.17,168.98' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,143.76 407.17,143.76' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='111.95,118.53 407.17,118.53' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='140.52,259.80 140.52,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='188.13,259.80 188.13,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='235.75,259.80 235.75,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='283.37,259.80 283.37,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='330.99,259.80 330.99,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='378.60,259.80 378.60,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect x='307.18' y='206.82' width='47.62' height='25.23' fill='#2F638E' fill-opacity='1' stroke='none'/>\n   <rect x='259.56' y='206.82' width='47.62' height='25.23' fill='#1A3956' fill-opacity='1' stroke='none'/>\n   <rect x='211.94' y='206.82' width='47.62' height='25.23' fill='#142E47' fill-opacity='1' stroke='none'/>\n   <rect x='354.79' y='206.82' width='47.62' height='25.23' fill='#2D5E88' fill-opacity='1' stroke='none'/>\n   <rect x='116.71' y='206.82' width='47.62' height='25.23' fill='#132B44' fill-opacity='1' stroke='none'/>\n   <rect x='307.18' y='156.37' width='47.62' height='25.23' fill='#214769' fill-opacity='1' stroke='none'/>\n   <rect x='259.56' y='156.37' width='47.62' height='25.23' fill='#152F49' fill-opacity='1' stroke='none'/>\n   <rect x='164.33' y='156.37' width='47.62' height='25.23' fill='#132B44' fill-opacity='1' stroke='none'/>\n   <rect x='354.79' y='156.37' width='47.62' height='25.23' fill='#4289C2' fill-opacity='1' stroke='none'/>\n   <rect x='307.18' y='131.14' width='47.62' height='25.23' fill='#265075' fill-opacity='1' stroke='none'/>\n   <rect x='259.56' y='131.14' width='47.62' height='25.23' fill='#18344F' fill-opacity='1' stroke='none'/>\n   <rect x='211.94' y='131.14' width='47.62' height='25.23' fill='#142E47' fill-opacity='1' stroke='none'/>\n   <rect x='354.79' y='131.14' width='47.62' height='25.23' fill='#3977A9' fill-opacity='1' stroke='none'/>\n   <rect x='307.18' y='105.92' width='47.62' height='25.23' fill='#2B5A82' fill-opacity='1' stroke='none'/>\n   <rect x='259.56' y='105.92' width='47.62' height='25.23' fill='#183550' fill-opacity='1' stroke='none'/>\n   <rect x='211.94' y='105.92' width='47.62' height='25.23' fill='#132C44' fill-opacity='1' stroke='none'/>\n   <rect x='164.33' y='105.92' width='47.62' height='25.23' fill='#132B44' fill-opacity='1' stroke='none'/>\n   <rect x='354.79' y='105.92' width='47.62' height='25.23' fill='#356E9D' fill-opacity='1' stroke='none'/>\n   <rect x='307.18' y='55.46' width='47.62' height='25.23' fill='#254F74' fill-opacity='1' stroke='none'/>\n   <rect x='259.56' y='55.46' width='47.62' height='25.23' fill='#1C3C5B' fill-opacity='1' stroke='none'/>\n   <rect x='211.94' y='55.46' width='47.62' height='25.23' fill='#152F49' fill-opacity='1' stroke='none'/>\n   <rect x='164.33' y='55.46' width='47.62' height='25.23' fill='#142D46' fill-opacity='1' stroke='none'/>\n   <rect x='354.79' y='55.46' width='47.62' height='25.23' fill='#336A98' fill-opacity='1' stroke='none'/>\n   <rect x='307.18' y='30.24' width='47.62' height='25.23' fill='#214769' fill-opacity='1' stroke='none'/>\n   <rect x='259.56' y='30.24' width='47.62' height='25.23' fill='#16304A' fill-opacity='1' stroke='none'/>\n   <rect x='211.94' y='30.24' width='47.62' height='25.23' fill='#142D46' fill-opacity='1' stroke='none'/>\n   <rect x='164.33' y='30.24' width='47.62' height='25.23' fill='#132B44' fill-opacity='1' stroke='none'/>\n   <rect x='354.79' y='30.24' width='47.62' height='25.23' fill='#4186BD' fill-opacity='1' stroke='none'/>\n   <rect x='307.18' y='232.05' width='47.62' height='25.23' fill='#2D5F89' fill-opacity='1' stroke='none'/>\n   <rect x='259.56' y='232.05' width='47.62' height='25.23' fill='#254F73' fill-opacity='1' stroke='none'/>\n   <rect x='211.94' y='232.05' width='47.62' height='25.23' fill='#16314B' fill-opacity='1' stroke='none'/>\n   <rect x='164.33' y='232.05' width='47.62' height='25.23' fill='#142C45' fill-opacity='1' stroke='none'/>\n   <rect x='354.79' y='232.05' width='47.62' height='25.23' fill='#214768' fill-opacity='1' stroke='none'/>\n   <rect x='307.18' y='181.6' width='47.62' height='25.23' fill='#29567D' fill-opacity='1' stroke='none'/>\n   <rect x='259.56' y='181.6' width='47.62' height='25.23' fill='#16304A' fill-opacity='1' stroke='none'/>\n   <rect x='211.94' y='181.6' width='47.62' height='25.23' fill='#142C45' fill-opacity='1' stroke='none'/>\n   <rect x='354.79' y='181.6' width='47.62' height='25.23' fill='#3977A9' fill-opacity='1' stroke='none'/>\n   <rect x='116.71' y='181.6' width='47.62' height='25.23' fill='#132B44' fill-opacity='1' stroke='none'/>\n   <rect x='307.18' y='80.69' width='47.62' height='25.23' fill='#2F638E' fill-opacity='1' stroke='none'/>\n   <rect x='259.56' y='80.69' width='47.62' height='25.23' fill='#21486A' fill-opacity='1' stroke='none'/>\n   <rect x='211.94' y='80.69' width='47.62' height='25.23' fill='#152F49' fill-opacity='1' stroke='none'/>\n   <rect x='164.33' y='80.69' width='47.62' height='25.23' fill='#132B44' fill-opacity='1' stroke='none'/>\n   <rect x='354.79' y='80.69' width='47.62' height='25.23' fill='#244C6F' fill-opacity='1' stroke='none'/>\n   <rect x='116.71' y='80.69' width='47.62' height='25.23' fill='#142C45' fill-opacity='1' stroke='none'/>\n   <text x='321.79' y='222.29' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>44%<\/text>\n   <text x='275.35' y='222.29' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>12%<\/text>\n   <text x='229.45' y='222.29' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>2%<\/text>\n   <text x='370.31' y='222.29' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>41%<\/text>\n   <text x='133.8' y='222.29' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>0%<\/text>\n   <text x='322.24' y='171.84' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>23%<\/text>\n   <text x='276.79' y='171.84' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>4%<\/text>\n   <text x='181.41' y='171.84' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>0%<\/text>\n   <text x='370.02' y='171.84' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>73%<\/text>\n   <text x='321.82' y='146.61' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>30%<\/text>\n   <text x='276.79' y='146.61' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>8%<\/text>\n   <text x='229.45' y='146.61' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>2%<\/text>\n   <text x='369.33' y='146.61' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>60%<\/text>\n   <text x='321.96' y='121.38' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>38%<\/text>\n   <text x='276.79' y='121.38' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>8%<\/text>\n   <text x='230.08' y='121.38' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>1%<\/text>\n   <text x='181.41' y='121.38' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>0%<\/text>\n   <text x='369.71' y='121.38' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>53%<\/text>\n   <text x='321.82' y='70.93' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>30%<\/text>\n   <text x='275.21' y='70.93' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>15%<\/text>\n   <text x='229.17' y='70.93' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>4%<\/text>\n   <text x='181.83' y='70.93' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>2%<\/text>\n   <text x='369.39' y='70.93' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>50%<\/text>\n   <text x='322.24' y='45.7' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>23%<\/text>\n   <text x='276.79' y='45.7' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>4%<\/text>\n   <text x='229.45' y='45.7' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>2%<\/text>\n   <text x='181.41' y='45.7' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>0%<\/text>\n   <text x='369.71' y='45.7' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>70%<\/text>\n   <text x='322.06' y='247.52' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>42%<\/text>\n   <text x='274.52' y='247.52' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>29%<\/text>\n   <text x='229.31' y='247.52' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>5%<\/text>\n   <text x='182.46' y='247.52' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>1%<\/text>\n   <text x='369.85' y='247.52' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>23%<\/text>\n   <text x='322.09' y='197.06' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>35%<\/text>\n   <text x='276.79' y='197.06' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>4%<\/text>\n   <text x='230.08' y='197.06' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>1%<\/text>\n   <text x='369.61' y='197.06' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>59%<\/text>\n   <text x='133.8' y='197.06' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>0%<\/text>\n   <text x='321.92' y='96.15' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>45%<\/text>\n   <text x='274.45' y='96.15' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>24%<\/text>\n   <text x='229.17' y='96.15' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>4%<\/text>\n   <text x='181.41' y='96.15' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>0%<\/text>\n   <text x='370.13' y='96.15' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>27%<\/text>\n   <text x='134.85' y='96.15' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>1%<\/text>\n  <\/g>\n  <g clip-path='url(#svg_6debb8e5_a353_425a_9053_c69d9c60be45_c1)'>\n   <text x='24.52' y='192.15' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>nicht geschütztem<\/text>\n   <text x='80.46' y='202.95' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Raum<\/text>\n   <text x='41.75' y='96.64' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>traditionell ein<\/text>\n   <text x='22.55' y='248.01' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>immer das Gleiche<\/text>\n   <text x='29.44' y='217.38' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Jeder macht sein<\/text>\n   <text x='85.1' y='228.18' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Ding<\/text>\n   <text x='70.83' y='46.19' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Exklusiv<\/text>\n   <text x='21.86' y='71.42' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Nur für Christinnen<\/text>\n   <text x='47.86' y='172.33' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Nicht-Kreativ<\/text>\n   <text x='32.38' y='141.7' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Jeder schaut auf<\/text>\n   <text x='87.72' y='152.5' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>sich<\/text>\n   <text x='6.97' y='116.47' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Man macht immer das<\/text>\n   <text x='72.16' y='127.27' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Gleiche<\/text>\n   <text x='440.61' y='197.55' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>geschütztem<\/text>\n   <text x='463.21' y='96.64' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>modern<\/text>\n   <text x='413.45' y='248.01' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>abwechslungsreich<\/text>\n   <text x='450.59' y='222.78' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Alle helfen<\/text>\n   <text x='439.77' y='46.19' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Offen für alle<\/text>\n   <text x='439.77' y='66.02' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Offen für alle<\/text>\n   <text x='450.07' y='76.82' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Religionen<\/text>\n   <text x='466.27' y='172.33' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Kreativ<\/text>\n   <text x='447.71' y='141.7' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Man achtet<\/text>\n   <text x='444.51' y='152.5' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>aufeinander<\/text>\n   <text x='433.47' y='116.47' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Man kann sich<\/text>\n   <text x='439.03' y='127.27' font-size='7.5pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>ausprobieren<\/text>\n   <text x='137.17' y='273.56' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>6<\/text>\n   <text x='184.87' y='273.56' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>5<\/text>\n   <text x='232.32' y='273.56' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>4<\/text>\n   <text x='280.16' y='273.56' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>3<\/text>\n   <text x='327.91' y='273.56' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>2<\/text>\n   <text x='376.35' y='273.56' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>1<\/text>\n   <text x='216.29' y='288.55' font-size='10.5pt' font-family='Atkinson Hyperlegible'>Antwortoption<\/text>\n   <text x='199.26' y='333.78' font-size='10.5pt' font-family='Atkinson Hyperlegible'>perc<\/text>\n   <image x='233.46' y='312.16' width='86.4' height='17.28' preserveAspectRatio='none' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAABCAYAAABkOJMpAAAAiUlEQVQ4jaWT3Q2AIAyEezM4hmO4/0z6QNFif64JiVEpXL8rFBzndYtAn/HVlwigQx3bdTYOJLFPE2s7XM2CX36B/lptEHuZlY+Zf/WxMonOxWr/ua7er07N9V51Pe6wWF2+N6gmiDn27MMtDasx6jFbT8Zd5x03uGs5l/Rni8HOvJkjZG54IusfaBgC//v2D/sAAAAASUVORK5CYII=' xmlns:xlink='http://www.w3.org/1999/xlink'/>\n   <polyline points='233.60,325.99 233.60,329.44' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='255.13,325.99 255.13,329.44' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='276.66,325.99 276.66,329.44' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='298.19,325.99 298.19,329.44' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='319.71,325.99 319.71,329.44' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='233.60,315.62 233.60,312.16' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='255.13,315.62 255.13,312.16' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='276.66,315.62 276.66,312.16' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='298.19,315.62 298.19,312.16' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='319.71,315.62 319.71,312.16' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='229.98' y='343.9' font-size='8.4pt' font-family='Atkinson Hyperlegible'>0<\/text>\n   <text x='248.8' y='343.9' font-size='8.4pt' font-family='Atkinson Hyperlegible'>25<\/text>\n   <text x='269.77' y='343.9' font-size='8.4pt' font-family='Atkinson Hyperlegible'>50<\/text>\n   <text x='292.07' y='343.9' font-size='8.4pt' font-family='Atkinson Hyperlegible'>75<\/text>\n   <text x='310.21' y='343.9' font-size='8.4pt' font-family='Atkinson Hyperlegible'>100<\/text>\n   <text x='6.97' y='17.67' font-size='12pt' font-weight='bold' font-family='Atkinson Hyperlegible'>Eigenschaften von TEN SING - Heatmap Ansicht<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_6debb8e5_a353_425a_9053_c69d9c60be45","ratio":1.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 46%">
+<col style="width: 41%">
+<col style="width: 3%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">label_short</th>
+<th style="text-align: left;">label_value</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">perc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Alle helfen SEP Jeder macht sein Ding</td>
+<td style="text-align: left;">Alle helfen zusammen und sind eine Gemeinschaft (1)</td>
+<td style="text-align: right;">117</td>
+<td style="text-align: right;">41.1971831</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alle helfen SEP Jeder macht sein Ding</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">44.3661972</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Alle helfen SEP Jeder macht sein Ding</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">11.6197183</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alle helfen SEP Jeder macht sein Ding</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">2.4647887</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Alle helfen SEP Jeder macht sein Ding</td>
+<td style="text-align: left;">Jeder macht sein Ding (6)</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3521127</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kreativ SEP Nicht-Kreativ</td>
+<td style="text-align: left;">Kreativ (1)</td>
+<td style="text-align: right;">205</td>
+<td style="text-align: right;">72.6950355</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Kreativ SEP Nicht-Kreativ</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">23.4042553</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kreativ SEP Nicht-Kreativ</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3.5460993</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Kreativ SEP Nicht-Kreativ</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3546099</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Man achtet aufeinander SEP Jeder schaut auf sich</td>
+<td style="text-align: left;">Man achtet aufeinander (1)</td>
+<td style="text-align: right;">169</td>
+<td style="text-align: right;">59.5070423</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Man achtet aufeinander SEP Jeder schaut auf sich</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">30.2816901</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Man achtet aufeinander SEP Jeder schaut auf sich</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">7.7464789</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Man achtet aufeinander SEP Jeder schaut auf sich</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">2.4647887</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Man kann sich ausprobieren SEP Man macht immer das Gleiche</td>
+<td style="text-align: left;">Man kann sich als Person ausprobieren (1)</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">52.8169014</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Man kann sich ausprobieren SEP Man macht immer das Gleiche</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">107</td>
+<td style="text-align: right;">37.6760563</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Man kann sich ausprobieren SEP Man macht immer das Gleiche</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">8.4507042</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Man kann sich ausprobieren SEP Man macht immer das Gleiche</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.7042254</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Man kann sich ausprobieren SEP Man macht immer das Gleiche</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3521127</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Offen für alle Religionen SEP Nur für Christinnen</td>
+<td style="text-align: left;">Offen für alle Religionen (1)</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">50.1779359</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Offen für alle Religionen SEP Nur für Christinnen</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: right;">29.5373665</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Offen für alle Religionen SEP Nur für Christinnen</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: right;">14.5907473</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Offen für alle Religionen SEP Nur für Christinnen</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3.5587189</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Offen für alle Religionen SEP Nur für Christinnen</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2.1352313</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Offen für alle SEP Exklusiv</td>
+<td style="text-align: left;">Offen für alle (1)</td>
+<td style="text-align: right;">198</td>
+<td style="text-align: right;">70.2127660</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Offen für alle SEP Exklusiv</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">23.4042553</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Offen für alle SEP Exklusiv</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">4.2553191</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Offen für alle SEP Exklusiv</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.7730496</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Offen für alle SEP Exklusiv</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3546099</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abwechslungsreich SEP immer das Gleiche</td>
+<td style="text-align: left;">Abwechslungsreich (1)</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">22.6950355</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abwechslungsreich SEP immer das Gleiche</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">118</td>
+<td style="text-align: right;">41.8439716</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abwechslungsreich SEP immer das Gleiche</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">82</td>
+<td style="text-align: right;">29.0780142</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abwechslungsreich SEP immer das Gleiche</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">5.3191489</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abwechslungsreich SEP immer das Gleiche</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.0638298</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">geschütztem SEP nicht geschütztem Raum</td>
+<td style="text-align: left;">Geschützter Raum (1)</td>
+<td style="text-align: right;">162</td>
+<td style="text-align: right;">59.3406593</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">geschütztem SEP nicht geschütztem Raum</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">34.7985348</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">geschütztem SEP nicht geschütztem Raum</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">4.3956044</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">geschütztem SEP nicht geschütztem Raum</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.0989011</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">geschütztem SEP nicht geschütztem Raum</td>
+<td style="text-align: left;">Kein geschützter Raum (6)</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3663004</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">modern SEP traditionell ein</td>
+<td style="text-align: left;">Modernes Angebot (1)</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">26.7857143</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">modern SEP traditionell ein</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">125</td>
+<td style="text-align: right;">44.6428571</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">modern SEP traditionell ein</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">23.5714286</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">modern SEP traditionell ein</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3.5714286</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">modern SEP traditionell ein</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3571429</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">modern SEP traditionell ein</td>
+<td style="text-align: left;">Traditionelles Angebot (6)</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.0714286</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="wie-setzen-sich-aktive-mit-ihrem-glauben-auseinander" class="level1">
+<h1>Wie setzen sich Aktive mit ihrem Glauben auseinander?</h1>
+<p>In der Mehrzahl setzen sich Aktive bei TEN SING mit ihrem Glauben auseinander. 76.51% der Aktiven bewerten die Aussage “<em>Bei TEN SING setzte ich mich mit meinem Glauben / Spiritualität auseinander.</em>” eher bis voll und ganz zutreffend.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>FRAGE: nur jugendliche??</p>
+<section id="ten-sing-als-einziger-kontakt-zum-christlichen-glauben" class="level3">
+<h3 class="anchored" data-anchor-id="ten-sing-als-einziger-kontakt-zum-christlichen-glauben">TEN SING als einziger Kontakt zum christlichen Glauben?</h3>
+<p><strong>79.4%</strong> der Aktiven haben außerhalb von TEN SING Kontakt zum christlichen Glauben, <strong>%</strong> haben nur über TEN SING Kontakt.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tortendiagramm
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Es zeigt sich ein leichter Unterschied zwischen den Gruppen - Aktive, die auch außerhalb von TEN SING Kontakt mit dem christlichen Glauben haben, setzen sich eher auch bei TEN SING mit ihm auseinander.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Balkendiagramm</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Density Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Balkendiagramm</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Density Plot</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="angebote-von-ten-sing" class="level1">
+<h1>Angebote von TEN SING</h1>
+<section id="welche-angebote-finden-personen-besonders-wichtig-welche-werden-angeboten" class="level3">
+<h3 class="anchored" data-anchor-id="welche-angebote-finden-personen-besonders-wichtig-welche-werden-angeboten">Welche Angebote finden Personen besonders wichtig? Welche werden angeboten?</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+dinge_zutrauen
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "dinge_zutrauen"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+eigene_entwicklung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "eigene_entwicklung"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+entfaltung_kreativitae
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "entfaltung_kreativitae"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+fehlerkultur
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "fehlerkultur"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+glaube_spiritualitaet
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "glaube_spiritualitaet"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+gute_entscheidung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "gute_entscheidung"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+ideeneinbringen
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "ideeneinbringen"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+internationale_projekt
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "internationale_projekt"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+neues_lernen
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "neues_lernen"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-69-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+selbst_sein
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "selbst_sein"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-72-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+selbstbewusstsein
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "selbstbewusstsein"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-75-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+transfer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "transfer"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="kern_files/figure-html/unnamed-chunk-78-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -189,7 +1125,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -221,45 +1168,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -294,11 +1203,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -346,6 +1251,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

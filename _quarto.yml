@@ -2,37 +2,43 @@ project:
   type: website
   output-dir: _site
   pre-render: 
-    - R/utils.R
-  render: 
-    - "!LICENSE"
-    - "*qmd"
-  
-# only re-render if the source changes or if we specifically render that file
+  - R/utils.R
+  - R/pre_render.R
+  - config/viz_config.R
+  - R/quarto-utils.R
+  render:
+  - '!LICENSE'
+  - '*qmd'
 execute:
   freeze: auto
-
 format:
   html:
     theme: materia
     css: styles.css
     toc: true
-
 website:
   navbar:
     left:
-      - text: "Start"
-        href: "index.html"
-      - deskriptiv.qmd
-      - kern.qmd
-      - evaluation-pg.qmd
-      - bedarfe.qmd
-      - trends.qmd
-      
+    - text: Start
+      href: index.html
+    - ueberblick.qmd
+    - text: Regionen
+      menu:
+      - href: region/ostwerk.qmd
+      - href: region/nord.qmd
+      - href: region/niederrhein.qmd
+      - href: region/blrg.qmd
+      - href: region/sachsen.qmd
+      - href: region/thueringen.qmd
+      - href: region/hessen.qmd
+      - href: region/owl.qmd
+      - href: region/sueden.qmd
+    - kern.qmd
+    - wirkung-pg.qmd
     right:
-      - text: "Hilfe"
-        href: "hilfe.html"
-      - icon: github
-        href: https://github.com/
-        aria-label: GitHub
-
+    - text: Hilfe
+      href: hilfe.html
+    - icon: github
+      href: https://github.com/
+      aria-label: GitHub
   page-navigation: true

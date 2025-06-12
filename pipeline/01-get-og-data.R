@@ -91,8 +91,7 @@ col_name_ma <- q$`col_name`
 OG_DATA$data$anzahl_ma_leitung <- og_df[[col_name_ma]] %>% as.integer()
 
 # TODO weird bug where xpath has 002 suffix but data has not :eyes:
-col_name_tn <- "group_jx3lf36/Teilnehmende"
-OG_DATA$data$anzahl_tn <- og_df[[col_name_tn]] %>% as.integer()
+OG_DATA$data$anzahl_tn <- og_df[[cfg$CN_ANZAHL_TN]] %>% as.integer()
 
 # GESCHLECHT MATRIX -------------
 gender_mat_begin <- find_qs(og_survey, "type", "begin_kobomatrix") %>% 
@@ -156,8 +155,8 @@ OG_DATA$data$hat_probleme_tn_gewinnung <- og_df %>%
     pull(!!cfg$CN_TN_GEWINNUNG_PROB)
 
 # Maßnahmen TN Gewinnung --------
-massnahmen_long <- make_multiselect_long(og_df, cfg$CNS_TN_GEWINNUNG_MASSNAHMEN) %>% 
-    rename(massnahme = !!cfg$CNS_TN_GEWINNUNG_MASSNAHMEN)
+massnahmen_long <- make_multiselect_long(og_df, cfg$CN_TN_GEWINNUNG_MASSNAHMEN) %>% 
+    rename(massnahme = !!cfg$CN_TN_GEWINNUNG_MASSNAHMEN)
 
 # add open text field sonstige as separate column
 mass_sonst <- og_df %>% 
@@ -184,10 +183,10 @@ massnahmen <- left_join(massnahmen_erfolg, massnahmen_long, by = c("og_id", "mas
 # finally recode values to use labels 
 # we get the labels from the multiple choice question
 # we have to add label for insgesamt manually
-m_massnahmen <- get_mapping(og_choices, cfg$QS_TN_GEWINNUNG_MASSNAHMEN$select_from_list_name)
+m_massnahmen <- get_mapping(og_choices, cfg$Q_TN_GEWINNUNG_MASSNAHMEN$select_from_list_name)
 m_massnahmen <- bind_rows(m_massnahmen, tibble(name = "insgesamt", label = "Insgesamt"))
 massnahmen <- massnahmen %>% recode_values(m_massnahmen, "massnahme")
-OG_DATA$long$tn_gewinnung_massnahmen <- massnahmen_long
+OG_DATA$long$tn_gewinnung_massnahmen <- massnahmen
 
 # UNTERSTUETZUNGSBEDARFE -----------------
 bedarfe_long  <-  pivot_cols_long(og_df, cfg$CN_UNTERSTUETZUNGSBEDARFE, values_to = "bedarf_value")  %>% 
@@ -203,16 +202,16 @@ col_name_weitere_ub <- q$`col_name`
 OG_DATA$data$unterstuetzungsbedarfe_weitere <- og_df[[col_name_weitere_ub]]
 
 # ORTSGRUPPE --------------
-q <- find_q(og_survey, "col_name", "region")
-col_name_og_region <- q$`col_name`
-m <- get_mapping(og_choices, q$select_from_list_name)
-OG_DATA$data$og_region <- og_df %>% recode_values(m, col_name_og_region) %>% 
-    pull(!!col_name_og_region)
+m <- get_mapping(og_choices, cfg$Q_OG_REGION$select_from_list_name)
+OG_DATA$data$og_region <- og_df %>% recode_values(m, cfg$CN_OG_REGION) %>% 
+    pull(!!cfg$CN_OG_REGION)
 
-
-q <- find_q(og_survey, "col_name", "ortsgruppe_name")
-OG_DATA$data$og_name_orig <- og_df[[q$`col_name`]]
+OG_DATA$data$og_name_orig <- og_df[[cfg$CN_OG_NAME]]
 OG_DATA$data$og_name_orig[OG_DATA$data$og_name_orig == ""] <- NA
 
+
+# CALCULATE INSG AKTIVE
+OG_DATA$data <- OG_DATA$data %>% 
+  dplyr::mutate(anzahl_insg = anzahl_tn + anzahl_ma_leitung)
 
 OG_DATA %>% readr::write_rds("data/cleaned/og.rds")

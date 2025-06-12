@@ -1,0 +1,6 @@
+---
+params:
+  region: "Nord"
+---
+
+{{< include ../_region-template.qmd >}}

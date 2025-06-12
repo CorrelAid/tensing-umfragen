@@ -27,7 +27,19 @@ cfg$QS_EIGENSCHAFTEN <- find_qs(tn_survey, "col_name", cfg$Q_BEGIN_EIGENSCHAFTEN
 #eig_choices %>% write_csv("data/meta/tn/eig_choices.csv")
 
 cfg$Q_ZUGANGSWEGE <- find_qs(tn_survey, "col_name", "zugangsweg") %>% filter(type == "select_multiple")
+cfg$LABEL_ZUGANGSWEGE <- c(
+    "Mitgenommen von anderer Person",
+    "Aufführung",
+    "Seminar",
+    "Schnupperprobe",
+    "Kirchengemeinde",
+    "Angebot von TEN SING in der Schule",
+    "Nicht-kirchliche Veranstaltung",
+    "Social Media",
+    "Sonstiges"
+)
 cfg$CN_ZUGANGSWEGE <- cfg$Q_ZUGANGSWEGE$col_name
+
 cfg$Q_ZUGANGSWEGE_SONST <- find_qs(tn_survey, "col_name", "zugangsweg") %>% filter(type == "text")
 cfg$CN_ZUGANGSWEGE_SONST <- cfg$Q_ZUGANGSWEGE_SONST$col_name
 

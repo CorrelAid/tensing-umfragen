@@ -39,3 +39,11 @@ funtion shuffle vector
 # Fragen an TenSING
 
 TODO: how to deal with NA in og_name? and TODO: How to deal with duplicate entries for one OG?
+
+one table to show all the data for ortsgruppen??? -> aggreagte long answers again :eyes:
+
+# next steps 
+
+- CI/CD
+- Datenschutz
+- Farben

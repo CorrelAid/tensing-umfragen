@@ -1,0 +1,6 @@
+---
+params:
+  region: "Ostwestfalen-Lippe"
+---
+
+{{< include ../_region-template.qmd >}}

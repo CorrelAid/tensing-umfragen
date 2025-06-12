@@ -1,12 +1,20 @@
-tn_cfg <- readr::read_rds("config/tn_cfg.rds")
-og_cfg <- readr::read_rds("config/tn_cfg.rds")
+tn_cfg <- readr::read_rds(here::here("config/tn_cfg.rds"))
+og_cfg <- readr::read_rds(here::here("config/tn_cfg.rds"))
+
+fmt_q <- function(Q, inline = TRUE) {
+  s <- sprintf('"*%s*"', Q$label)
+  if (inline) {
+    return(I(s))
+  }
+  return(s)
+}
 
 fmt_source <- function(Q, type, inline = TRUE) {
     if (type == "tn") {
-        s <- sprintf('"%s" im [%s Fragebogen](%s)', Q$label, "Teilnehmer*innen", tn_cfg$URL)
+        s <- sprintf('%s im [%s Fragebogen](%s)', fmt_q(Q), "Teilnehmer*innen", tn_cfg$URL)
 
     } else if (type == "og") {
-        s <- sprintf('"%s" im [%s Fragebogen](%s)', Q$label, "Ortsgruppen", og_cfg$URL)
+        s <- sprintf('%s im [%s Fragebogen](%s)', fmt_q(Q), "Ortsgruppen", og_cfg$URL)
     } else {
       stop(paste("Invalid value for argument type. allowed:", "tn, og"))
     }
@@ -42,4 +50,9 @@ get_pie_chart_data <- function(data, col) {
            pos = n / 2 + lead(csum, 1),
            pos = if_else(is.na(pos), n / 2, pos)) 
   
+}
+
+fmt_vec_to_bullet_point <- function(char_vec) {
+  char_vec <- char_vec[!is.na(char_vec)]
+  paste("- ", char_vec, collapse = "\n")
 }

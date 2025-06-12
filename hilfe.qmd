@@ -1,0 +1,160 @@
+---
+title: "Hilfe"
+execute:
+  echo: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+source("R/quarto-utils.R")
+source("config/viz_config.R")
+
+
+tn <- readr::read_rds("data/cleaned/tn.rds")
+tn_data <- tn$data
+
+og <- readr::read_rds("data/cleaned/og.rds")
+og_data <- og$data
+og_cfg <- readr::read_rds("config/og_cfg.rds")
+
+```
+
+
+# Verwirrt von den Auswertungen?
+
+**Daten verstehen ist nicht immer einfach!**
+
+1. Datenanalysen zu lesen und zu verstehen ist nicht immer einfach. Es ist normal, wenn du erst einmal verwirrt bist beim Anblick eines Balkendiagramms, einer Heatmap oder eines Kuchendiagramms. :exploding_head: Was dann helfen kann:
+
+- nimm dir Zeit und lies den Titel und die Achsenbeschriftungen 
+- klicke auf die Hinweise zur Datenquelle und klicke dich durch zur konkreten Frage im Fragebogen.  
+- nutze die Interpretationshilfe (wenn vorhanden - wir arbeiten dran)
+
+2. Daten so aufzubereiten, dass sie verständlich sind, ist nicht immer einfach, gerade wenn man tief im Thema drinsteckt so wie wir Datenanalyst*innen. :) 
+Deshalb: Wenn Grafiken oder Texte trotz aufmerksamen Lesens noch unklar/unverständlich sind, feedbacke uns das gerne über Antonio und wir schauen es uns nochmal an! :handshake:
+
+
+# Verloren auf der Website?
+
+Hier findest du Hilfe zur Struktur und den Bedienelementen dieser Website, wenn du dich noch nicht gut auf dieser Seite zurecht findest.
+
+ 
+## Struktur der Auswertung
+Die Auswertung bzw. der Report ist in Form einer Website gestaltet. Die Website hat mehrere Unterseiten:
+
+- [Deskriptives](/deskriptiv.html): diese Seite gibt euch einen ersten deskriptiven/beschreibenden Überblick. Hier findet ihr Zahlen zur Anzahl der Ortsgruppen, Geschlecht- und Altersverteilungen etc.
+- [Kern von TEN SING](kern.html): was macht TEN SING aus? Wie nehmen die TENSINGenden TEN SING wahr? 
+- [Evaluation der PG-Arbeit](evaluation-pg.html): Informationskanäle, ...
+- [Bedarfe der Ortsgruppen](bedarfe.html) 
+
+Du kannst über die Menüleiste zwischen den Unterseiten navigieren. 
+
+## Grafiken
+
+Im Report findest du viele Grafiken. 
+
+Manche Grafiken sind **interaktiv**, das heißt wenn du mit der Maus über sie fährst oder sie auf deinem Smartphone antippst, erscheinen zusätzliche Informationen. Bei interaktiven Grafiken findest du oben rechts einen kleinen **Download Button**. Damit kannst du die Grafik als `.png` Datei herunterladen.
+
+Wir hoffen, dass die Visualisierungen verständlich sind. Bei manchen Grafiken gibt es eine **Interpretationshilfe**, die du aufklappen kannst. Dort findest du einen Text, der dir beispielhaft zeigt, wie du die Grafik interpretieren kannst.
+
+::: {.callout-tip collapse="true"} 
+## Interpretationshilfe
+
+Hier wird erklärt, wie man die Grafik liest und interpretiert. 
+::: 
+
+Mithilfe von **Tabs** gruppieren wir Grafiken um Platz zu sparen. 
+
+Meistens findest du in den Tabs alternative **Grafiken für die gleiche Frage**:
+
+::: {.panel-tabset}
+
+## Grafik zu Frage A
+```{r}
+print("hier ist eine Grafik")
+```
+
+## Alternative Grafik zu Frage A
+```{r}
+print("hier ist eine Grafik, die Frage A noch einmal anders darstellt")
+```
+
+::: 
+
+In anderen Fällen fassen die Tabs **Grafiken zu verwandten Fragen** zusammen: 
+
+::: {.panel-tabset}
+
+## Grafik zu Frage A
+```{r}
+print("hier ist eine Grafik zu Frage A")
+```
+
+## Grafik zu Frage B
+```{r}
+print("hier ist eine Grafik zu Frage B")
+```
+
+::: 
+
+
+
+
+## Hinweise
+
+Warnhinweise sollen dir **Denkanstöße für die Einordnung, Interpretation und Verwendung** der Ergebnisse geben. 
+
+::: {.callout-warning} 
+
+## Für die Einordnung
+
+Hier steht etwas wichtiges zur Einordnung der Ergebnisse.
+
+:::
+
+
+Datenquellen-Hinweise dienen der **Nachvollziehbarkeit** der Analyse für dich. Ihr Inhalt ist erstmal verborgen, aber wenn du sie anklickst, öffnet sich der Hinweis und du erfährst mehr dazu, aus welchen Daten sich die Grafik oder ein Text speist. 
+
+::: {.callout-note collapse="true"} 
+
+## Datenquelle
+
+hier steht etwas dazu aus welcher Frage sich die Analyse/Grafik speist.
+
+:::
+
+In den "Mehr Infos"-Hinweisen findest du **zusätzliche Analysen und Informationen zu den Daten**. Diese sind erst einmal verborgen, um Platz zu sparen, aber wenn du sie anklickst, öffnet sich der Hinweis und du findest z.B. tiefergehende statistische Details. 
+
+
+::: {.callout-tip collapse="true"} 
+
+## Mehr Infos
+
+Hier stehen weitere Zahlen oder Listen. 
+
+:::
+
+Wir verwenden den gleichen Hinweis auch um dir **Hinweise zur Bedienung** zu geben:
+
+::: {.callout-tip} 
+
+## Hinweis zur Bedienung
+
+Du kannst die ...
+
+:::
+
+
+## Fußnoten
+
+Neben den Datenquellen-Hinweisen verwenden wir auch Fußnoten, um die Nachvollziehbarkeit zu gewährleisten. Das machen wir vor allem bei Zahlen, die im Fließtext auftauchen.
+
+Zum Beispiel: Durchschnittlich hat eine Ortsgruppe `{r} mean(og_data$anzahl_tn, na.rm = TRUE) %>% round(2)`^[Mittelwert von `{r} fmt_q(og_cfg$Q_ANZAHL_TN)` unter `{r} fmt_source(og_cfg$Q_ANZAHL_BEGIN, type = "og")`] Teilnehmer*innen. 
+
+
+## Accessibility
+
+Gerade befindet sich diese Website in einer Prototyp-Phase. Deshalb konnten wir leider noch nicht daran arbeiten, sicherzustellen, dass die Website zugänglich für alle ist. Das wird bald nachgeholt und dann findest du hier mehr Hinweise zur Accessibility. 
+ 
+

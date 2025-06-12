@@ -1,0 +1,6 @@
+---
+params:
+  region: "Niederrhein"
+---
+
+{{< include ../_region-template.qmd >}}

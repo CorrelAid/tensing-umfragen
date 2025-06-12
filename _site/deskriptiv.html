@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.4">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -35,10 +35,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c9f28ac3654e8145e3f329489cfce6b3.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c003d7bcb19510747d43a84e3d8ebfcb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -66,6 +66,21 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-18.2.0/react.min.js"></script>
+<script src="site_libs/react-18.2.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-2.0.0/react-tools.js"></script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+<script src="site_libs/reactable-binding-0.4.4/reactable.js"></script>
+<script src="site_libs/d3-bundle-5.16.0/d3-bundle.min.js"></script>
+<script src="site_libs/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+<script src="site_libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script>
+<script src="site_libs/flatbush-4.4.0/flatbush.min.js"></script>
+<link href="site_libs/ggiraphjs-0.8.10/ggiraphjs.min.css" rel="stylesheet">
+<script src="site_libs/ggiraphjs-0.8.10/ggiraphjs.min.js"></script>
+<script src="site_libs/girafe-binding-0.8.12/girafe.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -78,14 +93,14 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
+<span class="menu-text">Start</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./deskriptiv.html" aria-current="page"> 
@@ -95,8 +110,63 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./kern.html"> 
 <span class="menu-text">Kern von TenSing</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./evaluation-pg.html"> 
+<span class="menu-text">Evaluation PG-Arbeit</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./bedarfe.html"> 
+<span class="menu-text">Bedarfe</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-regionen" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Regionen</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-regionen">    
+        <li>
+    <a class="dropdown-item" href="./region/ostwerk.html">
+ <span class="dropdown-text">Ostwerk</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/nord.html">
+ <span class="dropdown-text">nord.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/niederrhein.html">
+ <span class="dropdown-text">niederrhein.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/blrg.html">
+ <span class="dropdown-text">blrg.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/sachsen.html">
+ <span class="dropdown-text">sachsen.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/thueringen.html">
+ <span class="dropdown-text">thueringen.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/hessen.html">
+ <span class="dropdown-text">hessen.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/owl.html">
+ <span class="dropdown-text">owl.html</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/sueden.html">
+ <span class="dropdown-text">sueden.html</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./hilfe.html"> 
+<span class="menu-text">Hilfe</span></a>
+  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -104,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -118,8 +188,27 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#wie-viele-aktive-gibt-es" id="toc-wie-viele-aktive-gibt-es" class="nav-link active" data-scroll-target="#wie-viele-aktive-gibt-es">Wie viele Aktive gibt es?</a></li>
+  <li><a href="#deutschlandweiter-überblick" id="toc-deutschlandweiter-überblick" class="nav-link active" data-scroll-target="#deutschlandweiter-überblick">Deutschlandweiter Überblick</a>
+  <ul class="collapse">
+  <li><a href="#ortsgruppengröße" id="toc-ortsgruppengröße" class="nav-link" data-scroll-target="#ortsgruppengröße">Ortsgruppengröße</a></li>
   <li><a href="#geschlecht" id="toc-geschlecht" class="nav-link" data-scroll-target="#geschlecht">Geschlecht</a></li>
+  <li><a href="#alter" id="toc-alter" class="nav-link" data-scroll-target="#alter">Alter</a></li>
+  <li><a href="#aktivitäten" id="toc-aktivitäten" class="nav-link" data-scroll-target="#aktivitäten">Aktivitäten</a>
+  <ul class="collapse">
+  <li><a href="#wie-viel-zeit-verbringen-jugendliche-mit-ten-sing" id="toc-wie-viel-zeit-verbringen-jugendliche-mit-ten-sing" class="nav-link" data-scroll-target="#wie-viel-zeit-verbringen-jugendliche-mit-ten-sing">Wie viel Zeit verbringen Jugendliche mit TEN SING?</a></li>
+  <li><a href="#wann-finden-ten-sing-veranstaltungen-statt-an-welchen-tagen" id="toc-wann-finden-ten-sing-veranstaltungen-statt-an-welchen-tagen" class="nav-link" data-scroll-target="#wann-finden-ten-sing-veranstaltungen-statt-an-welchen-tagen">Wann finden TEN SING Veranstaltungen statt? An welchen Tagen?</a></li>
+  <li><a href="#wie-viele-stunden-in-der-woche-finden-ten-sing-veranstaltungen-statt" id="toc-wie-viele-stunden-in-der-woche-finden-ten-sing-veranstaltungen-statt" class="nav-link" data-scroll-target="#wie-viele-stunden-in-der-woche-finden-ten-sing-veranstaltungen-statt">Wie viele Stunden in der Woche finden TEN SING Veranstaltungen statt?</a></li>
+  <li><a href="#wie-lange-dauert-ein-ten-sing-treffen" id="toc-wie-lange-dauert-ein-ten-sing-treffen" class="nav-link" data-scroll-target="#wie-lange-dauert-ein-ten-sing-treffen">Wie lange dauert ein TEN SING Treffen?</a></li>
+  <li><a href="#wie-viele-auftritte-finden-pro-schuljahr-statt" id="toc-wie-viele-auftritte-finden-pro-schuljahr-statt" class="nav-link" data-scroll-target="#wie-viele-auftritte-finden-pro-schuljahr-statt">Wie viele Auftritte finden pro Schuljahr statt?</a></li>
+  <li><a href="#welche-angebote-finden-statt" id="toc-welche-angebote-finden-statt" class="nav-link" data-scroll-target="#welche-angebote-finden-statt">Welche Angebote finden statt?</a></li>
+  <li><a href="#zufriedenheit-mit-tensing-weiterempfehlungsfrage" id="toc-zufriedenheit-mit-tensing-weiterempfehlungsfrage" class="nav-link" data-scroll-target="#zufriedenheit-mit-tensing-weiterempfehlungsfrage">Zufriedenheit mit TENSING (Weiterempfehlungsfrage)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#regionen-und-ortsgruppen" id="toc-regionen-und-ortsgruppen" class="nav-link" data-scroll-target="#regionen-und-ortsgruppen">Regionen und Ortsgruppen</a>
+  <ul class="collapse">
+  <li><a href="#teilnehmerinnen-pro-region" id="toc-teilnehmerinnen-pro-region" class="nav-link" data-scroll-target="#teilnehmerinnen-pro-region">Teilnehmer*innen pro Region</a></li>
+  <li><a href="#geschlecht-und-alter-nach-regionen" id="toc-geschlecht-und-alter-nach-regionen" class="nav-link" data-scroll-target="#geschlecht-und-alter-nach-regionen">Geschlecht und Alter nach Regionen</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -145,52 +234,361 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Insgesamt haben <strong>38 Ortsgruppen</strong> den Fragebogen ausgefüllt.</p>
-<section id="wie-viele-aktive-gibt-es" class="level2">
-<h2 class="anchored" data-anchor-id="wie-viele-aktive-gibt-es">Wie viele Aktive gibt es?</h2>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<section id="deutschlandweiter-überblick" class="level1">
+<h1>Deutschlandweiter Überblick</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="deskriptiv_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<div class="callout-title-container flex-fill">
+Datenquellen
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Anzahl Ortsgruppen</strong></p>
+<ul>
+<li>40 Anzahl von Antworten auf den <a href="https://ee-eu.kobotoolbox.org/single/cs5DElJT">Ortsgruppen Fragebogen</a></li>
+<li>40 Anzahl verschiedener Werte bei den Antworten zur Frage “<em>Wie heißt deine Ortsgruppe?</em>” im <a href="https://ee-eu.kobotoolbox.org/single/UgaA9dLH">Teilnehmer*innen Fragebogen</a></li>
+</ul>
+<p><strong>Anzahl Aktive</strong></p>
+<div id="tbl-summary" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Anzahl Aktive
+</figcaption>
+<div aria-describedby="tbl-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<thead>
+<tr class="header">
+<th>Fragebogen</th>
+<th>Teilnehmer*innen</th>
+<th>Leitung und Mitarbeitende</th>
+<th>Insgesamt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://ee-eu.kobotoolbox.org/single/UgaA9dLH">Teilnehmer*innen Fragebogen</a></td>
+<td>287<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
+<td><em>nicht abgefragt</em></td>
+<td><em>nicht errechenbar</em></td>
+</tr>
+<tr class="even">
+<td><a href="https://ee-eu.kobotoolbox.org/single/cs5DElJT">Ortsgruppen Fragebogen</a></td>
+<td>484</td>
+<td>199</td>
+<td>683</td>
+</tr>
+</tbody>
+</table>
+</div>
 </figure>
 </div>
 </div>
 </div>
-<p>Durchschnittliche Anzahl von Teilnehmenden: 7.24.</p>
+</div>
+<p>Es gibt <strong>zwischen 30 und 40 Ortsgruppen.</strong></p>
+<p>Insgesamt sind in den Ortsgruppen von TEN SING <strong>683 Personen aktiv</strong>.</p>
+<p>Davon sind <strong>zwischen 287 und 484 als Teilnehmer*innen</strong> engagiert. <strong>199</strong> Personen <strong>arbeiten</strong> für TEN SING oder engagieren sich <strong>in der Leitung</strong> einer Ortsgruppe.</p>
+<section id="ortsgruppengröße" class="level2">
+<h2 class="anchored" data-anchor-id="ortsgruppengröße">Ortsgruppengröße</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Alle</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Teilnehmer*innen</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Mitarbeitende / Leitung</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Hier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als <strong>Summe von Teilnehmer*innen und Leitung und Mitarbeitenden</strong>.</p>
+<p>Im Durchschnitt hat eine TenSing-Ortsgruppe 23 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 9 Aktive, die größte widerrum 48 Aktive.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="deskriptiv_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Hier wird die Anzahl der <strong>Teilnehmer*innen</strong> betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 16 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 6 TN, die größte widerrum 34 TN.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="deskriptiv_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="deskriptiv_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Interpretationshilfe
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Die Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert).</p>
+</div>
+</div>
+</div>
 </section>
 <section id="geschlecht" class="level2">
 <h2 class="anchored" data-anchor-id="geschlecht">Geschlecht</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Mitarbeitende (inkl. Leitung)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Teilnehmende</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Alle</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Mitarbeitende (inkl. Leitung)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">Teilnehmende</a></li></ul>
 <div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="deskriptiv_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="deskriptiv_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="deskriptiv_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="alter" class="level2">
+<h2 class="anchored" data-anchor-id="alter">Alter</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Alle</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Mitarbeitende (inkl. Leitung)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false">Teilnehmende</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="deskriptiv_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="deskriptiv_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="deskriptiv_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="aktivitäten" class="level2">
+<h2 class="anchored" data-anchor-id="aktivitäten">Aktivitäten</h2>
+<section id="wie-viel-zeit-verbringen-jugendliche-mit-ten-sing" class="level3">
+<h3 class="anchored" data-anchor-id="wie-viel-zeit-verbringen-jugendliche-mit-ten-sing">Wie viel Zeit verbringen Jugendliche mit TEN SING?</h3>
+<p><strong>TODO</strong></p>
+</section>
+<section id="wann-finden-ten-sing-veranstaltungen-statt-an-welchen-tagen" class="level3">
+<h3 class="anchored" data-anchor-id="wann-finden-ten-sing-veranstaltungen-statt-an-welchen-tagen">Wann finden TEN SING Veranstaltungen statt? An welchen Tagen?</h3>
+</section>
+<section id="wie-viele-stunden-in-der-woche-finden-ten-sing-veranstaltungen-statt" class="level3">
+<h3 class="anchored" data-anchor-id="wie-viele-stunden-in-der-woche-finden-ten-sing-veranstaltungen-statt">Wie viele Stunden in der Woche finden TEN SING Veranstaltungen statt?</h3>
+<p>Die TEN SING Gruppen verbringen <strong>jede Woche zusammen insgesamt 85 Stunden</strong> mit ihren Treffen.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="deskriptiv_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="wie-lange-dauert-ein-ten-sing-treffen" class="level3">
+<h3 class="anchored" data-anchor-id="wie-lange-dauert-ein-ten-sing-treffen">Wie lange dauert ein TEN SING Treffen?</h3>
+<p>TEN SING Treffen dauern im Durchschnitt 2.2972973 Stunden.</p>
+</section>
+<section id="wie-viele-auftritte-finden-pro-schuljahr-statt" class="level3">
+<h3 class="anchored" data-anchor-id="wie-viele-auftritte-finden-pro-schuljahr-statt">Wie viele Auftritte finden pro Schuljahr statt?</h3>
+<p>Im letzten Schuljahr fanden insgesamt 97 statt.</p>
+</section>
+<section id="welche-angebote-finden-statt" class="level3">
+<h3 class="anchored" data-anchor-id="welche-angebote-finden-statt">Welche Angebote finden statt?</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="deskriptiv_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="zufriedenheit-mit-tensing-weiterempfehlungsfrage" class="level3">
+<h3 class="anchored" data-anchor-id="zufriedenheit-mit-tensing-weiterempfehlungsfrage">Zufriedenheit mit TENSING (Weiterempfehlungsfrage)</h3>
+<p><strong>TODO</strong></p>
+</section>
+</section>
+</section>
+<section id="regionen-und-ortsgruppen" class="level1">
+<h1>Regionen und Ortsgruppen</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Datenquelle
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Relevante Fragen:</p>
+<ul>
+<li><strong>Frage</strong> “<em>In welcher Region liegt deine Ortsgruppe?</em>” im <a href="https://ee-eu.kobotoolbox.org/single/cs5DElJT">Ortsgruppen Fragebogen</a></li>
+<li><strong>Frage</strong> “<em>Wie heißt deine Ortsgruppe?</em>” im <a href="https://ee-eu.kobotoolbox.org/single/cs5DElJT">Ortsgruppen Fragebogen</a></li>
+<li><strong>Frage</strong> “<em>Wie heißt deine Ortsgruppe?</em>” im <a href="https://ee-eu.kobotoolbox.org/single/UgaA9dLH">Teilnehmer*innen Fragebogen</a></li>
+</ul>
+<p>Ortsgruppen, die von Teilnehmenden genannt werden, bekommen das Label “TN” in der Spalte <code>Datenquelle</code>. Ortsgruppen, für die der Ortsgruppen-Fragebogen ausgefüllt wurde, bekommen das Label “OG” in der Spalte <code>Datenquelle</code>. Beachte: Manche Ortsgruppen kommen nur im TN-Fragebogen vor, da die Ortsgruppenleitung den OG-Fragebogen nicht beantwortet hat</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Mit einem Klick auf den <span class="emoji" data-emoji="arrow_forward">▶️</span> kannst du jede Region öffnen und eine Liste ihrer Ortsgruppen sehen.</p>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="reactable html-widget html-fill-item" id="htmlwidget-10d1c88453f3e11e2964" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-10d1c88453f3e11e2964">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Region":["Ostwestfalen-Lippe","Nord","Sachsen","Thüringen","Bergischland-Ruhrgebiet (BLRG)","Niederrhein","Ostwerk","Hessen","Süden"],"Anzahl Ortsgruppen":[8,7,5,5,4,4,4,3,2]},"columns":[{"id":".details","name":"","type":null,"sortable":false,"resizable":false,"filterable":false,"searchable":false,"width":45,"align":"center","details":[{"name":"div","attribs":{"style":{"padding":"1rem"}},"children":[{"name":"Reactable","attribs":{"data":{"Ortsgruppe":["Gütersloh","Knetterheide","Lübbecke","Münster","Rheda-Wiedenbrück","Versmold","Brackwede-Quelle","Löhne"],"Datenquelle":["OG-FB, TN-FB","OG-FB, TN-FB","OG-FB, TN-FB","OG-FB, TN-FB","OG-FB, TN-FB","OG-FB, TN-FB","TN-FB","TN-FB"]},"columns":[{"id":"Ortsgruppe","name":"Ortsgruppe","type":"character"},{"id":"Datenquelle","name":"Datenquelle","type":"character"}],"outlined":true,"dataKey":"86f4e61ab727dbddfd6880e5cc3ee306","static":false,"nested":true},"children":[]}]},{"name":"div","attribs":{"style":{"padding":"1rem"}},"children":[{"name":"Reactable","attribs":{"data":{"Ortsgruppe":["Augustfehn-Apen","Bremen","Moormerland","Oldenburg","Sittensen","Ostrhauderfehn","Hambergen"],"Datenquelle":["OG-FB, TN-FB","OG-FB, TN-FB","OG-FB, TN-FB","OG-FB, TN-FB","TN-FB","TN-FB","TN-FB"]},"columns":[{"id":"Ortsgruppe","name":"Ortsgruppe","type":"character"},{"id":"Datenquelle","name":"Datenquelle","type":"character"}],"outlined":true,"dataKey":"435deb0166f41acf82fb96168554d698","static":false,"nested":true},"children":[]}]},{"name":"div","attribs":{"style":{"padding":"1rem"}},"children":[{"name":"Reactable","attribs":{"data":{"Ortsgruppe":["Dresden","Pirna","Zittau","Coswig","Zwickau"],"Datenquelle":["OG-FB, TN-FB","OG-FB, TN-FB","OG-FB","TN-FB","TN-FB"]},"columns":[{"id":"Ortsgruppe","name":"Ortsgruppe","type":"character"},{"id":"Datenquelle","name":"Datenquelle","type":"character"}],"outlined":true,"dataKey":"f98fc0f6e1a4b8e4b17ea6f24a80e8b9","static":false,"nested":true},"children":[]}]},{"name":"div","attribs":{"style":{"padding":"1rem"}},"children":[{"name":"Reactable","attribs":{"data":{"Ortsgruppe":["Erfurt","Rudolstadt","Sonneberg","Weimar","Zeulenroda"],"Datenquelle":["OG-FB, TN-FB","OG-FB, TN-FB","OG-FB, TN-FB","OG-FB, TN-FB","OG-FB, TN-FB"]},"columns":[{"id":"Ortsgruppe","name":"Ortsgruppe","type":"character"},{"id":"Datenquelle","name":"Datenquelle","type":"character"}],"outlined":true,"dataKey":"4609437cc25a8ed84ced6e8909d29ba2","static":false,"nested":true},"children":[]}]},{"name":"div","attribs":{"style":{"padding":"1rem"}},"children":[{"name":"Reactable","attribs":{"data":{"Ortsgruppe":["Burgaltendorf","Haßlinghausen","Hagen","Bochum"],"Datenquelle":["OG-FB, TN-FB","OG-FB, TN-FB","TN-FB","TN-FB"]},"columns":[{"id":"Ortsgruppe","name":"Ortsgruppe","type":"character"},{"id":"Datenquelle","name":"Datenquelle","type":"character"}],"outlined":true,"dataKey":"625b1a84556d5c99ed68fb3bfd24f660","static":false,"nested":true},"children":[]}]},{"name":"div","attribs":{"style":{"padding":"1rem"}},"children":[{"name":"Reactable","attribs":{"data":{"Ortsgruppe":["Borken","Moers","Solingen","Duisburg"],"Datenquelle":["OG-FB, TN-FB","OG-FB, TN-FB","OG-FB, TN-FB","TN-FB"]},"columns":[{"id":"Ortsgruppe","name":"Ortsgruppe","type":"character"},{"id":"Datenquelle","name":"Datenquelle","type":"character"}],"outlined":true,"dataKey":"14f3e44424b8deac81d7670cd90bc50a","static":false,"nested":true},"children":[]}]},{"name":"div","attribs":{"style":{"padding":"1rem"}},"children":[{"name":"Reactable","attribs":{"data":{"Ortsgruppe":["2.0","Brandenburg","Frankfurt (Oder)","Zeuthen"],"Datenquelle":["OG-FB, TN-FB","OG-FB","OG-FB, TN-FB","OG-FB, TN-FB"]},"columns":[{"id":"Ortsgruppe","name":"Ortsgruppe","type":"character"},{"id":"Datenquelle","name":"Datenquelle","type":"character"}],"outlined":true,"dataKey":"8d59adc213d3e1c460fe5752709ed3d1","static":false,"nested":true},"children":[]}]},{"name":"div","attribs":{"style":{"padding":"1rem"}},"children":[{"name":"Reactable","attribs":{"data":{"Ortsgruppe":["Eschwege","Homberg (Efze)","Ehringen"],"Datenquelle":["OG-FB, TN-FB","OG-FB, TN-FB","TN-FB"]},"columns":[{"id":"Ortsgruppe","name":"Ortsgruppe","type":"character"},{"id":"Datenquelle","name":"Datenquelle","type":"character"}],"outlined":true,"dataKey":"8eddf1cf30022acef974a207afbf0b10","static":false,"nested":true},"children":[]}]},{"name":"div","attribs":{"style":{"padding":"1rem"}},"children":[{"name":"Reactable","attribs":{"data":{"Ortsgruppe":["Ulm","Untermünkheim"],"Datenquelle":["OG-FB","TN-FB"]},"columns":[{"id":"Ortsgruppe","name":"Ortsgruppe","type":"character"},{"id":"Datenquelle","name":"Datenquelle","type":"character"}],"outlined":true,"dataKey":"bac17b5b11e6f960099471ef5146f5dd","static":false,"nested":true},"children":[]}]}]},{"id":"Region","name":"Region","type":"character"},{"id":"Anzahl Ortsgruppen","name":"Anzahl Ortsgruppen","type":"numeric"}],"dataKey":"58289000cedcb673031a0b49082bb37c"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<section id="teilnehmerinnen-pro-region" class="level3">
+<h3 class="anchored" data-anchor-id="teilnehmerinnen-pro-region">Teilnehmer*innen pro Region</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Datenquellen
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Quelle <a href="https://ee-eu.kobotoolbox.org/single/cs5DElJT">Ortsgruppen Fragebogen</a></strong></p>
+<ul>
+<li><strong>Frage</strong>: “<em>In welcher Region liegt deine Ortsgruppe?</em>”</li>
+<li><strong>Frage</strong>: “<em>Teilnehmende:</em>”</li>
+</ul>
+<p><strong>Quelle <a href="https://ee-eu.kobotoolbox.org/single/UgaA9dLH">Teilnehmer*innen Fragebogen</a></strong></p>
+<ul>
+<li><strong>Frage</strong>: “<em>Wie heißt deine Ortsgruppe?</em>”. Diese Information wurde während der Analyse gematcht mit den Regionen.</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Mitarbeitende (inkl. Leitung)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Teilnehmende</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Teilnehmer*innen nach Regionen</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Alternative Darstellung</a></li></ul>
 <div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="girafe html-widget html-fill-item" id="htmlwidget-b73b0b1e7474f25f7778" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-b73b0b1e7474f25f7778">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_6276496c_8a5f_4956_b9fe_311556199c61' viewBox='0 0 504 360'>\n <defs id='svg_6276496c_8a5f_4956_b9fe_311556199c61_defs'>\n  <clipPath id='svg_6276496c_8a5f_4956_b9fe_311556199c61_c1'>\n   <rect x='0' y='0' width='504' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_6276496c_8a5f_4956_b9fe_311556199c61_c2'>\n   <rect x='173.32' y='91.91' width='323.71' height='229.67'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_6276496c_8a5f_4956_b9fe_311556199c61_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_6276496c_8a5f_4956_b9fe_311556199c61_c1)'>\n   <rect x='0' y='0' width='504' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n  <\/g>\n  <g clip-path='url(#svg_6276496c_8a5f_4956_b9fe_311556199c61_c2)'>\n   <polyline points='243.65,321.58 243.65,91.91' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='359.50,321.58 359.50,91.91' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='475.36,321.58 475.36,91.91' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,308.07 497.03,308.07' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,285.56 497.03,285.56' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,263.04 497.03,263.04' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,240.52 497.03,240.52' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,218.00 497.03,218.00' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,195.49 497.03,195.49' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,172.97 497.03,172.97' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,150.45 497.03,150.45' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,127.94 497.03,127.94' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,105.42 497.03,105.42' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='185.72,321.58 185.72,91.91' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='301.57,321.58 301.57,91.91' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='417.43,321.58 417.43,91.91' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e1' cx='239.01' cy='240.52' r='4.27pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut TN-FB: 23 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e2' cx='245.96' cy='172.97' r='4.27pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut TN-FB: 26 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e3' cx='252.91' cy='218' r='4.27pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut TN-FB: 29 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e4' cx='271.45' cy='150.45' r='4.27pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut TN-FB: 37 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e5' cx='222.79' cy='195.49' r='4.27pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut TN-FB: 16 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e6' cx='387.31' cy='105.42' r='4.27pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut TN-FB: 87 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e7' cx='206.57' cy='263.04' r='4.27pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut TN-FB: 9 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e8' cx='188.03' cy='285.56' r='4.27pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut TN-FB: 1 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e9' cx='301.57' cy='127.94' r='4.27pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut TN-FB: 50 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e10' cx='206.57' cy='308.07' r='4.27pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut TN-FB: 9 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e11' cx='278.4' cy='240.52' r='4.27pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut OG-FB: 40 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e12' cx='278.4' cy='172.97' r='4.27pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut OG-FB: 40 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e13' cx='266.82' cy='218' r='4.27pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut OG-FB: 35 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e14' cx='336.33' cy='150.45' r='4.27pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut OG-FB: 65 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e15' cx='296.94' cy='195.49' r='4.27pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut OG-FB: 48 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e16' cx='482.31' cy='105.42' r='4.27pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut OG-FB: 128 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e17' cx='273.77' cy='263.04' r='4.27pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut OG-FB: 38 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e18' cx='239.01' cy='285.56' r='4.27pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut OG-FB: 23 Teilnehmer*innen'/>\n   <circle id='svg_6276496c_8a5f_4956_b9fe_311556199c61_e19' cx='340.97' cy='127.94' r='4.27pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='laut OG-FB: 67 Teilnehmer*innen'/>\n  <\/g>\n  <g clip-path='url(#svg_6276496c_8a5f_4956_b9fe_311556199c61_c1)'>\n   <text x='99.52' y='311.81' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>keine Angabe<\/text>\n   <text x='135.93' y='289.3' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Süden<\/text>\n   <text x='125.39' y='266.78' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Sachsen<\/text>\n   <text x='6.97' y='244.26' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Bergischland-Ruhrgebiet (BLRG)<\/text>\n   <text x='108.89' y='221.75' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Niederrhein<\/text>\n   <text x='127.38' y='199.23' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Ostwerk<\/text>\n   <text x='130.61' y='176.71' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Hessen<\/text>\n   <text x='143.05' y='154.19' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Nord<\/text>\n   <text x='117.28' y='131.68' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Thüringen<\/text>\n   <text x='71.62' y='109.16' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Ostwestfalen-Lippe<\/text>\n   <text x='182.09' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>0<\/text>\n   <text x='294.69' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>50<\/text>\n   <text x='407.93' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>100<\/text>\n   <text x='257.67' y='350.33' font-size='10.5pt' font-family='Atkinson Hyperlegible'>Anzahl Teilnehmer*innen<\/text>\n   <text x='234.82' y='67.02' font-size='10.5pt' font-family='Atkinson Hyperlegible'>Datenquelle<\/text>\n   <circle cx='324.29' cy='62.35' r='4.27pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round'/>\n   <circle cx='388.78' cy='62.35' r='4.27pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round'/>\n   <text x='339.91' y='66.09' font-size='8.4pt' font-family='Atkinson Hyperlegible'>OG-FB<\/text>\n   <text x='404.39' y='66.09' font-size='8.4pt' font-family='Atkinson Hyperlegible'>TN-FB<\/text>\n   <text x='6.97' y='37.07' font-size='10.5pt' font-family='Atkinson Hyperlegible'>beide Fragebögen<\/text>\n   <text x='6.97' y='17.67' font-size='12pt' font-weight='bold' font-family='Atkinson Hyperlegible'>Anzahl Teilnehmer*innen<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_6276496c_8a5f_4956_b9fe_311556199c61","ratio":1.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="girafe html-widget html-fill-item" id="htmlwidget-3400d7ac96c48bb05169" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-3400d7ac96c48bb05169">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_b4fab092_98e1_49f7_b57a_98778806493e' viewBox='0 0 504 360'>\n <defs id='svg_b4fab092_98e1_49f7_b57a_98778806493e_defs'>\n  <clipPath id='svg_b4fab092_98e1_49f7_b57a_98778806493e_c1'>\n   <rect x='0' y='0' width='504' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_b4fab092_98e1_49f7_b57a_98778806493e_c2'>\n   <rect x='173.32' y='46.73' width='323.71' height='274.85'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_b4fab092_98e1_49f7_b57a_98778806493e_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_b4fab092_98e1_49f7_b57a_98778806493e_c1)'>\n   <rect x='0' y='0' width='504' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n  <\/g>\n  <g clip-path='url(#svg_b4fab092_98e1_49f7_b57a_98778806493e_c2)'>\n   <polyline points='173.32,-341.29 497.03,-341.29' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,-1688.59 497.03,-1688.59' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,-3035.90 497.03,-3035.90' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='188.03,321.58 188.03,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='190.35,321.58 190.35,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='192.67,321.58 192.67,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='194.99,321.58 194.99,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='197.30,321.58 197.30,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='199.62,321.58 199.62,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='201.94,321.58 201.94,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='204.25,321.58 204.25,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='206.57,321.58 206.57,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='208.89,321.58 208.89,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,332.36 497.03,332.36' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,-1014.94 497.03,-1014.94' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.32,-2362.25 497.03,-2362.25' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <line id='svg_b4fab092_98e1_49f7_b57a_98778806493e_e1' x1='239.01' y1='305.42' x2='278.4' y2='305.42' stroke='#000000' stroke-opacity='1' stroke-width='4.27' stroke-linejoin='round' stroke-linecap='butt' title='Bergischland-Ruhrgebiet (BLRG): Zwischen 23 und 40 Teilnehmer*innen'/>\n   <line id='svg_b4fab092_98e1_49f7_b57a_98778806493e_e2' x1='245.96' y1='278.47' x2='278.4' y2='278.47' stroke='#000000' stroke-opacity='1' stroke-width='4.27' stroke-linejoin='round' stroke-linecap='butt' title='Hessen: Zwischen 26 und 40 Teilnehmer*innen'/>\n   <line id='svg_b4fab092_98e1_49f7_b57a_98778806493e_e3' x1='252.91' y1='224.58' x2='266.82' y2='224.58' stroke='#000000' stroke-opacity='1' stroke-width='4.27' stroke-linejoin='round' stroke-linecap='butt' title='Niederrhein: Zwischen 29 und 35 Teilnehmer*innen'/>\n   <line id='svg_b4fab092_98e1_49f7_b57a_98778806493e_e4' x1='271.45' y1='197.63' x2='336.33' y2='197.63' stroke='#000000' stroke-opacity='1' stroke-width='4.27' stroke-linejoin='round' stroke-linecap='butt' title='Nord: Zwischen 37 und 65 Teilnehmer*innen'/>\n   <line id='svg_b4fab092_98e1_49f7_b57a_98778806493e_e5' x1='222.79' y1='170.69' x2='296.94' y2='170.69' stroke='#000000' stroke-opacity='1' stroke-width='4.27' stroke-linejoin='round' stroke-linecap='butt' title='Ostwerk: Zwischen 16 und 48 Teilnehmer*innen'/>\n   <line id='svg_b4fab092_98e1_49f7_b57a_98778806493e_e6' x1='387.31' y1='143.74' x2='482.31' y2='143.74' stroke='#000000' stroke-opacity='1' stroke-width='4.27' stroke-linejoin='round' stroke-linecap='butt' title='Ostwestfalen-Lippe: Zwischen 87 und 128 Teilnehmer*innen'/>\n   <line id='svg_b4fab092_98e1_49f7_b57a_98778806493e_e7' x1='206.57' y1='116.79' x2='273.77' y2='116.79' stroke='#000000' stroke-opacity='1' stroke-width='4.27' stroke-linejoin='round' stroke-linecap='butt' title='Sachsen: Zwischen 9 und 38 Teilnehmer*innen'/>\n   <line id='svg_b4fab092_98e1_49f7_b57a_98778806493e_e8' x1='188.03' y1='89.85' x2='239.01' y2='89.85' stroke='#000000' stroke-opacity='1' stroke-width='4.27' stroke-linejoin='round' stroke-linecap='butt' title='Süden: Zwischen 1 und 23 Teilnehmer*innen'/>\n   <line id='svg_b4fab092_98e1_49f7_b57a_98778806493e_e9' x1='301.57' y1='62.9' x2='340.97' y2='62.9' stroke='#000000' stroke-opacity='1' stroke-width='4.27' stroke-linejoin='round' stroke-linecap='butt' title='Thüringen: Zwischen 50 und 67 Teilnehmer*innen'/>\n  <\/g>\n  <g clip-path='url(#svg_b4fab092_98e1_49f7_b57a_98778806493e_c1)'>\n   <text x='6.97' y='309.16' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Bergischland-Ruhrgebiet (BLRG)<\/text>\n   <text x='130.61' y='282.21' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Hessen<\/text>\n   <text x='99.52' y='255.26' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>keine Angabe<\/text>\n   <text x='108.89' y='228.32' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Niederrhein<\/text>\n   <text x='143.05' y='201.37' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Nord<\/text>\n   <text x='127.38' y='174.43' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Ostwerk<\/text>\n   <text x='71.62' y='147.48' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Ostwestfalen-Lippe<\/text>\n   <text x='125.39' y='120.53' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Sachsen<\/text>\n   <text x='135.93' y='93.59' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Süden<\/text>\n   <text x='117.28' y='66.64' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Thüringen<\/text>\n   <text x='182.09' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>0<\/text>\n   <text x='294.69' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>50<\/text>\n   <text x='407.93' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>100<\/text>\n   <text x='257.67' y='350.33' font-size='10.5pt' font-family='Atkinson Hyperlegible'>Anzahl Teilnehmer*innen<\/text>\n   <text x='6.97' y='37.07' font-size='10.5pt' font-family='Atkinson Hyperlegible'>beide Fragebögen<\/text>\n   <text x='6.97' y='17.67' font-size='12pt' font-weight='bold' font-family='Atkinson Hyperlegible'>Anzahl Teilnehmer*innen nach Region<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_b4fab092_98e1_49f7_b57a_98778806493e","ratio":1.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
+</div>
+</div>
+</section>
+<section id="geschlecht-und-alter-nach-regionen" class="level2">
+<h2 class="anchored" data-anchor-id="geschlecht-und-alter-nach-regionen">Geschlecht und Alter nach Regionen</h2>
+<p><strong>TODO</strong></p>
 
 
 </section>
+</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Anzahl der Antworten auf den <a href="https://ee-eu.kobotoolbox.org/single/UgaA9dLH">Teilnehmer*innen Fragebogen</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -226,7 +624,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -258,45 +667,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -331,11 +702,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -383,6 +750,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

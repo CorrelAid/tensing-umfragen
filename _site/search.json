@@ -1,37 +1,485 @@
 [
   {
+    "objectID": "trends.html",
+    "href": "trends.html",
+    "title": "Trends",
+    "section": "",
+    "text": "Coming… 2025?!\n\n\n\nDiese Seite kann erst befüllt werden, wenn die Umfrage mehrfach durchgeführt worden ist :)"
+  },
+  {
     "objectID": "kern.html",
     "href": "kern.html",
     "title": "Kern von TenSing",
     "section": "",
-    "text": "Eigenschaften\nwordcloud\nZustimmung zu Eigenschaften/Aussagen\n…"
+    "text": "Datenquelle\n\n\n\n\n\nFrage: “Mit welchen drei Worten verbindest du TEN SING?” im Teilnehmer*innen Fragebogen\nSpalten im Roh-Datensatz:\n\n\n# A tibble: 3 × 2\n  name   col_name            \n  &lt;chr&gt;  &lt;chr&gt;               \n1 Wort_1 group_aa5ex58/Wort_1\n2 Wort_2 group_aa5ex58/Wort_2\n3 Wort_3 group_aa5ex58/Wort_3"
+  },
+  {
+    "objectID": "kern.html#aussagen",
+    "href": "kern.html#aussagen",
+    "title": "Kern von TenSing",
+    "section": "Aussagen",
+    "text": "Aussagen\n\n\n\n\n\n\nDatenquelle\n\n\n\n\n\nFrage: “Bei TEN SING…” im Teilnehmer*innen Fragebogen\nSpalten im Roh-Datensatz:\n\n\n# A tibble: 12 × 2\n   name                   col_name                                             \n   &lt;chr&gt;                  &lt;chr&gt;                                                \n 1 entfaltung_kreativitae group_bc7fc89/aussagen_tensing/entfaltung_kreativitae\n 2 selbst_sein            group_bc7fc89/aussagen_tensing/selbst_sein           \n 3 neues_lernen           group_bc7fc89/aussagen_tensing/neues_lernen          \n 4 fehlerkultur           group_bc7fc89/aussagen_tensing/fehlerkultur          \n 5 ideeneinbringen        group_bc7fc89/aussagen_tensing/ideeneinbringen       \n 6 eigene_entwicklung     group_bc7fc89/aussagen_tensing/eigene_entwicklung    \n 7 gute_entscheidung      group_bc7fc89/aussagen_tensing/gute_entscheidung     \n 8 dinge_zutrauen         group_bc7fc89/aussagen_tensing/dinge_zutrauen        \n 9 selbstbewusstsein      group_bc7fc89/aussagen_tensing/selbstbewusstsein     \n10 transfer               group_bc7fc89/aussagen_tensing/transfer              \n11 internationale_projekt group_bc7fc89/aussagen_tensing/internationale_projekt\n12 glaube_spiritualitaet  group_bc7fc89/aussagen_tensing/glaube_spiritualitaet"
+  },
+  {
+    "objectID": "kern.html#eigenschaften",
+    "href": "kern.html#eigenschaften",
+    "title": "Kern von TenSing",
+    "section": "Eigenschaften",
+    "text": "Eigenschaften\n\n\n\n\n\n\nDatenquelle\n\n\n\n\n\nFrage: “Nachfolgend findest du Eigenschaften. Bitte entscheide, wie sehr diese auf TEN SING zutreffen:” im Teilnehmer*innen Fragebogen\nSpalten im Roh-Datensatz:\n\n\n# A tibble: 9 × 2\n  name                           col_name                                       \n  &lt;chr&gt;                          &lt;chr&gt;                                          \n1 tengsing_geschuetzt            group_aa5ex58/group_ze8px94/tengsing_geschuetzt\n2 tensing_modern_traditionell_00 group_aa5ex58/group_ze8px94/tensing_modern_tra…\n3 tensing_abwechslung            group_aa5ex58/group_ze8px94/tensing_abwechslung\n4 tensing_gemeinschaft           group_aa5ex58/group_ze8px94/tensing_gemeinscha…\n5 tensing_offen_exklusiv         group_aa5ex58/group_ze8px94/tensing_offen_exkl…\n6 tensing_offen_religionen       group_aa5ex58/group_ze8px94/tensing_offen_reli…\n7 tensing_kreativ_unkreativ      group_aa5ex58/group_ze8px94/tensing_kreativ_un…\n8 tensing_achtenaufandere        group_aa5ex58/group_ze8px94/tensing_achtenaufa…\n9 tensing_ausprobieren           group_aa5ex58/group_ze8px94/tensing_ausprobier…\n\n\n\n\n\n\n\n\n\n\n\nSkalen uneinheitlich!\n\n\n\nDie Antwortoptionen waren bei diesem Fragenblock nicht ganz einheitlich ausgestaltet. Jede Unterfrage hatte eine eigene sechsstufige Skala, deren Endpunkte unterschiedlich waren. Wenn ihr im Balkendiagramm mit der Maus über die Balken geht, könnt ihr die ganz ausformulierten Endpunkte sehen (in der Grafik nur verkürzt dargestellt) und natürlich im Teilnehmer*innen Fragebogen.\n\n\n\nBalkendiagrammHeatmapDaten\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nlabel_short\nlabel_value\nn\nperc\n\n\n\n\nAlle helfen SEP Jeder macht sein Ding\nAlle helfen zusammen und sind eine Gemeinschaft (1)\n117\n41.1971831\n\n\nAlle helfen SEP Jeder macht sein Ding\n2\n126\n44.3661972\n\n\nAlle helfen SEP Jeder macht sein Ding\n3\n33\n11.6197183\n\n\nAlle helfen SEP Jeder macht sein Ding\n4\n7\n2.4647887\n\n\nAlle helfen SEP Jeder macht sein Ding\nJeder macht sein Ding (6)\n1\n0.3521127\n\n\nKreativ SEP Nicht-Kreativ\nKreativ (1)\n205\n72.6950355\n\n\nKreativ SEP Nicht-Kreativ\n2\n66\n23.4042553\n\n\nKreativ SEP Nicht-Kreativ\n3\n10\n3.5460993\n\n\nKreativ SEP Nicht-Kreativ\n5\n1\n0.3546099\n\n\nMan achtet aufeinander SEP Jeder schaut auf sich\nMan achtet aufeinander (1)\n169\n59.5070423\n\n\nMan achtet aufeinander SEP Jeder schaut auf sich\n2\n86\n30.2816901\n\n\nMan achtet aufeinander SEP Jeder schaut auf sich\n3\n22\n7.7464789\n\n\nMan achtet aufeinander SEP Jeder schaut auf sich\n4\n7\n2.4647887\n\n\nMan kann sich ausprobieren SEP Man macht immer das Gleiche\nMan kann sich als Person ausprobieren (1)\n150\n52.8169014\n\n\nMan kann sich ausprobieren SEP Man macht immer das Gleiche\n2\n107\n37.6760563\n\n\nMan kann sich ausprobieren SEP Man macht immer das Gleiche\n3\n24\n8.4507042\n\n\nMan kann sich ausprobieren SEP Man macht immer das Gleiche\n4\n2\n0.7042254\n\n\nMan kann sich ausprobieren SEP Man macht immer das Gleiche\n5\n1\n0.3521127\n\n\nOffen für alle Religionen SEP Nur für Christinnen\nOffen für alle Religionen (1)\n141\n50.1779359\n\n\nOffen für alle Religionen SEP Nur für Christinnen\n2\n83\n29.5373665\n\n\nOffen für alle Religionen SEP Nur für Christinnen\n3\n41\n14.5907473\n\n\nOffen für alle Religionen SEP Nur für Christinnen\n4\n10\n3.5587189\n\n\nOffen für alle Religionen SEP Nur für Christinnen\n5\n6\n2.1352313\n\n\nOffen für alle SEP Exklusiv\nOffen für alle (1)\n198\n70.2127660\n\n\nOffen für alle SEP Exklusiv\n2\n66\n23.4042553\n\n\nOffen für alle SEP Exklusiv\n3\n12\n4.2553191\n\n\nOffen für alle SEP Exklusiv\n4\n5\n1.7730496\n\n\nOffen für alle SEP Exklusiv\n5\n1\n0.3546099\n\n\nabwechslungsreich SEP immer das Gleiche\nAbwechslungsreich (1)\n64\n22.6950355\n\n\nabwechslungsreich SEP immer das Gleiche\n2\n118\n41.8439716\n\n\nabwechslungsreich SEP immer das Gleiche\n3\n82\n29.0780142\n\n\nabwechslungsreich SEP immer das Gleiche\n4\n15\n5.3191489\n\n\nabwechslungsreich SEP immer das Gleiche\n5\n3\n1.0638298\n\n\ngeschütztem SEP nicht geschütztem Raum\nGeschützter Raum (1)\n162\n59.3406593\n\n\ngeschütztem SEP nicht geschütztem Raum\n2\n95\n34.7985348\n\n\ngeschütztem SEP nicht geschütztem Raum\n3\n12\n4.3956044\n\n\ngeschütztem SEP nicht geschütztem Raum\n4\n3\n1.0989011\n\n\ngeschütztem SEP nicht geschütztem Raum\nKein geschützter Raum (6)\n1\n0.3663004\n\n\nmodern SEP traditionell ein\nModernes Angebot (1)\n75\n26.7857143\n\n\nmodern SEP traditionell ein\n2\n125\n44.6428571\n\n\nmodern SEP traditionell ein\n3\n66\n23.5714286\n\n\nmodern SEP traditionell ein\n4\n10\n3.5714286\n\n\nmodern SEP traditionell ein\n5\n1\n0.3571429\n\n\nmodern SEP traditionell ein\nTraditionelles Angebot (6)\n3\n1.0714286"
+  },
+  {
+    "objectID": "hilfe.html",
+    "href": "hilfe.html",
+    "title": "Hilfe",
+    "section": "",
+    "text": "Daten verstehen ist nicht immer einfach!\n\nDatenanalysen zu lesen und zu verstehen ist nicht immer einfach. Es ist normal, wenn du erst einmal verwirrt bist beim Anblick eines Balkendiagramms, einer Heatmap oder eines Kuchendiagramms. :exploding_head: Was dann helfen kann:\n\n\nnimm dir Zeit und lies den Titel und die Achsenbeschriftungen\nklicke auf die Hinweise zur Datenquelle und klicke dich durch zur konkreten Frage im Fragebogen.\n\nnutze die Interpretationshilfe (wenn vorhanden - wir arbeiten dran)\n\n\nDaten so aufzubereiten, dass sie verständlich sind, ist nicht immer einfach, gerade wenn man tief im Thema drinsteckt so wie wir Datenanalyst*innen. :) Deshalb: Wenn Grafiken oder Texte trotz aufmerksamen Lesens noch unklar/unverständlich sind, feedbacke uns das gerne über Antonio und wir schauen es uns nochmal an! :handshake:"
+  },
+  {
+    "objectID": "hilfe.html#struktur-der-auswertung",
+    "href": "hilfe.html#struktur-der-auswertung",
+    "title": "Hilfe",
+    "section": "Struktur der Auswertung",
+    "text": "Struktur der Auswertung\nDie Auswertung bzw. der Report ist in Form einer Website gestaltet. Die Website hat mehrere Unterseiten:\n\nDeskriptives: diese Seite gibt euch einen ersten deskriptiven/beschreibenden Überblick. Hier findet ihr Zahlen zur Anzahl der Ortsgruppen, Geschlecht- und Altersverteilungen etc.\nKern von TEN SING: was macht TEN SING aus? Wie nehmen die TENSINGenden TEN SING wahr?\nEvaluation der PG-Arbeit: Informationskanäle, …\nBedarfe der Ortsgruppen\n\nDu kannst über die Menüleiste zwischen den Unterseiten navigieren."
+  },
+  {
+    "objectID": "hilfe.html#grafiken",
+    "href": "hilfe.html#grafiken",
+    "title": "Hilfe",
+    "section": "Grafiken",
+    "text": "Grafiken\nIm Report findest du viele Grafiken.\nManche Grafiken sind interaktiv, das heißt wenn du mit der Maus über sie fährst oder sie auf deinem Smartphone antippst, erscheinen zusätzliche Informationen. Bei interaktiven Grafiken findest du oben rechts einen kleinen Download Button. Damit kannst du die Grafik als .png Datei herunterladen.\nWir hoffen, dass die Visualisierungen verständlich sind. Bei manchen Grafiken gibt es eine Interpretationshilfe, die du aufklappen kannst. Dort findest du einen Text, der dir beispielhaft zeigt, wie du die Grafik interpretieren kannst.\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nHier wird erklärt, wie man die Grafik liest und interpretiert.\n\n\n\nMithilfe von Tabs gruppieren wir Grafiken um Platz zu sparen.\nMeistens findest du in den Tabs alternative Grafiken für die gleiche Frage:\n\nGrafik zu Frage AAlternative Grafik zu Frage A\n\n\n\n\n[1] \"hier ist eine Grafik\"\n\n\n\n\n\n\n[1] \"hier ist eine Grafik, die Frage A noch einmal anders darstellt\"\n\n\n\n\n\nIn anderen Fällen fassen die Tabs Grafiken zu verwandten Fragen zusammen:\n\nGrafik zu Frage AGrafik zu Frage B\n\n\n\n\n[1] \"hier ist eine Grafik zu Frage A\"\n\n\n\n\n\n\n[1] \"hier ist eine Grafik zu Frage B\""
+  },
+  {
+    "objectID": "hilfe.html#hinweise",
+    "href": "hilfe.html#hinweise",
+    "title": "Hilfe",
+    "section": "Hinweise",
+    "text": "Hinweise\nWarnhinweise sollen dir Denkanstöße für die Einordnung, Interpretation und Verwendung der Ergebnisse geben.\n\n\n\n\n\n\nFür die Einordnung\n\n\n\nHier steht etwas wichtiges zur Einordnung der Ergebnisse.\n\n\nDatenquellen-Hinweise dienen der Nachvollziehbarkeit der Analyse für dich. Ihr Inhalt ist erstmal verborgen, aber wenn du sie anklickst, öffnet sich der Hinweis und du erfährst mehr dazu, aus welchen Daten sich die Grafik oder ein Text speist.\n\n\n\n\n\n\nDatenquelle\n\n\n\n\n\nhier steht etwas dazu aus welcher Frage sich die Analyse/Grafik speist.\n\n\n\nIn den “Mehr Infos”-Hinweisen findest du zusätzliche Analysen und Informationen zu den Daten. Diese sind erst einmal verborgen, um Platz zu sparen, aber wenn du sie anklickst, öffnet sich der Hinweis und du findest z.B. tiefergehende statistische Details.\n\n\n\n\n\n\nMehr Infos\n\n\n\n\n\nHier stehen weitere Zahlen oder Listen.\n\n\n\nWir verwenden den gleichen Hinweis auch um dir Hinweise zur Bedienung zu geben:\n\n\n\n\n\n\nHinweis zur Bedienung\n\n\n\nDu kannst die …"
+  },
+  {
+    "objectID": "hilfe.html#fußnoten",
+    "href": "hilfe.html#fußnoten",
+    "title": "Hilfe",
+    "section": "Fußnoten",
+    "text": "Fußnoten\nNeben den Datenquellen-Hinweisen verwenden wir auch Fußnoten, um die Nachvollziehbarkeit zu gewährleisten. Das machen wir vor allem bei Zahlen, die im Fließtext auftauchen.\nZum Beispiel: Durchschnittlich hat eine Ortsgruppe 16.131 Teilnehmer*innen."
+  },
+  {
+    "objectID": "hilfe.html#accessibility",
+    "href": "hilfe.html#accessibility",
+    "title": "Hilfe",
+    "section": "Accessibility",
+    "text": "Accessibility\nGerade befindet sich diese Website in einer Prototyp-Phase. Deshalb konnten wir leider noch nicht daran arbeiten, sicherzustellen, dass die Website zugänglich für alle ist. Das wird bald nachgeholt und dann findest du hier mehr Hinweise zur Accessibility."
+  },
+  {
+    "objectID": "hilfe.html#footnotes",
+    "href": "hilfe.html#footnotes",
+    "title": "Hilfe",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nMittelwert von “Teilnehmende:” unter “Wie viele Personen waren bei euch vor Ort durchschnittlich im letzten Schuljahr aktiv?” im Ortsgruppen Fragebogen↩︎"
   },
   {
     "objectID": "deskriptiv.html",
     "href": "deskriptiv.html",
     "title": "Deskriptives",
     "section": "",
-    "text": "Insgesamt haben 38 Ortsgruppen den Fragebogen ausgefüllt."
+    "text": "Datenquellen\n\n\n\n\n\nAnzahl Ortsgruppen\n\n40 Anzahl von Antworten auf den Ortsgruppen Fragebogen\n40 Anzahl verschiedener Werte bei den Antworten zur Frage “Wie heißt deine Ortsgruppe?” im Teilnehmer*innen Fragebogen\n\nAnzahl Aktive\n\n\n\nTable 1: Anzahl Aktive\n\n\n\n\n\nFragebogen\nTeilnehmer*innen\nLeitung und Mitarbeitende\nInsgesamt\n\n\n\n\nTeilnehmer*innen Fragebogen\n2871\nnicht abgefragt\nnicht errechenbar\n\n\nOrtsgruppen Fragebogen\n484\n199\n683\n\n\n\n\n\n\n\n\n\nEs gibt zwischen 30 und 40 Ortsgruppen.\nInsgesamt sind in den Ortsgruppen von TEN SING 683 Personen aktiv.\nDavon sind zwischen 287 und 484 als Teilnehmer*innen engagiert. 199 Personen arbeiten für TEN SING oder engagieren sich in der Leitung einer Ortsgruppe.\n\n\n\nAlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe 23 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 9 Aktive, die größte widerrum 48 Aktive.\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 16 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 6 TN, die größte widerrum 34 TN.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert).\n\n\n\n\n\n\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTODO\n\n\n\n\n\n\nDie TEN SING Gruppen verbringen jede Woche zusammen insgesamt 85 Stunden mit ihren Treffen.\n\n\n\n\n\n\n\n\n\n\n\n\nTEN SING Treffen dauern im Durchschnitt 2.2972973 Stunden.\n\n\n\nIm letzten Schuljahr fanden insgesamt 97 statt.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTODO"
   },
   {
-    "objectID": "deskriptiv.html#wie-viele-aktive-gibt-es",
-    "href": "deskriptiv.html#wie-viele-aktive-gibt-es",
+    "objectID": "deskriptiv.html#ortsgruppengröße",
+    "href": "deskriptiv.html#ortsgruppengröße",
     "title": "Deskriptives",
-    "section": "Wie viele Aktive gibt es?",
-    "text": "Wie viele Aktive gibt es?\n\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nDurchschnittliche Anzahl von Teilnehmenden: 7.24."
+    "section": "",
+    "text": "AlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe 23 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 9 Aktive, die größte widerrum 48 Aktive.\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 16 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 6 TN, die größte widerrum 34 TN.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert)."
   },
   {
     "objectID": "deskriptiv.html#geschlecht",
     "href": "deskriptiv.html#geschlecht",
     "title": "Deskriptives",
-    "section": "Geschlecht",
-    "text": "Geschlecht\n\nMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\n\n\n\n\n\n\n\nMitarbeitende (inkl. Leitung)Teilnehmende"
+    "section": "",
+    "text": "AlleMitarbeitende (inkl. Leitung)Teilnehmende"
+  },
+  {
+    "objectID": "deskriptiv.html#alter",
+    "href": "deskriptiv.html#alter",
+    "title": "Deskriptives",
+    "section": "",
+    "text": "AlleMitarbeitende (inkl. Leitung)Teilnehmende"
+  },
+  {
+    "objectID": "deskriptiv.html#aktivitäten",
+    "href": "deskriptiv.html#aktivitäten",
+    "title": "Deskriptives",
+    "section": "",
+    "text": "TODO\n\n\n\n\n\n\nDie TEN SING Gruppen verbringen jede Woche zusammen insgesamt 85 Stunden mit ihren Treffen.\n\n\n\n\n\n\n\n\n\n\n\n\nTEN SING Treffen dauern im Durchschnitt 2.2972973 Stunden.\n\n\n\nIm letzten Schuljahr fanden insgesamt 97 statt.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTODO"
+  },
+  {
+    "objectID": "deskriptiv.html#geschlecht-und-alter-nach-regionen",
+    "href": "deskriptiv.html#geschlecht-und-alter-nach-regionen",
+    "title": "Deskriptives",
+    "section": "Geschlecht und Alter nach Regionen",
+    "text": "Geschlecht und Alter nach Regionen\nTODO"
+  },
+  {
+    "objectID": "deskriptiv.html#footnotes",
+    "href": "deskriptiv.html#footnotes",
+    "title": "Deskriptives",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnzahl der Antworten auf den Teilnehmer*innen Fragebogen↩︎"
+  },
+  {
+    "objectID": "bedarfe.html",
+    "href": "bedarfe.html",
+    "title": "Bedarfe",
+    "section": "",
+    "text": "TODO"
+  },
+  {
+    "objectID": "bedarfe.html#teilnehmendengewinnung",
+    "href": "bedarfe.html#teilnehmendengewinnung",
+    "title": "Bedarfe",
+    "section": "Teilnehmendengewinnung",
+    "text": "Teilnehmendengewinnung\n\nBalkendiagrammKuchendiagrammDaten Ortsgruppen\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWie sind die Teilnehmenden zu TEN SING gekommen?\n\n\n\n\n\n\nDatenquelle\n\n\n\n\n\nFrage: “Wie bist du zu TEN SING gekommen?” im Teilnehmer*innen Fragebogen\n\n\n\n\nBalkendiagrammZugangswege Antwortmuster - Top 10Zugangswege Antwortmuster - alleSonstige Zugangswege\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\ny-Achse/senkrechte Achse: Antwortoptionen, die ausgewählt werden konnten.\nx-Achse/waagerechte Achse: Prozentzahl der Teilnehmer*innen, die diese Option als eine ihrer Antworten ausgewählt haben.\n\nEs handelt sich um eine Multiple-Choice Frage, das heißt, Teilnehmende konnten mehrere Optionen auswählen. Das ist der Grund, wieso sich die Prozentzahlen nicht auf 100%, sondern auf 160% summieren.\nBeispielinterpretation: 66% der Teilnehmenden gaben als einen ihrer Zugangswege zu TEN SING an, von einer anderen Person mitgenommen worden zu sein.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\ny-Achse/senkrechte Achse: top 10 Kombinationen von Antwortoptionen, die zusammen ausgewählt wurden.\nx-Achse/waagerechte Achse: Prozentzahl der Teilnehmer*innen, die diese Optionen zusammen ausgewählt haben.\n\nBeispielinterpretation: 13.94% der Teilnehmenden gaben an, dass diese 2 Zugangswege eine Rolle gespielt haben, wie sie zu TEN SING gekommen sind: Andere Person, Auffuehrung\n\n\n\n\n\n\n\n\n\n\n\n\nAntworten aus dem offenen Textfeld werden noch zusammengefasst werden.\n\n\n\n\n\nMaßnahmen\n\n\n\n\n\n\nDatenquelle\n\n\n\n\n\nFrage: “Welche Maßnahmen setzt ihr vor Ort ein, um neue Teilnehmende zu finden?” im Ortsgruppen Fragebogen\n\n\n\n\nMaßnahmenErfolg der Maßnahmen"
+  },
+  {
+    "objectID": "evaluation-pg.html",
+    "href": "evaluation-pg.html",
+    "title": "Evaluation PG-Arbeit",
+    "section": "",
+    "text": "Informationskanäle\n\n\n\n\n\n\nDatenquellen\n\n\n\n\n\n\n\n# A tibble: 1 × 12\n  name     type  `$kuid` `$qpath` col_name `$autoname` label required appearance\n  &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt;     \n1 Wenn_du… sele… zx8cj11 group_n… group_n… Wenn_du_es… Wenn… FALSE    &lt;NA&gt;      \n# ℹ 3 more variables: select_from_list_name &lt;chr&gt;, relevant &lt;chr&gt;, hint &lt;lgl&gt;\n\n\nFragen aus dem Teilnehmer*innen Fragebogen:\n\n“Hast du den Eindruck, dass du alle wichtigen Informationen erhältst?”\n“Wenn du es dir aussuchen könntest: Auf welchem Weg möchtest du am liebsten Informationen von TEN SING erhalten?”\n\n\n\n\nDie TEN SINGenden fühlen sich zu 78.4% gut informiert.\n1.4% möchten auf anderem Wege informiert werden, 96.2% sind mit den bisherigen Informationskanälen zufrieden.\n\nSind TN informiert?Änderungswunsch Informationskanäle\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCaution\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeutschlandweites Netzwerk\nTODO\n\nIst das deutschlandweite Netzwerk bekannt (Ortsübergreifende Angebote im FRagebogen)?\n\n\nWird es genutzt?\n\n\nWas braucht ein deutschlandweites Seminar um daran teilzunehmen? Welche Hürden bestehen?"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "TenSing Auswertung 2024",
+    "title": "Willkommen zur TEN SING Auswertung 2024!",
     "section": "",
-    "text": "Willkommen zur Auswertung der Umfrage"
+    "text": "Disclaimer\n\n\n\nDas hier ist nur ein Prototyp - viele Fragen fehlen, es gibt Typos und kleine Fehler in den Visualisierungen etc.! Bitte sammelt Feedback hier oder in einem Text-Dokument :) Viel Erfolg bei eurem PG-Wochenende und LG aus Berlin, Leo\nHallo! Willkommen zur Auswertung der jährlichen TEN SING Umfrage. Wir freuen uns, euch Erkenntnisse aus zwei Umfragen mit insgesamt 317 Antworten präsentieren zu können."
+  },
+  {
+    "objectID": "index.html#fragebögen-daten",
+    "href": "index.html#fragebögen-daten",
+    "title": "Willkommen zur TEN SING Auswertung 2024!",
+    "section": "Fragebögen & Daten",
+    "text": "Fragebögen & Daten\nDie Analyse basiert auf Daten, die im Herbst 2024 erhoben wurden. Es wurden zwei Online-Umfragen durchgeführt:\n\neine Umfrage unter den Ortsgruppen mit dem Ortsgruppen Fragebogen\neine Umfrage unter TEN SING Teilnehmenden mit dem Teilnehmer*innen Fragebogen"
+  },
+  {
+    "objectID": "index.html#ansprechpersonen-und-kontakt",
+    "href": "index.html#ansprechpersonen-und-kontakt",
+    "title": "Willkommen zur TEN SING Auswertung 2024!",
+    "section": "Ansprechpersonen und Kontakt",
+    "text": "Ansprechpersonen und Kontakt\n\nProbleme mit der Umfrage und Feedback zur Umfragegestaltung:\n\nProbleme mit der Auswertung / Feedback: Leo Preu (Civic Data Lab / CorrelAid e.V.), am besten erreichbar unter info@correlaid.org."
+  },
+  {
+    "objectID": "region/ostwerk.html",
+    "href": "region/ostwerk.html",
+    "title": "Ostwerk",
+    "section": "",
+    "text": "Datenquelle\n\n\n\n\n\nRelevante Fragen:\n\nFrage “In welcher Region liegt deine Ortsgruppe?” im Ortsgruppen Fragebogen\nFrage “Wie heißt deine Ortsgruppe?” im Ortsgruppen Fragebogen\nFrage “Wie heißt deine Ortsgruppe?” im Teilnehmer*innen Fragebogen\n\nOrtsgruppen, die von Teilnehmenden genannt werden, bekommen das Label “TN” in der Spalte Datenquelle. Ortsgruppen, für die der Ortsgruppen-Fragebogen ausgefüllt wurde, bekommen das Label “OG” in der Spalte Datenquelle. Beachte: Manche Ortsgruppen kommen nur im TN-Fragebogen vor, da die Ortsgruppenleitung den OG-Fragebogen nicht beantwortet hat\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nMit einem Klick auf den :arrow_forward: kannst du jede Region öffnen und eine Liste ihrer Ortsgruppen sehen.\n\n\n\n\n\n\n\n\nAnzahl Ortsgruppen\n\n3 Anzahl von Antworten auf den Ortsgruppen Fragebogen\n3 Anzahl verschiedener Werte bei den Antworten zur Frage “Wie heißt deine Ortsgruppe?” im Teilnehmer*innen Fragebogen\n\nAnzahl Aktive\n\nAnzahl Aktive {#tbl-summary} :::\n\n\nFragebogen\nTeilnehmer*innen\nLeitung und Mitarbeitende\nInsgesamt\n\n\n\n\nTeilnehmer*innen Fragebogen\n161\nnicht abgefragt\nnicht errechenbar\n\n\nOrtsgruppen Fragebogen\n48\n38\n86\n\n\n\nEs gibt zwischen 3 und 4 Ortsgruppen.\nInsgesamt sind in den Ortsgruppen von TEN SING 86 Personen aktiv.\nDavon sind zwischen 16 und 48 als Teilnehmer*innen engagiert. 38 Personen arbeiten für TEN SING oder engagieren sich in der Leitung einer Ortsgruppe.\n\n\n\nAlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe 22 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 14 Aktive, die größte widerrum 29 Aktive.\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 12 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 8 TN, die größte widerrum 17 TN.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert).\n\n\n\n\n\n\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende"
+  },
+  {
+    "objectID": "region/thueringen.html#ortsgruppengröße",
+    "href": "region/thueringen.html#ortsgruppengröße",
+    "title": "foo",
+    "section": "Ortsgruppengröße",
+    "text": "Ortsgruppengröße\n\nAlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe 20 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 10 Aktive, die größte widerrum 36 Aktive.\n\nggplot(og_data_f, aes(x = anzahl_insg))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_insg, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_insg, na.rm = TRUE), hjust = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_insg, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Aktive\", y = \"Anzahl Gruppen\", title = \"Anzahl der Aktiven\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 13 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 6 TN, die größte widerrum 26 TN.\n\nggplot(og_data_f, aes(x = anzahl_tn))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_tn, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_tn, na.rm = TRUE), nudge_x = 1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_tn, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Teilnehmer*innen\", y = \"Anzahl Gruppen\", title = \"Anzahl der Teilnehmer*innen\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(og_data_f, aes(x = anzahl_ma_leitung))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE),  nudge_x = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Mitarbeitende/Leitung\", y = \"Anzahl Gruppen\", title = \"Anzahl der Mitarbeitenden/Leitung\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert)."
+  },
+  {
+    "objectID": "region/thueringen.html#geschlecht",
+    "href": "region/thueringen.html#geschlecht",
+    "title": "foo",
+    "section": "Geschlecht",
+    "text": "Geschlecht\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\ngender_all &lt;- og$long$gender_by_participant_type %&gt;% \n  group_by(og_id, gender) %&gt;% \n  summarize(n = sum(n))\n\n`summarise()` has grouped output by 'og_id'. You can override using the\n`.groups` argument.\n\nog$long$gender_by_participant_type %&gt;% \n  group_by(gender, person_type) %&gt;% \n  summarize(n = sum(n)) %&gt;% \n  mutate(label = paste(\"n =\", n)) %&gt;% \n  ggplot(aes(x = gender, y = n, fill = person_type, label = label))+\n    geom_col(position = \"stack\")+\n    geom_label(\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, title = \"Geschlecht\")+\n    scale_fill_manual(values = cols_4)\n\n`summarise()` has grouped output by 'gender'. You can override using the\n`.groups` argument.\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/thueringen.html#alter",
+    "href": "region/thueringen.html#alter",
+    "title": "foo",
+    "section": "Alter",
+    "text": "Alter\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\nalter_by_person &lt;- og$long$alter_by_participant_type\n\n# for reordering\nalter_choices &lt;- og_choices %&gt;% \n  filter(label %in% c(alter_by_person$alter %&gt;% unique())) %&gt;% \n  mutate(order = 1:n()) %&gt;% \n  select(label, order)\n\ncolor_values &lt;- set_names(cols_4, alter_choices$label)\n\nalter_by_person %&gt;% \n  left_join(alter_choices, by = c(\"alter\" = \"label\")) %&gt;% \n  group_by(person_type) %&gt;% \n  mutate(person_n = sum(n, na.rm = TRUE)) %&gt;% \n  group_by(person_type, alter, order, person_n) %&gt;% \n  summarize(n = sum(n, na.rm = TRUE)) %&gt;% \n  mutate(perc = round(n * 100 / person_n, 2),\n         label = paste0(n, \"\\n\", perc, \"%\"))  %&gt;%\n  ungroup() %&gt;% \n  arrange(person_type, order) %&gt;% \n  ggplot()+\n    geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, -order), stat = \"identity\", fill = alter), position = \"stack\")+\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, y = NULL, title = \"Anzahl Aktive nach Altersgruppen\")+\n  geom_label(\n      aes(y = person_type, x = n, label = label),\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n  scale_fill_manual(values = color_values, breaks = og_choices$label)+\n  guides(fill = guide_legend(nrow = 2))\n\n`summarise()` has grouped output by 'person_type', 'alter', 'order'. You can\noverride using the `.groups` argument.\n\n\nWarning in geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, :\nIgnoring unknown aesthetics: stat\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/thueringen.html#footnotes",
+    "href": "region/thueringen.html#footnotes",
+    "title": "foo",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnzahl der Antworten auf den Teilnehmer*innen Fragebogen↩︎"
+  },
+  {
+    "objectID": "region/sachsen.html#ortsgruppengröße",
+    "href": "region/sachsen.html#ortsgruppengröße",
+    "title": "foo",
+    "section": "Ortsgruppengröße",
+    "text": "Ortsgruppengröße\n\nAlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe 17 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 13 Aktive, die größte widerrum 21 Aktive.\n\nggplot(og_data_f, aes(x = anzahl_insg))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_insg, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_insg, na.rm = TRUE), hjust = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_insg, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Aktive\", y = \"Anzahl Gruppen\", title = \"Anzahl der Aktiven\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 13 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 11 TN, die größte widerrum 15 TN.\n\nggplot(og_data_f, aes(x = anzahl_tn))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_tn, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_tn, na.rm = TRUE), nudge_x = 1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_tn, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Teilnehmer*innen\", y = \"Anzahl Gruppen\", title = \"Anzahl der Teilnehmer*innen\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(og_data_f, aes(x = anzahl_ma_leitung))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE),  nudge_x = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Mitarbeitende/Leitung\", y = \"Anzahl Gruppen\", title = \"Anzahl der Mitarbeitenden/Leitung\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert)."
+  },
+  {
+    "objectID": "region/sachsen.html#geschlecht",
+    "href": "region/sachsen.html#geschlecht",
+    "title": "foo",
+    "section": "Geschlecht",
+    "text": "Geschlecht\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\ngender_all &lt;- og$long$gender_by_participant_type %&gt;% \n  group_by(og_id, gender) %&gt;% \n  summarize(n = sum(n))\n\n`summarise()` has grouped output by 'og_id'. You can override using the\n`.groups` argument.\n\nog$long$gender_by_participant_type %&gt;% \n  group_by(gender, person_type) %&gt;% \n  summarize(n = sum(n)) %&gt;% \n  mutate(label = paste(\"n =\", n)) %&gt;% \n  ggplot(aes(x = gender, y = n, fill = person_type, label = label))+\n    geom_col(position = \"stack\")+\n    geom_label(\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, title = \"Geschlecht\")+\n    scale_fill_manual(values = cols_4)\n\n`summarise()` has grouped output by 'gender'. You can override using the\n`.groups` argument.\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/sachsen.html#alter",
+    "href": "region/sachsen.html#alter",
+    "title": "foo",
+    "section": "Alter",
+    "text": "Alter\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\nalter_by_person &lt;- og$long$alter_by_participant_type\n\n# for reordering\nalter_choices &lt;- og_choices %&gt;% \n  filter(label %in% c(alter_by_person$alter %&gt;% unique())) %&gt;% \n  mutate(order = 1:n()) %&gt;% \n  select(label, order)\n\ncolor_values &lt;- set_names(cols_4, alter_choices$label)\n\nalter_by_person %&gt;% \n  left_join(alter_choices, by = c(\"alter\" = \"label\")) %&gt;% \n  group_by(person_type) %&gt;% \n  mutate(person_n = sum(n, na.rm = TRUE)) %&gt;% \n  group_by(person_type, alter, order, person_n) %&gt;% \n  summarize(n = sum(n, na.rm = TRUE)) %&gt;% \n  mutate(perc = round(n * 100 / person_n, 2),\n         label = paste0(n, \"\\n\", perc, \"%\"))  %&gt;%\n  ungroup() %&gt;% \n  arrange(person_type, order) %&gt;% \n  ggplot()+\n    geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, -order), stat = \"identity\", fill = alter), position = \"stack\")+\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, y = NULL, title = \"Anzahl Aktive nach Altersgruppen\")+\n  geom_label(\n      aes(y = person_type, x = n, label = label),\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n  scale_fill_manual(values = color_values, breaks = og_choices$label)+\n  guides(fill = guide_legend(nrow = 2))\n\n`summarise()` has grouped output by 'person_type', 'alter', 'order'. You can\noverride using the `.groups` argument.\n\n\nWarning in geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, :\nIgnoring unknown aesthetics: stat\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/sachsen.html#footnotes",
+    "href": "region/sachsen.html#footnotes",
+    "title": "foo",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnzahl der Antworten auf den Teilnehmer*innen Fragebogen↩︎"
+  },
+  {
+    "objectID": "region/ostwerk.html#ortsgruppengröße",
+    "href": "region/ostwerk.html#ortsgruppengröße",
+    "title": "Ostwerk",
+    "section": "",
+    "text": "AlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe 22 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 14 Aktive, die größte widerrum 29 Aktive.\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 12 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 8 TN, die größte widerrum 17 TN.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert)."
+  },
+  {
+    "objectID": "region/ostwerk.html#geschlecht",
+    "href": "region/ostwerk.html#geschlecht",
+    "title": "Ostwerk",
+    "section": "",
+    "text": "AlleMitarbeitende (inkl. Leitung)Teilnehmende"
+  },
+  {
+    "objectID": "region/ostwerk.html#alter",
+    "href": "region/ostwerk.html#alter",
+    "title": "Ostwerk",
+    "section": "",
+    "text": "AlleMitarbeitende (inkl. Leitung)Teilnehmende"
+  },
+  {
+    "objectID": "region/ostwerk.html#footnotes",
+    "href": "region/ostwerk.html#footnotes",
+    "title": "Ostwerk",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnzahl der Antworten auf den Teilnehmer*innen Fragebogen↩︎"
+  },
+  {
+    "objectID": "region/niederrhein.html#ortsgruppengröße",
+    "href": "region/niederrhein.html#ortsgruppengröße",
+    "title": "foo",
+    "section": "Ortsgruppengröße",
+    "text": "Ortsgruppengröße\n\nAlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe 16 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 15 Aktive, die größte widerrum 18 Aktive.\n\nggplot(og_data_f, aes(x = anzahl_insg))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_insg, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_insg, na.rm = TRUE), hjust = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_insg, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Aktive\", y = \"Anzahl Gruppen\", title = \"Anzahl der Aktiven\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 12 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 6 TN, die größte widerrum 15 TN.\n\nggplot(og_data_f, aes(x = anzahl_tn))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_tn, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_tn, na.rm = TRUE), nudge_x = 1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_tn, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Teilnehmer*innen\", y = \"Anzahl Gruppen\", title = \"Anzahl der Teilnehmer*innen\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(og_data_f, aes(x = anzahl_ma_leitung))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE),  nudge_x = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Mitarbeitende/Leitung\", y = \"Anzahl Gruppen\", title = \"Anzahl der Mitarbeitenden/Leitung\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert)."
+  },
+  {
+    "objectID": "region/niederrhein.html#geschlecht",
+    "href": "region/niederrhein.html#geschlecht",
+    "title": "foo",
+    "section": "Geschlecht",
+    "text": "Geschlecht\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\ngender_all &lt;- og$long$gender_by_participant_type %&gt;% \n  group_by(og_id, gender) %&gt;% \n  summarize(n = sum(n))\n\n`summarise()` has grouped output by 'og_id'. You can override using the\n`.groups` argument.\n\nog$long$gender_by_participant_type %&gt;% \n  group_by(gender, person_type) %&gt;% \n  summarize(n = sum(n)) %&gt;% \n  mutate(label = paste(\"n =\", n)) %&gt;% \n  ggplot(aes(x = gender, y = n, fill = person_type, label = label))+\n    geom_col(position = \"stack\")+\n    geom_label(\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, title = \"Geschlecht\")+\n    scale_fill_manual(values = cols_4)\n\n`summarise()` has grouped output by 'gender'. You can override using the\n`.groups` argument.\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/niederrhein.html#alter",
+    "href": "region/niederrhein.html#alter",
+    "title": "foo",
+    "section": "Alter",
+    "text": "Alter\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\nalter_by_person &lt;- og$long$alter_by_participant_type\n\n# for reordering\nalter_choices &lt;- og_choices %&gt;% \n  filter(label %in% c(alter_by_person$alter %&gt;% unique())) %&gt;% \n  mutate(order = 1:n()) %&gt;% \n  select(label, order)\n\ncolor_values &lt;- set_names(cols_4, alter_choices$label)\n\nalter_by_person %&gt;% \n  left_join(alter_choices, by = c(\"alter\" = \"label\")) %&gt;% \n  group_by(person_type) %&gt;% \n  mutate(person_n = sum(n, na.rm = TRUE)) %&gt;% \n  group_by(person_type, alter, order, person_n) %&gt;% \n  summarize(n = sum(n, na.rm = TRUE)) %&gt;% \n  mutate(perc = round(n * 100 / person_n, 2),\n         label = paste0(n, \"\\n\", perc, \"%\"))  %&gt;%\n  ungroup() %&gt;% \n  arrange(person_type, order) %&gt;% \n  ggplot()+\n    geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, -order), stat = \"identity\", fill = alter), position = \"stack\")+\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, y = NULL, title = \"Anzahl Aktive nach Altersgruppen\")+\n  geom_label(\n      aes(y = person_type, x = n, label = label),\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n  scale_fill_manual(values = color_values, breaks = og_choices$label)+\n  guides(fill = guide_legend(nrow = 2))\n\n`summarise()` has grouped output by 'person_type', 'alter', 'order'. You can\noverride using the `.groups` argument.\n\n\nWarning in geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, :\nIgnoring unknown aesthetics: stat\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/niederrhein.html#footnotes",
+    "href": "region/niederrhein.html#footnotes",
+    "title": "foo",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnzahl der Antworten auf den Teilnehmer*innen Fragebogen↩︎"
+  },
+  {
+    "objectID": "region/blrg.html#ortsgruppengröße",
+    "href": "region/blrg.html#ortsgruppengröße",
+    "title": "foo",
+    "section": "Ortsgruppengröße",
+    "text": "Ortsgruppengröße\n\nAlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe NaN Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat Aktive, die größte widerrum - Aktive.\n\nggplot(og_data_f, aes(x = anzahl_insg))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_insg, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_insg, na.rm = TRUE), hjust = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_insg, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Aktive\", y = \"Anzahl Gruppen\", title = \"Anzahl der Aktiven\")\n\nWarning: Removed 1 row containing missing values or values outside the scale range\n(`geom_vline()`).\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe NaN Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat TN, die größte widerrum - TN.\n\nggplot(og_data_f, aes(x = anzahl_tn))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_tn, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_tn, na.rm = TRUE), nudge_x = 1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_tn, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Teilnehmer*innen\", y = \"Anzahl Gruppen\", title = \"Anzahl der Teilnehmer*innen\")\n\nWarning: Removed 1 row containing missing values or values outside the scale range\n(`geom_vline()`).\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(og_data_f, aes(x = anzahl_ma_leitung))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE),  nudge_x = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Mitarbeitende/Leitung\", y = \"Anzahl Gruppen\", title = \"Anzahl der Mitarbeitenden/Leitung\")\n\nWarning: Removed 1 row containing missing values or values outside the scale range\n(`geom_vline()`).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert)."
+  },
+  {
+    "objectID": "region/blrg.html#geschlecht",
+    "href": "region/blrg.html#geschlecht",
+    "title": "foo",
+    "section": "Geschlecht",
+    "text": "Geschlecht\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\ngender_all &lt;- og$long$gender_by_participant_type %&gt;% \n  group_by(og_id, gender) %&gt;% \n  summarize(n = sum(n))\n\n`summarise()` has grouped output by 'og_id'. You can override using the\n`.groups` argument.\n\nog$long$gender_by_participant_type %&gt;% \n  group_by(gender, person_type) %&gt;% \n  summarize(n = sum(n)) %&gt;% \n  mutate(label = paste(\"n =\", n)) %&gt;% \n  ggplot(aes(x = gender, y = n, fill = person_type, label = label))+\n    geom_col(position = \"stack\")+\n    geom_label(\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, title = \"Geschlecht\")+\n    scale_fill_manual(values = cols_4)\n\n`summarise()` has grouped output by 'gender'. You can override using the\n`.groups` argument.\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/blrg.html#alter",
+    "href": "region/blrg.html#alter",
+    "title": "foo",
+    "section": "Alter",
+    "text": "Alter\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\nalter_by_person &lt;- og$long$alter_by_participant_type\n\n# for reordering\nalter_choices &lt;- og_choices %&gt;% \n  filter(label %in% c(alter_by_person$alter %&gt;% unique())) %&gt;% \n  mutate(order = 1:n()) %&gt;% \n  select(label, order)\n\ncolor_values &lt;- set_names(cols_4, alter_choices$label)\n\nalter_by_person %&gt;% \n  left_join(alter_choices, by = c(\"alter\" = \"label\")) %&gt;% \n  group_by(person_type) %&gt;% \n  mutate(person_n = sum(n, na.rm = TRUE)) %&gt;% \n  group_by(person_type, alter, order, person_n) %&gt;% \n  summarize(n = sum(n, na.rm = TRUE)) %&gt;% \n  mutate(perc = round(n * 100 / person_n, 2),\n         label = paste0(n, \"\\n\", perc, \"%\"))  %&gt;%\n  ungroup() %&gt;% \n  arrange(person_type, order) %&gt;% \n  ggplot()+\n    geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, -order), stat = \"identity\", fill = alter), position = \"stack\")+\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, y = NULL, title = \"Anzahl Aktive nach Altersgruppen\")+\n  geom_label(\n      aes(y = person_type, x = n, label = label),\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n  scale_fill_manual(values = color_values, breaks = og_choices$label)+\n  guides(fill = guide_legend(nrow = 2))\n\n`summarise()` has grouped output by 'person_type', 'alter', 'order'. You can\noverride using the `.groups` argument.\n\n\nWarning in geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, :\nIgnoring unknown aesthetics: stat\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/blrg.html#footnotes",
+    "href": "region/blrg.html#footnotes",
+    "title": "foo",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnzahl der Antworten auf den Teilnehmer*innen Fragebogen↩︎"
+  },
+  {
+    "objectID": "region/hessen.html#ortsgruppengröße",
+    "href": "region/hessen.html#ortsgruppengröße",
+    "title": "foo",
+    "section": "Ortsgruppengröße",
+    "text": "Ortsgruppengröße\n\nAlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe 29 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 28 Aktive, die größte widerrum 30 Aktive.\n\nggplot(og_data_f, aes(x = anzahl_insg))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_insg, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_insg, na.rm = TRUE), hjust = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_insg, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Aktive\", y = \"Anzahl Gruppen\", title = \"Anzahl der Aktiven\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 20 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 20 TN, die größte widerrum 20 TN.\n\nggplot(og_data_f, aes(x = anzahl_tn))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_tn, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_tn, na.rm = TRUE), nudge_x = 1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_tn, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Teilnehmer*innen\", y = \"Anzahl Gruppen\", title = \"Anzahl der Teilnehmer*innen\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(og_data_f, aes(x = anzahl_ma_leitung))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE),  nudge_x = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Mitarbeitende/Leitung\", y = \"Anzahl Gruppen\", title = \"Anzahl der Mitarbeitenden/Leitung\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert)."
+  },
+  {
+    "objectID": "region/hessen.html#geschlecht",
+    "href": "region/hessen.html#geschlecht",
+    "title": "foo",
+    "section": "Geschlecht",
+    "text": "Geschlecht\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\ngender_all &lt;- og$long$gender_by_participant_type %&gt;% \n  group_by(og_id, gender) %&gt;% \n  summarize(n = sum(n))\n\n`summarise()` has grouped output by 'og_id'. You can override using the\n`.groups` argument.\n\nog$long$gender_by_participant_type %&gt;% \n  group_by(gender, person_type) %&gt;% \n  summarize(n = sum(n)) %&gt;% \n  mutate(label = paste(\"n =\", n)) %&gt;% \n  ggplot(aes(x = gender, y = n, fill = person_type, label = label))+\n    geom_col(position = \"stack\")+\n    geom_label(\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, title = \"Geschlecht\")+\n    scale_fill_manual(values = cols_4)\n\n`summarise()` has grouped output by 'gender'. You can override using the\n`.groups` argument.\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/hessen.html#alter",
+    "href": "region/hessen.html#alter",
+    "title": "foo",
+    "section": "Alter",
+    "text": "Alter\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\nalter_by_person &lt;- og$long$alter_by_participant_type\n\n# for reordering\nalter_choices &lt;- og_choices %&gt;% \n  filter(label %in% c(alter_by_person$alter %&gt;% unique())) %&gt;% \n  mutate(order = 1:n()) %&gt;% \n  select(label, order)\n\ncolor_values &lt;- set_names(cols_4, alter_choices$label)\n\nalter_by_person %&gt;% \n  left_join(alter_choices, by = c(\"alter\" = \"label\")) %&gt;% \n  group_by(person_type) %&gt;% \n  mutate(person_n = sum(n, na.rm = TRUE)) %&gt;% \n  group_by(person_type, alter, order, person_n) %&gt;% \n  summarize(n = sum(n, na.rm = TRUE)) %&gt;% \n  mutate(perc = round(n * 100 / person_n, 2),\n         label = paste0(n, \"\\n\", perc, \"%\"))  %&gt;%\n  ungroup() %&gt;% \n  arrange(person_type, order) %&gt;% \n  ggplot()+\n    geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, -order), stat = \"identity\", fill = alter), position = \"stack\")+\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, y = NULL, title = \"Anzahl Aktive nach Altersgruppen\")+\n  geom_label(\n      aes(y = person_type, x = n, label = label),\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n  scale_fill_manual(values = color_values, breaks = og_choices$label)+\n  guides(fill = guide_legend(nrow = 2))\n\n`summarise()` has grouped output by 'person_type', 'alter', 'order'. You can\noverride using the `.groups` argument.\n\n\nWarning in geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, :\nIgnoring unknown aesthetics: stat\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/hessen.html#footnotes",
+    "href": "region/hessen.html#footnotes",
+    "title": "foo",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnzahl der Antworten auf den Teilnehmer*innen Fragebogen↩︎"
+  },
+  {
+    "objectID": "region/nord.html#ortsgruppengröße",
+    "href": "region/nord.html#ortsgruppengröße",
+    "title": "foo",
+    "section": "Ortsgruppengröße",
+    "text": "Ortsgruppengröße\n\nAlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe 22 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 13 Aktive, die größte widerrum 31 Aktive.\n\nggplot(og_data_f, aes(x = anzahl_insg))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_insg, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_insg, na.rm = TRUE), hjust = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_insg, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Aktive\", y = \"Anzahl Gruppen\", title = \"Anzahl der Aktiven\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 16 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 10 TN, die größte widerrum 25 TN.\n\nggplot(og_data_f, aes(x = anzahl_tn))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_tn, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_tn, na.rm = TRUE), nudge_x = 1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_tn, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Teilnehmer*innen\", y = \"Anzahl Gruppen\", title = \"Anzahl der Teilnehmer*innen\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(og_data_f, aes(x = anzahl_ma_leitung))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE),  nudge_x = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Mitarbeitende/Leitung\", y = \"Anzahl Gruppen\", title = \"Anzahl der Mitarbeitenden/Leitung\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert)."
+  },
+  {
+    "objectID": "region/nord.html#geschlecht",
+    "href": "region/nord.html#geschlecht",
+    "title": "foo",
+    "section": "Geschlecht",
+    "text": "Geschlecht\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\ngender_all &lt;- og$long$gender_by_participant_type %&gt;% \n  group_by(og_id, gender) %&gt;% \n  summarize(n = sum(n))\n\n`summarise()` has grouped output by 'og_id'. You can override using the\n`.groups` argument.\n\nog$long$gender_by_participant_type %&gt;% \n  group_by(gender, person_type) %&gt;% \n  summarize(n = sum(n)) %&gt;% \n  mutate(label = paste(\"n =\", n)) %&gt;% \n  ggplot(aes(x = gender, y = n, fill = person_type, label = label))+\n    geom_col(position = \"stack\")+\n    geom_label(\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, title = \"Geschlecht\")+\n    scale_fill_manual(values = cols_4)\n\n`summarise()` has grouped output by 'gender'. You can override using the\n`.groups` argument.\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/nord.html#alter",
+    "href": "region/nord.html#alter",
+    "title": "foo",
+    "section": "Alter",
+    "text": "Alter\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\nalter_by_person &lt;- og$long$alter_by_participant_type\n\n# for reordering\nalter_choices &lt;- og_choices %&gt;% \n  filter(label %in% c(alter_by_person$alter %&gt;% unique())) %&gt;% \n  mutate(order = 1:n()) %&gt;% \n  select(label, order)\n\ncolor_values &lt;- set_names(cols_4, alter_choices$label)\n\nalter_by_person %&gt;% \n  left_join(alter_choices, by = c(\"alter\" = \"label\")) %&gt;% \n  group_by(person_type) %&gt;% \n  mutate(person_n = sum(n, na.rm = TRUE)) %&gt;% \n  group_by(person_type, alter, order, person_n) %&gt;% \n  summarize(n = sum(n, na.rm = TRUE)) %&gt;% \n  mutate(perc = round(n * 100 / person_n, 2),\n         label = paste0(n, \"\\n\", perc, \"%\"))  %&gt;%\n  ungroup() %&gt;% \n  arrange(person_type, order) %&gt;% \n  ggplot()+\n    geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, -order), stat = \"identity\", fill = alter), position = \"stack\")+\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, y = NULL, title = \"Anzahl Aktive nach Altersgruppen\")+\n  geom_label(\n      aes(y = person_type, x = n, label = label),\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n  scale_fill_manual(values = color_values, breaks = og_choices$label)+\n  guides(fill = guide_legend(nrow = 2))\n\n`summarise()` has grouped output by 'person_type', 'alter', 'order'. You can\noverride using the `.groups` argument.\n\n\nWarning in geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, :\nIgnoring unknown aesthetics: stat\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/nord.html#footnotes",
+    "href": "region/nord.html#footnotes",
+    "title": "foo",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnzahl der Antworten auf den Teilnehmer*innen Fragebogen↩︎"
+  },
+  {
+    "objectID": "region/owl.html#ortsgruppengröße",
+    "href": "region/owl.html#ortsgruppengröße",
+    "title": "foo",
+    "section": "Ortsgruppengröße",
+    "text": "Ortsgruppengröße\n\nAlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe 29 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 9 Aktive, die größte widerrum 48 Aktive.\n\nggplot(og_data_f, aes(x = anzahl_insg))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_insg, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_insg, na.rm = TRUE), hjust = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_insg, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Aktive\", y = \"Anzahl Gruppen\", title = \"Anzahl der Aktiven\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 21 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 6 TN, die größte widerrum 34 TN.\n\nggplot(og_data_f, aes(x = anzahl_tn))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_tn, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_tn, na.rm = TRUE), nudge_x = 1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_tn, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Teilnehmer*innen\", y = \"Anzahl Gruppen\", title = \"Anzahl der Teilnehmer*innen\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(og_data_f, aes(x = anzahl_ma_leitung))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE),  nudge_x = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Mitarbeitende/Leitung\", y = \"Anzahl Gruppen\", title = \"Anzahl der Mitarbeitenden/Leitung\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert)."
+  },
+  {
+    "objectID": "region/owl.html#geschlecht",
+    "href": "region/owl.html#geschlecht",
+    "title": "foo",
+    "section": "Geschlecht",
+    "text": "Geschlecht\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\ngender_all &lt;- og$long$gender_by_participant_type %&gt;% \n  group_by(og_id, gender) %&gt;% \n  summarize(n = sum(n))\n\n`summarise()` has grouped output by 'og_id'. You can override using the\n`.groups` argument.\n\nog$long$gender_by_participant_type %&gt;% \n  group_by(gender, person_type) %&gt;% \n  summarize(n = sum(n)) %&gt;% \n  mutate(label = paste(\"n =\", n)) %&gt;% \n  ggplot(aes(x = gender, y = n, fill = person_type, label = label))+\n    geom_col(position = \"stack\")+\n    geom_label(\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, title = \"Geschlecht\")+\n    scale_fill_manual(values = cols_4)\n\n`summarise()` has grouped output by 'gender'. You can override using the\n`.groups` argument.\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/owl.html#alter",
+    "href": "region/owl.html#alter",
+    "title": "foo",
+    "section": "Alter",
+    "text": "Alter\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\nalter_by_person &lt;- og$long$alter_by_participant_type\n\n# for reordering\nalter_choices &lt;- og_choices %&gt;% \n  filter(label %in% c(alter_by_person$alter %&gt;% unique())) %&gt;% \n  mutate(order = 1:n()) %&gt;% \n  select(label, order)\n\ncolor_values &lt;- set_names(cols_4, alter_choices$label)\n\nalter_by_person %&gt;% \n  left_join(alter_choices, by = c(\"alter\" = \"label\")) %&gt;% \n  group_by(person_type) %&gt;% \n  mutate(person_n = sum(n, na.rm = TRUE)) %&gt;% \n  group_by(person_type, alter, order, person_n) %&gt;% \n  summarize(n = sum(n, na.rm = TRUE)) %&gt;% \n  mutate(perc = round(n * 100 / person_n, 2),\n         label = paste0(n, \"\\n\", perc, \"%\"))  %&gt;%\n  ungroup() %&gt;% \n  arrange(person_type, order) %&gt;% \n  ggplot()+\n    geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, -order), stat = \"identity\", fill = alter), position = \"stack\")+\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, y = NULL, title = \"Anzahl Aktive nach Altersgruppen\")+\n  geom_label(\n      aes(y = person_type, x = n, label = label),\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n  scale_fill_manual(values = color_values, breaks = og_choices$label)+\n  guides(fill = guide_legend(nrow = 2))\n\n`summarise()` has grouped output by 'person_type', 'alter', 'order'. You can\noverride using the `.groups` argument.\n\n\nWarning in geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, :\nIgnoring unknown aesthetics: stat\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/owl.html#footnotes",
+    "href": "region/owl.html#footnotes",
+    "title": "foo",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnzahl der Antworten auf den Teilnehmer*innen Fragebogen↩︎"
+  },
+  {
+    "objectID": "region/sueden.html#ortsgruppengröße",
+    "href": "region/sueden.html#ortsgruppengröße",
+    "title": "foo",
+    "section": "Ortsgruppengröße",
+    "text": "Ortsgruppengröße\n\nAlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe 24 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 24 Aktive, die größte widerrum 24 Aktive.\n\nggplot(og_data_f, aes(x = anzahl_insg))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_insg, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_insg, na.rm = TRUE), hjust = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_insg, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Aktive\", y = \"Anzahl Gruppen\", title = \"Anzahl der Aktiven\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 23 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 23 TN, die größte widerrum 23 TN.\n\nggplot(og_data_f, aes(x = anzahl_tn))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_tn, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_tn, na.rm = TRUE), nudge_x = 1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_tn, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Teilnehmer*innen\", y = \"Anzahl Gruppen\", title = \"Anzahl der Teilnehmer*innen\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(og_data_f, aes(x = anzahl_ma_leitung))+\n    geom_histogram(fill = TS_GREEN)+\n    geom_vline(xintercept = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE), color = RED, linetype = 2)+\n  geom_text(x = mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE),  nudge_x = -0.1, y = 5, label = paste(\"Mittelwert =\", mean(og_data_f$anzahl_ma_leitung, na.rm = TRUE) %&gt;% round(2)))+\n    labs(x = \"Anzahl Mitarbeitende/Leitung\", y = \"Anzahl Gruppen\", title = \"Anzahl der Mitarbeitenden/Leitung\")\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert)."
+  },
+  {
+    "objectID": "region/sueden.html#geschlecht",
+    "href": "region/sueden.html#geschlecht",
+    "title": "foo",
+    "section": "Geschlecht",
+    "text": "Geschlecht\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\ngender_all &lt;- og$long$gender_by_participant_type %&gt;% \n  group_by(og_id, gender) %&gt;% \n  summarize(n = sum(n))\n\n`summarise()` has grouped output by 'og_id'. You can override using the\n`.groups` argument.\n\nog$long$gender_by_participant_type %&gt;% \n  group_by(gender, person_type) %&gt;% \n  summarize(n = sum(n)) %&gt;% \n  mutate(label = paste(\"n =\", n)) %&gt;% \n  ggplot(aes(x = gender, y = n, fill = person_type, label = label))+\n    geom_col(position = \"stack\")+\n    geom_label(\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, title = \"Geschlecht\")+\n    scale_fill_manual(values = cols_4)\n\n`summarise()` has grouped output by 'gender'. You can override using the\n`.groups` argument.\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/sueden.html#alter",
+    "href": "region/sueden.html#alter",
+    "title": "foo",
+    "section": "Alter",
+    "text": "Alter\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\nalter_by_person &lt;- og$long$alter_by_participant_type\n\n# for reordering\nalter_choices &lt;- og_choices %&gt;% \n  filter(label %in% c(alter_by_person$alter %&gt;% unique())) %&gt;% \n  mutate(order = 1:n()) %&gt;% \n  select(label, order)\n\ncolor_values &lt;- set_names(cols_4, alter_choices$label)\n\nalter_by_person %&gt;% \n  left_join(alter_choices, by = c(\"alter\" = \"label\")) %&gt;% \n  group_by(person_type) %&gt;% \n  mutate(person_n = sum(n, na.rm = TRUE)) %&gt;% \n  group_by(person_type, alter, order, person_n) %&gt;% \n  summarize(n = sum(n, na.rm = TRUE)) %&gt;% \n  mutate(perc = round(n * 100 / person_n, 2),\n         label = paste0(n, \"\\n\", perc, \"%\"))  %&gt;%\n  ungroup() %&gt;% \n  arrange(person_type, order) %&gt;% \n  ggplot()+\n    geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, -order), stat = \"identity\", fill = alter), position = \"stack\")+\n    theme(legend.position = \"bottom\")+\n    labs(fill = NULL, x = NULL, y = NULL, title = \"Anzahl Aktive nach Altersgruppen\")+\n  geom_label(\n      aes(y = person_type, x = n, label = label),\n      position = position_stack(vjust = 0.5),\n      size = 3, fontface = \"bold\",\n      ## turn into white box without outline\n      fill = \"white\"\n    ) +\n  scale_fill_manual(values = color_values, breaks = og_choices$label)+\n  guides(fill = guide_legend(nrow = 2))\n\n`summarise()` has grouped output by 'person_type', 'alter', 'order'. You can\noverride using the `.groups` argument.\n\n\nWarning in geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, :\nIgnoring unknown aesthetics: stat\n\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT\n\n\n\n\n\n\n\n\n\n\n\nPLACEHOLDER_PLOT"
+  },
+  {
+    "objectID": "region/sueden.html#footnotes",
+    "href": "region/sueden.html#footnotes",
+    "title": "foo",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnzahl der Antworten auf den Teilnehmer*innen Fragebogen↩︎"
+  },
+  {
+    "objectID": "ueberblick.html",
+    "href": "ueberblick.html",
+    "title": "Überblick",
+    "section": "",
+    "text": "Datenquellen\n\n\n\n\n\nAnzahl Ortsgruppen\n\n40 Anzahl von Antworten auf den Ortsgruppen Fragebogen\n40 Anzahl verschiedener Werte bei den Antworten zur Frage “Wie heißt deine Ortsgruppe?” im Teilnehmer*innen Fragebogen\n\nAnzahl Aktive\n\n\n\nTable 1: Anzahl Aktive\n\n\n\n\n\nFragebogen\nTeilnehmer*innen\nLeitung und Mitarbeitende\nInsgesamt\n\n\n\n\nTeilnehmer*innen Fragebogen\n2871\nnicht abgefragt\nnicht errechenbar\n\n\nOrtsgruppen Fragebogen\n484\n199\n683\n\n\n\n\n\n\n\n\n\nEs gibt zwischen 30 und 40 Ortsgruppen.\nInsgesamt sind in den Ortsgruppen von TEN SING 683 Personen aktiv.\nDavon sind zwischen 287 und 484 als Teilnehmer*innen engagiert. 199 Personen arbeiten für TEN SING oder engagieren sich in der Leitung einer Ortsgruppe.\n\n\n\nAlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe 23 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 9 Aktive, die größte widerrum 48 Aktive.\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 16 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 6 TN, die größte widerrum 34 TN.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert).\n\n\n\n\n\n\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAlleMitarbeitende (inkl. Leitung)Teilnehmende\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTODO\n\n\n\n\n\n\nDie TEN SING Gruppen verbringen jede Woche zusammen insgesamt 85 Stunden mit ihren Treffen.\n\n\n\n\n\n\n\n\n\n\n\n\nTEN SING Treffen dauern im Durchschnitt 2.2972973 Stunden.\n\n\n\nIm letzten Schuljahr fanden insgesamt 97 statt.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTODO"
+  },
+  {
+    "objectID": "ueberblick.html#ortsgruppengröße",
+    "href": "ueberblick.html#ortsgruppengröße",
+    "title": "Überblick",
+    "section": "",
+    "text": "AlleTeilnehmer*innenMitarbeitende / Leitung\n\n\nHier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als Summe von Teilnehmer*innen und Leitung und Mitarbeitenden.\nIm Durchschnitt hat eine TenSing-Ortsgruppe 23 Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 9 Aktive, die größte widerrum 48 Aktive.\n\n\n\n\n\n\n\n\n\n\n\nHier wird die Anzahl der Teilnehmer*innen betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe 16 Teilnehmer*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat 6 TN, die größte widerrum 34 TN.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretationshilfe\n\n\n\n\n\nDie Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert)."
+  },
+  {
+    "objectID": "ueberblick.html#geschlecht",
+    "href": "ueberblick.html#geschlecht",
+    "title": "Überblick",
+    "section": "",
+    "text": "AlleMitarbeitende (inkl. Leitung)Teilnehmende"
+  },
+  {
+    "objectID": "ueberblick.html#alter",
+    "href": "ueberblick.html#alter",
+    "title": "Überblick",
+    "section": "",
+    "text": "AlleMitarbeitende (inkl. Leitung)Teilnehmende"
+  },
+  {
+    "objectID": "ueberblick.html#aktivitäten",
+    "href": "ueberblick.html#aktivitäten",
+    "title": "Überblick",
+    "section": "",
+    "text": "TODO\n\n\n\n\n\n\nDie TEN SING Gruppen verbringen jede Woche zusammen insgesamt 85 Stunden mit ihren Treffen.\n\n\n\n\n\n\n\n\n\n\n\n\nTEN SING Treffen dauern im Durchschnitt 2.2972973 Stunden.\n\n\n\nIm letzten Schuljahr fanden insgesamt 97 statt.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTODO"
+  },
+  {
+    "objectID": "ueberblick.html#geschlecht-und-alter-nach-regionen",
+    "href": "ueberblick.html#geschlecht-und-alter-nach-regionen",
+    "title": "Überblick",
+    "section": "Geschlecht und Alter nach Regionen",
+    "text": "Geschlecht und Alter nach Regionen\nTODO"
+  },
+  {
+    "objectID": "ueberblick.html#footnotes",
+    "href": "ueberblick.html#footnotes",
+    "title": "Überblick",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnzahl der Antworten auf den Teilnehmer*innen Fragebogen↩︎"
+  },
+  {
+    "objectID": "wirkung-pg.html",
+    "href": "wirkung-pg.html",
+    "title": "Wirkung PG",
+    "section": "",
+    "text": "Informationskanäle\n\n\n\n\n\n\nDatenquellen\n\n\n\n\n\n\n\n# A tibble: 1 × 12\n  name     type  `$kuid` `$qpath` col_name `$autoname` label required appearance\n  &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt;     \n1 Wenn_du… sele… zx8cj11 group_n… group_n… Wenn_du_es… Wenn… FALSE    &lt;NA&gt;      \n# ℹ 3 more variables: select_from_list_name &lt;chr&gt;, relevant &lt;chr&gt;, hint &lt;lgl&gt;\n\n\nFragen aus dem Teilnehmer*innen Fragebogen:\n\n“Hast du den Eindruck, dass du alle wichtigen Informationen erhältst?”\n“Wenn du es dir aussuchen könntest: Auf welchem Weg möchtest du am liebsten Informationen von TEN SING erhalten?”\n\n\n\n\nDie TEN SINGenden fühlen sich zu 78.4% gut informiert.\n1.4% möchten auf anderem Wege informiert werden, 96.2% sind mit den bisherigen Informationskanälen zufrieden.\n\nSind TN informiert?Änderungswunsch Informationskanäle\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCaution\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeutschlandweites Netzwerk\nTODO\n\nIst das deutschlandweite Netzwerk bekannt (Ortsübergreifende Angebote im FRagebogen)?\n\n\nWird es genutzt?\n\n\nWas braucht ein deutschlandweites Seminar um daran teilzunehmen? Welche Hürden bestehen?"
   }
 ]
