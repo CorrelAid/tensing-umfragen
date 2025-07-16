@@ -6,14 +6,11 @@ execute:
 from: "markdown+emoji"
 ---
 
-# {{< meta params.region >}}
-
-
 ```{r setup}
 # uncomment for development
 library(tidyverse)
 library(reactable)
-
+library(ggiraph)
 source(here::here("config/viz_config.R"))
 source(here::here("R/quarto-utils.R"))
 ggplot2::theme_set(theme_ts) # defined in viz_config
@@ -31,6 +28,8 @@ og_data <- og$data
 
 # choices for some reordering 
 og_choices <- readr::read_csv(here::here("data/meta/og_choices.csv"))
+tn_choices <- readr::read_csv(here::here("data/meta/tn_choices.csv"))
+
 
 ```
 
@@ -80,25 +79,14 @@ Mit einem Klick auf den :arrow_forward: kannst du jede Region öffnen und eine L
 ```{r table}
 og_region_df <- og_data_f %>%
   #mutate(anzahl_aktive = anzahl_ma_leitung + anzahl_tn) %>% 
-  select(og_region, og_name) %>% 
+  filter(og_region == params$region) |> 
   mutate(OG = "OG-FB") %>% 
   dplyr::full_join(tn_data_f %>% distinct(og_region, og_name) %>% drop_na() %>% 
                      mutate(TN = "TN-FB")) %>% 
   unite(col = "Datenquelle", c("OG", "TN"), na.rm = TRUE, sep = ", ") %>% 
-  rename(Region = og_region,
-         `Ortsgruppe` = og_name)
+  rename(`Ortsgruppe` = og_name)
 
 
-reactable::reactable(
-  og_region_agg,
-  details = function(index) {
-    region_data <-
-      og_region_df[og_region_df$Region == og_region_agg$Region[index],]
-    region_data <- region_data %>% select(-Region)
-    htmltools::div(style = "padding: 1rem",
-                   reactable(region_data, outlined = TRUE))
-  }
-)
 reactable::reactable(
   og_region_df |> 
     select(og_region, anzahl_insg, anzahl_ma_leitung, anzahl_tn, hat_probleme_tn_gewinnung, hat_hauptamt, auftritte)
