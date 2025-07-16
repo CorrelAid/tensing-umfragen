@@ -27,9 +27,10 @@ og_data <- og$data
 
 # choices for some reordering 
 og_choices <- readr::read_csv("data/meta/og_choices.csv")
-```
 
-# Deutschlandweiter Überblick
+# slug remapping to link to region pages
+og_slugs <- readr::read_csv("data/meta/og_slug_mapping.csv")
+```
 
 ```{r}
 n_og_og <- nrow(og_data)
@@ -52,7 +53,7 @@ insgesamt_og <- sum(og_data$anzahl_insg, na.rm = T)
 
 **Anzahl Aktive**
 
-| Fragebogen                 | Teilnehmer\*innen | Leitung und Mitarbeitende | Insgesamt                                 |
+| Fragebogen                 | Teilnehmer\*innen | Mitarbeitende | Insgesamt                                 |
 |-----------------|-----------------|-----------------|----------------------|
 | `{r} fmt_fragebogen("tn")` | `{r} tn_tn`[^1]   | *nicht abgefragt*         | *nicht errechenbar*                       |
 | `{r} fmt_fragebogen("og")` | `{r} tn_og`       | `{r} leitung_og`          | `{r} sum(og_data$anzahl_insg, na.rm = T)` |
@@ -67,193 +68,9 @@ Es gibt **zwischen `{r} min(n_og_tn, n_og_og)` und `{r} max(n_og_tn, n_og_og)` O
 
 Insgesamt sind in den Ortsgruppen von TEN SING **`{r} insgesamt_og` Personen aktiv**.
 
-Davon sind **zwischen `{r} min(tn_tn, tn_og)` und `{r} max(tn_tn, tn_og)` als Teilnehmer\*innen** engagiert.  **`{r} leitung_og`** Personen **arbeiten** für TEN SING oder engagieren sich **in der Leitung** einer Ortsgruppe.
+Davon sind **zwischen `{r} min(tn_tn, tn_og)` und `{r} max(tn_tn, tn_og)` als Teilnehmer\*innen** engagiert.  **`{r} leitung_og`** Personen sind Mitarbeitende.
 
-## Ortsgruppengröße
-
-::: panel-tabset
-## Alle
-
-Hier wird die Anzahl aller Aktiven betrachtet. Diese ist definiert als **Summe von Teilnehmer\*innen und Leitung und Mitarbeitenden**.
-
-Im Durchschnitt hat eine TenSing-Ortsgruppe `{r} mean(og_data$anzahl_insg, na.rm = T) %>% round()` Aktive. Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat `{r} min(og_data$anzahl_insg, na.rm = T)` Aktive, die größte widerrum `{r} max(og_data$anzahl_insg, na.rm = T)` Aktive.
-
-```{r}
-ggplot(og_data, aes(x = anzahl_insg))+
-    geom_histogram(fill = TS_GREEN)+
-    geom_vline(xintercept = mean(og_data$anzahl_insg, na.rm = TRUE), color = RED, linetype = 2)+
-  geom_text(x = mean(og_data$anzahl_insg, na.rm = TRUE), hjust = -0.1, y = 5, label = paste("Mittelwert =", mean(og_data$anzahl_insg, na.rm = TRUE) %>% round(2)))+
-    labs(x = "Anzahl Aktive", y = "Anzahl Gruppen", title = "Anzahl der Aktiven")
-```
-
-## Teilnehmer\*innen
-
-Hier wird die Anzahl der **Teilnehmer\*innen** betrachtet: Im Durchschnitt hat eine TenSing-Ortsgruppe `{r} mean(og_data$anzahl_tn, na.rm = T) %>% round()` Teilnehmer\*innen (TN). Dabei ist die Spannbreite recht groß. Die kleinste Ortsgruppe hat `{r} min(og_data$anzahl_tn, na.rm = T)` TN, die größte widerrum `{r} max(og_data$anzahl_tn, na.rm = T)` TN.
-
-```{r}
-ggplot(og_data, aes(x = anzahl_tn))+
-    geom_histogram(fill = TS_GREEN)+
-    geom_vline(xintercept = mean(og_data$anzahl_tn, na.rm = TRUE), color = RED, linetype = 2)+
-  geom_text(x = mean(og_data$anzahl_tn, na.rm = TRUE), nudge_x = 1, y = 5, label = paste("Mittelwert =", mean(og_data$anzahl_tn, na.rm = TRUE) %>% round(2)))+
-    labs(x = "Anzahl Teilnehmer*innen", y = "Anzahl Gruppen", title = "Anzahl der Teilnehmer*innen")
-```
-
-## Mitarbeitende / Leitung
-
-```{r}
-ggplot(og_data, aes(x = anzahl_ma_leitung))+
-    geom_histogram(fill = TS_GREEN)+
-    geom_vline(xintercept = mean(og_data$anzahl_ma_leitung, na.rm = TRUE), color = RED, linetype = 2)+
-  geom_text(x = mean(og_data$anzahl_ma_leitung, na.rm = TRUE),  nudge_x = -0.1, y = 5, label = paste("Mittelwert =", mean(og_data$anzahl_ma_leitung, na.rm = TRUE) %>% round(2)))+
-    labs(x = "Anzahl Mitarbeitende/Leitung", y = "Anzahl Gruppen", title = "Anzahl der Mitarbeitenden/Leitung")
-```
-:::
-
-::: {.callout-tip collapse="true"}
-## Interpretationshilfe
-
-Die Grafik zeigt auf der waagerechten Achse die Gruppengröße und auf der senkrechten Achse, wie viele Gruppen diese Gruppengröße haben. Die gestrichelte Linie zeigt die mittlere Gruppengröße an (Mittelwert).
-:::
-
-## Geschlecht
-
-::: panel-tabset
-## Alle
-
-```{r}
-gender_all <- og$long$gender_by_participant_type %>% 
-  group_by(og_id, gender) %>% 
-  summarize(n = sum(n))
-
-og$long$gender_by_participant_type %>% 
-  group_by(gender, person_type) %>% 
-  summarize(n = sum(n)) %>% 
-  mutate(label = paste("n =", n)) %>% 
-  ggplot(aes(x = gender, y = n, fill = person_type, label = label))+
-    geom_col(position = "stack")+
-    geom_label(
-      position = position_stack(vjust = 0.5),
-      size = 3, fontface = "bold",
-      ## turn into white box without outline
-      fill = "white"
-    ) +
-    theme(legend.position = "bottom")+
-    labs(fill = NULL, x = NULL, title = "Geschlecht")+
-    scale_fill_manual(values = cols_4)
-
-```
-
-## Mitarbeitende (inkl. Leitung)
-
-```{r}
-PLACEHOLDER_PLOT
-```
-
-## Teilnehmende
-
-```{r}
-PLACEHOLDER_PLOT
-```
-:::
-
-## Alter
-
-::: panel-tabset
-## Alle
-
-```{r}
-alter_by_person <- og$long$alter_by_participant_type
-
-# for reordering
-alter_choices <- og_choices %>% 
-  filter(label %in% c(alter_by_person$alter %>% unique())) %>% 
-  mutate(order = 1:n()) %>% 
-  select(label, order)
-
-color_values <- set_names(cols_4, alter_choices$label)
-
-alter_by_person %>% 
-  left_join(alter_choices, by = c("alter" = "label")) %>% 
-  group_by(person_type) %>% 
-  mutate(person_n = sum(n, na.rm = TRUE)) %>% 
-  group_by(person_type, alter, order, person_n) %>% 
-  summarize(n = sum(n, na.rm = TRUE)) %>% 
-  mutate(perc = round(n * 100 / person_n, 2),
-         label = paste0(n, "\n", perc, "%"))  %>%
-  ungroup() %>% 
-  arrange(person_type, order) %>% 
-  ggplot()+
-    geom_col(aes(y = person_type, x = n, group = fct_reorder(alter, -order), stat = "identity", fill = alter), position = "stack")+
-    theme(legend.position = "bottom")+
-    labs(fill = NULL, x = NULL, y = NULL, title = "Anzahl Aktive nach Altersgruppen")+
-  geom_label(
-      aes(y = person_type, x = n, label = label),
-      position = position_stack(vjust = 0.5),
-      size = 3, fontface = "bold",
-      ## turn into white box without outline
-      fill = "white"
-    ) +
-  scale_fill_manual(values = color_values, breaks = og_choices$label)+
-  guides(fill = guide_legend(nrow = 2))
-```
-
-## Mitarbeitende (inkl. Leitung)
-
-```{r}
-PLACEHOLDER_PLOT
-```
-
-## Teilnehmende
-
-```{r}
-PLACEHOLDER_PLOT
-```
-:::
-
-
-## Aktivitäten
-
-### Wie viel Zeit verbringen Jugendliche mit TEN SING?
-**TODO**
-
-### Wann finden TEN SING Veranstaltungen statt? An welchen Tagen?
-
-```{r}
-wochentage <- og$long$wochentage
-```
-
-
-### Wie viele Stunden in der Woche finden TEN SING Veranstaltungen statt? 
-
-Die TEN SING Gruppen verbringen **jede Woche zusammen insgesamt `{r} sum(wochentage$stunden)` Stunden** mit ihren Treffen. 
-
-```{r}
-
-german_weekdays <- c("Montag", "Dienstag", "Mittwoch", 
-                   "Donnerstag", "Freitag", "Samstag", "Sonntag")
-german_weekdays_abbr <- c("Mo", "Di", "Mi", "Do", "Fr", "Sa", "So")
-
-wochentage |> 
-  mutate(wochentag = factor(wochentag, levels = german_weekdays, labels = german_weekdays_abbr)) |> 
-  group_by(wochentag) |> 
-  summarize(stunden = sum(stunden)) |> 
-  ggplot(aes(x = wochentag, y = stunden)) +
-  geom_col()+
-  labs(title = "Summe der TEN SING Stunden", subtitle = "pro Wochentag", x = NULL)
-```
-
-### Wie lange dauert ein TEN SING Treffen?
-TEN SING Treffen dauern im Durchschnitt `{r} mean(wochentage$stunden, na.rm = TRUE)` Stunden.
-
-### Wie viele Auftritte finden pro Schuljahr statt?
-
-Im letzten Schuljahr fanden insgesamt `{r} sum(og$data$auftritte, na.rm = TRUE)` statt. 
-
-
-###  Zufriedenheit mit TENSING (Weiterempfehlungsfrage)
-**TODO**
-
-# Regionen und Ortsgruppen
+# Regionen
 
 ::: {.callout-note collapse="true"}
 ## Datenquelle
@@ -277,98 +94,86 @@ Mit einem Klick auf den :arrow_forward: kannst du jede Region öffnen und eine L
 :::
 
 ```{r}
-og_region_df <- og_data %>%
-  #mutate(anzahl_aktive = anzahl_ma_leitung + anzahl_tn) %>% 
-  select(og_region, og_name) %>% 
-  mutate(OG = "OG-FB") %>% 
-  dplyr::full_join(tn_data %>% distinct(og_region, og_name) %>% drop_na() %>% 
-                     mutate(TN = "TN-FB")) %>% 
-  unite(col = "Datenquelle", c("OG", "TN"), na.rm = TRUE, sep = ", ") %>% 
-  rename(Region = og_region,
-         `Ortsgruppe` = og_name)
-
-og_region_agg <- og_region_df %>% 
-  ungroup() %>% 
-  count(Region, name = "Anzahl Ortsgruppen") %>% 
-  arrange(-`Anzahl Ortsgruppen`)
-
-reactable(
-  og_region_agg,
-  details = function(index) {
-    region_data <-
-      og_region_df[og_region_df$Region == og_region_agg$Region[index],]
-    region_data <- region_data %>% select(-Region)
-    htmltools::div(style = "padding: 1rem",
-                   reactable(region_data, outlined = TRUE))
-  }
-)
-
-```
-
-### Teilnehmer*innen pro Region
-
-::: {.callout-note collapse="true"}
-## Datenquellen
-
-**Quelle `{r} fmt_fragebogen("og")`**
-
-- **Frage**: `{r} fmt_q(og_cfg$Q_OG_REGION)` 
-- **Frage**: `{r} fmt_q(og_cfg$Q_ANZAHL_TN)`
-
-**Quelle `{r} fmt_fragebogen("tn")`**
-
-- **Frage**: `{r} fmt_q(tn_cfg$Q_OG_NAME)`. Diese Information wurde während der Analyse gematcht mit den Regionen. 
-
-:::
-```{r}
+# create a dataset with the number of active people
 tn_tn <- tn_data %>% 
   replace_na(list(og_region = "keine Angabe")) %>% 
-  count(og_region) %>% 
+  count(og_region, name = "anzahl_tn") %>% 
   mutate(src = "TN-FB")
 
 og_tn <- og_data %>% 
   group_by(og_region) %>% 
-  summarize(n = sum(anzahl_tn)) %>% 
+  summarize(n = sum(anzahl_insg)) %>% 
   mutate(src = "OG-FB")
+
 ```
 
 
-::: {.panel-tabset}
 
-## Teilnehmer*innen nach Regionen
+```{r region-table}
+# some ortsgruppen are not in the og_data -> calculate separately
+og_tn_only <- tn_data %>% 
+  filter(!og_name %in% og_data$og_name) |> 
+  replace_na(list(og_region = "keine Angabe", og_name = "keine Angabe")) %>% 
+  # we use the verantwortungs question to proxy whether a person is "mitarbeitend"
+  mutate(verantwortung_ja = if_else(verantwortung_janein == "Ja", TRUE, FALSE, missing = FALSE)) |> 
+  group_by(og_region, og_name) |> 
+  summarize(anzahl_ma_leitung = sum(verantwortung_ja),
+            anzahl_tn = sum(!verantwortung_ja),
+            anzahl_insg = n())
+
+# here we use reactable's aggregate functionality
+og_region_df <- og_data %>%
+  select(og_region, og_name, anzahl_insg, anzahl_tn, anzahl_ma_leitung) |> 
+  bind_rows(og_tn_only) |> 
+  left_join(og_slugs, by = "og_region")
+
+reactable(
+  og_region_df,
+  groupBy = "og_region",
+  columns = list(
+    og_region = colDef(name = "Region", html = TRUE, cell = function(region, index) {
+      sprintf('<a href="%s" target="_blank">%s</a>', og_region_df$slug[index], region)
+    }),
+    og_name = colDef(name = "Ortsgruppen", aggregate = "count"),
+    anzahl_insg = colDef(name = "Aktive", aggregate = "sum"),
+     anzahl_tn = colDef(name = "Teilnehmende", aggregate = "sum"),
+    anzahl_ma_leitung = colDef(name = "Mitarbeitende", aggregate = "sum"),
+    slug = colDef(name = "Link", html = TRUE, aggregate = JS("
+    function(values, rows) {
+      if (!values || values.length === 0 || !values[0]) return '';
+      const slug = values[0];
+      return '<a href=\"/region/' + slug + '.html\" rel=\"noopener noreferrer\" style=\"text-decoration: none;\">🔗</a>';
+    }
+  "))
+  )
+)
+
+```
+
+
+## Version 2
 
 ```{r}
-tn_df <- bind_rows(tn_tn, og_tn) %>% 
-  group_by(og_region) %>% 
-  mutate(avg_n = mean(n))
+og_region_agg <- og_region_df |> 
+  group_by(og_region, slug) |> 
+  summarize(
+    n_og = length(unique(og_name)),
+    anzahl_insg = sum(anzahl_insg, na.rm = TRUE),
+    anzahl_tn = sum(anzahl_tn, na.rm = TRUE),
+    anzahl_ma_leitung = sum(anzahl_ma_leitung, na.rm = TRUE))
 
-p <- ggplot(tn_df, aes(y = fct_reorder(og_region, n), x = n, color = src, tooltip = paste0("laut ", src, ": ", n, " Teilnehmer*innen"))) + 
-  geom_point_interactive(size = 5)+
-  #geom_point(data = tn_df, aes(y = og_region, x = avg_n), color = "black")+
-  scale_fill_manual(values = cols_4[1:2])+
-  labs(x = "Anzahl Teilnehmer*innen", y = NULL, 
-       color = "Datenquelle", title = "Anzahl Teilnehmer*innen", subtitle = "beide Fragebögen")
-
-girafe(ggobj = p)
+reactable(
+  og_region_agg,
+  columns = list(
+    og_region = colDef(name = "Region", html = TRUE, cell = function(region, index) {
+      if (region == "keine Angabe") return(region);
+      sprintf('<a href="/region/%s.html">%s</a>', og_region_agg$slug[index], region)
+    }),
+    n_og = colDef(name = "Ortsgruppen"),
+    anzahl_insg = colDef(name = "Aktive"),
+    anzahl_tn = colDef(name = "Teilnehmende"),
+    anzahl_ma_leitung = colDef(name = "Mitarbeitende"),
+    slug = colDef(show = FALSE)
+  )
+)
 ```
-
-## Alternative Darstellung
-
-```{r}
-tn_df2 <- bind_rows(tn_tn, og_tn) %>% 
-  pivot_wider(og_region, names_from = "src", values_from = n)
-p2 <- ggplot(tn_df2, aes(x = og_region, ymin = `TN-FB`, ymax = `OG-FB`, tooltip = paste0(og_region, ": Zwischen ", `TN-FB`, " und ", `OG-FB`, " Teilnehmer*innen")))+
-  geom_linerange_interactive(linewidth = 2)+
-  coord_flip()+
-  labs(y = "Anzahl Teilnehmer*innen", x = NULL, 
-       color = "Datenquelle", title = "Anzahl Teilnehmer*innen nach Region", subtitle = "beide Fragebögen")
-  
-girafe(ggobj = p2)
-```
-
-:::
-
-
-## Geschlecht und Alter nach Regionen 
-
-**TODO** 
