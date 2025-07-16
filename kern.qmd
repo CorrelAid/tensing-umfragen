@@ -5,6 +5,7 @@ execute:
   warning: false
 ---
 
+
 ```{r}
 #| include: false
 library(tidyverse)
@@ -13,6 +14,7 @@ library(ggiraph)
 source("config/viz_config.R")
 source("R/quarto-utils.R")
 source("R/utils.R")
+source("R/viz.R")
 
 ggplot2::theme_set(theme_ts) # defined in viz_config
 
@@ -22,10 +24,45 @@ tn_cfg <- readr::read_rds("config/tn_cfg.rds")
 
 og <- readr::read_rds("data/cleaned/og.rds")
 og_data <- og$data
+og_cfg <- readr::read_rds("config/og_cfg.rds")
 
 tn_survey <- readr::read_csv("data/meta/tn_survey.csv")
 tn_choices <- readr::read_csv("data/meta/tn_choices.csv")
+
+
+meta_aussagen <- readr::read_csv("data/meta/tn/aussagen.csv")
+meta_aussagen_choices <- readr::read_csv("data/meta/tn/aussagen_choices.csv") %>% 
+  mutate(name = as.character(name))
+
 ```
+
+```{r aussagen-longify}
+# long format 
+aussagen_long <- tn$wide$aussagen %>% tidyr::pivot_longer(-tn_id, names_to = "aussage")
+aussagen_long <- aussagen_long %>% left_join(meta_aussagen %>% rename(q_label = label), by = c("aussage" = "$autoname"))
+aussagen_long <- aussagen_long %>% left_join(meta_aussagen_choices %>% rename(ch_label = label), by = c("value" = "name"))
+```
+
+```{r eig-data}
+meta_eig <- readr::read_csv("data/meta/tn/eig.csv")
+meta_eig_choices <- readr::read_csv("data/meta/tn/eig_choices.csv") %>% # here every question has its own scale
+  mutate(value = as.character(name)) %>% 
+  rename(label_value = label)
+
+meta_eig <- meta_eig %>% 
+  mutate(label_short = str_remove_all(label, "(Bei )?TEN SING.+?auf einer Skala"),
+         label_short = str_remove_all(label_short, ":"),
+         label_short = str_replace_all(label_short, "bis|und", "SEP"),
+         label_short = str_replace_all(label_short, "von|zwischen", ""),
+         label_short = str_remove_all(label_short, "\"")) %>% 
+  mutate(y = 1:n())
+
+eig_long <- tn$long$tensing_eigenschaften %>%
+  left_join(meta_eig, by = c("eig" = "name")) %>% 
+  left_join(meta_eig_choices, by = c("select_from_list_name" = "list_name", "value")) 
+
+```
+
 
 # Was verbinden die TN mit TEN SING?
 
@@ -52,160 +89,7 @@ woerter %>%
   wordcloud2::wordcloud2(color = colorVec, shape = "square")
 ```
 
-# Was denken die TN über TEN SING?
-
-
-::: {.callout-note collapse="true"}
-## Datenquelle
-
-**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_AUSSAGEN_LIKERT, "tn")`
-
-Spalten im Roh-Datensatz:
-
-```{r}
-tn_cfg$QS_AUSSAGEN_LIKERT %>% select(name, col_name)
-```
-:::
-
-```{r}
-#| out-width: "100%"
-
-meta_aussagen <- readr::read_csv("data/meta/tn/aussagen.csv")
-meta_aussagen_choices <- readr::read_csv("data/meta/tn/aussagen_choices.csv") %>% 
-  mutate(name = as.character(name))
-
-# long format 
-aussagen_long <- tn$wide$aussagen %>% tidyr::pivot_longer(-tn_id, names_to = "aussage")
-aussagen_long <- aussagen_long %>% left_join(meta_aussagen %>% rename(q_label = label), by = c("aussage" = "$autoname"))
-aussagen_long <- aussagen_long %>% left_join(meta_aussagen_choices %>% rename(ch_label = label), by = c("value" = "name"))
-p <- aussagen_long %>% 
-  group_by(aussage, q_label, value, ch_label) %>% 
-  summarize(n = n(), 
-            perc = n / nrow(tn_data)) %>% 
-  ggplot(aes(fill = value, y = aussage, x = perc, tooltip = q_label))+
-  geom_col_interactive(position = position_stack(reverse = TRUE))+
-  scale_x_continuous(labels = scales::percent)+
-  scale_y_discrete(labels = scales::label_wrap(60))+
-  scale_fill_manual_interactive(labels = meta_aussagen_choices$label, values = COLS_6)+
-  labs(fill = NULL, y = NULL, x = NULL, title = "Aussagen über TEN SING")+
-  theme(legend.position = "top", 
-        axis.text.y = element_text(size = 12),
-        legend.text = element_text(size = 10))
-
-ggiraph::girafe(ggobj = p)
-```
-
-## Eigenschaften
-
-::: {.callout-note collapse="true"}
-## Datenquelle
-
-**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_EIGENSCHAFTEN, "tn")`
-
-Spalten im Roh-Datensatz:
-
-```{r}
-tn_cfg$QS_EIGENSCHAFTEN %>% select(name, col_name)
-```
-:::
-
-```{r}
-meta_eig <- readr::read_csv("data/meta/tn/eig.csv")
-meta_eig_choices <- readr::read_csv("data/meta/tn/eig_choices.csv") %>% # here every question has its own scale
-  mutate(value = as.character(name)) %>% 
-  rename(label_value = label)
-
-meta_eig <- meta_eig %>% 
-  mutate(label_short = str_remove_all(label, "(Bei )?TEN SING.+?auf einer Skala"),
-         label_short = str_remove_all(label_short, ":"),
-         label_short = str_replace_all(label_short, "bis|und", "SEP"),
-         label_short = str_replace_all(label_short, "von|zwischen", ""),
-         label_short = str_remove_all(label_short, "\"")) %>% 
-  mutate(y = 1:n())
-
-eig_long <- tn$long$tensing_eigenschaften %>%
-  left_join(meta_eig, by = c("eig" = "name")) %>% 
-  left_join(meta_eig_choices, by = c("select_from_list_name" = "list_name", "value"))
-```
-
-::: callout-warning
-## Skalen uneinheitlich!
-
-Die Antwortoptionen waren bei diesem Fragenblock nicht ganz einheitlich ausgestaltet. Jede Unterfrage hatte eine eigene sechsstufige Skala, deren Endpunkte unterschiedlich waren. Wenn ihr im Balkendiagramm mit der Maus über die Balken geht, könnt ihr die ganz ausformulierten Endpunkte sehen (in der Grafik nur verkürzt dargestellt) und natürlich im `{r} fmt_fragebogen("tn")`.
-:::
-
-::: panel-tabset
-## Balkendiagramm
-
-```{r}
-p_eig <- eig_long %>% 
-  count(label_short, label_value, value) %>% 
-  ggplot(aes(y = label_short, x = n, group = value, fill = value, tooltip = paste("Antwortoption:", label_value)))+
-  geom_col_interactive(position = "stack")+
-  scale_y_discrete(
-    labels = str_wrap(str_split_i(meta_eig$label_short, "SEP", 2), 20),
-    breaks = meta_eig$label_short,
-    sec.axis = dup_axis(
-      labels = str_wrap(str_split_i(meta_eig$label_short, "SEP", 1), 20)
-    )
-  )+ 
-  scale_fill_manual_interactive(values = rev(COLS_6))+ 
-  guides(fill = "none")+
-  labs(y = NULL, title = "Eigenschaften von TEN SING")+
-  theme(axis.text.y = element_text(size = 10))
-
-ggiraph::girafe(ggobj = p_eig)
-
-```
-
-## Heatmap
-
-```{r}
-eig_long_plotdata <- eig_long %>% 
-  add_count(label_short, name = "n_antwort") %>% 
-  count(label_short, n_antwort, label_value, value, .drop = FALSE) %>% 
-  mutate(perc = 100 * n / n_antwort) 
-  
-  
-p_eig_heatmap <-
-  ggplot(
-    eig_long_plotdata,
-    aes(
-      y = label_short,
-      x = fct_rev(value),
-      group = value,
-      fill = perc,
-      label = paste0(round(perc, 0), "%")
-    )
-  ) +
-  geom_tile() +
-  geom_text(color = "white", size = 3) +
-  scale_y_discrete(
-    labels = str_wrap(str_split_i(meta_eig$label_short, "SEP", 2), 20),
-    breaks = meta_eig$label_short,
-    sec.axis = dup_axis(
-      labels = str_wrap(str_split_i(meta_eig$label_short, "SEP", 1), 20)
-    )
-  ) +
-  scale_fill_continuous(limits = c(0, 100)) +
-  labs(y = NULL, x = "Antwortoption", title = "Eigenschaften von TEN SING - Heatmap Ansicht") +
-  theme(legend.position = "bottom", axis.text.y = element_text(size = 10))
-
-ggiraph::girafe(ggobj = p_eig_heatmap)
-
-```
-
-## Daten
-
-```{r}
-eig_long_plotdata %>% 
-  arrange(label_short, value) %>% 
-  select(label_short, label_value, n, perc) %>% 
-  knitr::kable()
-```
-:::
-
-# Wie setzen sich Aktive mit ihrem Glauben auseinander? 
+# TEN SING und Glaube
 
 ```{r}
 # does the person have any contact to christian faith outside of TEN SING?
@@ -229,26 +113,13 @@ share_eher_yes <- sum(glaube_rolle_agg$percent[glaube_rolle_agg$value >= 4])
 ```
 
 In der Mehrzahl setzen sich Aktive bei TEN SING mit ihrem Glauben auseinander. `{r} round(share_eher_yes * 100, 2)`% der Aktiven bewerten die Aussage "*`{r} glaube_rolle_q$label`*" eher bis voll und ganz zutreffend.
-
+ 
 ```{r}
-
-glaube_rolle_agg |> 
-  ggplot(aes(x = value, fill = value, y = percent))+
-  geom_col()+
-  scale_fill_manual(values = COLS_6)+
-  #scale_x_discrete(labels = meta_aussagen_choices$label)+
-  scale_y_continuous(labels = scales::label_percent())+
-  labs(y = "% Aktive", title = str_wrap(glaube_rolle_q$label, 60), fill = NULL, x = "Bewertung",
-  subtitle = "Bewertung von trifft überhaupt nicht zu (1) zu trifft voll und ganz zu (6)")+
-  guides(fill = "none")
+aussage_bar_chart(aussagen_long, "aussage", "glaube_spiritualitaet")
 ```
 
 
-FRAGE: nur jugendliche??
-
-### TEN SING als einziger Kontakt zum christlichen Glauben? 
-
-**`{r} kontaktpunkt_pie$perc[kontaktpunkt_pie$has_kontaktpunkt == "Kontakt"]`%** der Aktiven haben außerhalb von TEN SING Kontakt zum christlichen Glauben, **`{r} kontaktpunkt_pie$perc[kontaktpunkt_pie$has_kontaktpunkt == "Kein Kontakt"]`%** haben nur über TEN SING Kontakt. 
+**`{r} kontaktpunkt_pie$perc[kontaktpunkt_pie$has_kontaktpunkt == "Kontakt"]`%** der Aktiven haben außerhalb von TEN SING Kontakt zum christlichen Glauben, **`{r} kontaktpunkt_pie$perc[kontaktpunkt_pie$has_kontaktpunkt == "Kein Kontakt außerhalb von TEN SING"]`%** haben nur über TEN SING Kontakt. 
 
 ::: {.callout-tip collapse="true"}
 ## Tortendiagramm
@@ -279,9 +150,6 @@ subtitle = "außerhalb von Ten Sing",
 
 Es zeigt sich ein leichter Unterschied zwischen den Gruppen - Aktive, die auch außerhalb von TEN SING Kontakt mit dem christlichen Glauben haben, setzen sich eher auch bei TEN SING mit ihm auseinander. 
 
-::: panel-tabset
-## Balkendiagramm
-
 ```{r}
 glaube_rolle |> 
   group_by(has_kontaktpunkt, value) |> 
@@ -297,21 +165,7 @@ glaube_rolle |>
   subtitle = "Bewertung von trifft überhaupt nicht zu (1) zu trifft voll und ganz zu (6)")
 ```
 
-## Density Plot
 
-```{r}
-
-ggplot(glaube_rolle, aes(x = as.numeric(value), fill = has_kontaktpunkt)) +
-  geom_density(alpha = 0.6)+
-  scale_fill_manual(name = NULL, values = cols_4)+
-  labs(title = str_wrap(glaube_rolle_q$label, 60), x = "Bewertung",
-  subtitle = "Bewertung von trifft überhaupt nicht zu (1) zu trifft voll und ganz zu (6)")
-```
-
-:::
-
-::: panel-tabset
-## Balkendiagramm
 
 ```{r}
 offenheit_religionen <- eig_long |> 
@@ -335,58 +189,133 @@ offenheit_religionen |>
   theme(legend.position = "bottom")
 ```
 
-## Density Plot 
+
+# Was denken die TN über TEN SING?
+
+
+::: {.callout-note collapse="true"}
+## Datenquellen
+
+**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_AUSSAGEN_LIKERT, "tn")`
+
+
+**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_EIGENSCHAFTEN, "tn")`
+
+Spalten im Roh-Datensatz - Aussagen:
 
 ```{r}
-
-ggplot(offenheit_religionen, aes(x = as.numeric(value), fill = has_kontaktpunkt)) +
-  geom_density(alpha = 0.6)+
-  scale_fill_manual(name = NULL, values = cols_4)+
-  labs(title = str_wrap(question, 60), x = "von exklusiv")
+tn_cfg$QS_AUSSAGEN_LIKERT %>% select(name, col_name)
 ```
 
-::: 
-
-
-
+Spalten im Roh-Datensatz - Eigenschaften:
 
 ```{r}
-build_continent_report <- function(aussage) {
-  #name_for_labels <- janitor::make_clean_names(continent_report_items$continent[[i]])
-
-  # Quarto and RStudio and Positron all really struggle with syntax highlighting 
-  # and parsing when there are multiple ```s inside a string, so we can make 
-  # life easier by splitting the output into a few parts here, ensuring that 
-  # there's a maximum of one set of triple backticks
-
-  output_first_part <- glue::glue('
-  ### `{r} {aussage}`', .open = "<<", .close = ">>")
-
-  output_first_part
-}
+tn_cfg$QS_EIGENSCHAFTEN %>% select(name, col_name)
 ```
 
-# Angebote von TEN SING
-
-```{r}
-continent_reports <- map_chr(meta_aussagen$name, 
-  function(aussage) build_continent_report(aussage)
-)
-```
-
-
-### Welche Angebote finden Personen besonders wichtig? Welche werden angeboten?
+:::
 
 ```{r}
 #| output: asis
-#| echo: false
-res <- purrr::map_chr(unique(meta_aussagen$name), function(aussage, data = aussagen_long) {
+#| echo: false 
+res <- purrr::map_chr(unique(meta_aussagen$label), function(aussage_label, data = aussagen_long) {
     knitr::knit_child(
       input = "_child_aussagen.qmd", 
       envir = environment(), 
       quiet = TRUE
-      ) 
+      )
   })
+
 
 cat(res, sep = '\n')
 ```
+
+
+```{r}
+#| out-width: "100%"
+
+p <- aussagen_long %>% 
+  group_by(aussage, q_label, value, ch_label) %>% 
+  summarize(n = n(), 
+            perc = n / nrow(tn_data)) %>% 
+  ggplot(aes(fill = value, y = aussage, x = perc, tooltip = q_label))+
+  geom_col_interactive(position = position_stack(reverse = TRUE))+
+  scale_x_continuous(labels = scales::percent)+
+  scale_y_discrete(labels = scales::label_wrap(60))+
+  scale_fill_manual_interactive(labels = meta_aussagen_choices$label, values = COLS_6)+
+  labs(fill = NULL, y = NULL, x = NULL, title = "Aussagen über TEN SING")+
+  theme(legend.position = "top", 
+        axis.text.y = element_text(size = 12),
+        legend.text = element_text(size = 10))
+
+ggiraph::girafe(ggobj = p)
+```
+
+
+::: callout-warning
+## Skalen uneinheitlich!
+
+Die Antwortoptionen waren bei diesem Fragenblock nicht ganz einheitlich ausgestaltet. Jede Unterfrage hatte eine eigene sechsstufige Skala, deren Endpunkte unterschiedlich waren. Wenn ihr im Balkendiagramm mit der Maus über die Balken geht, könnt ihr die ganz ausformulierten Endpunkte sehen (in der Grafik nur verkürzt dargestellt) und natürlich im `{r} fmt_fragebogen("tn")`.
+:::
+
+```{r}
+p_eig <- eig_long %>% 
+  count(label_short, label_value, value) %>% 
+  ggplot(aes(y = label_short, x = n, group = value, fill = value, tooltip = paste("Antwortoption:", label_value)))+
+  geom_col_interactive(position = "stack")+
+  scale_y_discrete(
+    labels = str_wrap(str_split_i(meta_eig$label_short, "SEP", 2), 20),
+    breaks = meta_eig$label_short,
+    sec.axis = dup_axis(
+      labels = str_wrap(str_split_i(meta_eig$label_short, "SEP", 1), 20)
+    )
+  )+ 
+  scale_fill_manual_interactive(values = rev(COLS_6))+ 
+  guides(fill = "none")+
+  labs(y = NULL, title = "Eigenschaften von TEN SING")+
+  theme(axis.text.y = element_text(size = 10))
+
+ggiraph::girafe(ggobj = p_eig)
+
+```
+
+
+
+
+
+# Welche Angebote werden von Ortsgruppen angeboten?
+
+
+```{r}
+angebote_agg <- og$long$angebote_vor_ort |> 
+  group_by(angebote_vor_ort) |>
+  summarize(percent_og = n() / nrow(og$data)) 
+
+p_ang_og <- ggplot(angebote_agg, aes(y = forcats::fct_reorder(angebote_vor_ort, percent_og), x = percent_og))+
+  geom_col(fill = TS_GREEN)+
+  scale_x_continuous(labels = scales::label_percent())+
+  labs(y = NULL, x = "% der Ortsgruppen", title = "Abdeckung der Angebote in den Ortsgruppen")
+
+ggiraph::girafe(ggobj = p_ang_og)
+
+```
+
+
+### An welchen Angeboten nehmen TN teil?
+
+```{r}
+angebote_agg <- tn$long$angebote_vor_ort |> 
+  group_by(angebot) |>
+  summarize(percent = n() / nrow(tn$data)) 
+
+p_ang_tn <- ggplot(angebote_agg, aes(y = forcats::fct_reorder(angebot, percent), x = percent))+
+  geom_col(fill = TS_GREEN)+
+  scale_x_continuous(labels = scales::label_percent())+
+  labs(y = NULL, x = "% der TN", title = "An welchen Angeboten nehmen TN teil?")
+
+
+ggiraph::girafe(ggobj = p_ang_tn)
+
+```
+### Welche Angebote finden Personen besonders wichtig? Welche werden angeboten?
+

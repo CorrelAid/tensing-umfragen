@@ -80,7 +80,7 @@ angebote_long <- left_join(angebote_long, angebote_sonst, by = c("tn_id", "angeb
 # wenn eine antwortoption "/" hat, dann wird es durch ___ ersetzt und nicht nur durch _ im Spaltennamen
 angebote_long <- angebote_long %>% 
     mutate(angebot = str_replace_all(angebot, "___", "_")) %>% 
-    recode_values(m, "angebot")
+    recode_values(angebote_m, "angebot")
 
 TN_DATA$long$angebote_vor_ort <- angebote_long
 

@@ -4,15 +4,15 @@ format: html
 engine: knitr
 ---
  
-::: {.callout-note collapse="true"}
-## `r aussage`
+```{r}
+source("R/viz.R")
+```
+
+::: {.callout-tip collapse="true"}
+
+## `r aussage_label`
 
 ```{r}
-aussage
-library(ggplot2)
-library(dplyr)
-data |> filter(name == aussage) |> 
-ggplot(aes(value))+
-    geom_bar()
+aussage_bar_chart(data, "q_label", aussage_label)
 ```
 ::: 

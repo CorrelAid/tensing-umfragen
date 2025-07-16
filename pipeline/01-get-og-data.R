@@ -65,8 +65,12 @@ OG_DATA$data$auftritte <- og_df[[col_name_auf]] %>% as.integer()
 # Workshops ---------------
 q <- find_q(og_survey, "name", "angebote_vor_ort")
 col_name_avo <- q$`col_name`
+angebote_m <- get_mapping(og_choices, q$select_from_list_name)
+
+
 OG_DATA$long[["angebote_vor_ort"]] <- make_multiselect_long(og_df, col_name_avo) %>% 
-    rename(angebote_vor_ort = !!col_name_avo)
+    rename(angebote_vor_ort = !!col_name_avo) |> 
+    recode_values(angebote_m, "angebote_vor_ort")
 
 # HAUPTBERUFLICH MA -------------
 # gibt es hauptamtl. MA?

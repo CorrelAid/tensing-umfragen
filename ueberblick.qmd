@@ -250,20 +250,6 @@ TEN SING Treffen dauern im Durchschnitt `{r} mean(wochentage$stunden, na.rm = TR
 Im letzten Schuljahr fanden insgesamt `{r} sum(og$data$auftritte, na.rm = TRUE)` statt. 
 
 
-### Welche Angebote finden statt? 
-
-```{r}
-angebote_agg <- og$long$angebote_vor_ort |> 
-  group_by(angebote_vor_ort) |>
-  summarize(percent_og = n() / nrow(og$data)) 
-
-
-ggplot(angebote_agg, aes(y = forcats::fct_reorder(angebote_vor_ort, percent_og), x = percent_og))+
-  geom_col(fill = TS_GREEN)+
-  scale_x_continuous(labels = scales::label_percent())+
-  labs(y = NULL, x = "% der Ortsgruppen", title = "Abdeckung der Angebote in den Ortsgruppen")
-```
-
 ###  Zufriedenheit mit TENSING (Weiterempfehlungsfrage)
 **TODO**
 
