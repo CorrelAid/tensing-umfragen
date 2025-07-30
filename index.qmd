@@ -8,7 +8,7 @@ from: markdown+emoji
 ```{r}
 #| include: false
 library(tidyverse)
-library(duckdb)
+library(wordcloud2)
 source("R/quarto-utils.R")
 source("config/viz_config.R")
 
@@ -21,6 +21,31 @@ og_data <- og$data
 og_cfg <- readr::read_rds("config/og_cfg.rds")
 
 ```
+
+
+::: {.callout-note collapse="true"}
+## Datenquelle
+
+**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_WORT, "tn")`
+
+Spalten im Roh-Datensatz:
+
+```{r}
+tn_cfg$QS_WORT %>% select(name, col_name)
+```
+:::
+
+```{r}
+woerter <- tn$long$woerter
+colorVec = rep(c(TS_GREEN, 'black'), length.out=nrow(demoFreq))
+
+woerter %>% 
+  rename(word = wort) %>% 
+  count(word, name = "freq") %>% 
+  filter(freq > 4) %>% 
+  wordcloud2::wordcloud2(color = colorVec, shape = "square")
+```
+
 
 ::: {.callout-caution}
 ## Disclaimer
