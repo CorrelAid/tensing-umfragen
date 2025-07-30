@@ -35,7 +35,7 @@ website:
       - href: region/hessen.qmd
       - href: region/owl.qmd
       - href: region/sueden.qmd
-    - kern.qmd
+    - themen.qmd
     - wirkung-pg.qmd
     right:
     - text: Hilfe

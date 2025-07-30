@@ -107,7 +107,9 @@ og_tn <- og_data %>%
 
 ```
 
+::: {.panel-tabset}
 
+## Version 1
 
 ```{r region-table}
 # some ortsgruppen are not in the og_data -> calculate separately
@@ -130,6 +132,7 @@ og_region_df <- og_data %>%
 reactable(
   og_region_df,
   groupBy = "og_region",
+  defaultSorted = list(og_name = "desc"),
   columns = list(
     og_region = colDef(name = "Region", html = TRUE, cell = function(region, index) {
       sprintf('<a href="%s" target="_blank">%s</a>', og_region_df$slug[index], region)
@@ -138,11 +141,13 @@ reactable(
     anzahl_insg = colDef(name = "Aktive", aggregate = "sum"),
      anzahl_tn = colDef(name = "Teilnehmende", aggregate = "sum"),
     anzahl_ma_leitung = colDef(name = "Mitarbeitende", aggregate = "sum"),
-    slug = colDef(name = "Link", html = TRUE, aggregate = JS("
+    slug = colDef(name = "Details", html = TRUE, cell = function(value) { 
+      return("")
+    }, aggregate = JS("
     function(values, rows) {
       if (!values || values.length === 0 || !values[0]) return '';
       const slug = values[0];
-      return '<a href=\"/region/' + slug + '.html\" rel=\"noopener noreferrer\" style=\"text-decoration: none;\">🔗</a>';
+      return '<a href=\"/region/' + slug + '.html\" rel=\"noopener noreferrer\" style=\"text-decoration: none;\">↗️</a>';
     }
   "))
   )
@@ -153,7 +158,7 @@ reactable(
 
 ## Version 2
 
-```{r}
+```{r region-table-2}
 og_region_agg <- og_region_df |> 
   group_by(og_region, slug) |> 
   summarize(
@@ -174,6 +179,14 @@ reactable(
     anzahl_tn = colDef(name = "Teilnehmende"),
     anzahl_ma_leitung = colDef(name = "Mitarbeitende"),
     slug = colDef(show = FALSE)
-  )
+  ),
+  defaultSorted = list(n_og = "desc"),
 )
 ```
+
+:::
+
+
+# Zufriedenheit TN
+
+Aussage Gute Entscheidung TEN SING 

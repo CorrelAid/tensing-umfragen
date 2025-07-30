@@ -1,5 +1,5 @@
 ---
-title: "Kern von TenSing"
+title: "Themen"
 execute:
   echo: false
   warning: false
@@ -34,6 +34,16 @@ meta_aussagen <- readr::read_csv("data/meta/tn/aussagen.csv")
 meta_aussagen_choices <- readr::read_csv("data/meta/tn/aussagen_choices.csv") %>% 
   mutate(name = as.character(name))
 
+fmt_aussage_label <- function(meta_data, aussage_short, inline = TRUE) {
+  label <- meta_data$label[meta_data$name == aussage_short]
+  if (length(label) == 0) stop(sprintf("Aussage %s does not exist.", aussage_short));
+  s <- sprintf('%s', label)
+  if (inline) {
+    return(I(s))
+  }
+  return(s)
+}
+
 ```
 
 ```{r aussagen-longify}
@@ -59,37 +69,65 @@ meta_eig <- meta_eig %>%
 
 eig_long <- tn$long$tensing_eigenschaften %>%
   left_join(meta_eig, by = c("eig" = "name")) %>% 
-  left_join(meta_eig_choices, by = c("select_from_list_name" = "list_name", "value")) 
-
+  left_join(meta_eig_choices, by = c("select_from_list_name" = "list_name", "value")) |> 
+  rename(choice_label = label_value)
 ```
 
-
-# Was verbinden die TN mit TEN SING?
 
 ::: {.callout-note collapse="true"}
-## Datenquelle
+## Datenquellen
 
-**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_WORT, "tn")`
+**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_AUSSAGEN_LIKERT, "tn")`
 
-Spalten im Roh-Datensatz:
+
+**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_EIGENSCHAFTEN, "tn")`
+
+Spalten im Roh-Datensatz - Aussagen:
 
 ```{r}
-tn_cfg$QS_WORT %>% select(name, col_name)
+tn_cfg$QS_AUSSAGEN_LIKERT %>% select(name, col_name)
 ```
+
+Spalten im Roh-Datensatz - Eigenschaften:
+
+```{r}
+tn_cfg$QS_EIGENSCHAFTEN %>% select(name, col_name)
+```
+
 :::
 
-```{r}
-woerter <- tn$long$woerter
-colorVec = rep(c(TS_GREEN, 'black'), length.out=nrow(demoFreq))
 
-woerter %>% 
-  rename(word = wort) %>% 
-  count(word, name = "freq") %>% 
-  filter(freq > 4) %>% 
-  wordcloud2::wordcloud2(color = colorVec, shape = "square")
+
+```{r eig-utility-fun}
+# we have to get the labels separately because there is no guarantee that all the values will be present in the data -> columns would be missing from the ggplot
+get_eig_choice_labels <- function(choices_meta_df, list_name) {
+  # filter out the labels for the y axis from the meta dataframe 
+  eig_labels <- choices_meta_df |> 
+    filter(list_name == .env$list_name) |> 
+    pull(label_value)
+}
+
+get_eig_plot_data <- function(data_long, eig_choices_meta, eig) {
+  data_eig <- data_long %>%
+    dplyr::filter(eig == .env$eig)
+  
+  factor_levels <- get_eig_choice_labels(eig_choices_meta, data_eig$select_from_list_name[1])
+  plot_data <- data_eig |>
+    dplyr::group_by(eig, eig_label, value, select_from_list_name, choice_label, .drop = FALSE) %>%
+    dplyr::summarize(n = n(), percent = n / length(unique(data_long$tn_id))) |> 
+    dplyr::mutate(choice_label = factor(choice_label, levels = factor_levels, labels = factor_levels, ordered = TRUE))
+  plot_data
+}
 ```
 
-# TEN SING und Glaube
+ 
+# Glaube
+
+```{r}
+plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_offen_religionen")
+eig_bar_chart(plot_data)
+```
+
 
 ```{r}
 # does the person have any contact to christian faith outside of TEN SING?
@@ -121,10 +159,12 @@ aussage_bar_chart(aussagen_long, "aussage", "glaube_spiritualitaet")
 
 **`{r} kontaktpunkt_pie$perc[kontaktpunkt_pie$has_kontaktpunkt == "Kontakt"]`%** der Aktiven haben außerhalb von TEN SING Kontakt zum christlichen Glauben, **`{r} kontaktpunkt_pie$perc[kontaktpunkt_pie$has_kontaktpunkt == "Kein Kontakt außerhalb von TEN SING"]`%** haben nur über TEN SING Kontakt. 
 
+
+
 ::: {.callout-tip collapse="true"}
 ## Tortendiagramm
 
-```{r}
+```{r} 
 kontakt_pie_plot <- ggplot(kontaktpunkt_pie, aes(x = "", y = n, fill = has_kontaktpunkt)) +
   geom_col() +
   ggrepel::geom_label_repel(
@@ -167,6 +207,8 @@ glaube_rolle |>
 
 
 
+
+
 ```{r}
 offenheit_religionen <- eig_long |> 
   filter(eig == "tensing_offen_religionen") |> 
@@ -190,132 +232,102 @@ offenheit_religionen |>
 ```
 
 
-# Was denken die TN über TEN SING?
-
-
-::: {.callout-note collapse="true"}
-## Datenquellen
-
-**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_AUSSAGEN_LIKERT, "tn")`
-
-
-**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_EIGENSCHAFTEN, "tn")`
-
-Spalten im Roh-Datensatz - Aussagen:
-
+# Kreativität und Abwechslung
 ```{r}
-tn_cfg$QS_AUSSAGEN_LIKERT %>% select(name, col_name)
+aussage_bar_chart(aussagen_long, "aussage", "entfaltung_kreativitae")
+```
+```{r}
+plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_kreativ_unkreativ")
+eig_bar_chart(plot_data)
 ```
 
-Spalten im Roh-Datensatz - Eigenschaften:
-
 ```{r}
-tn_cfg$QS_EIGENSCHAFTEN %>% select(name, col_name)
-```
-
-:::
-
-```{r}
-#| output: asis
-#| echo: false 
-res <- purrr::map_chr(unique(meta_aussagen$label), function(aussage_label, data = aussagen_long) {
-    knitr::knit_child(
-      input = "_child_aussagen.qmd", 
-      envir = environment(), 
-      quiet = TRUE
-      )
-  })
-
-
-cat(res, sep = '\n')
-```
-
-
-```{r}
-#| out-width: "100%"
-
-p <- aussagen_long %>% 
-  group_by(aussage, q_label, value, ch_label) %>% 
-  summarize(n = n(), 
-            perc = n / nrow(tn_data)) %>% 
-  ggplot(aes(fill = value, y = aussage, x = perc, tooltip = q_label))+
-  geom_col_interactive(position = position_stack(reverse = TRUE))+
-  scale_x_continuous(labels = scales::percent)+
-  scale_y_discrete(labels = scales::label_wrap(60))+
-  scale_fill_manual_interactive(labels = meta_aussagen_choices$label, values = COLS_6)+
-  labs(fill = NULL, y = NULL, x = NULL, title = "Aussagen über TEN SING")+
-  theme(legend.position = "top", 
-        axis.text.y = element_text(size = 12),
-        legend.text = element_text(size = 10))
-
-ggiraph::girafe(ggobj = p)
-```
-
-
-::: callout-warning
-## Skalen uneinheitlich!
-
-Die Antwortoptionen waren bei diesem Fragenblock nicht ganz einheitlich ausgestaltet. Jede Unterfrage hatte eine eigene sechsstufige Skala, deren Endpunkte unterschiedlich waren. Wenn ihr im Balkendiagramm mit der Maus über die Balken geht, könnt ihr die ganz ausformulierten Endpunkte sehen (in der Grafik nur verkürzt dargestellt) und natürlich im `{r} fmt_fragebogen("tn")`.
-:::
-
-```{r}
-p_eig <- eig_long %>% 
-  count(label_short, label_value, value) %>% 
-  ggplot(aes(y = label_short, x = n, group = value, fill = value, tooltip = paste("Antwortoption:", label_value)))+
-  geom_col_interactive(position = "stack")+
-  scale_y_discrete(
-    labels = str_wrap(str_split_i(meta_eig$label_short, "SEP", 2), 20),
-    breaks = meta_eig$label_short,
-    sec.axis = dup_axis(
-      labels = str_wrap(str_split_i(meta_eig$label_short, "SEP", 1), 20)
-    )
-  )+ 
-  scale_fill_manual_interactive(values = rev(COLS_6))+ 
-  guides(fill = "none")+
-  labs(y = NULL, title = "Eigenschaften von TEN SING")+
-  theme(axis.text.y = element_text(size = 10))
-
-ggiraph::girafe(ggobj = p_eig)
-
+plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_abwechslung")
+eig_bar_chart(plot_data)
 ```
 
 
 
-
-
-# Welche Angebote werden von Ortsgruppen angeboten?
+# Offenheit und Fehlerkultur
 
 
 ```{r}
-angebote_agg <- og$long$angebote_vor_ort |> 
-  group_by(angebote_vor_ort) |>
-  summarize(percent_og = n() / nrow(og$data)) 
-
-p_ang_og <- ggplot(angebote_agg, aes(y = forcats::fct_reorder(angebote_vor_ort, percent_og), x = percent_og))+
-  geom_col(fill = TS_GREEN)+
-  scale_x_continuous(labels = scales::label_percent())+
-  labs(y = NULL, x = "% der Ortsgruppen", title = "Abdeckung der Angebote in den Ortsgruppen")
-
-ggiraph::girafe(ggobj = p_ang_og)
-
+aussage_bar_chart(aussagen_long, "aussage", "ideeneinbringen")
 ```
-
-
-### An welchen Angeboten nehmen TN teil?
 
 ```{r}
-angebote_agg <- tn$long$angebote_vor_ort |> 
-  group_by(angebot) |>
-  summarize(percent = n() / nrow(tn$data)) 
-
-p_ang_tn <- ggplot(angebote_agg, aes(y = forcats::fct_reorder(angebot, percent), x = percent))+
-  geom_col(fill = TS_GREEN)+
-  scale_x_continuous(labels = scales::label_percent())+
-  labs(y = NULL, x = "% der TN", title = "An welchen Angeboten nehmen TN teil?")
-
-
-ggiraph::girafe(ggobj = p_ang_tn)
-
+plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_modern_traditionell_00")
+eig_bar_chart(plot_data)
 ```
-### Welche Angebote finden Personen besonders wichtig? Welche werden angeboten?
+
+
+```{r}
+plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_offen_exklusiv")
+eig_bar_chart(plot_data)
+```
+
+
+
+```{r}
+aussage_bar_chart(aussagen_long, "aussage", "fehlerkultur")
+```
+
+# Authentizität, Gemeinschaft und Safe Space
+
+
+```{r}
+aussage_bar_chart(aussagen_long, "aussage", "selbst_sein")
+```
+
+```{r}
+plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tengsing_geschuetzt")
+eig_bar_chart(plot_data)
+```
+
+```{r}
+plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_achtenaufandere")
+eig_bar_chart(plot_data)
+```
+
+```{r}
+plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_gemeinschaft")
+eig_bar_chart(plot_data)
+```
+
+
+# Selbstvertrauen und Selbstwirksamkeit
+
+```{r}
+aussage_bar_chart(aussagen_long, "aussage", "selbstbewusstsein")
+```
+
+```{r}
+aussage_bar_chart(aussagen_long, "aussage", "dinge_zutrauen")
+```
+
+# Persönliche Entwicklung
+
+```{r}
+aussage_bar_chart(aussagen_long, "aussage", "eigene_entwicklung")
+```
+
+```{r}
+plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_ausprobieren")
+eig_bar_chart(plot_data)
+```
+
+
+
+# Lernen und Transfer
+
+```{r}
+aussage_bar_chart(aussagen_long, "aussage", "transfer")
+```
+
+
+```{r}
+aussage_bar_chart(aussagen_long, "aussage", "neues_lernen")
+```
+
+
 

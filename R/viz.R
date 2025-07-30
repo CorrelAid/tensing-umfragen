@@ -18,7 +18,10 @@ aussage_bar_chart <- function(data_long, var_filter, var_value) {
       x = "Bewertung",
       subtitle = "Bewertung von trifft überhaupt nicht zu (1) zu trifft voll und ganz zu (6)"
     ) +
-    guides(fill = "none")
+    guides(fill = "none") + 
+    theme(
+      plot.title = element_textbox_simple(margin = unit(c(0, 0, 20, 0), "pt"))
+    )
   
   ggiraph::girafe(ggobj = p)
 
@@ -54,8 +57,40 @@ bedarfe_bar_chart <- function(data_long, og_choices, og_cfg, bedarf) {
       x = "Bewertung",
       subtitle = "Bewertung nein bis ja"
     ) +
-    guides(fill = "none")
+    guides(fill = "none") + 
+    theme(
+      plot.subtitle = element_textbox_simple(),
+      plot.title = element_textbox_simple(margin = unit(c(0, 0, 10, 0), "pt"))
+    )
   
   ggiraph::girafe(ggobj = p)
 
+}
+
+# rev_x so far always true 
+eig_bar_chart <- function(plot_data, rev_x = TRUE) {
+  
+  title <- unique(plot_data$eig_label)
+
+  # we want to reverse the y position so that the best option is on top
+  # we do want to have the most green 
+  colors <- rev(COLS_6) |> set_names(levels(plot_data$choice_label))
+   
+  p <- ggplot(plot_data, aes(y = fct_rev(choice_label), fill = choice_label, x = percent)) +
+    geom_col() +
+    scale_fill_manual(values = colors) +
+    scale_y_discrete(drop = FALSE)+
+    scale_x_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
+    labs(
+      x = "% Aktive",
+      title = title,
+      fill = NULL, 
+      y = NULL
+    ) +
+    guides(fill = "none") + 
+    theme(
+      plot.subtitle = element_textbox_simple(),
+      plot.title = element_textbox_simple(margin = unit(c(0, 0, 10, 0), "pt"))
+    )
+  ggiraph::girafe(ggobj = p)
 }
