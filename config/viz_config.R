@@ -1,4 +1,5 @@
 library(ggplot2)
+library(ggtext)
 
 TS_GREEN <- "#b5c948"
 RED <- "#D81B60"
@@ -8,8 +9,13 @@ PAL_AMPEL <- c(TS_GREEN, "#FFFF00", RED)
 #hcl.pals(type = "diverging")
 #scales::show_col(hcl.colors(6, "Purple-Green"))
 cols_6 <- hcl.colors(6, "Purple-Green")
-COLS_6 <- c('#8c510a','#d8b365','#f6e8c3','#c7eae5','#5ab4ac','#01665e')
+COLS_6_orig <- c('#8c510a','#d8b365','#f6e8c3','#c7eae5','#5ab4ac','#01665e')
+COLS_6 <- c('#7a4a0c', '#cfb77c', '#f4e9d2', '#c0e3dc', '#4ca89f', '#155c52')
 
+PAL5_DIV_orig <- c('#a6611a','#dfc27d','#f5f5f5','#80cdc1','#018571')
+PAL5_DIV <- c('#874d16', '#d6bb88', '#f0f0f0', '#75c4b9', '#116b5c')
+PAL5_UEB <- c(`Nein` = '#a6611a',`Eher nein` = '#dfc27d', `Bin mir unsicher` = '#f5f5f5',
+`Eher ja` = '#80cdc1', `Ja` = '#018571')
 theme_ts <- ggplot2::theme_minimal(base_size = 14,
                                    base_family = "Atkinson Hyperlegible") +
   ggplot2::theme(
