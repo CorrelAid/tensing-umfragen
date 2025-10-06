@@ -30,3 +30,4 @@ data/cleaned
 # quarto website
 _freeze/
 _site/
+qgis/tensing.qgz

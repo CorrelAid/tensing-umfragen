@@ -86,7 +86,7 @@ Beachte: Manche Ortsgruppen kommen nur im TN-Fragebogen vor, da die Ortsgruppenl
 Mit einem Klick auf den :arrow_forward: kannst du jede Ortsgruppe öffnen und ein genaueres Profil sehen.
 :::
 
-```{r og-table}
+```{r}
 
 og_region_df <- og_data %>%
   #mutate(anzahl_aktive = anzahl_ma_leitung + anzahl_tn) %>% 
@@ -108,7 +108,7 @@ leitung_og <- sum(og_data$anzahl_ma_leitung, na.rm = T)
 insgesamt_og <- sum(og_data$anzahl_insg, na.rm = T)
 ```
 
-```{r og-reactable}
+```{r}
 # value should be passed for a11y
 status_badge <- function(value, color = "#aaa", width = "0.55rem", height = width) {
   htmltools::span(style = list(
@@ -193,7 +193,7 @@ Davon sind **zwischen `{r} min(tn_tn, tn_og)` und `{r} max(tn_tn, tn_og)` als Te
 
 ## Nach Angeboten
 
-```{r table-og-angebote-by-angebot}
+```{r}
 og_ang <- og$long$angebote_vor_ort |> 
   filter(og_id %in% og_ids) |> 
   full_join(og_data, by = "og_id")
@@ -203,7 +203,7 @@ reactable::reactable(og_ang |> select(angebote_vor_ort, og_name), groupBy = "ang
 
 ## Nach Ortsgruppen
 
-```{r table-og-angebote-by-og}
+```{r}
 reactable::reactable(og_ang |> select(angebote_vor_ort, og_name), groupBy = "og_name")
 
 ```

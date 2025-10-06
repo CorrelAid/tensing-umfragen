@@ -8,6 +8,7 @@ project:
   - R/quarto-utils.R
   render:
   - '!LICENSE'
+  - "!dump.qmd"
   - '*qmd'
   - "!qgis/"
 execute:
