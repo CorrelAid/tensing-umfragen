@@ -1,6 +1,7 @@
 .PHONY: data
 
 
+# 00-get-metadata.R is executed via source'ing of config/config_[og|tn].R in the get-[og|tn]-data.R files
 data: 
 	Rscript pipeline/01-get-og-data.R 
 	Rscript pipeline/02-get_tn_data.R 
