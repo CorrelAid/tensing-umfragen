@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Wirkung PG</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/d3-bundle-5.16.0/d3-bundle.min.js"></script>
+<script src="site_libs/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+<script src="site_libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script>
+<script src="site_libs/flatbush-4.4.0/flatbush.min.js"></script>
+<link href="site_libs/ggiraphjs-0.8.10/ggiraphjs.min.css" rel="stylesheet">
+<script src="site_libs/ggiraphjs-0.8.10/ggiraphjs.min.js"></script>
+<script src="site_libs/girafe-binding-0.8.12/girafe.js"></script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Start</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./ueberblick.html"> 
+<span class="menu-text">Überblick</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-regionen" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Regionen</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-regionen">    
+        <li>
+    <a class="dropdown-item" href="./region/ostwerk.html">
+ <span class="dropdown-text">Ostwerk</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/nord.html">
+ <span class="dropdown-text">Nord</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/niederrhein.html">
+ <span class="dropdown-text">Niederrhein</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/blrg.html">
+ <span class="dropdown-text">Bergischland-Ruhrgebiet</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/sachsen.html">
+ <span class="dropdown-text">Sachsen</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/thueringen.html">
+ <span class="dropdown-text">Thüringen</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/hessen.html">
+ <span class="dropdown-text">Hessen</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/owl.html">
+ <span class="dropdown-text">Ostwestfalen-Lippe</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./region/sueden.html">
+ <span class="dropdown-text">Süden</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./themen.html"> 
+<span class="menu-text">Themen</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./wirkung-pg.html" aria-current="page"> 
+<span class="menu-text">Wirkung PG</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./hilfe.html"> 
+<span class="menu-text">Hilfe</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#informationskanäle" id="toc-informationskanäle" class="nav-link active" data-scroll-target="#informationskanäle">Informationskanäle</a></li>
+  <li><a href="#deutschlandweites-netzwerk-und-angebote" id="toc-deutschlandweites-netzwerk-und-angebote" class="nav-link" data-scroll-target="#deutschlandweites-netzwerk-und-angebote">Deutschlandweites Netzwerk und Angebote</a>
+  <ul class="collapse">
+  <li><a href="#warst-du-schon-mal-auf-einem-ortsgruppenübergreifenden-seminar-oder-einer-veranstaltung-von-ten-sing-die-in-deiner-region-stattfand" id="toc-warst-du-schon-mal-auf-einem-ortsgruppenübergreifenden-seminar-oder-einer-veranstaltung-von-ten-sing-die-in-deiner-region-stattfand" class="nav-link" data-scroll-target="#warst-du-schon-mal-auf-einem-ortsgruppenübergreifenden-seminar-oder-einer-veranstaltung-von-ten-sing-die-in-deiner-region-stattfand">Warst du schon mal auf einem ortsgruppenübergreifenden Seminar oder einer Veranstaltung von TEN SING, die in deiner Region stattfand?</a></li>
+  <li><a href="#welche-hürden-bestehen-für-eine-teilnahme" id="toc-welche-hürden-bestehen-für-eine-teilnahme" class="nav-link" data-scroll-target="#welche-hürden-bestehen-für-eine-teilnahme">Welche Hürden bestehen für eine Teilnahme?</a></li>
+  <li><a href="#unterstützungsbedarfe-der-ortsgruppen" id="toc-unterstützungsbedarfe-der-ortsgruppen" class="nav-link" data-scroll-target="#unterstützungsbedarfe-der-ortsgruppen">Unterstützungsbedarfe der Ortsgruppen</a></li>
+  <li><a href="#ist-das-deutschlandweite-netzwerk-bekannt-ortsübergreifende-angebote-im-fragebogen" id="toc-ist-das-deutschlandweite-netzwerk-bekannt-ortsübergreifende-angebote-im-fragebogen" class="nav-link" data-scroll-target="#ist-das-deutschlandweite-netzwerk-bekannt-ortsübergreifende-angebote-im-fragebogen">Ist das deutschlandweite Netzwerk bekannt (Ortsübergreifende Angebote im Fragebogen)?</a></li>
+  <li><a href="#wird-es-genutzt" id="toc-wird-es-genutzt" class="nav-link" data-scroll-target="#wird-es-genutzt">Wird es genutzt?</a></li>
+  <li><a href="#was-braucht-ein-deutschlandweites-seminar-um-daran-teilzunehmen-welche-hürden-bestehen" id="toc-was-braucht-ein-deutschlandweites-seminar-um-daran-teilzunehmen-welche-hürden-bestehen" class="nav-link" data-scroll-target="#was-braucht-ein-deutschlandweites-seminar-um-daran-teilzunehmen-welche-hürden-bestehen">Was braucht ein deutschlandweites Seminar um daran teilzunehmen? Welche Hürden bestehen?</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Wirkung PG</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="informationskanäle" class="level1">
+<h1>Informationskanäle</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Datenquellen
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  name     type  `$kuid` `$qpath` col_name `$autoname` label required appearance
+  &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt;     
+1 Wenn_du… sele… zx8cj11 group_n… group_n… Wenn_du_es… Wenn… FALSE    &lt;NA&gt;      
+# ℹ 3 more variables: select_from_list_name &lt;chr&gt;, relevant &lt;chr&gt;, hint &lt;lgl&gt;</code></pre>
+</div>
+</div>
+<p><strong>Fragen</strong> aus dem <a href="https://ee-eu.kobotoolbox.org/single/UgaA9dLH">Teilnehmer*innen Fragebogen</a>:</p>
+<ul>
+<li>“<em>Hast du den Eindruck, dass du alle wichtigen Informationen erhältst?</em>”</li>
+<li>“<em>Wenn du es dir aussuchen könntest: Auf welchem Weg möchtest du am liebsten Informationen von TEN SING erhalten?</em>”</li>
+</ul>
+</div>
+</div>
+</div>
+<p>Die TEN SINGenden fühlen sich zu 78.4% gut informiert.</p>
+<p>1.4% möchten auf anderem Wege informiert werden, 96.2% sind mit den bisherigen Informationskanälen zufrieden.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Sind TN informiert?</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Änderungswunsch Informationskanäle</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wirkung-pg_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wirkung-pg_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="deutschlandweites-netzwerk-und-angebote" class="level1">
+<h1>Deutschlandweites Netzwerk und Angebote</h1>
+<p><strong>TODO</strong></p>
+<section id="warst-du-schon-mal-auf-einem-ortsgruppenübergreifenden-seminar-oder-einer-veranstaltung-von-ten-sing-die-in-deiner-region-stattfand" class="level3">
+<h3 class="anchored" data-anchor-id="warst-du-schon-mal-auf-einem-ortsgruppenübergreifenden-seminar-oder-einer-veranstaltung-von-ten-sing-die-in-deiner-region-stattfand">Warst du schon mal auf einem ortsgruppenübergreifenden Seminar oder einer Veranstaltung von TEN SING, die in deiner Region stattfand?</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="girafe html-widget html-fill-item" id="htmlwidget-ad0c06baf98cd37f504c" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-ad0c06baf98cd37f504c">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_d5215528_7d34_4085_8bd0_fba7e64786fd' viewBox='0 0 504 360'>\n <defs id='svg_d5215528_7d34_4085_8bd0_fba7e64786fd_defs'>\n  <clipPath id='svg_d5215528_7d34_4085_8bd0_fba7e64786fd_c1'>\n   <rect x='0' y='0' width='504' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_d5215528_7d34_4085_8bd0_fba7e64786fd_c2'>\n   <rect x='101.82' y='0' width='300.36' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_d5215528_7d34_4085_8bd0_fba7e64786fd_c3'>\n   <rect x='115.07' y='72.89' width='280.14' height='280.14'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_d5215528_7d34_4085_8bd0_fba7e64786fd_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_d5215528_7d34_4085_8bd0_fba7e64786fd_c1)'>\n   <rect x='0' y='0' width='504' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n  <\/g>\n  <g clip-path='url(#svg_d5215528_7d34_4085_8bd0_fba7e64786fd_c3)'>\n   <polygon points='255.14,212.96 258.58,213.43 262.03,213.91 265.47,214.38 268.92,214.86 272.36,215.33 275.81,215.80 279.25,216.28 282.70,216.75 286.14,217.23 289.59,217.70 293.03,218.18 296.48,218.65 299.92,219.12 303.37,219.60 306.81,220.07 310.26,220.55 313.70,221.02 317.15,221.50 320.59,221.97 324.04,222.44 324.42,219.03 324.64,215.60 324.68,212.16 324.56,208.72 324.27,205.30 323.80,201.89 323.17,198.51 322.38,195.17 321.41,191.87 320.29,188.62 319.01,185.43 317.57,182.31 315.98,179.26 314.24,176.29 312.36,173.42 310.33,170.64 308.17,167.96 305.89,165.40 303.47,162.95 300.94,160.62 298.30,158.42 295.55,156.35 292.71,154.43 289.77,152.64 286.75,151.00 283.65,149.52 280.48,148.19 277.24,147.01 273.96,146.00 270.63,145.15 267.26,144.47 266.65,147.90 266.05,151.32 265.44,154.74 264.83,158.17 264.23,161.59 263.62,165.02 263.02,168.44 262.41,171.87 261.80,175.29 261.20,178.71 260.59,182.14 259.99,185.56 259.38,188.99 258.77,192.41 258.17,195.84 257.56,199.26 256.96,202.68 256.35,206.11 255.74,209.53 255.14,212.96' fill='#1E88E5' fill-opacity='1' stroke='none'/>\n   <polygon points='255.14,212.96 255.14,209.48 255.14,206.00 255.14,202.53 255.14,199.05 255.14,195.57 255.14,192.09 255.14,188.61 255.14,185.14 255.14,181.66 255.14,178.18 255.14,174.70 255.14,171.23 255.14,167.75 255.14,164.27 255.14,160.79 255.14,157.32 255.14,153.84 255.14,150.36 255.14,146.88 255.14,143.41 251.75,143.49 248.38,143.74 245.02,144.15 241.68,144.72 238.38,145.46 235.11,146.35 231.90,147.41 228.73,148.61 225.63,149.97 222.60,151.48 219.65,153.14 216.78,154.94 214.01,156.87 211.33,158.94 208.75,161.14 206.28,163.46 203.93,165.89 201.70,168.44 199.60,171.09 197.63,173.84 195.79,176.69 194.10,179.62 192.55,182.63 191.15,185.71 189.90,188.85 188.80,192.06 187.86,195.31 187.08,198.60 186.47,201.93 186.01,205.29 185.72,208.66 185.59,212.04 185.63,215.43 185.83,218.81 186.20,222.17 186.73,225.52 187.42,228.83 188.27,232.11 189.29,235.34 190.45,238.51 191.77,241.63 193.24,244.68 194.86,247.65 196.62,250.55 198.52,253.35 200.55,256.06 202.71,258.66 205.00,261.16 207.40,263.54 209.92,265.80 212.54,267.94 215.27,269.95 218.09,271.82 221.00,273.55 223.99,275.14 227.05,276.58 230.18,277.88 233.37,279.01 236.61,279.99 239.89,280.82 243.21,281.48 246.56,281.98 249.93,282.31 253.31,282.48 256.69,282.49 260.07,282.33 263.44,282.01 266.79,281.53 270.12,280.88 273.40,280.07 276.65,279.10 279.84,277.97 282.97,276.70 286.04,275.27 289.04,273.69 291.95,271.97 294.78,270.11 297.51,268.11 300.15,265.98 302.67,263.73 305.09,261.36 307.38,258.87 309.56,256.27 311.60,253.57 313.51,250.78 315.28,247.89 316.91,244.92 318.39,241.88 319.72,238.77 320.90,235.60 321.93,232.37 322.79,229.10 323.50,225.79 324.04,222.44 320.59,221.97 317.15,221.50 313.70,221.02 310.26,220.55 306.81,220.07 303.37,219.60 299.92,219.12 296.48,218.65 293.03,218.18 289.59,217.70 286.14,217.23 282.70,216.75 279.25,216.28 275.81,215.80 272.36,215.33 268.92,214.86 265.47,214.38 262.03,213.91 258.58,213.43 255.14,212.96' fill='#B5C948' fill-opacity='1' stroke='none'/>\n   <polygon points='255.14,212.96 255.74,209.53 256.35,206.11 256.96,202.68 257.56,199.26 258.17,195.84 258.77,192.41 259.38,188.99 259.99,185.56 260.59,182.14 261.20,178.71 261.80,175.29 262.41,171.87 263.02,168.44 263.62,165.02 264.23,161.59 264.83,158.17 265.44,154.74 266.05,151.32 266.65,147.90 267.26,144.47 263.24,143.88 259.20,143.53 255.14,143.41 255.14,146.88 255.14,150.36 255.14,153.84 255.14,157.32 255.14,160.79 255.14,164.27 255.14,167.75 255.14,171.23 255.14,174.70 255.14,178.18 255.14,181.66 255.14,185.14 255.14,188.61 255.14,192.09 255.14,195.57 255.14,199.05 255.14,202.53 255.14,206.00 255.14,209.48 255.14,212.96' fill='#7F7F7F' fill-opacity='1' stroke='none'/>\n   <line x1='199.17' y1='133.11' x2='230.47' y2='186.94' stroke='#000000' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='303.74' y1='299.26' x2='277.43' y2='241.04' stroke='#000000' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='264.91' y1='109.52' x2='258.29' y2='177.21' stroke='#000000' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <polygon points='157.86,140.41 197.01,140.41 196.93,140.41 197.27,140.39 197.61,140.32 197.94,140.20 198.24,140.03 198.51,139.81 198.74,139.55 198.93,139.25 199.06,138.93 199.15,138.60 199.17,138.25 199.17,138.25 199.17,126.19 199.17,126.19 199.15,125.84 199.06,125.51 198.93,125.19 198.74,124.89 198.51,124.63 198.24,124.41 197.94,124.24 197.61,124.11 197.27,124.05 197.01,124.03 157.86,124.03 158.12,124.05 157.77,124.03 157.43,124.07 157.09,124.17 156.78,124.32 156.49,124.52 156.24,124.76 156.03,125.04 155.87,125.34 155.76,125.67 155.71,126.02 155.70,126.19 155.70,138.25 155.71,138.08 155.71,138.42 155.76,138.77 155.87,139.10 156.03,139.40 156.24,139.68 156.49,139.92 156.78,140.12 157.09,140.27 157.43,140.37 157.77,140.41' fill='#1E88E5' fill-opacity='1' stroke='#000000' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='round'/>\n   <text x='159.3' y='136.81' font-size='9.6pt' font-family='Helvetica'>24.4%<\/text>\n   <polygon points='305.90,308.37 345.06,308.37 344.97,308.37 345.32,308.36 345.66,308.29 345.98,308.16 346.29,307.99 346.55,307.77 346.78,307.51 346.97,307.22 347.11,306.90 347.19,306.56 347.22,306.21 347.22,306.21 347.22,294.15 347.22,294.15 347.19,293.81 347.11,293.47 346.97,293.15 346.78,292.85 346.55,292.59 346.29,292.37 345.98,292.20 345.66,292.08 345.32,292.01 345.06,291.99 305.90,291.99 306.16,292.01 305.82,291.99 305.47,292.04 305.14,292.13 304.82,292.28 304.54,292.48 304.29,292.72 304.08,293.00 303.92,293.31 303.81,293.64 303.75,293.98 303.74,294.15 303.74,306.21 303.75,306.04 303.75,306.39 303.81,306.73 303.92,307.06 304.08,307.37 304.29,307.64 304.54,307.89 304.82,308.08 305.14,308.23 305.47,308.33 305.82,308.37' fill='#B5C948' fill-opacity='1' stroke='#000000' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='round'/>\n   <text x='307.34' y='304.77' font-size='9.6pt' font-family='Helvetica'>72.8%<\/text>\n   <polygon points='248.92,109.52 280.96,109.52 280.87,109.52 281.22,109.51 281.56,109.44 281.88,109.31 282.19,109.14 282.45,108.92 282.69,108.66 282.87,108.37 283.01,108.05 283.09,107.71 283.12,107.36 283.12,107.36 283.12,95.30 283.12,95.30 283.09,94.96 283.01,94.62 282.87,94.30 282.69,94.00 282.45,93.74 282.19,93.52 281.88,93.35 281.56,93.23 281.22,93.16 280.96,93.14 248.92,93.14 249.18,93.16 248.83,93.14 248.49,93.19 248.15,93.28 247.84,93.43 247.55,93.63 247.30,93.87 247.09,94.15 246.93,94.46 246.82,94.79 246.77,95.13 246.76,95.30 246.76,107.36 246.77,107.19 246.77,107.54 246.82,107.88 246.93,108.21 247.09,108.52 247.30,108.79 247.55,109.04 247.84,109.23 248.15,109.38 248.49,109.48 248.83,109.52' fill='#7F7F7F' fill-opacity='1' stroke='#000000' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='round'/>\n   <text x='250.36' y='105.92' font-size='9.6pt' font-family='Helvetica'>2.8%<\/text>\n  <\/g>\n  <g clip-path='url(#svg_d5215528_7d34_4085_8bd0_fba7e64786fd_c1)'>\n   <rect x='188.05' y='35.59' width='15.48' height='15.48' fill='#B5C948' fill-opacity='1' stroke='none'/>\n   <rect x='242.24' y='35.59' width='15.48' height='15.48' fill='#1E88E5' fill-opacity='1' stroke='none'/>\n   <rect x='285.06' y='35.59' width='15.48' height='15.48' fill='#7F7F7F' fill-opacity='1' stroke='none'/>\n   <text x='211.4' y='47.07' font-size='8.4pt' font-family='Atkinson Hyperlegible'>Nein<\/text>\n   <text x='265.59' y='47.07' font-size='8.4pt' font-family='Atkinson Hyperlegible'>Ja<\/text>\n   <text x='308.41' y='47.07' font-size='8.4pt' font-family='Atkinson Hyperlegible'>NA<\/text>\n   <text x='108.79' y='17.67' font-size='12pt' font-weight='bold' font-family='Atkinson Hyperlegible'>Teilnahme deutschlandweite Veranstaltung<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_d5215528_7d34_4085_8bd0_fba7e64786fd","ratio":1.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="girafe html-widget html-fill-item" id="htmlwidget-8870a4e65f6bd9662d8a" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-8870a4e65f6bd9662d8a">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_52b1a069_6036_4330_817f_e49de2a1b4f3' viewBox='0 0 504 360'>\n <defs id='svg_52b1a069_6036_4330_817f_e49de2a1b4f3_defs'>\n  <clipPath id='svg_52b1a069_6036_4330_817f_e49de2a1b4f3_c1'>\n   <rect x='0' y='0' width='504' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_52b1a069_6036_4330_817f_e49de2a1b4f3_c2'>\n   <rect x='101.82' y='0' width='300.36' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_52b1a069_6036_4330_817f_e49de2a1b4f3_c3'>\n   <rect x='115.07' y='72.89' width='280.14' height='280.14'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_52b1a069_6036_4330_817f_e49de2a1b4f3_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_52b1a069_6036_4330_817f_e49de2a1b4f3_c1)'>\n   <rect x='0' y='0' width='504' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n  <\/g>\n  <g clip-path='url(#svg_52b1a069_6036_4330_817f_e49de2a1b4f3_c3)'>\n   <polygon points='255.14,212.96 252.75,215.49 250.37,218.02 247.99,220.55 245.60,223.09 243.22,225.62 240.83,228.15 238.45,230.68 236.07,233.21 233.68,235.74 231.30,238.28 228.92,240.81 226.53,243.34 224.15,245.87 221.76,248.40 219.38,250.94 217.00,253.47 214.61,256.00 212.23,258.53 209.84,261.06 207.46,263.60 209.99,265.86 212.63,268.00 215.36,270.01 218.20,271.89 221.12,273.62 224.12,275.21 227.20,276.65 230.34,277.94 233.54,279.07 236.79,280.05 240.09,280.86 243.42,281.52 246.78,282.01 250.16,282.33 253.56,282.49 256.95,282.49 260.35,282.31 263.73,281.98 267.08,281.48 270.41,280.81 273.71,279.98 276.96,279.00 280.16,277.85 283.30,276.55 286.37,275.10 289.36,273.51 292.28,271.76 295.10,269.88 297.84,267.86 300.46,265.71 302.99,263.43 305.39,261.04 307.68,258.53 309.84,255.91 311.87,253.19 313.77,250.37 315.53,247.46 317.14,244.47 318.60,241.41 319.92,238.28 321.08,235.08 322.08,231.84 322.92,228.55 323.60,225.22 324.12,221.86 324.47,218.49 324.66,215.10 324.68,211.70 324.53,208.31 324.22,204.92 323.75,201.56 323.11,198.22 322.31,194.92 321.35,191.67 320.23,188.46 318.96,185.31 317.53,182.23 315.96,179.22 314.24,176.29 312.38,173.45 310.38,170.70 308.25,168.05 306.00,165.52 303.62,163.09 301.13,160.78 298.53,158.60 295.82,156.55 293.02,154.63 290.12,152.85 287.15,151.21 284.10,149.72 280.97,148.38 277.79,147.20 274.55,146.17 271.27,145.30 267.95,144.60 264.60,144.05 261.22,143.67 260.92,147.14 260.61,150.60 260.31,154.07 260.00,157.53 259.70,160.99 259.40,164.46 259.09,167.92 258.79,171.39 258.48,174.85 258.18,178.32 257.88,181.78 257.57,185.24 257.27,188.71 256.96,192.17 256.66,195.64 256.35,199.10 256.05,202.57 255.75,206.03 255.44,209.49 255.14,212.96' fill='#1E88E5' fill-opacity='1' stroke='none'/>\n   <polygon points='255.14,212.96 255.14,209.48 255.14,206.00 255.14,202.53 255.14,199.05 255.14,195.57 255.14,192.09 255.14,188.61 255.14,185.14 255.14,181.66 255.14,178.18 255.14,174.70 255.14,171.23 255.14,167.75 255.14,164.27 255.14,160.79 255.14,157.32 255.14,153.84 255.14,150.36 255.14,146.88 255.14,143.41 251.75,143.49 248.37,143.74 245.01,144.15 241.68,144.72 238.37,145.46 235.10,146.35 231.88,147.41 228.72,148.62 225.62,149.98 222.59,151.49 219.64,153.15 216.77,154.95 213.99,156.89 211.31,158.96 208.73,161.15 206.26,163.47 203.91,165.91 201.68,168.46 199.58,171.12 197.61,173.87 195.78,176.72 194.08,179.65 192.53,182.66 191.13,185.75 189.88,188.89 188.79,192.10 187.85,195.35 187.07,198.65 186.46,201.98 186.01,205.34 185.72,208.71 185.59,212.10 185.63,215.48 185.84,218.86 186.21,222.23 186.74,225.57 187.44,228.89 188.29,232.17 189.31,235.40 190.48,238.57 191.80,241.69 193.27,244.74 194.89,247.72 196.66,250.61 198.56,253.41 200.60,256.12 202.76,258.72 205.05,261.21 207.46,263.60 209.84,261.06 212.23,258.53 214.61,256.00 217.00,253.47 219.38,250.94 221.76,248.40 224.15,245.87 226.53,243.34 228.92,240.81 231.30,238.28 233.68,235.74 236.07,233.21 238.45,230.68 240.83,228.15 243.22,225.62 245.60,223.09 247.99,220.55 250.37,218.02 252.75,215.49 255.14,212.96' fill='#B5C948' fill-opacity='1' stroke='none'/>\n   <polygon points='255.14,212.96 255.44,209.49 255.75,206.03 256.05,202.57 256.35,199.10 256.66,195.64 256.96,192.17 257.27,188.71 257.57,185.24 257.88,181.78 258.18,178.32 258.48,174.85 258.79,171.39 259.09,167.92 259.40,164.46 259.70,160.99 260.00,157.53 260.31,154.07 260.61,150.60 260.92,147.14 261.22,143.67 255.14,143.41 255.14,146.88 255.14,150.36 255.14,153.84 255.14,157.32 255.14,160.79 255.14,164.27 255.14,167.75 255.14,171.23 255.14,174.70 255.14,178.18 255.14,181.66 255.14,185.14 255.14,188.61 255.14,192.09 255.14,195.57 255.14,199.05 255.14,202.53 255.14,206.00 255.14,209.48 255.14,212.96' fill='#7F7F7F' fill-opacity='1' stroke='none'/>\n   <line x1='171.01' y1='249.23' x2='221.29' y2='224.84' stroke='#000000' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='346.11' y1='181.23' x2='289.5' y2='202.62' stroke='#000000' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='260.04' y1='109.2' x2='256.71' y2='177.11' stroke='#000000' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <polygon points='129.69,257.87 168.85,257.87 168.76,257.87 169.11,257.85 169.45,257.78 169.77,257.66 170.07,257.49 170.34,257.27 170.57,257.01 170.76,256.71 170.90,256.39 170.98,256.05 171.01,255.71 171.01,255.71 171.01,243.65 171.01,243.65 170.98,243.30 170.90,242.96 170.76,242.64 170.57,242.35 170.34,242.09 170.07,241.87 169.77,241.70 169.45,241.57 169.11,241.50 168.85,241.49 129.69,241.49 129.95,241.50 129.61,241.49 129.26,241.53 128.93,241.63 128.61,241.78 128.33,241.97 128.08,242.22 127.87,242.49 127.71,242.80 127.60,243.13 127.54,243.47 127.53,243.65 127.53,255.71 127.54,255.53 127.54,255.88 127.60,256.22 127.71,256.55 127.87,256.86 128.08,257.14 128.33,257.38 128.61,257.58 128.93,257.73 129.26,257.82 129.61,257.87' fill='#1E88E5' fill-opacity='1' stroke='#000000' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='round'/>\n   <text x='131.13' y='254.27' font-size='9.6pt' font-family='Helvetica'>60.6%<\/text>\n   <polygon points='348.27,189.10 376.75,189.10 376.67,189.10 377.01,189.08 377.35,189.01 377.68,188.89 377.98,188.71 378.25,188.49 378.48,188.23 378.67,187.94 378.80,187.62 378.89,187.28 378.91,186.94 378.91,186.94 378.91,174.88 378.91,174.88 378.89,174.53 378.80,174.19 378.67,173.87 378.48,173.58 378.25,173.32 377.98,173.10 377.68,172.93 377.35,172.80 377.01,172.73 376.75,172.72 348.27,172.72 348.53,172.73 348.18,172.72 347.84,172.76 347.50,172.86 347.19,173.01 346.90,173.20 346.65,173.44 346.44,173.72 346.28,174.03 346.17,174.36 346.12,174.70 346.11,174.88 346.11,186.94 346.12,186.76 346.12,187.11 346.17,187.45 346.28,187.78 346.44,188.09 346.65,188.37 346.90,188.61 347.19,188.81 347.50,188.96 347.84,189.05 348.18,189.10' fill='#B5C948' fill-opacity='1' stroke='#000000' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='round'/>\n   <text x='349.71' y='185.5' font-size='9.6pt' font-family='Helvetica'>38%<\/text>\n   <polygon points='244.02,109.20 276.06,109.20 275.98,109.20 276.32,109.18 276.66,109.12 276.99,108.99 277.29,108.82 277.56,108.60 277.79,108.34 277.98,108.04 278.11,107.72 278.20,107.39 278.22,107.04 278.22,107.04 278.22,94.98 278.22,94.98 278.20,94.63 278.11,94.30 277.98,93.98 277.79,93.68 277.56,93.42 277.29,93.20 276.99,93.03 276.66,92.91 276.32,92.84 276.06,92.82 244.02,92.82 244.28,92.84 243.94,92.82 243.59,92.86 243.26,92.96 242.94,93.11 242.66,93.31 242.41,93.55 242.20,93.83 242.04,94.13 241.93,94.46 241.87,94.81 241.86,94.98 241.86,107.04 241.87,106.87 241.87,107.21 241.93,107.56 242.04,107.89 242.20,108.19 242.41,108.47 242.66,108.71 242.94,108.91 243.26,109.06 243.59,109.16 243.94,109.20' fill='#7F7F7F' fill-opacity='1' stroke='#000000' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='round'/>\n   <text x='245.46' y='105.6' font-size='9.6pt' font-family='Helvetica'>1.4%<\/text>\n  <\/g>\n  <g clip-path='url(#svg_52b1a069_6036_4330_817f_e49de2a1b4f3_c1)'>\n   <rect x='188.05' y='35.59' width='15.48' height='15.48' fill='#B5C948' fill-opacity='1' stroke='none'/>\n   <rect x='242.24' y='35.59' width='15.48' height='15.48' fill='#1E88E5' fill-opacity='1' stroke='none'/>\n   <rect x='285.06' y='35.59' width='15.48' height='15.48' fill='#7F7F7F' fill-opacity='1' stroke='none'/>\n   <text x='211.4' y='47.07' font-size='8.4pt' font-family='Atkinson Hyperlegible'>Nein<\/text>\n   <text x='265.59' y='47.07' font-size='8.4pt' font-family='Atkinson Hyperlegible'>Ja<\/text>\n   <text x='308.41' y='47.07' font-size='8.4pt' font-family='Atkinson Hyperlegible'>NA<\/text>\n   <text x='108.79' y='17.67' font-size='12pt' font-weight='bold' font-family='Atkinson Hyperlegible'>Teilnahme ortsgrupenübergreifende / regionale Veranstaltung<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_52b1a069_6036_4330_817f_e49de2a1b4f3","ratio":1.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="girafe html-widget html-fill-item" id="htmlwidget-b75b48b9925ba2eec6ec" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-b75b48b9925ba2eec6ec">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_3c21d5c7_2fe4_4727_aa40_8e8fd110d58f' viewBox='0 0 504 360'>\n <defs id='svg_3c21d5c7_2fe4_4727_aa40_8e8fd110d58f_defs'>\n  <clipPath id='svg_3c21d5c7_2fe4_4727_aa40_8e8fd110d58f_c1'>\n   <rect x='0' y='0' width='504' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_3c21d5c7_2fe4_4727_aa40_8e8fd110d58f_c2'>\n   <rect x='143.66' y='27.71' width='353.37' height='248.69'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_3c21d5c7_2fe4_4727_aa40_8e8fd110d58f_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_3c21d5c7_2fe4_4727_aa40_8e8fd110d58f_c1)'>\n   <rect x='0' y='0' width='504' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n  <\/g>\n  <g clip-path='url(#svg_3c21d5c7_2fe4_4727_aa40_8e8fd110d58f_c2)'>\n   <polyline points='199.87,276.41 199.87,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='280.19,276.41 280.19,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='360.50,276.41 360.50,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='440.81,276.41 440.81,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='143.66,208.58 497.03,208.58' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='143.66,95.54 497.03,95.54' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='159.72,276.41 159.72,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='240.03,276.41 240.03,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='320.34,276.41 320.34,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='400.65,276.41 400.65,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='480.96,276.41 480.96,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect x='159.72' y='225.54' width='78.38' height='33.91' fill='#B5C948' fill-opacity='1' stroke='none'/>\n   <rect x='159.72' y='191.63' width='233.87' height='33.91' fill='#1E88E5' fill-opacity='1' stroke='none'/>\n   <rect x='159.72' y='157.71' width='8.99' height='33.91' fill='#7F7F7F' fill-opacity='1' stroke='none'/>\n   <rect x='159.72' y='112.5' width='194.67' height='33.91' fill='#B5C948' fill-opacity='1' stroke='none'/>\n   <rect x='159.72' y='78.58' width='122.07' height='33.91' fill='#1E88E5' fill-opacity='1' stroke='none'/>\n   <rect x='159.72' y='44.67' width='4.5' height='33.91' fill='#7F7F7F' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_3c21d5c7_2fe4_4727_aa40_8e8fd110d58f_c1)'>\n   <text x='57.39' y='212.32' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>deutschlandweit<\/text>\n   <text x='6.97' y='93.23' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>ortsgruppenübergreifend /<\/text>\n   <text x='97.33' y='105.33' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>regional<\/text>\n   <text x='150.91' y='290.17' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>0%<\/text>\n   <text x='228.51' y='290.17' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>25%<\/text>\n   <text x='308.27' y='290.17' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>50%<\/text>\n   <text x='389.35' y='290.17' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>75%<\/text>\n   <text x='466.28' y='290.17' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>100%<\/text>\n   <text x='277.14' y='305.16' font-size='10.5pt' font-family='Atkinson Hyperlegible'>% der Aktiven<\/text>\n   <rect x='253.25' y='329.67' width='15.48' height='15.48' fill='#B5C948' fill-opacity='1' stroke='none'/>\n   <rect x='296.07' y='329.67' width='15.48' height='15.48' fill='#1E88E5' fill-opacity='1' stroke='none'/>\n   <rect x='350.26' y='329.67' width='15.48' height='15.48' fill='#7F7F7F' fill-opacity='1' stroke='none'/>\n   <text x='276.61' y='341.15' font-size='8.4pt' font-family='Atkinson Hyperlegible'>Ja<\/text>\n   <text x='319.43' y='341.15' font-size='8.4pt' font-family='Atkinson Hyperlegible'>Nein<\/text>\n   <text x='373.61' y='341.15' font-size='8.4pt' font-family='Atkinson Hyperlegible'>NA<\/text>\n   <text x='6.97' y='17.67' font-size='12pt' font-weight='bold' font-family='Atkinson Hyperlegible'>Teilnahme an Veranstaltungen<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_3c21d5c7_2fe4_4727_aa40_8e8fd110d58f","ratio":1.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="welche-hürden-bestehen-für-eine-teilnahme" class="level3">
+<h3 class="anchored" data-anchor-id="welche-hürden-bestehen-für-eine-teilnahme">Welche Hürden bestehen für eine Teilnahme?</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+  teilnahme     n  csum  perc   pos type_veranst                      
+  &lt;chr&gt;     &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                             
+1 Ja           70   287 0.244 252   deutschlandweit                   
+2 Nein        209   217 0.728 112.  deutschlandweit                   
+3 &lt;NA&gt;          8     8 0.028   4   deutschlandweit                   
+4 Ja          174   287 0.606 200   ortsgruppenübergreifend / regional
+5 Nein        109   113 0.38   58.5 ortsgruppenübergreifend / regional
+6 &lt;NA&gt;          4     4 0.014   2   ortsgruppenübergreifend / regional</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 226</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="girafe html-widget html-fill-item" id="htmlwidget-e5cf7d7b1240874fcaa9" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-e5cf7d7b1240874fcaa9">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_e140bcab_b22a_40c6_ba18_a7de9b70ea85' viewBox='0 0 504 360'>\n <defs id='svg_e140bcab_b22a_40c6_ba18_a7de9b70ea85_defs'>\n  <clipPath id='svg_e140bcab_b22a_40c6_ba18_a7de9b70ea85_c1'>\n   <rect x='0' y='0' width='504' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_e140bcab_b22a_40c6_ba18_a7de9b70ea85_c2'>\n   <rect x='203.62' y='46.73' width='293.41' height='274.85'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_e140bcab_b22a_40c6_ba18_a7de9b70ea85_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_e140bcab_b22a_40c6_ba18_a7de9b70ea85_c1)'>\n   <rect x='0' y='0' width='504' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n  <\/g>\n  <g clip-path='url(#svg_e140bcab_b22a_40c6_ba18_a7de9b70ea85_c2)'>\n   <polyline points='250.30,321.58 250.30,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='316.98,321.58 316.98,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='383.66,321.58 383.66,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='450.35,321.58 450.35,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='203.62,298.68 497.03,298.68' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='203.62,260.51 497.03,260.51' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='203.62,222.33 497.03,222.33' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='203.62,184.16 497.03,184.16' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='203.62,145.98 497.03,145.98' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='203.62,107.81 497.03,107.81' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='203.62,69.64 497.03,69.64' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='216.96,321.58 216.96,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='283.64,321.58 283.64,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='350.32,321.58 350.32,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='417.01,321.58 417.01,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='483.69,321.58 483.69,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect x='216.96' y='243.33' width='33.19' height='34.36' fill='#B5C948' fill-opacity='1' stroke='none'/>\n   <rect x='216.96' y='128.81' width='60.23' height='34.36' fill='#B5C948' fill-opacity='1' stroke='none'/>\n   <rect x='216.96' y='281.5' width='18.44' height='34.36' fill='#B5C948' fill-opacity='1' stroke='none'/>\n   <rect x='216.96' y='52.46' width='86.04' height='34.36' fill='#B5C948' fill-opacity='1' stroke='none'/>\n   <rect x='216.96' y='166.98' width='52.86' height='34.36' fill='#B5C948' fill-opacity='1' stroke='none'/>\n   <rect x='216.96' y='205.15' width='35.65' height='34.36' fill='#B5C948' fill-opacity='1' stroke='none'/>\n   <rect x='216.96' y='90.63' width='63.92' height='34.36' fill='#B5C948' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_e140bcab_b22a_40c6_ba18_a7de9b70ea85_c1)'>\n   <text x='12.94' y='296.37' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Die Veranstaltungen haben mich vom<\/text>\n   <text x='31.71' y='308.47' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Inhalt bisher nicht angesprochen.<\/text>\n   <text x='11.51' y='258.2' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Der Preis für die Veranstaltung war zu<\/text>\n   <text x='171.06' y='270.29' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>hoch.<\/text>\n   <text x='6.97' y='220.02' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Ich kenne keine Personen, die auch zu<\/text>\n   <text x='74.24' y='232.12' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>der Veranstaltung gehen.<\/text>\n   <text x='8.95' y='181.85' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Ich habe von solchen Veranstaltungen<\/text>\n   <text x='62.44' y='193.95' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>bisher nicht mitbekommen.<\/text>\n   <text x='7' y='143.68' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Der Weg zum Veranstaltungsort ist mir<\/text>\n   <text x='160.68' y='155.77' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>zu weit.<\/text>\n   <text x='123.86' y='111.55' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>andere Gründe<\/text>\n   <text x='13.51' y='67.33' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Es gibt zu viele andere Angebote und<\/text>\n   <text x='100.16' y='79.43' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>ich habe keine Zeit.<\/text>\n   <text x='208.14' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>0%<\/text>\n   <text x='272.12' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>25%<\/text>\n   <text x='338.25' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>50%<\/text>\n   <text x='405.7' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>75%<\/text>\n   <text x='469' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>100%<\/text>\n   <text x='343.84' y='350.33' font-size='10.5pt' font-family='Atkinson Hyperlegible'>%<\/text>\n   <text x='6.97' y='37.07' font-size='10.5pt' font-family='Atkinson Hyperlegible'>an deutschlandweiten oder regionalen Veranstaltungen<\/text>\n   <text x='6.97' y='17.67' font-size='12pt' font-weight='bold' font-family='Atkinson Hyperlegible'>Teilnahmehürden<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_e140bcab_b22a_40c6_ba18_a7de9b70ea85","ratio":1.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Weitere Gründe (offene Antworten):
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Zeitlich nicht gepasst</li>
+<li>Krank</li>
+<li>Schule</li>
+<li>Keine Zeit</li>
+<li>Chaotische Orga</li>
+<li>Wurden abgesagt</li>
+<li>Konnte an dem Termin nicht</li>
+<li>Noch keine Zeit</li>
+<li>Manchmal lassen meine Eltern mich nicht.</li>
+<li>Ich habe leider keine Zeit</li>
+<li>Ich habe leider keine Zeit</li>
+<li>Ich hatte ein Jahr Interesse am PLUS Seminar, es wurde jedoch abgesagt</li>
+<li>Terminüberschneidungen</li>
+<li>Zeitliche Überschneidungen mit der Arbeit</li>
+<li>Hab schon Seminare mitgemacht</li>
+<li>Persönlich keine Zeit gehabt + Corona</li>
+<li>Ich noch nicht alt genug dafür</li>
+<li>Terminüberschneidung durch Arbeit/ Studium</li>
+<li>Plus hat nicht stattgefunden :(</li>
+<li>Keine Zeit</li>
+<li>Weil ich 3 mal in der Woche baby Sitten muss</li>
+<li>Ich hatte Keine zeit</li>
+<li>Keine lust</li>
+<li>Hab es leider nicht geschafft</li>
+<li>Arbeiten</li>
+<li>Noch nicht lange dabei</li>
+<li>ich bin demnächst auf einer solchen Veranstaltung und erst seit ein paar Monaten dabei.</li>
+<li>Angst</li>
+<li>Musste Arbeiten</li>
+<li>Keine Zeit</li>
+<li>Zeitlich schwierig</li>
+<li>Ich studiere und die Seminare fallen nicht in die Semesterferien. In manchen Jahren wollte ich einfach keine Vorlesungen verpassen.</li>
+<li>Ich hatte Angst vor Heimweh.</li>
+<li>Ich war bisher auf dem WBS, und da ich erst seit ca. 1 1/2 Jahre dabei bin, hat sich bisher einfach noch nichts anderes ergeben.</li>
+<li>Angst vor fremden Menschen</li>
+<li>Kein Geld :(</li>
+<li>Keine Zeit</li>
+<li>Hat meist ungünstig vom Termin gelegen</li>
+<li>Ich bin sehr introvertiert</li>
+<li>Zu laut / zu overstimulating</li>
+<li>Keine Zeit, vor allem auch aufgrund privater Umstände</li>
+<li>Zeit fehlt</li>
+<li>Private Gründe</li>
+<li>Oftmals keinen Urlaub</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="unterstützungsbedarfe-der-ortsgruppen" class="level3">
+<h3 class="anchored" data-anchor-id="unterstützungsbedarfe-der-ortsgruppen">Unterstützungsbedarfe der Ortsgruppen</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Balkendiagramm</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Heatmap</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="girafe html-widget html-fill-item" id="htmlwidget-5ebed5fca9209d6f115c" style="width:100%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-5ebed5fca9209d6f115c">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_92987798_d79a_471a_966f_567f12f03ddd' viewBox='0 0 576 360'>\n <defs id='svg_92987798_d79a_471a_966f_567f12f03ddd_defs'>\n  <clipPath id='svg_92987798_d79a_471a_966f_567f12f03ddd_c1'>\n   <rect x='0' y='0' width='576' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_92987798_d79a_471a_966f_567f12f03ddd_c2'>\n   <rect x='181.86' y='72.89' width='387.17' height='248.69'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_92987798_d79a_471a_966f_567f12f03ddd_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_92987798_d79a_471a_966f_567f12f03ddd_c1)'>\n   <rect x='0' y='0' width='576' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n  <\/g>\n  <g clip-path='url(#svg_92987798_d79a_471a_966f_567f12f03ddd_c2)'>\n   <polyline points='243.45,321.58 243.45,72.89' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='331.45,321.58 331.45,72.89' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='419.44,321.58 419.44,72.89' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='507.43,321.58 507.43,72.89' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='181.86,303.39 569.03,303.39' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='181.86,273.06 569.03,273.06' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='181.86,242.73 569.03,242.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='181.86,212.40 569.03,212.40' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='181.86,182.07 569.03,182.07' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='181.86,151.74 569.03,151.74' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='181.86,121.42 569.03,121.42' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='181.86,91.09 569.03,91.09' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='199.46,321.58 199.46,72.89' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='287.45,321.58 287.45,72.89' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='375.44,321.58 375.44,72.89' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='463.44,321.58 463.44,72.89' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='551.43,321.58 551.43,72.89' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e1' x='199.46' y='289.74' width='35.2' height='27.3' fill='#492050' fill-opacity='1' stroke='none' title='Angebot von  deutschlandweiten Seminaren / Workshops&amp;lt;br/&amp;gt;Bin mir unsicher: 10% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e2' x='234.66' y='289.74' width='117.32' height='27.3' fill='#C490CF' fill-opacity='1' stroke='none' title='Angebot von  deutschlandweiten Seminaren / Workshops&amp;lt;br/&amp;gt;Eher ja: 33% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e3' x='351.98' y='289.74' width='70.39' height='27.3' fill='#F1F1F1' fill-opacity='1' stroke='none' title='Angebot von  deutschlandweiten Seminaren / Workshops&amp;lt;br/&amp;gt;Eher nein: 20% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e4' x='422.37' y='289.74' width='93.86' height='27.3' fill='#72B173' fill-opacity='1' stroke='none' title='Angebot von  deutschlandweiten Seminaren / Workshops&amp;lt;br/&amp;gt;Ja: 27% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e5' x='516.23' y='289.74' width='35.2' height='27.3' fill='#023903' fill-opacity='1' stroke='none' title='Angebot von  deutschlandweiten Seminaren / Workshops&amp;lt;br/&amp;gt;Nein: 10% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e6' x='199.46' y='259.41' width='36.41' height='27.3' fill='#492050' fill-opacity='1' stroke='none' title='Austausch von Chorsätzen&amp;lt;br/&amp;gt;Bin mir unsicher: 10% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e7' x='235.87' y='259.41' width='48.55' height='27.3' fill='#C490CF' fill-opacity='1' stroke='none' title='Austausch von Chorsätzen&amp;lt;br/&amp;gt;Eher ja: 14% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e8' x='284.42' y='259.41' width='48.55' height='27.3' fill='#F1F1F1' fill-opacity='1' stroke='none' title='Austausch von Chorsätzen&amp;lt;br/&amp;gt;Eher nein: 14% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e9' x='332.96' y='259.41' width='182.05' height='27.3' fill='#72B173' fill-opacity='1' stroke='none' title='Austausch von Chorsätzen&amp;lt;br/&amp;gt;Ja: 52% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e10' x='515.02' y='259.41' width='36.41' height='27.3' fill='#023903' fill-opacity='1' stroke='none' title='Austausch von Chorsätzen&amp;lt;br/&amp;gt;Nein: 10% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e11' x='199.46' y='229.08' width='24.27' height='27.3' fill='#492050' fill-opacity='1' stroke='none' title='Einheitliche Kommunikations- und Cloudspeicher-Plattform&amp;lt;br/&amp;gt;Bin mir unsicher: 7% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e12' x='223.73' y='229.08' width='109.23' height='27.3' fill='#C490CF' fill-opacity='1' stroke='none' title='Einheitliche Kommunikations- und Cloudspeicher-Plattform&amp;lt;br/&amp;gt;Eher ja: 31% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e13' x='332.96' y='229.08' width='60.68' height='27.3' fill='#F1F1F1' fill-opacity='1' stroke='none' title='Einheitliche Kommunikations- und Cloudspeicher-Plattform&amp;lt;br/&amp;gt;Eher nein: 17% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e14' x='393.65' y='229.08' width='97.09' height='27.3' fill='#72B173' fill-opacity='1' stroke='none' title='Einheitliche Kommunikations- und Cloudspeicher-Plattform&amp;lt;br/&amp;gt;Ja: 28% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e15' x='490.74' y='229.08' width='60.68' height='27.3' fill='#023903' fill-opacity='1' stroke='none' title='Einheitliche Kommunikations- und Cloudspeicher-Plattform&amp;lt;br/&amp;gt;Nein: 17% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e16' x='199.46' y='198.75' width='23.46' height='27.3' fill='#492050' fill-opacity='1' stroke='none' title='Gewinnung von neuen Teilnehmenden&amp;lt;br/&amp;gt;Bin mir unsicher: 7% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e17' x='222.92' y='198.75' width='46.93' height='27.3' fill='#C490CF' fill-opacity='1' stroke='none' title='Gewinnung von neuen Teilnehmenden&amp;lt;br/&amp;gt;Eher ja: 13% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e18' x='269.85' y='198.75' width='23.46' height='27.3' fill='#F1F1F1' fill-opacity='1' stroke='none' title='Gewinnung von neuen Teilnehmenden&amp;lt;br/&amp;gt;Eher nein: 7% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e19' x='293.32' y='198.75' width='246.38' height='27.3' fill='#72B173' fill-opacity='1' stroke='none' title='Gewinnung von neuen Teilnehmenden&amp;lt;br/&amp;gt;Ja: 70% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e20' x='539.7' y='198.75' width='11.73' height='27.3' fill='#023903' fill-opacity='1' stroke='none' title='Gewinnung von neuen Teilnehmenden&amp;lt;br/&amp;gt;Nein: 3% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e21' x='199.46' y='168.42' width='23.46' height='27.3' fill='#492050' fill-opacity='1' stroke='none' title='Internationale Zusammenarbeit&amp;lt;br/&amp;gt;Bin mir unsicher: 7% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e22' x='222.92' y='168.42' width='58.66' height='27.3' fill='#C490CF' fill-opacity='1' stroke='none' title='Internationale Zusammenarbeit&amp;lt;br/&amp;gt;Eher ja: 17% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e23' x='281.58' y='168.42' width='82.13' height='27.3' fill='#F1F1F1' fill-opacity='1' stroke='none' title='Internationale Zusammenarbeit&amp;lt;br/&amp;gt;Eher nein: 23% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e24' x='363.71' y='168.42' width='129.06' height='27.3' fill='#72B173' fill-opacity='1' stroke='none' title='Internationale Zusammenarbeit&amp;lt;br/&amp;gt;Ja: 37% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e25' x='492.77' y='168.42' width='58.66' height='27.3' fill='#023903' fill-opacity='1' stroke='none' title='Internationale Zusammenarbeit&amp;lt;br/&amp;gt;Nein: 17% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e26' x='199.46' y='107.77' width='24.27' height='27.3' fill='#492050' fill-opacity='1' stroke='none' title='Schulung von Teamern / Ehrenamtlichen&amp;lt;br/&amp;gt;Bin mir unsicher: 7% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e27' x='223.73' y='107.77' width='133.51' height='27.3' fill='#C490CF' fill-opacity='1' stroke='none' title='Schulung von Teamern / Ehrenamtlichen&amp;lt;br/&amp;gt;Eher ja: 38% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e28' x='357.24' y='107.77' width='60.68' height='27.3' fill='#F1F1F1' fill-opacity='1' stroke='none' title='Schulung von Teamern / Ehrenamtlichen&amp;lt;br/&amp;gt;Eher nein: 17% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e29' x='417.92' y='107.77' width='121.37' height='27.3' fill='#72B173' fill-opacity='1' stroke='none' title='Schulung von Teamern / Ehrenamtlichen&amp;lt;br/&amp;gt;Ja: 34% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e30' x='539.29' y='107.77' width='12.14' height='27.3' fill='#023903' fill-opacity='1' stroke='none' title='Schulung von Teamern / Ehrenamtlichen&amp;lt;br/&amp;gt;Nein: 3% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e31' x='199.46' y='77.44' width='12.14' height='27.3' fill='#492050' fill-opacity='1' stroke='none' title='Standpunkte bzw. Hilfestellungen zu bestimmten Themen (z. B. Diversity)&amp;lt;br/&amp;gt;Bin mir unsicher: 3% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e32' x='211.6' y='77.44' width='72.82' height='27.3' fill='#C490CF' fill-opacity='1' stroke='none' title='Standpunkte bzw. Hilfestellungen zu bestimmten Themen (z. B. Diversity)&amp;lt;br/&amp;gt;Eher ja: 21% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e33' x='284.42' y='77.44' width='133.51' height='27.3' fill='#F1F1F1' fill-opacity='1' stroke='none' title='Standpunkte bzw. Hilfestellungen zu bestimmten Themen (z. B. Diversity)&amp;lt;br/&amp;gt;Eher nein: 38% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e34' x='417.92' y='77.44' width='84.96' height='27.3' fill='#72B173' fill-opacity='1' stroke='none' title='Standpunkte bzw. Hilfestellungen zu bestimmten Themen (z. B. Diversity)&amp;lt;br/&amp;gt;Ja: 24% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e35' x='502.88' y='77.44' width='48.55' height='27.3' fill='#023903' fill-opacity='1' stroke='none' title='Standpunkte bzw. Hilfestellungen zu bestimmten Themen (z. B. Diversity)&amp;lt;br/&amp;gt;Nein: 14% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e36' x='199.46' y='138.1' width='117.32' height='27.3' fill='#C490CF' fill-opacity='1' stroke='none' title='Öffentlichkeitsarbeit / Social Media&amp;lt;br/&amp;gt;Eher ja: 33% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e37' x='316.78' y='138.1' width='70.39' height='27.3' fill='#F1F1F1' fill-opacity='1' stroke='none' title='Öffentlichkeitsarbeit / Social Media&amp;lt;br/&amp;gt;Eher nein: 20% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e38' x='387.18' y='138.1' width='105.59' height='27.3' fill='#72B173' fill-opacity='1' stroke='none' title='Öffentlichkeitsarbeit / Social Media&amp;lt;br/&amp;gt;Ja: 30% der Ortsgruppen'/>\n   <rect id='svg_92987798_d79a_471a_966f_567f12f03ddd_e39' x='492.77' y='138.1' width='58.66' height='27.3' fill='#023903' fill-opacity='1' stroke='none' title='Öffentlichkeitsarbeit / Social Media&amp;lt;br/&amp;gt;Nein: 17% der Ortsgruppen'/>\n  <\/g>\n  <g clip-path='url(#svg_92987798_d79a_471a_966f_567f12f03ddd_c1)'>\n   <text x='6.97' y='300.92' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Angebot von deutschlandweiten<\/text>\n   <text x='49.36' y='313.88' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Seminaren / Workshops<\/text>\n   <text x='36.4' y='277.07' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Austausch von Chorsätzen<\/text>\n   <text x='16.74' y='240.26' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Einheitliche Kommunikations-<\/text>\n   <text x='23.41' y='253.22' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>und Cloudspeicher-Plattform<\/text>\n   <text x='58.91' y='209.93' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Gewinnung von neuen<\/text>\n   <text x='93.73' y='222.89' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Teilnehmenden<\/text>\n   <text x='7.55' y='186.08' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Internationale Zusammenarbeit<\/text>\n   <text x='59.73' y='149.27' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Öffentlichkeitsarbeit /<\/text>\n   <text x='107.19' y='162.23' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Social Media<\/text>\n   <text x='47.09' y='118.95' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Schulung von Teamern /<\/text>\n   <text x='93.04' y='131.91' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Ehrenamtlichen<\/text>\n   <text x='82.88' y='82.14' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Standpunkte bzw.<\/text>\n   <text x='14.49' y='95.1' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Hilfestellungen zu bestimmten<\/text>\n   <text x='52.3' y='108.06' font-size='9pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Themen (z. B. Diversity)<\/text>\n   <text x='190.65' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>0%<\/text>\n   <text x='275.93' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>25%<\/text>\n   <text x='363.37' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>50%<\/text>\n   <text x='452.13' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>75%<\/text>\n   <text x='536.74' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>100%<\/text>\n   <text x='316.35' y='350.33' font-size='10.5pt' font-family='Atkinson Hyperlegible'>% der Ortsgruppen<\/text>\n   <rect x='203.46' y='35.4' width='15.86' height='15.86' fill='#492050' fill-opacity='1' stroke='none'/>\n   <rect x='257.65' y='35.4' width='15.86' height='15.86' fill='#C490CF' fill-opacity='1' stroke='none'/>\n   <rect x='335.65' y='35.4' width='15.86' height='15.86' fill='#F1F1F1' fill-opacity='1' stroke='none'/>\n   <rect x='447.63' y='35.4' width='15.86' height='15.86' fill='#72B173' fill-opacity='1' stroke='none'/>\n   <rect x='513' y='35.4' width='15.86' height='15.86' fill='#023903' fill-opacity='1' stroke='none'/>\n   <text x='227.01' y='47.07' font-size='8.4pt' font-family='Atkinson Hyperlegible'>Nein<\/text>\n   <text x='281.2' y='47.07' font-size='8.4pt' font-family='Atkinson Hyperlegible'>Eher nein<\/text>\n   <text x='359.19' y='47.07' font-size='8.4pt' font-family='Atkinson Hyperlegible'>Bin mir unsicher<\/text>\n   <text x='471.17' y='47.07' font-size='8.4pt' font-family='Atkinson Hyperlegible'>Eher ja<\/text>\n   <text x='536.54' y='47.07' font-size='8.4pt' font-family='Atkinson Hyperlegible'>Ja<\/text>\n   <text x='6.97' y='17.67' font-size='12pt' font-weight='bold' font-family='Atkinson Hyperlegible'>Unterstützungsbedarfe in den Ortsgruppen<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_92987798_d79a_471a_966f_567f12f03ddd","ratio":1.6,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="girafe html-widget html-fill-item" id="htmlwidget-f3cdbfa02459c77b77c0" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-f3cdbfa02459c77b77c0">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_3ca6bec4_ed2e_424e_9b36_2f72a6cc2c52' viewBox='0 0 504 360'>\n <defs id='svg_3ca6bec4_ed2e_424e_9b36_2f72a6cc2c52_defs'>\n  <clipPath id='svg_3ca6bec4_ed2e_424e_9b36_2f72a6cc2c52_c1'>\n   <rect x='0' y='0' width='504' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_3ca6bec4_ed2e_424e_9b36_2f72a6cc2c52_c2'>\n   <rect x='170.41' y='27.71' width='326.61' height='247.62'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_3ca6bec4_ed2e_424e_9b36_2f72a6cc2c52_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_3ca6bec4_ed2e_424e_9b36_2f72a6cc2c52_c1)'>\n   <rect x='0' y='0' width='504' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n  <\/g>\n  <g clip-path='url(#svg_3ca6bec4_ed2e_424e_9b36_2f72a6cc2c52_c2)'>\n   <polyline points='170.41,257.21 497.03,257.21' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='170.41,227.02 497.03,227.02' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='170.41,196.82 497.03,196.82' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='170.41,166.62 497.03,166.62' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='170.41,136.42 497.03,136.42' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='170.41,106.23 497.03,106.23' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='170.41,76.03 497.03,76.03' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='170.41,45.83 497.03,45.83' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='208.10,275.33 208.10,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='270.91,275.33 270.91,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='333.72,275.33 333.72,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='396.53,275.33 396.53,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='459.34,275.33 459.34,27.71' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect x='302.31' y='242.12' width='62.81' height='30.2' fill='#193753' fill-opacity='1' stroke='none'/>\n   <rect x='365.12' y='242.12' width='62.81' height='30.2' fill='#28547A' fill-opacity='1' stroke='none'/>\n   <rect x='239.5' y='242.12' width='62.81' height='30.2' fill='#1F4364' fill-opacity='1' stroke='none'/>\n   <rect x='427.93' y='242.12' width='62.81' height='30.2' fill='#234C6F' fill-opacity='1' stroke='none'/>\n   <rect x='176.69' y='242.12' width='62.81' height='30.2' fill='#193753' fill-opacity='1' stroke='none'/>\n   <rect x='302.31' y='211.92' width='62.81' height='30.2' fill='#193754' fill-opacity='1' stroke='none'/>\n   <rect x='365.12' y='211.92' width='62.81' height='30.2' fill='#1B3B59' fill-opacity='1' stroke='none'/>\n   <rect x='239.5' y='211.92' width='62.81' height='30.2' fill='#1B3B59' fill-opacity='1' stroke='none'/>\n   <rect x='427.93' y='211.92' width='62.81' height='30.2' fill='#346C9B' fill-opacity='1' stroke='none'/>\n   <rect x='176.69' y='211.92' width='62.81' height='30.2' fill='#193754' fill-opacity='1' stroke='none'/>\n   <rect x='302.31' y='181.72' width='62.81' height='30.2' fill='#17334E' fill-opacity='1' stroke='none'/>\n   <rect x='365.12' y='181.72' width='62.81' height='30.2' fill='#265176' fill-opacity='1' stroke='none'/>\n   <rect x='239.5' y='181.72' width='62.81' height='30.2' fill='#1E405F' fill-opacity='1' stroke='none'/>\n   <rect x='427.93' y='181.72' width='62.81' height='30.2' fill='#244D70' fill-opacity='1' stroke='none'/>\n   <rect x='176.69' y='181.72' width='62.81' height='30.2' fill='#1E405F' fill-opacity='1' stroke='none'/>\n   <rect x='302.31' y='151.52' width='62.81' height='30.2' fill='#17334E' fill-opacity='1' stroke='none'/>\n   <rect x='365.12' y='151.52' width='62.81' height='30.2' fill='#1B3B58' fill-opacity='1' stroke='none'/>\n   <rect x='239.5' y='151.52' width='62.81' height='30.2' fill='#17334E' fill-opacity='1' stroke='none'/>\n   <rect x='427.93' y='151.52' width='62.81' height='30.2' fill='#4186BD' fill-opacity='1' stroke='none'/>\n   <rect x='176.69' y='151.52' width='62.81' height='30.2' fill='#152F48' fill-opacity='1' stroke='none'/>\n   <rect x='302.31' y='121.33' width='62.81' height='30.2' fill='#17334E' fill-opacity='1' stroke='none'/>\n   <rect x='365.12' y='121.33' width='62.81' height='30.2' fill='#1D3F5E' fill-opacity='1' stroke='none'/>\n   <rect x='239.5' y='121.33' width='62.81' height='30.2' fill='#214769' fill-opacity='1' stroke='none'/>\n   <rect x='427.93' y='121.33' width='62.81' height='30.2' fill='#2A5880' fill-opacity='1' stroke='none'/>\n   <rect x='176.69' y='121.33' width='62.81' height='30.2' fill='#1D3F5E' fill-opacity='1' stroke='none'/>\n   <rect x='302.31' y='60.93' width='62.81' height='30.2' fill='#17334E' fill-opacity='1' stroke='none'/>\n   <rect x='365.12' y='60.93' width='62.81' height='30.2' fill='#2B5A82' fill-opacity='1' stroke='none'/>\n   <rect x='239.5' y='60.93' width='62.81' height='30.2' fill='#1E405F' fill-opacity='1' stroke='none'/>\n   <rect x='427.93' y='60.93' width='62.81' height='30.2' fill='#29567C' fill-opacity='1' stroke='none'/>\n   <rect x='176.69' y='60.93' width='62.81' height='30.2' fill='#152F48' fill-opacity='1' stroke='none'/>\n   <rect x='302.31' y='30.73' width='62.81' height='30.2' fill='#152F48' fill-opacity='1' stroke='none'/>\n   <rect x='365.12' y='30.73' width='62.81' height='30.2' fill='#204465' fill-opacity='1' stroke='none'/>\n   <rect x='239.5' y='30.73' width='62.81' height='30.2' fill='#2B5A82' fill-opacity='1' stroke='none'/>\n   <rect x='427.93' y='30.73' width='62.81' height='30.2' fill='#22486B' fill-opacity='1' stroke='none'/>\n   <rect x='176.69' y='30.73' width='62.81' height='30.2' fill='#1B3B59' fill-opacity='1' stroke='none'/>\n   <rect x='365.12' y='91.13' width='62.81' height='30.2' fill='#28547A' fill-opacity='1' stroke='none'/>\n   <rect x='239.5' y='91.13' width='62.81' height='30.2' fill='#1F4364' fill-opacity='1' stroke='none'/>\n   <rect x='427.93' y='91.13' width='62.81' height='30.2' fill='#265075' fill-opacity='1' stroke='none'/>\n   <rect x='176.69' y='91.13' width='62.81' height='30.2' fill='#1D3F5E' fill-opacity='1' stroke='none'/>\n   <text x='325.28' y='260.07' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>10%<\/text>\n   <text x='387.68' y='260.07' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>33%<\/text>\n   <text x='261.84' y='260.07' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>20%<\/text>\n   <text x='450.87' y='260.07' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>27%<\/text>\n   <text x='199.66' y='260.07' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>10%<\/text>\n   <text x='325.28' y='229.87' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>10%<\/text>\n   <text x='388.24' y='229.87' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>14%<\/text>\n   <text x='262.62' y='229.87' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>14%<\/text>\n   <text x='450.55' y='229.87' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>52%<\/text>\n   <text x='199.66' y='229.87' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>10%<\/text>\n   <text x='327.59' y='199.67' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>7%<\/text>\n   <text x='388.41' y='199.67' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>31%<\/text>\n   <text x='263.06' y='199.67' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>17%<\/text>\n   <text x='450.42' y='199.67' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>28%<\/text>\n   <text x='200.25' y='199.67' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>17%<\/text>\n   <text x='327.59' y='169.47' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>7%<\/text>\n   <text x='388.41' y='169.47' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>13%<\/text>\n   <text x='264.78' y='169.47' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>7%<\/text>\n   <text x='450.44' y='169.47' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>70%<\/text>\n   <text x='201.69' y='169.47' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>3%<\/text>\n   <text x='327.59' y='139.28' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>7%<\/text>\n   <text x='388.69' y='139.28' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>17%<\/text>\n   <text x='262.16' y='139.28' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>23%<\/text>\n   <text x='450.76' y='139.28' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>37%<\/text>\n   <text x='200.25' y='139.28' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>17%<\/text>\n   <text x='327.59' y='78.88' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>7%<\/text>\n   <text x='387.5' y='78.88' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>38%<\/text>\n   <text x='263.06' y='78.88' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>17%<\/text>\n   <text x='450.31' y='78.88' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>34%<\/text>\n   <text x='201.69' y='78.88' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>3%<\/text>\n   <text x='327.31' y='48.68' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>3%<\/text>\n   <text x='388.52' y='48.68' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>21%<\/text>\n   <text x='261.88' y='48.68' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>38%<\/text>\n   <text x='450.42' y='48.68' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>24%<\/text>\n   <text x='199.81' y='48.68' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>14%<\/text>\n   <text x='387.68' y='109.08' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>33%<\/text>\n   <text x='261.84' y='109.08' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>20%<\/text>\n   <text x='450.17' y='109.08' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>30%<\/text>\n   <text x='200.25' y='109.08' font-size='6.4pt' font-family='Atkinson Hyperlegible' fill='#FFFFFF' fill-opacity='1'>17%<\/text>\n  <\/g>\n  <g clip-path='url(#svg_3ca6bec4_ed2e_424e_9b36_2f72a6cc2c52_c1)'>\n   <text x='6.97' y='254.91' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Angebot von deutschlandweiten<\/text>\n   <text x='46.49' y='267' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Seminaren / Workshops<\/text>\n   <text x='34.41' y='230.76' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Austausch von Chorsätzen<\/text>\n   <text x='16.05' y='194.51' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Einheitliche Kommunikations-<\/text>\n   <text x='22.3' y='206.61' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>und Cloudspeicher-Plattform<\/text>\n   <text x='55.4' y='164.31' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Gewinnung von neuen<\/text>\n   <text x='87.84' y='176.41' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Teilnehmenden<\/text>\n   <text x='7.51' y='140.17' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Internationale Zusammenarbeit<\/text>\n   <text x='56.13' y='103.92' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Öffentlichkeitsarbeit /<\/text>\n   <text x='100.39' y='116.02' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Social Media<\/text>\n   <text x='44.39' y='73.72' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Schulung von Teamern /<\/text>\n   <text x='87.2' y='85.82' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Ehrenamtlichen<\/text>\n   <text x='77.74' y='37.48' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Standpunkte bzw.<\/text>\n   <text x='13.97' y='49.57' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Hilfestellungen zu bestimmten<\/text>\n   <text x='49.21' y='61.67' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Themen (z. B. Diversity)<\/text>\n   <text x='196.62' y='289.09' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Nein<\/text>\n   <text x='247.52' y='289.09' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Eher nein<\/text>\n   <text x='293.35' y='289.09' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Bin mir unsicher<\/text>\n   <text x='379.46' y='289.09' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Eher ja<\/text>\n   <text x='453.54' y='289.09' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Ja<\/text>\n   <text x='227.93' y='333.78' font-size='10.5pt' font-family='Atkinson Hyperlegible'>% der Ortsgruppen<\/text>\n   <image x='353.1' y='312.16' width='86.4' height='17.28' preserveAspectRatio='none' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAABCAYAAABkOJMpAAAAiUlEQVQ4jaWT3Q2AIAyEezM4hmO4/0z6QNFif64JiVEpXL8rFBzndYtAn/HVlwigQx3bdTYOJLFPE2s7XM2CX36B/lptEHuZlY+Zf/WxMonOxWr/ua7er07N9V51Pe6wWF2+N6gmiDn27MMtDasx6jFbT8Zd5x03uGs5l/Rni8HOvJkjZG54IusfaBgC//v2D/sAAAAASUVORK5CYII=' xmlns:xlink='http://www.w3.org/1999/xlink'/>\n   <polyline points='353.25,325.99 353.25,329.44' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='374.78,325.99 374.78,329.44' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='396.30,325.99 396.30,329.44' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='417.83,325.99 417.83,329.44' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='439.36,325.99 439.36,329.44' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='353.25,315.62 353.25,312.16' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='374.78,315.62 374.78,312.16' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='396.30,315.62 396.30,312.16' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='417.83,315.62 417.83,312.16' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='439.36,315.62 439.36,312.16' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='349.62' y='343.9' font-size='8.4pt' font-family='Atkinson Hyperlegible'>0<\/text>\n   <text x='368.44' y='343.9' font-size='8.4pt' font-family='Atkinson Hyperlegible'>25<\/text>\n   <text x='389.42' y='343.9' font-size='8.4pt' font-family='Atkinson Hyperlegible'>50<\/text>\n   <text x='411.72' y='343.9' font-size='8.4pt' font-family='Atkinson Hyperlegible'>75<\/text>\n   <text x='429.86' y='343.9' font-size='8.4pt' font-family='Atkinson Hyperlegible'>100<\/text>\n   <text x='6.97' y='17.67' font-size='12pt' font-weight='bold' font-family='Atkinson Hyperlegible'>Unterstützungsbedarfe in den Ortsgruppen<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_3ca6bec4_ed2e_424e_9b36_2f72a6cc2c52","ratio":1.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="girafe html-widget html-fill-item" id="htmlwidget-217dcf8193456b3baa96" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-217dcf8193456b3baa96">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_6516662d_5603_4cec_b46d_b1d14d03504f' viewBox='0 0 504 360'>\n <defs id='svg_6516662d_5603_4cec_b46d_b1d14d03504f_defs'>\n  <clipPath id='svg_6516662d_5603_4cec_b46d_b1d14d03504f_c1'>\n   <rect x='0' y='0' width='504' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_6516662d_5603_4cec_b46d_b1d14d03504f_c2'>\n   <rect x='58.16' y='46.73' width='438.87' height='274.85'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_6516662d_5603_4cec_b46d_b1d14d03504f_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_6516662d_5603_4cec_b46d_b1d14d03504f_c1)'>\n   <rect x='0' y='0' width='504' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n  <\/g>\n  <g clip-path='url(#svg_6516662d_5603_4cec_b46d_b1d14d03504f_c2)'>\n   <polyline points='58.16,277.86 497.03,277.86' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='58.16,215.39 497.03,215.39' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='58.16,152.93 497.03,152.93' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='58.16,90.46 497.03,90.46' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.68' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='58.16,309.09 497.03,309.09' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='58.16,246.62 497.03,246.62' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='58.16,184.16 497.03,184.16' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='58.16,121.69 497.03,121.69' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='58.16,59.23 497.03,59.23' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='108.80,321.58 108.80,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='193.19,321.58 193.19,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='277.59,321.58 277.59,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='361.99,321.58 361.99,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='446.39,321.58 446.39,46.73' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.36' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect x='239.61' y='284.1' width='75.96' height='24.99' fill='#F4E9D2' fill-opacity='1' stroke='none'/>\n   <rect x='324.01' y='225.8' width='75.96' height='83.29' fill='#C0E3DC' fill-opacity='1' stroke='none'/>\n   <rect x='155.22' y='259.12' width='75.96' height='49.97' fill='#CFB77C' fill-opacity='1' stroke='none'/>\n   <rect x='408.41' y='242.46' width='75.96' height='66.63' fill='#4CA89F' fill-opacity='1' stroke='none'/>\n   <rect x='70.82' y='284.1' width='75.96' height='24.99' fill='#7A4A0C' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_6516662d_5603_4cec_b46d_b1d14d03504f_c1)'>\n   <text x='34.26' y='312.83' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>0%<\/text>\n   <text x='28.84' y='250.36' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>25%<\/text>\n   <text x='27.73' y='187.9' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>50%<\/text>\n   <text x='29.27' y='125.43' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>75%<\/text>\n   <text x='22.51' y='62.97' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>100%<\/text>\n   <text x='97.32' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Nein<\/text>\n   <text x='169.81' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Eher nein<\/text>\n   <text x='237.22' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Bin mir unsicher<\/text>\n   <text x='344.92' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Eher ja<\/text>\n   <text x='440.59' y='335.34' font-size='8.4pt' font-family='Atkinson Hyperlegible' fill='#4D4D4D' fill-opacity='1'>Ja<\/text>\n   <text x='238.82' y='350.33' font-size='10.5pt' font-family='Atkinson Hyperlegible'>Zustimmung<\/text>\n   <text transform='translate(16.33,231.20) rotate(-90.00)' font-size='10.5pt' font-family='Atkinson Hyperlegible'>% Ortsgruppen<\/text>\n   <text x='6.97' y='37.07' font-size='10.5pt' font-family='Atkinson Hyperlegible'>Angebot von  deutschlandweiten Seminaren / Workshops<\/text>\n   <text x='6.97' y='17.67' font-size='12pt' font-weight='bold' font-family='Atkinson Hyperlegible'>Wunsch nach Begleitung / Unterstützung<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_6516662d_5603_4cec_b46d_b1d14d03504f","ratio":1.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="ist-das-deutschlandweite-netzwerk-bekannt-ortsübergreifende-angebote-im-fragebogen" class="level3">
+<h3 class="anchored" data-anchor-id="ist-das-deutschlandweite-netzwerk-bekannt-ortsübergreifende-angebote-im-fragebogen">Ist das deutschlandweite Netzwerk bekannt (Ortsübergreifende Angebote im Fragebogen)?</h3>
+</section>
+<section id="wird-es-genutzt" class="level3">
+<h3 class="anchored" data-anchor-id="wird-es-genutzt">Wird es genutzt?</h3>
+</section>
+<section id="was-braucht-ein-deutschlandweites-seminar-um-daran-teilzunehmen-welche-hürden-bestehen" class="level3">
+<h3 class="anchored" data-anchor-id="was-braucht-ein-deutschlandweites-seminar-um-daran-teilzunehmen-welche-hürden-bestehen">Was braucht ein deutschlandweites Seminar um daran teilzunehmen? Welche Hürden bestehen?</h3>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
