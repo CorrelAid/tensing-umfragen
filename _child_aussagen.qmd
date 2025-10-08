@@ -1,0 +1,18 @@
+---
+title: "Untitled"
+format: html
+engine: knitr
+---
+ 
+```{r}
+source("R/viz.R")
+```
+
+::: {.callout-tip collapse="true"}
+
+## `r aussage_label`
+
+```{r}
+aussage_bar_chart(data, "q_label", aussage_label)
+```
+::: 
