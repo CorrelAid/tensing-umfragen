@@ -22,6 +22,10 @@ renv::restore()
 
 To interact with KoboToolbox API for data processing, you need an API token and access to the surveys. Create an account on [the EU instance](https://eu.kobotoolbox.org/accounts/login/) and contact CorrelAid to get access.
 
+
+### .env file
+Refer to the .env-template
+
 ## Repository structure 
 This repository contains code for: 
 - data processing and data wranglig 

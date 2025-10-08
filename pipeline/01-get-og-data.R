@@ -32,12 +32,12 @@ og_cfg <- readr::read_rds("config/og_cfg.rds")
 
 # Ortsgruppe Daten -----------
 og_df <- kobo$get_submissions(og_id)
-og_df %>% readr::write_csv(file = "data/raw/og_api.csv") # for reference
 
 # drop system columns
 og_df <- og_df %>%
     rename(og_id = `_id`) %>%
     drop_system_columns()
+og_df %>% readr::write_csv(file = "data/raw/og_api.csv") # for reference
 
 # filter out observations that are empty / only have NA except for id
 og_df <- og_df %>%
