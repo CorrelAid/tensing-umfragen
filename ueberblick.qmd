@@ -1,0 +1,192 @@
+---
+title: "Überblick"
+execute:
+  echo: false
+  warning: false
+from: markdown+emoji
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(ggplot2)
+library(reactable)
+library(ggiraph)
+source("config/viz_config.R")
+source("R/quarto-utils.R")
+ggplot2::theme_set(theme_ts) # defined in viz_config
+
+
+tn_cfg <- readr::read_rds("config/tn_cfg.rds")
+tn <- readr::read_rds("data/cleaned/tn.rds")
+tn_data <- tn$data
+
+og_cfg <- readr::read_rds("config/og_cfg.rds")
+og <- readr::read_rds("data/cleaned/og.rds")
+og_data <- og$data
+
+# choices for some reordering 
+og_choices <- readr::read_csv("data/meta/og_choices.csv")
+
+# slug remapping to link to region pages
+og_slugs <- readr::read_csv("data/meta/og_slug_mapping.csv")
+```
+
+```{r}
+n_og_og <- nrow(og_data)
+n_og_tn <- tn_data$og_name %>% unique() %>% length()
+
+tn_tn <- nrow(tn_data)
+tn_og <- sum(og_data$anzahl_tn, na.rm = T)
+
+leitung_og <- sum(og_data$anzahl_ma_leitung, na.rm = T)
+insgesamt_og <- sum(og_data$anzahl_insg, na.rm = T)
+```
+
+::: {.callout-note collapse="true"}
+## Datenquellen
+
+**Anzahl Ortsgruppen**
+
+- `{r} n_og_tn` Anzahl von Antworten auf den `{r} fmt_fragebogen("og")`
+- `{r} n_og_tn` Anzahl verschiedener Werte bei den Antworten zur Frage `{r} I(fmt_source(tn_cfg$Q_OG_NAME, "tn"))`
+
+**Anzahl Aktive**
+
+| Fragebogen                 | Teilnehmer\*innen | Mitarbeitende | Insgesamt                                 |
+|-----------------|-----------------|-----------------|----------------------|
+| `{r} fmt_fragebogen("tn")` | `{r} tn_tn`[^1]   | *nicht abgefragt*         | *nicht errechenbar*                       |
+| `{r} fmt_fragebogen("og")` | `{r} tn_og`       | `{r} leitung_og`          | `{r} sum(og_data$anzahl_insg, na.rm = T)` |
+
+: Anzahl Aktive {#tbl-summary}
+:::
+
+[^1]: Anzahl der Antworten auf den `{r} I(fmt_fragebogen(type = "tn"))`
+
+
+Es gibt **zwischen `{r} min(n_og_tn, n_og_og)` und `{r} max(n_og_tn, n_og_og)` Ortsgruppen.**
+
+Insgesamt sind in den Ortsgruppen von TEN SING **`{r} insgesamt_og` Personen aktiv**.
+
+Davon sind **zwischen `{r} min(tn_tn, tn_og)` und `{r} max(tn_tn, tn_og)` als Teilnehmer\*innen** engagiert.  **`{r} leitung_og`** Personen sind Mitarbeitende.
+
+# Regionen
+
+::: {.callout-note collapse="true"}
+## Datenquelle
+
+
+
+Relevante Fragen:
+
+- **Frage** `{r} fmt_source(og_cfg$Q_OG_REGION, "og")`
+- **Frage** `{r} fmt_source(og_cfg$Q_OG_NAME, "og")`
+- **Frage** `{r} fmt_source(tn_cfg$Q_OG_NAME, "tn")` 
+
+
+Ortsgruppen, die von Teilnehmenden genannt werden, bekommen das Label "TN" in der Spalte `Datenquelle`. Ortsgruppen, für die der Ortsgruppen-Fragebogen ausgefüllt wurde, bekommen das Label "OG" in der Spalte `Datenquelle`. 
+Beachte: Manche Ortsgruppen kommen nur im TN-Fragebogen vor, da die Ortsgruppenleitung den OG-Fragebogen nicht beantwortet hat
+
+:::
+
+::: callout-tip
+Mit einem Klick auf den :arrow_forward: kannst du jede Region öffnen und eine Liste ihrer Ortsgruppen sehen.
+:::
+
+```{r}
+# create a dataset with the number of active people
+tn_tn <- tn_data %>% 
+  replace_na(list(og_region = "keine Angabe")) %>% 
+  count(og_region, name = "anzahl_tn") %>% 
+  mutate(src = "TN-FB")
+
+og_tn <- og_data %>% 
+  group_by(og_region) %>% 
+  summarize(n = sum(anzahl_insg)) %>% 
+  mutate(src = "OG-FB")
+
+```
+
+::: {.panel-tabset}
+
+## Version 1
+
+```{r region-table}
+# some ortsgruppen are not in the og_data -> calculate separately
+og_tn_only <- tn_data %>% 
+  filter(!og_name %in% og_data$og_name) |> 
+  replace_na(list(og_region = "keine Angabe", og_name = "keine Angabe")) %>% 
+  # we use the verantwortungs question to proxy whether a person is "mitarbeitend"
+  mutate(verantwortung_ja = if_else(verantwortung_janein == "Ja", TRUE, FALSE, missing = FALSE)) |> 
+  group_by(og_region, og_name) |> 
+  summarize(anzahl_ma_leitung = sum(verantwortung_ja),
+            anzahl_tn = sum(!verantwortung_ja),
+            anzahl_insg = n())
+
+# here we use reactable's aggregate functionality
+og_region_df <- og_data %>%
+  select(og_region, og_name, anzahl_insg, anzahl_tn, anzahl_ma_leitung) |> 
+  bind_rows(og_tn_only) |> 
+  left_join(og_slugs, by = "og_region")
+
+reactable(
+  og_region_df,
+  groupBy = "og_region",
+  defaultSorted = list(og_name = "desc"),
+  columns = list(
+    og_region = colDef(name = "Region", html = TRUE, cell = function(region, index) {
+      sprintf('<a href="%s" target="_blank">%s</a>', og_region_df$slug[index], region)
+    }),
+    og_name = colDef(name = "Ortsgruppen", aggregate = "count"),
+    anzahl_insg = colDef(name = "Aktive", aggregate = "sum"),
+     anzahl_tn = colDef(name = "Teilnehmende", aggregate = "sum"),
+    anzahl_ma_leitung = colDef(name = "Mitarbeitende", aggregate = "sum"),
+    slug = colDef(name = "Details", html = TRUE, cell = function(value) { 
+      return("")
+    }, aggregate = JS("
+    function(values, rows) {
+      if (!values || values.length === 0 || !values[0]) return '';
+      const slug = values[0];
+      return '<a href=\"/region/' + slug + '.html\" rel=\"noopener noreferrer\" style=\"text-decoration: none;\">↗️</a>';
+    }
+  "))
+  )
+)
+
+```
+
+
+## Version 2
+
+```{r region-table-2}
+og_region_agg <- og_region_df |> 
+  group_by(og_region, slug) |> 
+  summarize(
+    n_og = length(unique(og_name)),
+    anzahl_insg = sum(anzahl_insg, na.rm = TRUE),
+    anzahl_tn = sum(anzahl_tn, na.rm = TRUE),
+    anzahl_ma_leitung = sum(anzahl_ma_leitung, na.rm = TRUE))
+
+reactable(
+  og_region_agg,
+  columns = list(
+    og_region = colDef(name = "Region", html = TRUE, cell = function(region, index) {
+      if (region == "keine Angabe") return(region);
+      sprintf('<a href="/region/%s.html">%s</a>', og_region_agg$slug[index], region)
+    }),
+    n_og = colDef(name = "Ortsgruppen"),
+    anzahl_insg = colDef(name = "Aktive"),
+    anzahl_tn = colDef(name = "Teilnehmende"),
+    anzahl_ma_leitung = colDef(name = "Mitarbeitende"),
+    slug = colDef(show = FALSE)
+  ),
+  defaultSorted = list(n_og = "desc"),
+)
+```
+
+:::
+
+
+# Zufriedenheit TN
+
+Aussage Gute Entscheidung TEN SING 

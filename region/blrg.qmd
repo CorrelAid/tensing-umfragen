@@ -1,0 +1,10 @@
+---
+params:
+  region: "Bergischland-Ruhrgebiet"
+title: "Bergischland-Ruhrgebiet"
+execute:
+  echo: false
+  warning: false
+---
+
+{{< include ../_region-template.qmd >}}

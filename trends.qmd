@@ -1,0 +1,15 @@
+---
+title: "Trends"
+execute:
+  echo: false
+  warning: false
+from: markdown+emoji
+---
+
+
+::: {.callout-caution}
+## Coming... 2025?!
+
+Diese Seite kann erst befüllt werden, wenn die Umfrage mehrfach durchgeführt worden ist :) 
+
+:::

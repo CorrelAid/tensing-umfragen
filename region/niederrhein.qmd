@@ -1,0 +1,10 @@
+---
+params:
+  region: "Niederrhein"
+title: "Niederrhein"
+execute:
+  echo: false
+  warning: false
+---
+
+{{< include ../_region-template.qmd >}}

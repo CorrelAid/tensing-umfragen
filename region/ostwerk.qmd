@@ -1,0 +1,9 @@
+---
+params:
+  region: "Ostwerk"
+title: "Ostwerk"
+execute:
+  echo: false
+  warning: false
+---
+{{< include ../_region-template.qmd >}}

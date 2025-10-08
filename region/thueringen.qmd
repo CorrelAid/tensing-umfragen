@@ -1,0 +1,10 @@
+---
+params:
+  region: "Thüringen"
+title: "Thüringen"
+execute:
+  echo: false
+  warning: false
+---
+
+{{< include ../_region-template.qmd >}}

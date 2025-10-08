@@ -1,0 +1,23 @@
+
+
+/*-- scss:defaults --*/
+// 1. Import Bootstrap functions first
+
+// 2. Override Bootstrap color variables
+$body-bg: #f8f9fa;
+$body-color: #343a40;
+$secondary-color: #6c757d;
+$border-color: #dee2e6;
+
+$primary:rgb(33, 111, 5);  // Muted green/dark olive for links, accents
+$primary-light: #b5c948; // Original green for hover or subtle highlights
+$primary-dark: darken($primary, 15%);
+
+$btn-primary-bg: $body-bg;  // Neutral button background
+$btn-primary-border-color: #ced4da;
+$btn-primary-color: $primary;
+$btn-primary-hover-bg: $primary-light;
+$btn-primary-hover-color: #212529;
+
+$link-color: $primary;
+$link-hover-color: $primary-light;

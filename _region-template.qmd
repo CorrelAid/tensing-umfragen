@@ -1,0 +1,550 @@
+---
+format: "html"
+execute:
+  echo: false
+  warning: false
+from: "markdown+emoji"
+---
+
+```{r setup}
+# uncomment for development
+library(tidyverse)
+library(reactable)
+library(ggiraph)
+source(here::here("config/viz_config.R"))
+source(here::here("R/quarto-utils.R"))
+ggplot2::theme_set(theme_ts) # defined in viz_config
+#params <- list(region = "Niederrhein")
+```
+
+```{r read-data}
+tn_cfg <- readr::read_rds(here::here("config/tn_cfg.rds"))
+tn <- readr::read_rds(here::here("data/cleaned/tn.rds"))
+tn_data <- tn$data
+
+og_cfg <- readr::read_rds(here::here("config/og_cfg.rds"))
+og <- readr::read_rds(here::here("data/cleaned/og.rds"))
+og_data <- og$data
+
+# choices for some reordering 
+og_choices <- readr::read_csv(here::here("data/meta/og_choices.csv"))
+tn_choices <- readr::read_csv(here::here("data/meta/tn_choices.csv"))
+
+
+```
+
+```{r filter-region}
+# FILTER
+
+# get the ortsgruppen for this region
+# some ortsgruppen are not in the og_data -> calculate separately
+og_tn_only <- tn_data %>% 
+  filter(og_region == params$region) |> 
+  filter(!og_name %in% og_data$og_name)
+
+if (nrow(og_tn_only) > 0) {
+  og_tn_only <- og_tn_only |> 
+    replace_na(list(og_region = "keine Angabe", og_name = "keine Angabe")) %>% 
+    # we use the verantwortungs question to proxy whether a person is "mitarbeitend"
+    mutate(verantwortung_ja = if_else(verantwortung_janein == "Ja", TRUE, FALSE, missing = FALSE)) |> 
+    group_by(og_region, og_name) |> 
+    summarize(anzahl_ma_leitung = sum(verantwortung_ja),
+              anzahl_tn = sum(!verantwortung_ja),
+              anzahl_insg = n())
+}
+
+og_data <- og_data %>% 
+  bind_rows(og_tn_only) |> 
+  filter(og_region == params$region)
+
+og_ids <- og_data$og_id |> unique()
+tn_data_f <- tn_data |> 
+    filter(og_region == params$region)
+
+
+```
+
+
+::: {.callout-note collapse="true"}
+## Datenquelle
+
+
+
+Relevante Fragen:
+
+- **Frage** `{r} fmt_source(og_cfg$Q_OG_REGION, "og")`
+- **Frage** `{r} fmt_source(og_cfg$Q_OG_NAME, "og")`
+- **Frage** `{r} fmt_source(tn_cfg$Q_OG_NAME, "tn")` 
+
+
+Ortsgruppen, die von Teilnehmenden genannt werden, bekommen das Label "TN" in der Spalte `Datenquelle`. Ortsgruppen, für die der Ortsgruppen-Fragebogen ausgefüllt wurde, bekommen das Label "OG" in der Spalte `Datenquelle`. 
+Beachte: Manche Ortsgruppen kommen nur im TN-Fragebogen vor, da die Ortsgruppenleitung den OG-Fragebogen nicht beantwortet hat
+
+:::
+
+::: callout-tip
+Mit einem Klick auf den :arrow_forward: kannst du jede Ortsgruppe öffnen und ein genaueres Profil sehen.
+:::
+
+```{r}
+
+og_region_df <- og_data %>%
+  #mutate(anzahl_aktive = anzahl_ma_leitung + anzahl_tn) %>% 
+  filter(og_region == params$region) |> 
+  mutate(OG = "OG-FB") %>% 
+  dplyr::full_join(tn_data_f %>% distinct(og_region, og_name) %>% drop_na() %>% 
+                     mutate(TN = "TN-FB")) %>% 
+  unite(col = "Datenquelle", c("OG", "TN"), na.rm = TRUE, sep = ", ")
+```
+
+```{r}
+n_og_og <- nrow(og_data)
+n_og_tn <- tn_data_f$og_name %>% unique() %>% length()
+
+tn_tn <- nrow(tn_data_f)
+tn_og <- sum(og_data$anzahl_tn, na.rm = T)
+
+leitung_og <- sum(og_data$anzahl_ma_leitung, na.rm = T)
+insgesamt_og <- sum(og_data$anzahl_insg, na.rm = T)
+```
+
+```{r}
+# value should be passed for a11y
+status_badge <- function(value, color = "#aaa", width = "0.55rem", height = width) {
+  htmltools::span(style = list(
+    display = "inline-block",
+    marginRight = "0.5rem",
+    width = width,
+    height = height,
+    backgroundColor = color,
+    borderRadius = "50%"
+  ), 
+  `aria-label` = value,
+  role = "img")
+}
+
+reactable::reactable(
+  og_region_df |> 
+    select(og_name, hat_hauptamt, starts_with("anzahl"), auftritte, hat_probleme_tn_gewinnung),
+  columns = list(
+    og_name = colDef(name = "Ortsgruppe", footer = "Summe", show = TRUE),
+    hat_hauptamt = colDef(name = "Hauptamt", footer = function(values) sprintf("%d", length(values[values == "Ja"])), show = TRUE),
+    anzahl_insg = colDef(name = "Aktive", footer = function(values) sprintf("%d", sum(values)), show = TRUE),
+    anzahl_tn = colDef(name = "Teiln.", footer = function(values) sprintf("%d", sum(values)), show = TRUE),
+    anzahl_ma_leitung = colDef(name = "Mitarb.", footer = function(values) sprintf("%d", sum(values)), show = TRUE),
+    auftritte = colDef(name = "Auftritte", footer = function(values) sprintf("%d", sum(values)), show = TRUE),
+    hat_probleme_tn_gewinnung = colDef(name = "TN-Gewinnung", cell = function(value) {
+      color <- switch(
+        value,
+        `Nein` = "hsl(129, 75.10%, 41.00%)",
+        `Ja, aber nur phasenweise` = "hsl(30, 97%, 70%)",
+        `Ja, sehr große Probleme` = "hsl(3, 69%, 50%)"
+      )
+      badge <- status_badge(value, color = color)
+      htmltools::tagList(badge)
+    }, show = TRUE)
+  ),
+  details = function(index, name) {
+    # input:
+    #   - index, the row index
+    #   - name, the column name (optional)
+    #
+    # output:
+    #   - content to render (e.g., an HTML tag or nested table), or NULL to hide details
+    htmltools::div(
+      paste("Details for row:", index),
+      htmltools::p("hier könnten jetzt alle möglichen Details zur Ortsgruppe stehen")
+    )
+  },
+  defaultColDef = colDef(footerStyle = list(fontWeight = "bold"), show = FALSE)
+)
+```
+
+
+**Anzahl Ortsgruppen**
+
+- `{r} n_og_tn` Anzahl von Antworten auf den `{r} fmt_fragebogen("og")`
+- `{r} n_og_tn` Anzahl verschiedener Werte bei den Antworten zur Frage `{r} I(fmt_source(tn_cfg$Q_OG_NAME, "tn"))`
+
+**Anzahl Aktive**
+
+| Fragebogen                 | Teilnehmer\*innen | Mitarbeitende | Insgesamt                                 |
+|-----------------|-----------------|-----------------|----------------------|
+| `{r} fmt_fragebogen("tn")` | `{r} tn_tn`[^1]   | *nicht abgefragt*         | *nicht errechenbar*                       |
+| `{r} fmt_fragebogen("og")` | `{r} tn_og`       | `{r} leitung_og`          | `{r} sum(og_data$anzahl_insg, na.rm = T)` |
+
+: Anzahl Aktive {#tbl-summary}
+:::
+
+[^1]: Anzahl der Antworten auf den `{r} I(fmt_fragebogen(type = "tn"))`
+
+
+Es gibt **zwischen `{r} min(n_og_tn, n_og_og)` und `{r} max(n_og_tn, n_og_og)` Ortsgruppen.**
+
+Insgesamt sind in den Ortsgruppen von TEN SING **`{r} insgesamt_og` Personen aktiv**.
+
+Davon sind **zwischen `{r} min(tn_tn, tn_og)` und `{r} max(tn_tn, tn_og)` als Teilnehmer\*innen** engagiert.  **`{r} leitung_og`** Personen **arbeiten** für TEN SING oder engagieren sich **in der Leitung** einer Ortsgruppe.
+
+
+# Angebote in den Ortsgruppen
+
+::: {.panel-tabset}
+
+
+## Nach Angeboten
+
+```{r}
+og_ang <- og$long$angebote_vor_ort |> 
+  filter(og_id %in% og_ids) |> 
+  full_join(og_data, by = "og_id")
+reactable::reactable(og_ang |> select(angebote_vor_ort, og_name), groupBy = "angebote_vor_ort")
+```
+
+
+## Nach Ortsgruppen
+
+```{r}
+reactable::reactable(og_ang |> select(angebote_vor_ort, og_name), groupBy = "og_name")
+
+```
+
+:::
+
+# Unterstützungsbedarfe
+
+::: {.callout-note collapse="true"}
+
+## Datenquelle
+
+**Frage:** `{r} fmt_source(og_cfg$Q_BEGIN_UNTERSTUETZUNGSBEDARFE, "og")`
+
+Spalten im Roh-Datensatz:
+
+```{r}
+og_cfg$QS_UNTERSTUETZUNGSBEDARFE %>% pull(col_name)
+```
+:::
+
+
+```{r}
+order_df <- og_choices %>% 
+  filter(list_name %in% og_cfg$QS_UNTERSTUETZUNGSBEDARFE$select_from_list_name) %>% 
+  #mutate(order = c(1:2, 4:5, 3)) %>% # TODO: klären ob "bin mir unsicher" in der mItte oder NA
+  mutate(order = c(0:1, 2:3, NA)) %>% # TODO: klären ob "bin mir unsicher" in der mItte oder NA
+  select(order, bedarf_value = label) %>% 
+  arrange(order)
+
+og_ueb <- og$long$unterstuetzungsbedarfe |> 
+  left_join(order_df, by = "bedarf_value") |> 
+  filter(og_id %in% og_ids) |> 
+  left_join(og_data |> select(og_id, og_name), by = "og_id")
+
+
+og_ueb_sum <- og_ueb |> 
+  group_by(bedarf) |> 
+  summarize(median_bedarf = median(order, na.rm = TRUE),
+            bedarf_mean = mean(order, na.rm = TRUE),
+            sd = sd(order, na.rm = TRUE),
+            range = max(order, na.rm = TRUE) - min(order, na.rm = TRUE),
+            sd_label = cut(range, breaks = c(0, 1, 3), labels = c("konstant", "variierend"), right = TRUE, include.lowest = TRUE),
+            bedarf_label = cut(bedarf_mean, breaks = c(0, 1, 2, 3), labels = c("gering", "mittel", "hoch"), right = TRUE))
+
+
+
+reactable::reactable(og_ueb_sum |> select(bedarf, bedarf_mean, bedarf_label, sd_label), 
+  defaultSorted = list(bedarf_mean = "desc"),
+  details = function(index) {
+    bedarf_data <- og_ueb[og_ueb$bedarf == og_ueb_sum$bedarf[index], ] |> 
+      select(og_name, bedarf_value)
+    htmltools::div(style = "padding: 1rem",
+      reactable(bedarf_data, outlined = TRUE, columns = list(
+        og_name = colDef(name = "Ortsgruppe"), 
+        bedarf_value = colDef(name = "Antwort auf Bedarfsabfrage")
+      ))
+  )},
+  columns = list(
+    bedarf = colDef(name = ""),
+    bedarf_mean = colDef(show = FALSE), 
+    bedarf_label = colDef(name = "⌀ Bedarf", cell = function(value) {
+      switch(value, 
+        gering = htmltools::span(value, class = "badge bg-success"),
+        mittel = htmltools::span(value, class = "badge bg-warning"),
+        hoch = htmltools::span(value, class = "badge bg-danger"))
+    }),
+    sd_label = colDef(name = "Variiert?", cell = function(value) {
+      switch(value, 
+        konstant = htmltools::span(value, class = "badge bg-light"),
+        variierend = htmltools::span(value, class = "badge bg-dark"))
+    })
+  ))
+```
+
+_debug - wird noch gelöscht_ 
+
+```{r}
+og_ueb_sum
+```
+
+
+
+
+::: {.callout-tip appearance="simple" collapse="true"}
+
+
+```{r}
+answers <- og_data %>% 
+  filter(!is.na(unterstuetzungsbedarfe_weitere)) %>% 
+  pull(unterstuetzungsbedarfe_weitere)
+```
+  
+## Weitere Unterstützungsbedarfe (`{r} length(answers)` offene Antworten):
+
+```{r}
+#| results: asis
+cat(paste("- ", answers, collapse = "\n"))
+
+```
+
+
+:::
+
+
+## Wie sind die Teilnehmenden zu TEN SING `{r} params$region` gekommen?
+
+::: {.callout-note collapse="true"}
+## Datenquelle
+
+**Frage**: `{r} fmt_source(tn_cfg$Q_ZUGANGSWEGE, "tn")` 
+
+
+:::
+
+
+```{r}
+# shorter labels are necessary for the plot
+zugang_choices <- tn_choices %>% 
+  filter(list_name == tn_cfg$Q_ZUGANGSWEGE$select_from_list_name) %>% 
+  mutate(label_manual = tn_cfg$LABEL_ZUGANGSWEGE) %>% 
+  mutate(label_short = str_to_title(str_replace_all(name, "_", " ")))
+
+zugang_df <- tn$long$zugangsweg %>% 
+  left_join(zugang_choices, by = c("zugangsweg" = "label")) %>% 
+  full_join(tn_data %>% select(tn_id) %>% filter(!tn_id %in% tn$long$zugangsweg$tn_id)) %>%  # add people who did not answer for proper calculation of percentages 
+  tidyr::replace_na(list(label_short = "keine Angabe"))
+```
+
+
+::: {.panel-tabset}
+
+## Balkendiagramm
+
+```{r}
+zugang_prop <- zugang_df %>% 
+  group_by(zugangsweg, label_short, label_manual) %>% 
+  summarize(prop = round(n() / nrow(tn_data), 2)) 
+
+
+p <- ggplot(zugang_prop, aes(y = fct_reorder(str_wrap(label_short, 20), prop), group = zugangsweg, x = prop, tooltip = paste0(zugangsweg, "\n", prop * 100, "%"))) +
+  geom_col_interactive(fill = TS_GREEN)+
+  scale_x_continuous(label = scales::label_percent(), limits = c(0, 1))+
+  labs(y = NULL, x = "% der Teilnehmenden", caption = paste0("% summieren nicht zu 100, da Mehrfachauswahl möglich.\n"), title = "Zugangswege für Teilnehmende")
+
+ggiraph::girafe(ggobj = p)
+```
+
+::: {.callout-tip}
+## Interpretationshilfe
+
+- y-Achse/senkrechte Achse: Antwortoptionen, die ausgewählt werden konnten. 
+- x-Achse/waagerechte Achse: Prozentzahl der Teilnehmer\*innen, die diese Option als _eine ihrer Antworten_ ausgewählt haben. 
+
+Es handelt sich um eine Multiple-Choice Frage, das heißt, Teilnehmende konnten mehrere Optionen auswählen. Das ist der Grund, wieso sich die Prozentzahlen nicht auf 100%, sondern auf `{r} sum(zugang_prop$prop) * 100`% summieren. 
+
+```{r}
+example_proz <- zugang_prop %>% 
+  filter(label_short == "Andere Person") %>% 
+  pull(prop)
+example_proz <- example_proz * 100
+
+```
+
+**Beispielinterpretation**: `{r} example_proz`% der Teilnehmenden gaben **als einen** ihrer Zugangswege zu TEN SING an, von einer anderen Person mitgenommen worden zu sein. 
+
+:::
+## Antwortmuster - Top 10
+
+```{r}
+# Kombinationen von Zugangswegen
+zugang_comb <- zugang_df %>% 
+  group_by(tn_id) %>% 
+  summarize(Antwortmuster = paste(label_short, collapse = ", ")) %>% 
+  count(Antwortmuster, name = "Anzahl TN") %>% 
+  arrange(desc(`Anzahl TN`)) %>% 
+  mutate(Prozent = round(100 * (`Anzahl TN` / nrow(tn_data)), 2)) %>% 
+  ungroup() 
+
+
+ggplot(zugang_comb %>% slice_max(Prozent, n = 10), aes(y = fct_reorder(Antwortmuster, Prozent), x = Prozent))+
+  geom_col(fill = TS_GREEN)+
+  labs(title = "Top 10 Antwortmuster Zugangswege", y = NULL, x = "% der Teilnehmenden")
+```
+
+::: {.callout-tip}
+## Interpretationshilfe
+
+- y-Achse/senkrechte Achse: top 10 Kombinationen von Antwortoptionen, die zusammen ausgewählt wurden.
+- x-Achse/waagerechte Achse: Prozentzahl der Teilnehmer*innen, die diese Optionen zusammen ausgewählt haben.
+
+
+```{r}
+example <- zugang_comb %>%
+  slice_max(Prozent, n = 10) %>% 
+  filter(str_detect(Antwortmuster, ",")) %>% 
+  slice(1)
+
+example_percent <- example$Prozent
+n_options <- str_split(example$Antwortmuster, ",")[[1]] %>% length()
+```
+
+**Beispielinterpretation**: `{r} example_percent`% der Teilnehmenden gaben an, dass diese `{r} n_options` Zugangswege eine Rolle gespielt haben, wie sie zu TEN SING gekommen sind: `{r} example$Antwortmuster`
+
+:::
+
+## Antwortmuster - Daten
+```{r}
+reactable::reactable(
+  zugang_comb,
+  columns = list(
+    Prozent = colDef(format = colFormat(suffix = "%"))
+  )
+)
+```
+
+
+
+
+::: {.callout-tip appearance="simple" collapse="true"}
+  
+## Sonstige Zugangswege
+Antworten aus dem offenen Textfeld werden noch zusammengefasst werden. 
+
+
+:::
+
+
+
+
+:::
+
+## Maßnahmen 
+
+::: {.callout-note collapse="true"}
+## Datenquelle
+**Frage:** `{r} fmt_source(og_cfg$Q_TN_GEWINNUNG_MASSNAHMEN, "og")`
+:::
+
+::: {.panel-tabset}
+
+## Maßnahmen
+
+```{r}
+mass_choices <- og_choices %>% 
+  filter(list_name == og_cfg$Q_TN_GEWINNUNG_MASSNAHMEN$select_from_list_name) %>% 
+  mutate(label_short = str_to_title(str_replace_all(name, "_", " "))) %>% 
+  select(name, label, label_short)
+
+erfolg_choices <- og_choices %>% 
+  filter(list_name == og_cfg$QS_TN_GEWINNUNG_MASSNAHMEN_ERFOLG$select_from_list_name[1]) %>% 
+  mutate(erfolg = as.integer(name)) %>% 
+  select(erfolg, erfolg_label = label)
+
+mass_long <- og$long$tn_gewinnung_massnahmen %>% 
+  left_join(og_data %>% select(og_id, hat_probleme_tn_gewinnung), by = "og_id") %>% 
+  left_join(mass_choices, by = c("massnahme" = "label")) %>% 
+  left_join(erfolg_choices)
+```
+
+
+```{r}
+mass_count_agg <- mass_long %>% 
+  filter(massnahme != "Insgesamt") %>% 
+  count(massnahme, label_short)
+
+p <- ggplot(mass_count_agg, aes(y = fct_reorder(label_short, n), x = n, tooltip = massnahme))+
+  geom_col_interactive(fill = TS_GREEN)+
+  labs(x = "Anzahl Ortsgruppen", y = NULL, title = "Maßnahmen zur Teilnehmendengewinnung", subtitle = "in den Ortsgruppen", 
+       caption = "Mehrfachauswahl möglich")
+
+girafe(ggobj = p)
+```
+
+## Erfolg der Maßnahmen
+
+```{r}
+
+mass_erfolg_agg <- mass_long %>% 
+  filter(massnahme != "Insgesamt") %>% 
+  left_join(mass_count_agg, by = c("massnahme", "label_short")) %>% 
+  group_by(massnahme, label_short, n, erfolg, erfolg_label) %>% 
+  summarize(n_erf = n()) %>% 
+  mutate(perc = n_erf / n)
+
+
+p <- mass_erfolg_agg %>% 
+  ggplot(aes(fill = fct_reorder(erfolg_label, as.integer(erfolg)), y = fct_reorder(label_short, n),
+             x = perc, tooltip = paste0(
+    massnahme, "\nAntwortoption ", erfolg_label, ": ", round(perc * 100, 2), "%")
+  ))+
+  geom_col_interactive(position = position_stack(reverse = TRUE))+
+  scale_x_continuous(labels = scales::label_percent())+
+  scale_y_discrete(labels = scales::label_wrap(60))+
+  scale_fill_manual_interactive(labels = erfolg_choices$erfolg_label, values = hcl.colors(6, "Purple-Green"))+
+  labs(fill = NULL, y = NULL, x = NULL, title = "Erfolg der Maßnahmen zur TN-Gewinnung", subtitle = "in den Ortsgruppen")+
+  theme(legend.position = "bottom", 
+        axis.text.y = element_text(size = 12),
+        legend.text = element_text(size = 10))
+
+girafe(ggobj = p)
+```
+
+:::
+
+
+
+
+# Welche Angebote werden von Ortsgruppen angeboten?
+
+
+```{r}
+angebote_agg <- og$long$angebote_vor_ort |> 
+  group_by(angebote_vor_ort) |>
+  summarize(percent_og = n() / nrow(og$data)) 
+
+p_ang_og <- ggplot(angebote_agg, aes(y = forcats::fct_reorder(angebote_vor_ort, percent_og), x = percent_og))+
+  geom_col(fill = TS_GREEN)+
+  scale_x_continuous(labels = scales::label_percent())+
+  labs(y = NULL, x = "% der Ortsgruppen", title = "Abdeckung der Angebote in den Ortsgruppen")
+
+ggiraph::girafe(ggobj = p_ang_og)
+
+```
+
+
+### An welchen Angeboten nehmen TN teil?
+
+```{r}
+angebote_agg <- tn$long$angebote_vor_ort |> 
+  group_by(angebot) |>
+  summarize(percent = n() / nrow(tn$data)) 
+
+p_ang_tn <- ggplot(angebote_agg, aes(y = forcats::fct_reorder(angebot, percent), x = percent))+
+  geom_col(fill = TS_GREEN)+
+  scale_x_continuous(labels = scales::label_percent())+
+  labs(y = NULL, x = "% der TN", title = "An welchen Angeboten nehmen TN teil?")
+
+
+ggiraph::girafe(ggobj = p_ang_tn)
+
+```
+
+# Steckbriefe Ortsgruppen

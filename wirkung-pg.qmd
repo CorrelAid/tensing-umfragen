@@ -1,0 +1,390 @@
+---
+title: "Wirkung PG"
+execute:
+  echo: false
+  warning: false
+---
+
+
+```{r}
+
+#| include: false
+library(tidyverse)
+library(ggiraph)
+library(patchwork)
+
+source("config/viz_config.R")
+source("R/quarto-utils.R")
+source("R/viz.R")
+
+ggplot2::theme_set(theme_ts) # defined in viz_config
+
+tn <- readr::read_rds("data/cleaned/tn.rds")
+tn_data <- tn$data
+tn_cfg <- readr::read_rds("config/tn_cfg.rds")
+
+og <- readr::read_rds("data/cleaned/og.rds")
+og_data <- og$data
+og_cfg <- readr::read_rds(here::here("config/og_cfg.rds"))
+
+tn_survey <- readr::read_csv("data/meta/tn_survey.csv")
+og_choices <- readr::read_csv(here::here("data/meta/og_choices.csv"))
+
+
+```
+
+
+# Informationskanäle  
+
+```{r}
+info_komplett_data <- tn_data %>% 
+  count(info_komplett) %>% 
+  mutate(csum = rev(cumsum(rev(n))),
+         perc = round(n * 100 / nrow(tn_data), 1),
+         pos = n/2 + lead(csum, 1),
+         pos = if_else(is.na(pos), n/2, pos)) 
+
+ja_share <- info_komplett_data %>% 
+  filter(info_komplett == "ja") %>% pull(perc)
+
+# aenderungswunsch
+info_aenderung <- tn_data %>% 
+  count(info_wege_aenderung) %>% 
+  mutate(csum = rev(cumsum(rev(n))),
+       perc = round(n * 100 / nrow(tn_data), 1),
+       pos = n/2 + lead(csum, 1),
+       pos = if_else(is.na(pos), n/2, pos)) 
+
+ja_change <- info_aenderung %>% 
+  filter(stringr::str_starts(info_wege_aenderung, "Auf")) %>% pull(perc)
+
+nein_change <- info_aenderung %>% 
+  filter(stringr::str_starts(info_wege_aenderung, "Genau")) %>% pull(perc)
+```
+
+::: {.callout-note collapse="true"}
+## Datenquellen
+
+```{r}
+tn_cfg$Q_INFO_WEGE_AENDERUNG
+```
+
+**Fragen** aus dem `{r} fmt_fragebogen("tn")`:
+
+- `{r} fmt_q(tn_cfg$Q_INFO_KOMPLETT)`
+- `{r} fmt_q(tn_cfg$Q_INFO_WEGE_AENDERUNG)`
+
+
+:::
+
+
+Die TEN SINGenden fühlen sich zu `{r} ja_share`% gut informiert. 
+
+`{r} ja_change`% möchten auf anderem Wege informiert werden, `{r} nein_change`% sind mit den bisherigen Informationskanälen zufrieden. 
+
+::: {.panel-tabset}
+
+## Sind TN informiert?
+
+```{r}
+info_komplett_plot <- ggplot(info_komplett_data, aes(x = "", y = n, fill = info_komplett)) +
+  geom_col() +
+  ggrepel::geom_label_repel(
+    aes(y = pos, label = paste0(perc, "%")),
+    size = 4.5,
+    nudge_x = 1,
+    show.legend = FALSE
+  ) +
+  coord_polar(theta = "y") +
+  labs(title = "Fühlen sich TN komplett informiert?",
+       x = NULL,
+       y = NULL,
+       fill = NULL) +
+  theme(panel.grid = element_blank(),
+        axis.text.x = element_blank()) +
+  scale_fill_manual(values = cols_4[c(1, 3, 4)])
+
+info_komplett_plot
+```
+
+
+```{r}
+#| output: asis
+?knit_child
+
+cat("::: {.callout-caution}") 
+
+cat("\n:::")
+```
+
+
+## Änderungswunsch Informationskanäle
+
+```{r}
+info_aenderung_plot <- ggplot(info_aenderung, aes(x = "", y = n, fill = fct_rev(info_wege_aenderung))) +
+  geom_col() +
+  ggrepel::geom_label_repel(
+    aes(y = pos, label = paste0(perc, "%")),
+    size = 4.5,
+    nudge_x = 1,
+    show.legend = FALSE
+  ) +
+  coord_polar(theta = "y") +
+  labs(title = "Möchten die TN anders informiert werden?",
+       x = NULL,
+       y = NULL,
+       fill = NULL) +
+  theme(panel.grid = element_blank(),
+        axis.text.x = element_blank())  +
+  scale_fill_manual(values = cols_4[c(1, 3, 4)])
+
+info_aenderung_plot
+```
+:::
+
+
+
+# Deutschlandweites Netzwerk und Angebote
+
+**TODO**
+
+###  Warst du schon mal auf einem ortsgruppenübergreifenden Seminar oder einer Veranstaltung von TEN SING, die in deiner Region stattfand?
+
+```{r tn-deutschlandweite-regionale-veranst}
+dtl_pie <- tn_data |> 
+  get_pie_chart_data(teilnahme_dtlweit)
+
+p_tn_dtlweit <- ggplot(dtl_pie, aes(x = "", y = n, fill = fct_rev(teilnahme_dtlweit))) +
+  geom_col() +
+  ggrepel::geom_label_repel(
+    aes(y = pos, label = paste0(perc, "%")),
+    size = 4.5,
+    nudge_x = 1,
+    show.legend = FALSE
+  ) +
+  coord_polar(theta = "y") +
+  labs(title = "Teilnahme deutschlandweite Veranstaltung",
+       x = NULL,
+       y = NULL,
+       fill = NULL) +
+  theme(panel.grid = element_blank(),
+        axis.text.x = element_blank())  +
+  scale_fill_manual(values = cols_4[c(1, 3, 4)])
+
+ggiraph::girafe(ggobj = p_tn_dtlweit)
+
+```
+
+```{r}
+og_ue_pie <- tn_data |> 
+  get_pie_chart_data(teilnahme_og_uebergreifend)
+
+p_tn_og_ue <- ggplot(og_ue_pie, aes(x = "", y = n, fill = fct_rev(teilnahme_og_uebergreifend))) +
+  geom_col() +
+  ggrepel::geom_label_repel(
+    aes(y = pos, label = paste0(perc, "%")),
+    size = 4.5,
+    nudge_x = 1,
+    show.legend = FALSE
+  ) +
+  coord_polar(theta = "y") +
+  labs(title = str_wrap("Teilnahme ortsgrupenübergreifende / regionale Veranstaltung", 60),
+       x = NULL,
+       y = NULL,
+       fill = NULL) +
+  theme(panel.grid = element_blank(),
+        axis.text.x = element_blank())  +
+  scale_fill_manual(values = cols_4[c(1, 3, 4)])
+
+ggiraph::girafe(ggobj = p_tn_og_ue)
+```
+
+```{r}
+og_ue_pie2 <- og_ue_pie |> 
+  mutate(type_veranst = "ortsgruppenübergreifend / regional") |> 
+  rename(teilnahme = teilnahme_og_uebergreifend)
+
+dtl_pie2 <- dtl_pie |> 
+  mutate(type_veranst = "deutschlandweit") |> 
+  rename(teilnahme = teilnahme_dtlweit)
+
+colors <- cols_4[c(1, 3, 4)]
+names(colors) <- c("Ja", "Nein", "NA")
+pie_common <- dplyr::bind_rows(dtl_pie2, og_ue_pie2) |> mutate(perc = perc / 100)
+bar_chart <- ggplot(pie_common, aes(y = type_veranst, x = perc, fill = teilnahme, group = teilnahme))+
+  geom_col(position = "dodge")+
+  scale_x_continuous(limits = c(0, 1), labels = scales::label_percent())+
+  scale_y_discrete(labels = scales::label_wrap(30))+
+  labs(title = "Teilnahme an Veranstaltungen", y = NULL, x = "% der Aktiven", fill = NULL)+
+  scale_fill_manual(values = colors)+
+  theme(legend.position = "bottom")
+ggiraph::girafe(ggobj = bar_chart)
+
+```
+
+### Welche Hürden bestehen für eine Teilnahme?
+
+```{r}
+pie_common
+tn$long$teilnahme_dtlweit_gruende_dagegen$tn_id |> unique() |> length()
+```
+```{r}
+nicht_teilgenommen <- tn_data |> 
+  filter(teilnahme_og_uebergreifend == "Nein" | teilnahme_dtlweit == "Nein") |>
+  pull(tn_id)
+
+gruende_dagegen <- tn$long$teilnahme_dtlweit_gruende_dagegen |> 
+  filter(tn_id %in% nicht_teilgenommen) |> 
+  group_by(grund) |>
+  summarize(percent = n() / length(nicht_teilgenommen)) # TODO was ist grundlage?
+
+p_gruende_dagegen <- ggplot(gruende_dagegen, aes(y = forcats::fct_reorder(grund, percent), x = percent))+
+  geom_col(fill = TS_GREEN)+
+  scale_x_continuous(limits = c(0, 1), labels = scales::label_percent())+
+  scale_y_discrete(labels = scales::label_wrap(40))+
+  labs(y = NULL, x = "%", title = "Teilnahmehürden", subtitle = "an deutschlandweiten oder regionalen Veranstaltungen")
+
+ggiraph::girafe(ggobj = p_gruende_dagegen)
+```
+
+::: {.callout-tip appearance="simple" collapse="true"}
+
+## Weitere Gründe (offene Antworten):
+
+```{r}
+#| results: asis
+andere <- tn$long$teilnahme_dtlweit_gruende_dagegen |> 
+  filter(grund == "andere Gründe") |> 
+  filter(!is.na(andere_gruende)) |> 
+  pull(andere_gruende) 
+
+cat(paste("- ", andere, collapse = "\n"))
+```
+
+:::
+
+
+### Unterstützungsbedarfe der Ortsgruppen 
+
+
+::: {.panel-tabset}
+
+```{r}
+# get values
+order_df <- og_choices %>% 
+  filter(list_name %in% og_cfg$QS_UNTERSTUETZUNGSBEDARFE$select_from_list_name) %>% 
+  mutate(order = c(1:2, 4:5, 3)) %>% 
+  select(order, bedarf_value = label) %>% 
+  arrange(order)
+
+unterst_long_plotdata <- og$long$unterstuetzungsbedarfe %>% 
+  left_join(order_df) %>% 
+  add_count(bedarf, name = "n_antwort") %>% 
+  count(bedarf, n_antwort, bedarf_value, order, .drop = FALSE) %>% 
+  mutate(prop = n / n_antwort) 
+
+```
+
+::: {.callout-note collapse="true"}
+
+## Datenquelle
+ 
+**Frage:** `{r} fmt_source(og_cfg$Q_BEGIN_UNTERSTUETZUNGSBEDARFE, "og")`
+
+Spalten im Roh-Datensatz:
+
+```{r}
+og_cfg$QS_UNTERSTUETZUNGSBEDARFE %>% pull(col_name)
+```
+:::
+
+## Balkendiagramm
+
+
+```{r}
+#| out-width: "100%"
+#| fig-width: 8
+
+
+# long format 
+p <- ggplot(unterst_long_plotdata, aes(fill = bedarf_value, y = bedarf, x = prop, tooltip = paste0(bedarf, "\n", bedarf_value, ": ", round(prop * 100), "% der Ortsgruppen")))+
+  geom_col_interactive(position = position_stack(reverse = TRUE))+
+  scale_x_continuous(labels = scales::percent)+
+  scale_y_discrete(labels = scales::label_wrap(30))+
+  scale_fill_manual_interactive(labels = order_df$bedarf_value, values = hcl.colors(5, "Purple-Green"))+
+  labs(fill = NULL, y = NULL, x = "% der Ortsgruppen", title = "Unterstützungsbedarfe in den Ortsgruppen")+
+  theme(legend.position = "top", axis.text.y = element_text(size = 12))
+
+ggiraph::girafe(ggobj = p)
+```
+## Heatmap
+
+```{r}
+
+  
+p_unterst_heatmap <-
+  ggplot(
+    unterst_long_plotdata,
+    aes(
+      y = bedarf,
+      x = fct_reorder(bedarf_value, order),
+      group = bedarf_value,
+      fill = prop * 100,
+      label = scales::percent(prop, accuracy = 1)
+    )
+  ) +
+  geom_tile() +
+  scale_y_discrete(labels = scales::label_wrap(30))+
+  geom_text(color = "white", size = 3) +
+  scale_fill_continuous(limits = c(0, 100)) +
+  labs(y = NULL, x = NULL, title = "Unterstützungsbedarfe in den Ortsgruppen", fill = "% der Ortsgruppen") +
+  theme(legend.position = "bottom")
+
+ggiraph::girafe(ggobj = p_unterst_heatmap)
+```
+
+:::
+
+
+```{r}
+bedarf <- "Angebot von  deutschlandweiten Seminaren / Workshops"
+  order_df <- og_choices %>% 
+    filter(list_name %in% og_cfg$QS_UNTERSTUETZUNGSBEDARFE$select_from_list_name) %>% 
+    mutate(order = c(1:2, 4:5, 3)) %>% 
+    select(order, bedarf_value = label) %>% 
+    arrange(order)
+  
+  plot_data <- og$long$unterstuetzungsbedarfe %>%
+    left_join(order_df, by = "bedarf_value") %>% 
+    dplyr::filter(bedarf == .env$bedarf) |>
+    dplyr::group_by(bedarf, bedarf_value, order, .drop = FALSE) %>%
+    dplyr::summarize(n = n(), percent = n / length(unique(og$long$unterstuetzungsbedarfe$og_id)))
+
+  title <- "Wunsch nach Begleitung / Unterstützung"
+
+  colors <- COLS_6[1:nrow(order_df)]
+  names(colors) <- order_df$bedarf_value
+
+  p <- ggplot(plot_data, aes(x = fct_reorder(bedarf_value, order), fill = bedarf_value, y = percent)) +
+    geom_col() +
+    #scale_x_discrete(labels = meta_aussagen_choices$label)+
+    scale_fill_manual(values = colors)+
+    scale_y_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
+    labs(
+      y = "% Ortsgruppen",
+      title = str_wrap(title, 80),
+      fill = NULL,
+      x = "Zustimmung",
+      subtitle = unique(plot_data$bedarf)
+    ) +
+    guides(fill = "none")
+  
+  ggiraph::girafe(ggobj = p)
+
+```
+
+### Ist das deutschlandweite Netzwerk bekannt (Ortsübergreifende Angebote im Fragebogen)?
+
+### Wird es genutzt?
+ 
+### Was braucht ein deutschlandweites Seminar um daran teilzunehmen? Welche Hürden bestehen?
