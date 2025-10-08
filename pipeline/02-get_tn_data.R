@@ -29,12 +29,12 @@ tn_cfg <- readr::read_rds("config/tn_cfg.rds")
 
 # TN Daten -----------
 tn_df <- kobo$get_submissions(tn_id)
+tn_df %>% readr::write_csv(file = "data/raw/tn_api.csv") # for reference
+
 # drop system columns
 tn_df <- tn_df %>%
     rename(tn_id = `_id`) %>%
     select(-starts_with("_"))
-
-tn_df %>% readr::read_csv(file = "data/raw/tn_api.csv")
 
 TN_DATA <- list(
     long = list(),
