@@ -1,0 +1,166 @@
+name,$kuid,label,list_name,$autovalue,order
+1,uGstCaaeT,Geschützter Raum (1),zn7ly20,1,NA
+2,LntiH1Gdi,2,zn7ly20,2,NA
+3,UzGgU2QCG,3,zn7ly20,3,NA
+4,cCeswyqto,4,zn7ly20,4,NA
+5,HqjPP8rgf,5,zn7ly20,5,NA
+6,ykOOlv4ZX,Kein geschützter Raum (6),zn7ly20,6,NA
+1,PMhAJSXVA,Modernes Angebot (1),of2xr12,1,NA
+2,ZH4GmDLMS,2,of2xr12,2,NA
+3,b3JzEEbbc,3,of2xr12,3,NA
+4,Ia3tfiOJW,4,of2xr12,4,NA
+5,XmdmnNMPU,5,of2xr12,5,NA
+6,P6n1kLh81,Traditionelles Angebot (6),of2xr12,6,NA
+1,nUld2L5Gi,Abwechslungsreich (1),bp5fa75,1,NA
+2,aghud61pG,2,bp5fa75,2,NA
+3,2VlmENahx,3,bp5fa75,3,NA
+4,X3BmH7Pir,4,bp5fa75,4,NA
+5,UAheMhQaU,5,bp5fa75,5,NA
+6,YWwDLRdnU,Immer das Gleiche (6),bp5fa75,6,NA
+1,pmUiT1f6G,Alle helfen zusammen und sind eine Gemeinschaft (1),to1tc02,1,NA
+2,Sfn62eIMS,2,to1tc02,2,NA
+3,y41wsjSpY,3,to1tc02,3,NA
+4,SkvrclKlP,4,to1tc02,4,NA
+5,mruXGyRaY,5,to1tc02,5,NA
+6,4MOA5p7WC,Jeder macht sein Ding (6),to1tc02,6,NA
+1,V3TBv07mV,Offen für alle (1),mb0iy64,1,NA
+2,HZmQ4JyXu,2,mb0iy64,2,NA
+3,1SYJKAXjh,3,mb0iy64,3,NA
+4,EapacebEJ,4,mb0iy64,4,NA
+5,1zB1S5l4E,5,mb0iy64,5,NA
+6,QW6qnwbJW,Exklusiv (6),mb0iy64,6,NA
+1,4D8gpu7gS,Offen für alle Religionen (1),jc39z02,1,NA
+2,nNXTdxrwc,2,jc39z02,2,1
+3,TwNrZSQ5s,3,jc39z02,3,2
+4,CfltbrpWq,4,jc39z02,4,3
+5,okKEpofpp,5,jc39z02,5,4
+6,LBtSMDqnF,Nur für Christ:innen (6),jc39z02,6,5
+1,4XHf8fTGN,Kreativ (1),yj5us17,1,NA
+2,lMqh8JU54,2,yj5us17,2,NA
+3,m9DLgLO4s,3,yj5us17,3,NA
+4,iWWHHwpG6,4,yj5us17,4,NA
+5,rYwYPJody,5,yj5us17,5,NA
+6,JSkdleFyK,Nicht kreativ (6),yj5us17,6,NA
+1,dLqcRdrNq,Man achtet aufeinander (1),ua93t27,1,NA
+2,dE3ZNfaVI,2,ua93t27,2,NA
+3,3nsRhaYYD,3,ua93t27,3,NA
+4,emgJJww8u,4,ua93t27,4,NA
+5,9hjezb9Dj,5,ua93t27,5,NA
+6,ADzTZ55lN,Jede:r schaut auf sich (6),ua93t27,6,NA
+1,hs9WAm8eA,Man kann sich als Person ausprobieren (1),qk9rg27,1,NA
+2,FNG5HPEFf,2,qk9rg27,2,NA
+3,MynAlrxJp,3,qk9rg27,3,NA
+4,Qqc7nUrEC,4,qk9rg27,4,NA
+5,yMD8snTJX,5,qk9rg27,5,NA
+6,lW1NRZfi3,Man macht immer das gleiche (6),qk9rg27,6,NA
+andere_person,EQb3e8iwk,Eine andere Person hat mich mitgenommen.,tl1ba82,andere_person,0
+auffuehrung,sIr0amOgk,Ich war zuvor bei einer Aufführung.,tl1ba82,auffuehrung,1
+seminar,1dXi5bHiR,Ich war zuvor bei einem Seminar.,tl1ba82,seminar,2
+schnupperprobe,TNbUlq2G5,Ich habe an einer Schnupperprobe teilgenommen.,tl1ba82,schnupperprobe,3
+kirchgemeinde,xAQfnoEk6,Ich habe TEN SING in meiner Kirchengemeinde kennengelernt.,tl1ba82,kirchgemeinde,4
+schule,jQySmJX8W,TEN SING war bei mir in der Schule und hat dort ein Angebot gemacht.,tl1ba82,schule,5
+nicht_kirchlich,FOHk5xN5c,Ich habe TEN SING bei einer nicht kirchlichen Veranstaltung (z. B. Stadtfest) kennengelernt.,tl1ba82,nicht_kirchlich,6
+social_media,tmSdk0zYU,"Ich habe über Social Media (z. B. Instagram, Facebook) von TEN SING gehört.",tl1ba82,social_media,7
+sonstiges,bzxChUsrY,Sonstiges,tl1ba82,sonstiges,8
+1,5Ieh64Gm7,Trifft überhaupt nicht zu (1),ql4ex71,1,NA
+2,MsSHUT7Lc,2,ql4ex71,2,NA
+3,aTkTwpz1s,3,ql4ex71,3,NA
+4,PkFuSaGtA,4,ql4ex71,4,NA
+5,pgNz5Ny87,5,ql4ex71,5,NA
+6,peuKUSJrK,Trifft voll und ganz zu (6),ql4ex71,6,NA
+chor,66Nijf89f,Chor,vj9by53,chor,0
+solo_gesang,n7BDy2dfM,Solo-Gesang,vj9by53,solo_gesang,1
+tanz,uei7uyPEQ,Tanz,vj9by53,tanz,2
+orga,1VCAMuDxc,Orga,vj9by53,orga,3
+medien,ivArZUwEC,Medien,vj9by53,medien,4
+technik,tbQDyXKKb,Technik,vj9by53,technik,5
+band,iKNBNntZ4,Band,vj9by53,band,6
+kreativ,dvOEIxpTt,Kreativ,vj9by53,kreativ,7
+theater,yNNr403Ob,Theater,vj9by53,theater,8
+dirigieren_chorleitung,oRzMcO2f2,Dirigieren / Chorleitung,vj9by53,dirigieren_chorleitung,9
+andere_workshops,mUvtBSVhF,andere Workshops,vj9by53,andere_workshops,10
+blrg,mvX8ZnOm9,Bergischland-Ruhrgebiet (BLRG),ta2jv23,blrg,0
+hessen,tNA9eR1t5,Hessen,ta2jv23,hessen,1
+niederrhein,eTJUvWWRN,Niederrhein,ta2jv23,niederrhein,2
+nord,bcjHu84hV,Nord,ta2jv23,nord,3
+ostwerk,MTTJUqzQr,Ostwerk,ta2jv23,ostwerk,4
+owl,dTUdGN5NT,Ostwestfalen-Lippe (OWL),ta2jv23,owl,5
+sachsen,3ZHrmd1PW,Sachsen,ta2jv23,sachsen,6
+sachsen_anhalt,cjz3UktKY,Sachsen-Anhalt,ta2jv23,sachsen_anhalt,7
+sueden,YlwFZhBd4,Süden,ta2jv23,sueden,8
+thueringen,O2zNDKA8u,Thüringen,ta2jv23,thueringen,9
+ja,kzSuveoeS,Ja,jx7zb70,ja,NA
+nein,2u4aeNvJM,Nein,jx7zb70,nein,NA
+ja,ZFKTkaKa7,Ja,xd4nd49,ja,NA
+nein,odD8xCzV6,Nein,xd4nd49,nein,NA
+es_gibt_zu_viele_andere_angebote_und_ich,qRVxV75US,Es gibt zu viele andere Angebote und ich habe keine Zeit.,id5sa70,es_gibt_zu_viele_andere_angebote_und_ich,NA
+der_weg_zum_veranstaltungsort_ist_mir_zu,2b5wyObgO,Der Weg zum Veranstaltungsort ist mir zu weit.,id5sa70,der_weg_zum_veranstaltungsort_ist_mir_zu,NA
+der_preis_f_r_die_veranstaltung_war_zu_h,6y6yyc1np,Der Preis für die Veranstaltung war zu hoch.,id5sa70,der_preis_f_r_die_veranstaltung_war_zu_h,NA
+ich_kenne_keine_personen_die_auch_zu_de,Xn6ZUPj0F,"Ich kenne keine Personen, die auch zu der Veranstaltung gehen.",id5sa70,ich_kenne_keine_personen_die_auch_zu_de,NA
+die_veranstaltungen_haben_mich_vom_inhal,QWGPU6QTk,Die Veranstaltungen haben mich vom Inhalt bisher nicht angesprochen.,id5sa70,die_veranstaltungen_haben_mich_vom_inhal,NA
+ich_habe_von_solchen_veranstaltungen_bis,pKHmleD80,Ich habe von solchen Veranstaltungen bisher nicht mitbekommen.,id5sa70,ich_habe_von_solchen_veranstaltungen_bis,NA
+andere_gr_nde,2cB8VC54J,andere Gründe,id5sa70,andere_gr_nde,NA
+ja,Cscu1KXPJ,Ja,ux2fo08,ja,NA
+nein,3rmD5RhYp,Nein,ux2fo08,nein,NA
+unterstuetzung_person,mwqOGmn2A,Unterstützung von Anleitenden bekommen,gx1xm18,unterstuetzung_person,NA
+unterstuetzung_cvjm,8lGZmzuaZ,Unterstützung vom CVJM bekommen,gx1xm18,unterstuetzung_cvjm,NA
+zeit,OSjEmUnyz,mehr Zeit / freie Kapazitäten,gx1xm18,zeit,NA
+team,XlqNIp6O5,Als Team zu arbeiten,gx1xm18,team,NA
+vertrauen,PsBD4PGc5,Das Vertrauen von Anleitenden/ der anderen,gx1xm18,vertrauen,NA
+mitbestimmung,kkbne76bU,"Die Möglichkeit, mitzubestimmen",gx1xm18,mitbestimmung,NA
+anerkennung,SDn7RMuwt,Wertschätzung und Anerkennung der anderen,gx1xm18,anerkennung,NA
+materialien,NjcbXtfJW,"Materialien, die man nutzen kann, sodass man nicht alles selbst machen muss",gx1xm18,materialien,NA
+keine_unterstuetzung,98tH2O60Z,Ich brauche keine Unterstützung,gx1xm18,keine_unterstuetzung,NA
+sonstiges,bAantaXj5,Sonstiges,gx1xm18,sonstiges,NA
+ansprache___informationen__ber_die_leitu,E7b9QLuJJ,Ansprache / Informationen über die Leitung oder Teilnehmenden in TEN SING,ix2yn66,ansprache___informationen__ber_die_leitu,NA
+whatsapp,dIVrnz0VR,WhatsApp,ix2yn66,whatsapp,NA
+e_mail,2egWzUcgf,E-Mail,ix2yn66,e_mail,NA
+instagram,51o4LClRE,Instagram,ix2yn66,instagram,NA
+tiktok,1hbg4U8ry,TikTok,ix2yn66,tiktok,NA
+andere_social_media,PacQH8aiM,andere Social Media,ix2yn66,andere_social_media,NA
+internetseite,QmmcUEovQ,Internetseite,ix2yn66,internetseite,NA
+sonstiges,6eo0HhpIY,Sonstiges,ix2yn66,sonstiges,NA
+ja,aluuqKtGG,ja,sk3kk53,ja,NA
+zum_teil,v2qj2jjg3,zum Teil,sk3kk53,zum_teil,NA
+nein,iW5u1Drst,nein,sk3kk53,nein,NA
+gleich,G0Z6Sdqfr,Genau wie bisher auch,ig3ep62,gleich,NA
+anders,riHlTSHBI,"Auf anderem Weg, und zwar:",ig3ep62,anders,NA
+ansprache___informationen__ber_die_leitu,Djyx0F9ri,Ansprache / Informationen über die Leitung oder Teilnehmenden in TEN SING,qt4dn74,ansprache___informationen__ber_die_leitu,2
+whatsapp,yfBlVVA1L,WhatsApp,qt4dn74,whatsapp,3
+e_mail,XGKC1W3Yn,E-Mail,qt4dn74,e_mail,4
+instagram,7XUrqpwr5,Instagram,qt4dn74,instagram,5
+tiktok,BKg8OmzpV,TikTok,qt4dn74,tiktok,6
+anderes_social_media,YQ8QhlXpl,anderes Social Media,qt4dn74,anderes_social_media,7
+internetseite,z61DUWxv3,Internetseite,qt4dn74,internetseite,8
+sonstiges,p9XduOpJY,Sonstiges,qt4dn74,sonstiges,9
+0,fsmrPjQLm,Völlig unwahrscheinlich (0),mh7yx74,0,NA
+1,BI2ObERhp,1,mh7yx74,1,1
+2,YisM8nNaJ,2,mh7yx74,2,2
+3,sJoZ6ba3N,3,mh7yx74,3,3
+4,imEv8tSRn,4,mh7yx74,4,4
+5,dw22JYJp6,5,mh7yx74,5,5
+6,xpwxRiOuu,6,mh7yx74,6,6
+7,NsmLErDrO,7,mh7yx74,7,7
+8,Yez6IRkrE,8,mh7yx74,8,8
+9,YLfRokb6Z,9,mh7yx74,9,NA
+10,OcO3Z1tls,Sehr wahrscheinlich (10),mh7yx74,10,NA
+divers,jXberLqYU,Divers,nl6qm12,divers,NA
+mann,MNUPo3WfV,Männlich,nl6qm12,mann,NA
+frau,nOzEVyyoa,Weiblich,nl6qm12,frau,NA
+hauptschule___mittelschule,ffU0zXwoW,Hauptschule / Mittelschule,qr8jz24,hauptschule___mittelschule,NA
+realschule,WmcygEgHE,Realschule,qr8jz24,realschule,NA
+gesamtschule,tdoTn2Dw5,Gesamtschule,qr8jz24,gesamtschule,NA
+gymnasium,ON1u5O11I,Gymnasium,qr8jz24,gymnasium,NA
+andere_schule,AXgC1b7i6,andere Schule,qr8jz24,andere_schule,NA
+ich_studiere,exKBKs3hk,ich studiere,qr8jz24,ich_studiere,NA
+ich_mache_eine_ausbildung,RXC3SWQ55,ich mache eine Ausbildung,qr8jz24,ich_mache_eine_ausbildung,NA
+ich_bin_bereits_berufst_tig,xl6Uq9bHr,ich bin bereits berufstätig,qr8jz24,ich_bin_bereits_berufst_tig,NA
+keine_dieser_optionen,mreuqFeRL,keine dieser Optionen,qr8jz24,keine_dieser_optionen,NA
+ja_familie,i6a1kg1Yt,"Ja, in der Familie",vh8ly81,ja_familie,NA
+ja_freundeskreis,zb38ORElB,"Ja, durch meinen Freundeskreis",vh8ly81,ja_freundeskreis,NA
+ja_gottesdienste,j6c4jGjNL,"Ja, durch den Besuch von Gottesdiensten",vh8ly81,ja_gottesdienste,NA
+ja_veranst_kg,R0BTPw7vr,"Ja, durch den Besuch von Veranstaltungen von Kirchengemeinden oder Freikirchen",vh8ly81,ja_veranst_kg,NA
+ja_cvjm,Msx0Fn83u,"Ja, durch andere CVJM-Arbeit",vh8ly81,ja_cvjm,NA
+ja_internet_socmedia,0YMd4FN3t,"Ja, durch Angebote im Internet oder auf Social Media",vh8ly81,ja_internet_socmedia,NA
+ja_andere,kSqY31zpu,"Ja, durch andere Kontaktpunkte",vh8ly81,ja_andere,NA
+nein,9MKbDObIP,Nein,vh8ly81,nein,NA
