@@ -1,65 +1,112 @@
-name,$kuid,label,list_name,$autovalue,order
-montag,4X02L0jeg,Montag,my9mv70,montag,NA
-dienstag,3qdwAF24y,Dienstag,my9mv70,dienstag,NA
-mittwoch,U4wmdZkaI,Mittwoch,my9mv70,mittwoch,NA
-donnerstag,X8By5zjLU,Donnerstag,my9mv70,donnerstag,NA
-freitag,bXzlWxoQS,Freitag,my9mv70,freitag,NA
-samstag,0xj1hL6Cp,Samstag,my9mv70,samstag,NA
-sonntag,Rs3gsYnzC,Sonntag,my9mv70,sonntag,NA
-chor,66Nijf89f,Chor,vj9by53,chor,0
-solo_gesang,n7BDy2dfM,Solo-Gesang,vj9by53,solo_gesang,1
-tanz,uei7uyPEQ,Tanz,vj9by53,tanz,2
-orga,1VCAMuDxc,Orga,vj9by53,orga,3
-medien,ivArZUwEC,Medien,vj9by53,medien,4
-technik,tbQDyXKKb,Technik,vj9by53,technik,5
-band,iKNBNntZ4,Band,vj9by53,band,6
-kreativ,dvOEIxpTt,Kreativ,vj9by53,kreativ,7
-theater,yNNr403Ob,Theater,vj9by53,theater,8
-dirigieren_chorleitung,oRzMcO2f2,Dirigieren / Chorleitung,vj9by53,dirigieren_chorleitung,9
-andere_workshops,mUvtBSVhF,andere Workshops,vj9by53,andere_workshops,10
-Ja_Vollzeit,xycFIIgKy,Ja,ra07e45,Ja_Vollzeit,NA
-nein,zXbzGjUXT,Nein,ra07e45,nein,NA
-wei__ich_nicht,wn6UmaKxs,Weiß ich nicht,ra07e45,wei__ich_nicht,NA
-ja_grosse_probleme,DxqY5eZe8,"Ja, sehr große Probleme",xx6oz98,ja_grosse_probleme,NA
-ja_phasenweise,9zi1hGl26,"Ja, aber nur phasenweise",xx6oz98,ja_phasenweise,NA
-nein,6MVr4QftP,Nein,xx6oz98,nein,NA
-werbung_auftritte,0MZn2XhK8,Werbung bei unseren Veranstaltungen und Vorführungen,sd1mv43,werbung_auftritte,NA
-werbung_kirche,bN6MnptFr,Werbung bei Veranstaltungen der Kirchengemeinde (z. B. Veranstaltungen in der Konfirmandenarbeit),sd1mv43,werbung_kirche,NA
-schulprojekte,MH9LDXuDy,Schulprojekte (z. B. Projektwochen),sd1mv43,schulprojekte,NA
-schnupperproben,qfnrNQkuy,Schnupperproben,sd1mv43,schnupperproben,NA
-social_media,El3FWT2dq,"Werbung auf Social Media (z. B. Instagram, TikTok)",sd1mv43,social_media,NA
-freunde_und_bekannte,4OqtUuVvt,Freunde und Bekannte ansprechen,sd1mv43,freunde_und_bekannte,NA
-sonstige,VAh2e1v0O,Sonstige,sd1mv43,sonstige,NA
-1,EwREFivlq,Gar nicht erfolgreich (1),dq4ul86,1,NA
-2,jUTUTsG7B,2,dq4ul86,2,NA
-3,ffg2OSHTk,3,dq4ul86,3,NA
-4,SLpYPupRP,4,dq4ul86,4,NA
-5,y9T0HtF9q,5,dq4ul86,5,NA
-6,8kPS2Kiq7,Sehr erfolgreich (6),dq4ul86,6,NA
-1,EwREFivlq,Gar nicht erfolgreich (1),kd0em48,1,NA
-2,jUTUTsG7B,2,kd0em48,2,NA
-3,ffg2OSHTk,3,kd0em48,3,NA
-4,SLpYPupRP,4,kd0em48,4,NA
-5,y9T0HtF9q,5,kd0em48,5,NA
-6,8kPS2Kiq7,Sehr erfolgreich (6),kd0em48,6,NA
-nein,4ADYRxL0E,Nein,qq0kz18,nein,NA
-eher_nein,ejpjSeTBd,Eher nein,qq0kz18,eher_nein,NA
-eher_ja,UmFqL6tFB,Eher ja,qq0kz18,eher_ja,NA
-ja,nQiIzRSL1,Ja,qq0kz18,ja,NA
-bin_mir_unsicher,hjkMjqbHV,Bin mir unsicher,qq0kz18,bin_mir_unsicher,NA
-hessen,x2qufw7sz,Hessen,ta2jv23,hessen,NA
-nord,sqdRJ6W9J,Nord,ta2jv23,nord,NA
-ostwestfalen_lippe,LDHop2jPP,Ostwestfalen-Lippe,ta2jv23,ostwestfalen_lippe,NA
-sachsen_anhalt,giLpX9DxK,Sachsen-Anhalt,ta2jv23,sachsen_anhalt,NA
-thueringen,BgTsCXOHS,Thüringen,ta2jv23,thueringen,NA
-blrg,IJnDNpUBP,Niederrhein und Bergischland-Ruhrgebiet (BLRG),ta2jv23,blrg,NA
-ostwerk,z6s9wvwdU,Ostwerk,ta2jv23,ostwerk,NA
-sachsen,gKHKw9qRz,Sachsen,ta2jv23,sachsen,NA
-sueden,oVTvUgFsc,Süden,ta2jv23,sueden,NA
-divers_1,by3du15,Divers,matrix_sv3gv00,divers_1,NA
-mann_1,kb9og41,Männlich,matrix_sv3gv00,mann_1,NA
-frau_1,pa84u58,Weiblich,matrix_sv3gv00,frau_1,NA
-bis13_1,fs9da17,Bis 13 Jahre,matrix_rw26u38,bis13_1,NA
-14bis17_1,js4hb61,14-17 Jahre,matrix_rw26u38,14bis17_1,NA
-18bis19_1,xn1vq53,18 bis 19 Jahre,matrix_rw26u38,18bis19_1,NA
-20und_1,nf5nf74,20 Jahre und älter,matrix_rw26u38,20und_1,NA
+name,$kuid,label,list_name,$autovalue,order,region
+montag,4X02L0jeg,Montag,my9mv70,montag,NA,NA
+dienstag,3qdwAF24y,Dienstag,my9mv70,dienstag,NA,NA
+mittwoch,U4wmdZkaI,Mittwoch,my9mv70,mittwoch,NA,NA
+donnerstag,X8By5zjLU,Donnerstag,my9mv70,donnerstag,NA,NA
+freitag,bXzlWxoQS,Freitag,my9mv70,freitag,NA,NA
+samstag,0xj1hL6Cp,Samstag,my9mv70,samstag,NA,NA
+sonntag,Rs3gsYnzC,Sonntag,my9mv70,sonntag,NA,NA
+chor,66Nijf89f,Chor,vj9by53,chor,0,NA
+solo_gesang,n7BDy2dfM,Solo-Gesang,vj9by53,solo_gesang,1,NA
+tanz,uei7uyPEQ,Tanz,vj9by53,tanz,2,NA
+orga,1VCAMuDxc,Orga,vj9by53,orga,3,NA
+medien,ivArZUwEC,Medien,vj9by53,medien,4,NA
+technik,tbQDyXKKb,Technik,vj9by53,technik,5,NA
+band,iKNBNntZ4,Band,vj9by53,band,6,NA
+kreativ,dvOEIxpTt,Kreativ,vj9by53,kreativ,7,NA
+theater,yNNr403Ob,Theater,vj9by53,theater,8,NA
+dirigieren_chorleitung,oRzMcO2f2,Dirigieren / Chorleitung,vj9by53,dirigieren_chorleitung,9,NA
+andere_workshops,mUvtBSVhF,andere Workshops,vj9by53,andere_workshops,10,NA
+Ja_Vollzeit,xycFIIgKy,Ja,ra07e45,Ja_Vollzeit,NA,NA
+nein,zXbzGjUXT,Nein,ra07e45,nein,NA,NA
+wei__ich_nicht,wn6UmaKxs,Weiß ich nicht,ra07e45,wei__ich_nicht,NA,NA
+ja_grosse_probleme,DxqY5eZe8,"Ja, sehr große Probleme",xx6oz98,ja_grosse_probleme,NA,NA
+ja_phasenweise,9zi1hGl26,"Ja, aber nur phasenweise",xx6oz98,ja_phasenweise,NA,NA
+nein,6MVr4QftP,Nein,xx6oz98,nein,NA,NA
+werbung_auftritte,0MZn2XhK8,Werbung bei unseren Veranstaltungen und Vorführungen,sd1mv43,werbung_auftritte,NA,NA
+werbung_kirche,bN6MnptFr,Werbung bei Veranstaltungen der Kirchengemeinde (z. B. Veranstaltungen in der Konfirmandenarbeit),sd1mv43,werbung_kirche,NA,NA
+schulprojekte,MH9LDXuDy,Schulprojekte (z. B. Projektwochen),sd1mv43,schulprojekte,NA,NA
+schnupperproben,qfnrNQkuy,Schnupperproben,sd1mv43,schnupperproben,NA,NA
+social_media,El3FWT2dq,"Werbung auf Social Media (z. B. Instagram, TikTok)",sd1mv43,social_media,NA,NA
+freunde_und_bekannte,4OqtUuVvt,Freunde und Bekannte ansprechen,sd1mv43,freunde_und_bekannte,NA,NA
+sonstige,VAh2e1v0O,Sonstige,sd1mv43,sonstige,NA,NA
+1,EwREFivlq,Gar nicht erfolgreich (1),dq4ul86,1,NA,NA
+2,jUTUTsG7B,2,dq4ul86,2,NA,NA
+3,ffg2OSHTk,3,dq4ul86,3,NA,NA
+4,SLpYPupRP,4,dq4ul86,4,NA,NA
+5,y9T0HtF9q,5,dq4ul86,5,NA,NA
+6,8kPS2Kiq7,Sehr erfolgreich (6),dq4ul86,6,NA,NA
+nein,4ADYRxL0E,Nein,qq0kz18,nein,NA,NA
+eher_nein,ejpjSeTBd,Eher nein,qq0kz18,eher_nein,NA,NA
+eher_ja,UmFqL6tFB,Eher ja,qq0kz18,eher_ja,NA,NA
+ja,nQiIzRSL1,Ja,qq0kz18,ja,NA,NA
+bin_mir_unsicher,hjkMjqbHV,Bin mir unsicher,qq0kz18,bin_mir_unsicher,NA,NA
+blrg,BH05m9yvn,Bergischland-Ruhrgebiet (BLRG),region,blrg,NA,NA
+hessen,6kkOXF6Zg,Hessen,region,hessen,NA,NA
+niederrhein,rLovWMCPn,Niederrhein,region,niederrhein,NA,NA
+nord,eXprY8XaC,Nord,region,nord,NA,NA
+ostwestfalen_lippe,ey64Qxtto,Ostwestfalen-Lippe,region,ostwestfalen_lippe,NA,NA
+sachsen,n1Ket9NLu,Sachsen,region,sachsen,NA,NA
+thueringen,h59eZVzbg,Thüringen,region,thueringen,NA,NA
+sueden,a6W8XeIJz,Süden,region,sueden,NA,NA
+ostwerk,ztf9lC8xp,Ostwerk,region,ostwerk,NA,NA
+bochum,RNsUHAZO7,Bochum,ortsgruppe,bochum,NA,blrg
+burgaltendorf,WPUbniLQ8,Burgaltendorf,ortsgruppe,burgaltendorf,NA,blrg
+hagen,2jvpYs0Hk,Hagen,ortsgruppe,hagen,NA,blrg
+hasslinghausen,a21FhlBkP,Haßlinghausen,ortsgruppe,hasslinghausen,NA,blrg
+andere_blrg,g5gYMNgh2,Andere Ortsgruppe (BLRG),ortsgruppe,andere_blrg,NA,blrg
+ehringen,1WLo6KtJ3,Ehringen,ortsgruppe,ehringen,NA,hessen
+eschwege,3ktuT0QsV,Eschwege,ortsgruppe,eschwege,NA,hessen
+homberg_efze,1BWRdj6Ba,Homberg (Efze),ortsgruppe,homberg_efze,NA,hessen
+andere_hessen,UhDjU31fj,Andere Ortsgruppe (Hessen),ortsgruppe,andere_hessen,NA,hessen
+borken,gSm9LqeLV,Borken,ortsgruppe,borken,NA,niederrhein
+duisburg,gbVOYkkKY,Duisburg,ortsgruppe,duisburg,NA,niederrhein
+moers,qiCCoChlM,Moers,ortsgruppe,moers,NA,niederrhein
+solingen,0ZobEWEP7,Solingen,ortsgruppe,solingen,NA,niederrhein
+huenxe,KLPfpHXn3,Hünxe,ortsgruppe,huenxe,NA,niederrhein
+andere_niederrhein,6RdAnvQTH,Andere Ortsgruppe (Niederrhein),ortsgruppe,andere_niederrhein,NA,niederrhein
+augustfehn_apen,l94fd7CeJ,Augustfehn-Apen,ortsgruppe,augustfehn_apen,NA,nord
+bremen,goqW7jxgY,Bremen,ortsgruppe,bremen,NA,nord
+hambergen,M5bARAFDN,Hambergen,ortsgruppe,hambergen,NA,nord
+moormerland,t41IfDuhz,Moormerland,ortsgruppe,moormerland,NA,nord
+oldenburg,ST4eKQKSw,Oldenburg,ortsgruppe,oldenburg,NA,nord
+ostrhauderfehn,DGVQY1apR,Ostrhauderfehn,ortsgruppe,ostrhauderfehn,NA,nord
+sittensen,AfsVuR87h,Sittensen,ortsgruppe,sittensen,NA,nord
+andere_nord,Kcx51xsb1,Andere Ortsgruppe (Nord),ortsgruppe,andere_nord,NA,nord
+brandenburg,UZrMzcajS,Brandenburg,ortsgruppe,brandenburg,NA,ostwerk
+frankfurt_oder,ovI61AtoY,Frankfurt (Oder),ortsgruppe,frankfurt_oder,NA,ostwerk
+zeuthen,pxryRcwo8,Zeuthen,ortsgruppe,zeuthen,NA,ostwerk
+2_0,znTtpBWSP,2.0.,ortsgruppe,2_0,NA,ostwerk
+andere_ostwerk,69cPZKPHa,Andere Ortsgruppe (Ostwerk),ortsgruppe,andere_ostwerk,NA,ostwerk
+brackwede_quelle,ao6wXmgbm,Brackwede-Quelle,ortsgruppe,brackwede_quelle,NA,ostwestfalen_lippe
+guetersloh,O6PMq4mfl,Gütersloh,ortsgruppe,guetersloh,NA,ostwestfalen_lippe
+knetterheide,57XOJdow4,Knetterheide,ortsgruppe,knetterheide,NA,ostwestfalen_lippe
+loehne,PlHHQQeLX,Löhne,ortsgruppe,loehne,NA,ostwestfalen_lippe
+luebbecke,1m5XxeUsX,Lübbecke,ortsgruppe,luebbecke,NA,ostwestfalen_lippe
+muenster,UKjYJk0VK,Münster,ortsgruppe,muenster,NA,ostwestfalen_lippe
+rheda_wiedenbrueck,0OjcVBC0e,Rheda-Wiedenbrück,ortsgruppe,rheda_wiedenbrueck,NA,ostwestfalen_lippe
+versmold,uXJLYcbGG,Versmold,ortsgruppe,versmold,NA,ostwestfalen_lippe
+werre,wk145Wm7o,Werre,ortsgruppe,werre,NA,ostwestfalen_lippe
+andere_ostwestfalen_lippe,LAtu9t4VM,Andere Ortsgruppe (Ostwestfalen-Lippe),ortsgruppe,andere_ostwestfalen_lippe,NA,ostwestfalen_lippe
+coswig,e6uxiag1S,Coswig,ortsgruppe,coswig,NA,sachsen
+dresden,eOnI1HiUr,Dresden,ortsgruppe,dresden,NA,sachsen
+pirna,LmjXOHSxK,Pirna,ortsgruppe,pirna,NA,sachsen
+zittau,bc0H6P9lP,Zittau,ortsgruppe,zittau,NA,sachsen
+zwickau,Xy4avEft0,Zwickau,ortsgruppe,zwickau,NA,sachsen
+andere_sachsen,kQ30zi1sb,Andere Ortsgruppe (Sachsen),ortsgruppe,andere_sachsen,NA,sachsen
+ulm,ux3Nd2PeI,Ulm,ortsgruppe,ulm,NA,sueden
+untermuenkheim,RZPc8JFOC,Untermünkheim,ortsgruppe,untermuenkheim,NA,sueden
+andere_sueden,Wz03ylBbA,Andere Ortsgruppe (Süden),ortsgruppe,andere_sueden,NA,sueden
+erfurt,43p0KK5vL,Erfurt,ortsgruppe,erfurt,NA,thueringen
+rudolstadt,B87DKpStp,Rudolstadt,ortsgruppe,rudolstadt,NA,thueringen
+sonneberg,wkcKpA4kW,Sonneberg,ortsgruppe,sonneberg,NA,thueringen
+weimar,pZfqlLb7C,Weimar,ortsgruppe,weimar,NA,thueringen
+zeulenroda,tTUN2QFwb,Zeulenroda,ortsgruppe,zeulenroda,NA,thueringen
+andere_thueringen,sEdLjkEff,Andere Ortsgruppe (Thüringen),ortsgruppe,andere_thueringen,NA,thueringen
+divers_1,by3du15,Divers,matrix_sv3gv00,divers_1,NA,NA
+maennlich_1,kb9og41,Männlich,matrix_sv3gv00,maennlich_1,NA,NA
+weiblich_1,pa84u58,Weiblich,matrix_sv3gv00,weiblich_1,NA,NA
+bis13_1,fs9da17,Bis 13 Jahre,matrix_rw26u38,bis13_1,NA,NA
+14bis17_1,js4hb61,14-17 Jahre,matrix_rw26u38,14bis17_1,NA,NA
+18bis19_1,xn1vq53,18 bis 19 Jahre,matrix_rw26u38,18bis19_1,NA,NA
+20und_1,nf5nf74,20 Jahre und älter,matrix_rw26u38,20und_1,NA,NA
