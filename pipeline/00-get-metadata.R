@@ -15,7 +15,7 @@ kobo <- kbtbr::Kobo$new(
 )
 
 # OG SURVEY DATEN --------
-og_id <- Sys.getenv("2024_OG")
+og_id <- Sys.getenv(paste0(YEAR, "_OG"))
 og_asset <- kobo$get(sprintf("assets/%s", og_id))
 og_survey <- og_asset$content$survey
 og_survey <- og_survey |>
@@ -25,16 +25,16 @@ og_survey <- og_survey |>
 # json format for reference only
 og_survey |>
     survey_to_json() |>
-    readr::write_lines("data/meta/og_survey.json")
-og_survey |> readr::write_csv("data/meta/og_survey.csv")
+    readr::write_lines(file.path(DIR_META, "og_survey.json"))
+og_survey |> readr::write_csv(file.path(DIR_META, "og_survey.csv"))
 
 # extract choices
 og_choices <- og_asset$content$choices
 og_choices$label <- unlist(og_choices$label)
-og_choices |> readr::write_csv("data/meta/og_choices.csv")
+og_choices |> readr::write_csv(file.path(DIR_META, "og_choices.csv"))
 
 # TN SURVEY ---------
-tn_id <- Sys.getenv("2024_TN")
+tn_id <- Sys.getenv(paste0(YEAR, "_TN"))
 tn_asset <- kobo$get(sprintf("assets/%s", tn_id))
 tn_survey <- tn_asset$content$survey
 tn_survey <- tn_survey |>
@@ -43,10 +43,10 @@ tn_survey <- tn_survey |>
 
 tn_survey |>
     survey_to_json() |>
-    readr::write_lines("data/meta/tn_survey.json")
-tn_survey |> readr::write_csv("data/meta/tn_survey.csv")
+    readr::write_lines(file.path(DIR_META, "tn_survey.json"))
+tn_survey |> readr::write_csv(file.path(DIR_META, "tn_survey.csv"))
 
 # extract coices
 tn_choices <- tn_asset$content$choices
 tn_choices$label <- unlist(tn_choices$label)
-tn_choices |> readr::write_csv("data/meta/tn_choices.csv")
+tn_choices |> readr::write_csv(file.path(DIR_META, "tn_choices.csv"))
