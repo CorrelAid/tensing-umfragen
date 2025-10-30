@@ -4,7 +4,7 @@
 #' TODO: alternatively, look at data quality.
 library(tidyverse)
 
-og <- readr::read_rds("data/cleaned/og.rds")
+og <- readr::read_rds(file.path(DIR_CLEANDED, "og.rds"))
 og_data <- og$data
 
 # we filter out NA
@@ -25,4 +25,4 @@ og$long <- og$long %>%
 
 og$data <- og_data
 
-og %>% readr::write_rds("data/cleaned/og.rds")
+og %>% readr::write_rds(file.path(DIR_CLEANDED, "og.rds"))

@@ -23,12 +23,12 @@ kobo <- kbtbr::Kobo$new(
 )
 
 # METADATA AND SETUP ----
-og_survey <- readr::read_csv("data/meta/og_survey.csv")
-og_choices <- readr::read_csv("data/meta/og_choices.csv")
+og_survey <- readr::read_csv(file.path(DIR_META, "og_survey.csv"))
+og_choices <- readr::read_csv(file.path(DIR_META, "og_choices.csv"))
 
 
 # config
-og_cfg <- readr::read_rds("config/og_cfg.rds")
+og_cfg <- readr::read_rds(file.path(DIR_CONFIG,"og_cfg.rds"))
 
 # Ortsgruppe Daten -----------
 og_df <- kobo$get_submissions(og_id)
@@ -307,4 +307,4 @@ OG_DATA$data$og_name_orig[OG_DATA$data$og_name_orig == ""] <- NA
 OG_DATA$data <- OG_DATA$data %>%
     dplyr::mutate(anzahl_insg = anzahl_tn + anzahl_ma_leitung)
 
-OG_DATA %>% readr::write_rds("data/cleaned/og.rds")
+OG_DATA %>% readr::write_rds(file.path(DIR_CLEANED,"og.rds"))

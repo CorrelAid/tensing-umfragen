@@ -13,19 +13,19 @@ library(dotenv)
 library(dplyr)
 library(readr)
 source("R/utils.R")
-source("config/tn_config.R")
+source(file.path(DIR_CONFIG, "tn_config.R"))
 
 dotenv::load_dot_env()
 kobo <- kbtbr::Kobo$new(
     "https://eu.kobotoolbox.org/",
     kobo_token = Sys.getenv("KOBO_EU_TOKEN")
 )
-tn_id <- Sys.getenv("2024_TN")
+tn_id <- Sys.getenv(paste0(YEAR,"_TN"))
 
 # METADATA ----
-tn_survey <- readr::read_csv("data/meta/tn_survey.csv")
-tn_choices <- readr::read_csv("data/meta/tn_choices.csv")
-tn_cfg <- readr::read_rds("config/tn_cfg.rds")
+tn_survey <- readr::read_csv(file.path(DIR_META, "tn_survey.csv"))
+tn_choices <- readr::read_csv(file.path(DIR_META, "tn_choices.csv"))
+tn_cfg <- readr::read_rds(file.path(DIR_CONFIG, "tn_cfg.rds"))
 
 # TN Daten -----------
 tn_df <- kobo$get_submissions(tn_id)
@@ -34,7 +34,7 @@ tn_df <- kobo$get_submissions(tn_id)
 tn_df <- tn_df %>%
     rename(tn_id = `_id`) %>%
     select(-starts_with("_"))
-tn_df %>% readr::write_csv(file = "data/raw/tn_api.csv") # for reference
+tn_df %>% readr::write_csv(file = file.path(DIR_RAW, "tn_api.csv")) # for reference
 
 TN_DATA <- list(
     long = list(),
@@ -328,4 +328,4 @@ TN_DATA$demo$kontakt_chrgl <- sample(
 )
 TN_DATA$long$kontakt_chrgl <- kontaktpunkte_long
 
-readr::write_rds(TN_DATA, "data/cleaned/tn.rds")
+readr::write_rds(TN_DATA, file.path(DIR_CLEANED,"tn.rds"))

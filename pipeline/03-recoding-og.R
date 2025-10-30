@@ -7,8 +7,8 @@ library(tidyverse)
 # KODIERUNGSDATEN ============
 
 # og_recoding <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1kFo3lhPVslsJrXCmFvbWry8BN4V_9VIIptIQ32Y4sDE/edit?gid=0#gid=0")
-# og_recoding %>% readr::write_csv("data/meta/og_recoding_gsheet.csv")
-og_recoding <- readr::read_csv("data/meta/og_recoding_gsheet.csv")
+# og_recoding %>% readr::write_csv(file.path(DIR_META,"og_recoding_gsheet.csv")
+og_recoding <- readr::read_csv(file.path(DIR_META, "og_recoding_gsheet.csv"))
 # rename variables
 og_recoding <- og_recoding %>%
   rename(
@@ -20,7 +20,7 @@ og_recoding <- og_recoding %>%
 
 # OG DATA ============
 # read in data
-og <- readr::read_rds("data/cleaned/og.rds")
+og <- readr::read_rds(file.path(DIR_CLEANED, "og.rds"))
 og_data <- og$data
 
 # join to og data
@@ -30,11 +30,11 @@ og_data <- og_data %>%
 
 # TODO: how to deal with NA in og_name? and TODO: How to deal with duplicate entries for one OG? -> see 04_ for current approach
 og$data <- og_data
-og %>% readr::write_rds("data/cleaned/og.rds")
+og %>% readr::write_rds(file.path(DIR_CLEANED, "og.rds"))
 
 # TN DATA ==========
 # read in data
-tn <- readr::read_rds("data/cleaned/tn.rds")
+tn <- readr::read_rds(file.path(DIR_CLEANED, "tn.rds"))
 
 # join to og data
 tn$data <- tn$data %>%
@@ -45,4 +45,4 @@ tn$data <- tn$data %>%
 sum(is.na(tn$data$og_name))
 sum(is.na(tn$data$og_name_orig))
 
-tn %>% readr::write_rds("data/cleaned/tn.rds")
+tn %>% readr::write_rds(file.path(DIR_CLEANED, "tn.rds"))
