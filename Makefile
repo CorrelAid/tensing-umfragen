@@ -1,12 +1,12 @@
 .PHONY: data
 
+YEARS = 2024 2025
 
-# 00-get-metadata.R is executed via source'ing of config/config_[og|tn].R in the get-[og|tn]-data.R files
-data: 
-	Rscript pipeline/01-get-og-data.R 
-	Rscript pipeline/02-get-tn-data.R 
-	Rscript pipeline/03-recoding-og.R 
-	Rscript pipeline/04-delete-duplicates.R
+data:
+	for year in $(YEARS); do \
+		echo "=== Running pipeline for $$year ==="; \
+		Rscript pipeline/setup.R $$year; \
+	done
 
 website: index.qmd data/cleaned/og.rds data/cleaned/tn.rds
 	quarto render .
