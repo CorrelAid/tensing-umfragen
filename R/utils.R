@@ -4,41 +4,63 @@ library(stringr)
 #' @param col_to_regex A string naming the column in \code{meta_survey} to search.
 #' sometimes, we want to regex the question text, sometimes the column name.
 #' @param regex A regular expression pattern to match within \code{col_to_regex}.
-#' @return A filtered data frame of rows where the column matches the regex.
+#' @param type Optional. A string specifying the question type to filter by (e.g., "select_one").
+#' If NULL, no type filtering is applied.
+#' @return A filtered data frame of rows where the column matches the regex (and type, if specified).
 #' @details meta_survey stores metadata for a kobo survey. This function helps us to find the columns
 #' that are relevant for a given matrix question. Can also be used to find columns
 #' for questions that are thematically related.
 #' If no matches are found, the function stops with an error.
 #' @seealso \code{\link[stringr]{str_detect}}, \code{\link[dplyr]{filter}}
 #' @export
-find_qs <- function(meta_survey, col_to_regex, regex) {
+find_qs <- function(meta_survey, col_to_regex, regex, type_filter = NULL) {
     q_df <- meta_survey %>%
-        filter(stringr::str_detect(.data[[col_to_regex]], regex))
-    if (nrow(q_df) == 0) {
-        stop(sprintf("Did not find hits for %s in %s", regex, col_to_regex))
+        dplyr::filter(stringr::str_detect(.data[[col_to_regex]], regex))
+
+    if (!is.null(type_filter)) {
+        q_df <- q_df %>%
+            dplyr::filter(.data$type == type_filter)
     }
+
+    if (nrow(q_df) == 0) {
+        stop(sprintf(
+            "Did not find hits for %s in %s%s",
+            regex, col_to_regex,
+            if (!is.null(type_filter)) paste0(" with type = ", type_filter) else ""
+        ))
+    }
+
     return(q_df)
 }
-#' Find column for a question. use for simple text, numeric questions.
+
+
+#' Find column for a question. Use for simple text or numeric questions.
 #' @param meta_survey A data frame containing survey metadata.
 #' @param col_to_regex A string naming the column in \code{meta_survey} to search.
 #' @param regex A regular expression pattern to match within \code{col_to_regex}.
+#' @param type_filter Optional. A string specifying the question type to filter by (e.g., "text").
+#'        If NULL, no type filtering is applied.
 #' @return A single-row data frame corresponding to the matched question.
-#' @details Calls \code{find_qs()} to locate matching rows and ensures exactly one match. Throws an error if none or multiple matches are found.
+#' @details Calls \code{find_qs()} to locate matching rows and ensures exactly one match.
+#' Throws an error if none or multiple matches are found.
 #' @seealso \code{\link{find_qs}}, \code{\link[stringr]{str_detect}}, \code{\link[dplyr]{filter}}
 #' @export
-find_q <- function(meta_survey, col_to_regex, regex) {
-    q_df <- find_qs(meta_survey, col_to_regex, regex)
+find_q <- function(meta_survey, col_to_regex, regex, type_filter = NULL) {
+    q_df <- find_qs(meta_survey, col_to_regex, regex, type_filter = type_filter)
+
     if (nrow(q_df) != 1) {
         stop(sprintf(
-            "Did not find one column for %s in %s but %i",
+            "Did not find one column for %s in %s%s but %i",
             regex,
             col_to_regex,
+            if (!is.null(type_filter)) paste0(" with type = ", type_filter) else "",
             nrow(q_df)
         ))
     }
+
     return(q_df)
 }
+
 
 #' Drop System Columns from Survey Submissions
 #' @param submissions_df A data frame of survey submissions, typically from KoboToolbox or ODK exports.
@@ -99,7 +121,7 @@ get_mapping <- function(choices_df, choice_list_name) {
 #' @seealso \code{\link[dplyr]{left_join}}
 #' @export
 recode_values <- function(df, mapping, col_name) {
-    df['name'] <- df[[col_name]]
+    df["name"] <- df[[col_name]]
     df <- df %>% dplyr::left_join(mapping, by = "name")
     df[col_name] <- df$label
     df$name <- NULL # TODO: not sure whether we should actually delete the original value --> retain it? However, then we would have two columns .. maybe this function should be used in the quarto directly on demand and not during preprocessing/data wrangling
