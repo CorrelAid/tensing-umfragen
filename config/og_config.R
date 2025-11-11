@@ -10,8 +10,6 @@ library(dplyr)
 source("R/utils.R")
 dotenv::load_dot_env()
 
-# source("pipeline/00-get-metadata.R")
-
 # METADATA ----
 og_survey <- readr::read_csv(file.path(DIR_META, "og_survey.csv"))
 og_choices <- readr::read_csv(file.path(DIR_META, "og_choices.csv"))
@@ -51,19 +49,19 @@ cfg$Q_ANZAHL_BEGIN <- find_q(og_survey, "label", "Wie viele Personen.+aktiv?")
 
 # TODO matrix
 
-# TODO weird bug where col_name in metadata has 002 suffix but data has not :eyes:
-if (YEAR == 2024) {
-    cfg$CN_ANZAHL_TN <- "group_jx3lf36/Teilnehmende"
-} else {
-    cfg$CN_ANZAHL_TN <- "block_aktive/Teilnehmende"
-}
+cfg$Q_GESCHLECHT <-find_q(og_survey, "label", "identifizieren")
+cfg$CN_GESCHLECHT <- cfg$Q_GESCHLECHT$col_name
+
+cfg$Q_ALTERSGRUPPE <-find_q(og_survey, "col_name", "Altersgruppe")
+cfg$CN_ALTERSGRUPPE <- cfg$Q_ALTERSGRUPPE$col_name
+
 
 cfg$Q_ANZAHL_TN <- find_q(
     og_survey,
     "col_name",
-    paste0(cfg$CN_ANZAHL_TN, "_002")
+    "Teilnehmende_002"
 )
-cfg$Q_ANZAHL_TN$col_name <- cfg$CN_ANZAHL_TN
+cfg$CN_ANZAHL_TN <- sub("_[0-9]+$", "", cfg$Q_ANZAHL_TN$col_name)
 
 cfg$Q_TN_GEWINNUNG_PROB <- find_q(
     og_survey,
