@@ -86,11 +86,13 @@ cfg$CN_TN_GEWINNUNG_MASSNAHMEN_SONST <- cfg$Q_TN_GEWINNUNG_MASSNAHMEN_SONST$col_
 
 cfg$QS_TN_GEWINNUNG_MASSNAHMEN_ERFOLG <- find_qs(
     og_survey,
-    "name",
-    "[Gg]ewinnung.+_header"
+    "col_name",
+    "(Erfolg.+?[Mm]assnahm)|block_erfolg_tngewinnung",
+    "select_one"
 ) %>%
-    filter(type == "select_one")
-
+    # header in survey design ist fälschlicherweise ein "select_one"
+    filter(!str_detect(name, "header"))
+   
 cfg$Q_BEGIN_UNTERSTUETZUNGSBEDARFE <- find_qs(
     og_survey,
     "col_name",
