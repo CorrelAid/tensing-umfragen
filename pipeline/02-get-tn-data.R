@@ -13,14 +13,14 @@ library(dotenv)
 library(dplyr)
 library(readr)
 source("R/utils.R")
-source(file.path(DIR_CONFIG, "tn_config.R"))
+source(file.path("config/tn_config.R"))
 
 dotenv::load_dot_env()
 kobo <- kbtbr::Kobo$new(
     "https://eu.kobotoolbox.org/",
     kobo_token = Sys.getenv("KOBO_EU_TOKEN")
 )
-tn_id <- Sys.getenv(paste0(YEAR,"_TN"))
+tn_id <- Sys.getenv(paste0(YEAR, "_TN"))
 
 # METADATA ----
 tn_survey <- readr::read_csv(file.path(DIR_META, "tn_survey.csv"))
@@ -89,7 +89,7 @@ TN_DATA$long$zugangsweg <- zugangsweg_long
 TN_DATA$wide$aussagen <- tn_df %>%
     select(tn_id, tn_cfg$CN_AUSSAGEN_LIKERT) %>%
     select(tn_id, sort(tidyselect::peek_vars())) %>%
-    rename_with(~ tn_cfg$QS_AUSSAGEN_LIKERT$name, all_of(starts_with("group")))
+    rename_with(~ tn_cfg$QS_AUSSAGEN_LIKERT$name, matches("^(group|block)"))
 
 
 # ANGEBOTE VOR ORT ---------------
@@ -328,4 +328,4 @@ TN_DATA$demo$kontakt_chrgl <- sample(
 )
 TN_DATA$long$kontakt_chrgl <- kontaktpunkte_long
 
-readr::write_rds(TN_DATA, file.path(DIR_CLEANED,"tn.rds"))
+readr::write_rds(TN_DATA, file.path(DIR_CLEANED, "tn.rds"))

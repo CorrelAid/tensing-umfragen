@@ -28,7 +28,7 @@ og_choices <- readr::read_csv(file.path(DIR_META, "og_choices.csv"))
 
 
 # config
-og_cfg <- readr::read_rds(file.path(DIR_CONFIG,"og_cfg.rds"))
+og_cfg <- readr::read_rds(file.path(DIR_CONFIG, "og_cfg.rds"))
 
 # Ortsgruppe Daten -----------
 og_df <- kobo$get_submissions(og_id)
@@ -37,7 +37,7 @@ og_df <- kobo$get_submissions(og_id)
 og_df <- og_df %>%
     rename(og_id = `_id`) %>%
     drop_system_columns()
-og_df %>% readr::write_csv(file = "data/raw/og_api.csv") # for reference
+og_df %>% readr::write_csv(file = file.path(DIR_RAW, "og_api.csv")) # for reference
 
 # filter out observations that are empty / only have NA except for id
 og_df <- og_df %>%
@@ -69,6 +69,13 @@ wochentage <- og_df %>%
 #' logically belong together.
 #' for those cases, the pivot_cols_long function collects
 #' the columns and puts them into long format.
+
+#' Ensure all expected columns exist in og_df
+#' TODO: delete when more submissions
+missing_cols <- setdiff(og_cfg$CN_WOCHENTAG_STUNDEN, names(og_df))
+if (length(missing_cols) > 0) {
+    og_df[missing_cols] <- NA
+}
 wochentage_stunden <- pivot_cols_long(
     og_df,
     og_cfg$CN_WOCHENTAG_STUNDEN,
@@ -138,7 +145,6 @@ gender_mat_cols <- colnames(og_df)[str_detect(
     colnames(og_df),
     gender_mat_group_id
 )]
-
 
 # we use fuzzyjoins to merge the correct labels for the gender and the person_type
 gender_options <- get_mapping(og_choices, gender_mat_begin$`kobo--matrix_list`)
@@ -234,6 +240,7 @@ massnahmen_long <- left_join(
 # add Erfolg of Massnahmen
 # the questionnaire always shows the "insgesamt" / overall evaluation of the
 # massnahmen. we have to recode this.
+
 mass_erfolg_cols <- cfg$QS_TN_GEWINNUNG_MASSNAHMEN_ERFOLG %>%
     mutate(massnahme = str_replace_all(relevant, ".+?\\'(.+?)\\'.$", "\\1")) %>%
     mutate(massnahme = if_else(is.na(massnahme), "insgesamt", massnahme))
@@ -307,4 +314,4 @@ OG_DATA$data$og_name_orig[OG_DATA$data$og_name_orig == ""] <- NA
 OG_DATA$data <- OG_DATA$data %>%
     dplyr::mutate(anzahl_insg = anzahl_tn + anzahl_ma_leitung)
 
-OG_DATA %>% readr::write_rds(file.path(DIR_CLEANED,"og.rds"))
+OG_DATA %>% readr::write_rds(file.path(DIR_CLEANED, "og.rds"))
