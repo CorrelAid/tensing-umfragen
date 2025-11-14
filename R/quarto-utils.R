@@ -1,6 +1,6 @@
 # TODO: not best practice to have this here.. should be passed to functions
-tn_cfg <- readr::read_rds(here::here("config/tn_cfg.rds"))
-og_cfg <- readr::read_rds(here::here("config/tn_cfg.rds"))
+#tn_cfg <- readr::read_rds(here::here("config/tn_cfg.rds"))
+#og_cfg <- readr::read_rds(here::here("config/tn_cfg.rds"))
 
 #' Format a Question Label for Markdown Output
 #' @param Q element from the config object (prefix Q_)  -> a row from the survey metadata
@@ -25,20 +25,20 @@ fmt_q <- function(Q, inline = TRUE) {
 #' @details Combines a formatted question label (via \code{fmt_q()}) with a link to the corresponding questionnaire URL defined in \code{tn_cfg} or \code{og_cfg}.
 #' @seealso \code{fmt_q}, \code{\link[base]{sprintf}}, \code{\link[base]{I}}
 #' @export
-fmt_source <- function(Q, type, inline = TRUE) {
+fmt_source <- function(Q, type,url, inline = TRUE) {
   if (type == "tn") {
     s <- sprintf(
       '%s im [%s Fragebogen](%s)',
       fmt_q(Q),
       "Teilnehmer*innen",
-      tn_cfg$URL
+      url
     )
   } else if (type == "og") {
     s <- sprintf(
       '%s im [%s Fragebogen](%s)',
       fmt_q(Q),
       "Ortsgruppen",
-      og_cfg$URL
+      url
     )
   } else {
     stop(paste("Invalid value for argument type. allowed:", "tn, og"))
@@ -57,12 +57,12 @@ fmt_source <- function(Q, type, inline = TRUE) {
 #' @details Generates a markdown link to either the participant or local group questionnaire URL based on configuration objects \code{tn_cfg} and \code{og_cfg}.
 #' @seealso \code{\link[base]{sprintf}}, \code{\link[base]{I}}
 #' @export
-fmt_fragebogen <- function(type, inline = TRUE) {
+fmt_fragebogen <- function(type, inline = TRUE, url) {
   # TODO add link to Fragebogen
   if (type == "tn") {
-    s <- sprintf('[%s Fragebogen](%s)', "Teilnehmer*innen", tn_cfg$URL)
+    s <- sprintf('[%s Fragebogen](%s)', "Teilnehmer*innen", url)
   } else if (type == "og") {
-    s <- sprintf('[%s Fragebogen](%s)', "Ortsgruppen", og_cfg$URL)
+    s <- sprintf('[%s Fragebogen](%s)', "Ortsgruppen", url)
   } else {
     stop(paste("Invalid value for argument type. allowed:", "tn, og"))
   }
