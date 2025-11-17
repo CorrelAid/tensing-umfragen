@@ -1,6 +1,6 @@
 # TODO: not best practice to have this here.. should be passed to functions
-#tn_cfg <- readr::read_rds(here::here("config/tn_cfg.rds"))
-#og_cfg <- readr::read_rds(here::here("config/tn_cfg.rds"))
+# tn_cfg <- readr::read_rds(here::here("config/tn_cfg.rds"))
+# og_cfg <- readr::read_rds(here::here("config/tn_cfg.rds"))
 
 #' Format a Question Label for Markdown Output
 #' @param Q element from the config object (prefix Q_)  -> a row from the survey metadata
@@ -25,17 +25,17 @@ fmt_q <- function(Q, inline = TRUE) {
 #' @details Combines a formatted question label (via \code{fmt_q()}) with a link to the corresponding questionnaire URL defined in \code{tn_cfg} or \code{og_cfg}.
 #' @seealso \code{fmt_q}, \code{\link[base]{sprintf}}, \code{\link[base]{I}}
 #' @export
-fmt_source <- function(Q, type,url, inline = TRUE) {
+fmt_source <- function(Q, type, url, inline = TRUE) {
   if (type == "tn") {
     s <- sprintf(
-      '%s im [%s Fragebogen](%s)',
+      "%s im [%s Fragebogen](%s)",
       fmt_q(Q),
       "Teilnehmer*innen",
       url
     )
   } else if (type == "og") {
     s <- sprintf(
-      '%s im [%s Fragebogen](%s)',
+      "%s im [%s Fragebogen](%s)",
       fmt_q(Q),
       "Ortsgruppen",
       url
@@ -60,9 +60,9 @@ fmt_source <- function(Q, type,url, inline = TRUE) {
 fmt_fragebogen <- function(type, inline = TRUE, url) {
   # TODO add link to Fragebogen
   if (type == "tn") {
-    s <- sprintf('[%s Fragebogen](%s)', "Teilnehmer*innen", url)
+    s <- sprintf("[%s Fragebogen](%s)", "Teilnehmer*innen", url)
   } else if (type == "og") {
-    s <- sprintf('[%s Fragebogen](%s)', "Ortsgruppen", url)
+    s <- sprintf("[%s Fragebogen](%s)", "Ortsgruppen", url)
   } else {
     stop(paste("Invalid value for argument type. allowed:", "tn, og"))
   }
@@ -93,4 +93,18 @@ get_pie_chart_data <- function(data, col) {
 fmt_vec_to_bullet_point <- function(char_vec) {
   char_vec <- char_vec[!is.na(char_vec)]
   paste("- ", char_vec, collapse = "\n")
+}
+
+# Creates a Year Comparison Tabset in Quarto
+# Takes current and previous year data along with a rendering function and titles as input.
+render_year_tabset <- function(curr_data, prev_data, render_fn) {
+  stopifnot(is.function(render_fn))
+  cat("::: {.panel-tabset}\n\n")
+  cat("## ", curr_data$year, "\n\n", sep = "")
+  render_fn(curr_data)
+  cat("\n\n")
+  cat("## ", prev_data$year, "\n\n", sep = "")
+  render_fn(prev_data)
+  cat("\n\n:::\n")
+  invisible(NULL)
 }
