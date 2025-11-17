@@ -10,11 +10,9 @@ library(dplyr)
 source("R/utils.R")
 dotenv::load_dot_env()
 
-source("pipeline/00-get-metadata.R")
-
 # METADATA ----
-tn_survey <- readr::read_csv("data/meta/tn_survey.csv")
-tn_choices <- readr::read_csv("data/meta/tn_choices.csv")
+tn_survey <- readr::read_csv(file.path(DIR_META,"tn_survey.csv"))
+tn_choices <- readr::read_csv(file.path(DIR_META,"tn_choices.csv"))
 
 cfg <- list()
 
@@ -34,9 +32,10 @@ cfg$QS_EIGENSCHAFTEN <- find_qs(
 ) %>%
     filter(type == "select_one")
 
-#eig_qs %>% write_csv("data/meta/tn/eig.csv")
-#eig_choices <- tn_choices %>% filter(list_name %in% eig_qs$select_from_list_name)
-#eig_choices %>% write_csv("data/meta/tn/eig_choices.csv")
+
+cfg$QS_EIGENSCHAFTEN %>% write_csv(file.path(DIR_META, "tn_eig.csv"))
+eig_choices <- tn_choices %>% filter(list_name %in% cfg$QS_EIGENSCHAFTEN$select_from_list_name)
+eig_choices %>% write_csv(file.path(DIR_META,"tn_eig_choices.csv"))
 
 cfg$Q_ZUGANGSWEGE <- find_qs(tn_survey, "col_name", "zugangsweg") %>%
     filter(type == "select_multiple")
@@ -66,11 +65,11 @@ cfg$CN_AUSSAGEN_LIKERT <- cfg$QS_AUSSAGEN_LIKERT$col_name
 
 cfg$QS_AUSSAGEN_LIKERT %>%
     arrange(name) %>%
-    write_csv("data/meta/tn/aussagen.csv")
+    write_csv(file.path(DIR_META,"tn_aussagen.csv"))
 
 tn_choices %>%
     filter(list_name == cfg$QS_AUSSAGEN_LIKERT$select_from_list_name[1]) %>%
-    write_csv("data/meta/tn/aussagen_choices.csv")
+    write_csv(file.path(DIR_META,"tn_aussagen_choices.csv"))
 
 cfg$Q_ANGEBOTE_VOR_ORT <- find_q(tn_survey, "label", "An welchen Angeboten")
 cfg$CN_ANGEBOTE_VOR_ORT <- cfg$Q_ANGEBOTE_VOR_ORT$col_name
@@ -94,11 +93,13 @@ cfg$Q_VERANTWORTUNG_SUPPORT <- find_q(
 )
 cfg$CN_VERANTWORTUNG_SUPPORT <- cfg$Q_VERANTWORTUNG_SUPPORT$col_name
 
-cfg$Q_VERANTWORTUNG_SUPPORT_SONST <- find_q(
+cfg$Q_VERANTWORTUNG_SUPPORT_SONST <- find_qs(
     tn_survey,
     "col_name",
-    "hilfe_fuer_verantw"
+    "hilfe_fuer_verantw",
+    "select_multiple"
 )
+
 cfg$CN_VERANTWORTUNG_SUPPORT_SONST <- cfg$Q_VERANTWORTUNG_SUPPORT_SONST$col_name
 
 cfg$Q_INFO_WEGE_AKTUELL <- find_q(
@@ -136,7 +137,8 @@ cfg$CN_DEMO_ALTER <- cfg$Q_DEMO_ALTER$col_name
 # diese Eingabe wird dann gelöscht aus den Daten
 cfg$INVALID_DEMO_ALTER <- 99
 
-cfg$Q_DEMO_SCHULE <- find_q(tn_survey, "col_name", "demo.+?Schule")
+cfg$Q_DEMO_SCHULE <- find_q(tn_survey, "col_name", "demo.+?[Ss]chul")
+
 cfg$CN_DEMO_SCHULE <- cfg$Q_DEMO_SCHULE$col_name
 
 cfg$Q_CHR_GLAUBEN_KONTAKT <- find_q(
@@ -154,4 +156,4 @@ cfg$Q_CHR_GLAUBEN_KONTAKT_SONST <- find_q(
 cfg$CN_CHR_GLAUBEN_KONTAKT_SONST <- cfg$Q_CHR_GLAUBEN_KONTAKT_SONST$col_name
 
 
-cfg %>% readr::write_rds("config/tn_cfg.rds")
+cfg %>% readr::write_rds(file.path(DIR_CONFIG,"tn_cfg.rds"))
