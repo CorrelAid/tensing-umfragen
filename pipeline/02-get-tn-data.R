@@ -91,6 +91,19 @@ TN_DATA$wide$aussagen <- tn_df %>%
     select(tn_id, sort(tidyselect::peek_vars())) %>%
     rename_with(~ tn_cfg$QS_AUSSAGEN_LIKERT$name, matches("^(group|block)"))
 
+# aggregate for trends
+TN_DATA$agg$aussagen <-TN_DATA$wide$aussagen %>% 
+tidyr::pivot_longer(-tn_id,
+                names_to = "aussage",
+                values_to = "value") %>%
+mutate(value = as.numeric(value)) %>%
+group_by(aussage) %>%
+summarise(
+    total_non_na = sum(!is.na(value)),
+    average      = mean(value, na.rm = TRUE),
+    zustimmung    = sum(value > 3, na.rm = TRUE),
+    zustimmung_perc = zustimmung/total_non_na,
+    .groups = "drop")
 
 # ANGEBOTE VOR ORT ---------------
 angebote_m <- get_mapping(
