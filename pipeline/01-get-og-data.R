@@ -16,6 +16,8 @@ source("R/utils.R")
 source("config/og_config.R")
 dotenv::load_dot_env()
 
+og_id <- Sys.getenv(paste0(YEAR, "_OG"))
+
 # connect to kobo
 kobo <- kbtbr::Kobo$new(
     "https://eu.kobotoolbox.org/",
@@ -306,12 +308,30 @@ OG_DATA$data$og_region <- og_df %>%
     recode_values(m, cfg$CN_OG_REGION) %>%
     pull(!!cfg$CN_OG_REGION)
 
-OG_DATA$data$og_name_orig <- og_df[[cfg$CN_OG_NAME]]
-OG_DATA$data$og_name_orig[OG_DATA$data$og_name_orig == ""] <- NA
+m <- get_mapping(og_choices, cfg$Q_OG_NAME$select_from_list_name)
+
+if (nrow(m)) {
+    OG_DATA$data$og_name <- og_df %>%
+        recode_values(m, cfg$CN_OG_NAME) %>%
+        pull(!!cfg$CN_OG_NAME)
+} else {
+    OG_DATA$data$og_name_orig <- og_df[[cfg$CN_OG_NAME]]
+    OG_DATA$data$og_name_orig[OG_DATA$data$og_name_orig == ""] <- NA
+}
 
 
 # CALCULATE INSG AKTIVE
 OG_DATA$data <- OG_DATA$data %>%
     dplyr::mutate(anzahl_insg = anzahl_tn + anzahl_ma_leitung)
+
+# add grouped regions
+m_regions <- readr::read_csv("data/meta/region_mapping.csv")
+
+OG_DATA$data <- OG_DATA$data |>
+    left_join(
+        m_regions |> select(og_region, region_grouped),
+        by = "og_region"
+    )
+
 
 OG_DATA %>% readr::write_rds(file.path(DIR_CLEANED, "og.rds"))
