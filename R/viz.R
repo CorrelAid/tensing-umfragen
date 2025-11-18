@@ -34,7 +34,7 @@ aussage_bar_chart <- function(data_long, var_filter, var_value) {
     ) +
     # guides(fill = "none") +
     theme(
-      plot.title = element_textbox_simple(margin = unit(c(0, 0, 20, 0), "pt")),
+      plot.title = element_textbox_simple(margin = grid::unit(c(5, 0, 20, 0), "pt")),
       legend.position = "bottom"
     )
 
@@ -89,12 +89,21 @@ bedarfe_bar_chart <- function(data_long, og_choices, og_cfg, bedarf) {
 eig_bar_chart <- function(plot_data, rev_x = TRUE) {
   title <- unique(plot_data$eig_label)
 
-  # we want to reverse the y position so that the best option is on top
-  # we do want to have the most green
-  colors <- rev(COLS_6) |> set_names(levels(plot_data$choice_label))
+  # reverses the x-axis levels
+  plot_data$choice_label <- factor(plot_data$choice_label,
+                                 levels = rev(levels(plot_data$choice_label)))
+
+  colors <- COLS_6 |> set_names(levels(plot_data$choice_label))
 
   lvls <- levels(plot_data$choice_label)
   end_levels <- lvls[c(1, length(lvls))]
+
+  # swap the (1) and (6) labels for the legend
+  legend_labels <- stringr::str_replace(
+    end_levels,
+    "(?<=\\()([16])(?=\\)$)",
+    function(x) ifelse(x == "1", "6", "1")
+  )
 
   p <- ggplot(
     plot_data,
@@ -105,12 +114,13 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
       name   = "",
       values = colors,
       breaks = end_levels,
-      labels = end_levels,
+      labels = legend_labels,
       drop = FALSE
     ) +
     scale_x_discrete(
       drop = FALSE,
-      labels = function(x) sub(".*\\((\\d+)\\)$", "\\1", x)
+      # labels = function(x) sub(".*\\((\\d+)\\)$", "\\1", x)
+      labels = function(x) as.character(seq_along(x)) # sets x-axis labels to 1-6
     ) +
     scale_y_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
     labs(
