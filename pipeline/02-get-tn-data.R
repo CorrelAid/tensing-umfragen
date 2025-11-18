@@ -92,18 +92,20 @@ TN_DATA$wide$aussagen <- tn_df %>%
     rename_with(~ tn_cfg$QS_AUSSAGEN_LIKERT$name, matches("^(group|block)"))
 
 # aggregate for trends
-TN_DATA$agg$aussagen <-TN_DATA$wide$aussagen %>% 
-tidyr::pivot_longer(-tn_id,
-                names_to = "aussage",
-                values_to = "value") %>%
-mutate(value = as.numeric(value)) %>%
-group_by(aussage) %>%
-summarise(
-    total_non_na = sum(!is.na(value)),
-    average      = mean(value, na.rm = TRUE),
-    zustimmung    = sum(value > 3, na.rm = TRUE),
-    zustimmung_perc = zustimmung/total_non_na,
-    .groups = "drop")
+TN_DATA$agg$aussagen <- TN_DATA$wide$aussagen %>%
+    tidyr::pivot_longer(-tn_id,
+        names_to = "aussage",
+        values_to = "value"
+    ) %>%
+    mutate(value = as.numeric(value)) %>%
+    group_by(aussage) %>%
+    summarise(
+        total_non_na = sum(!is.na(value)),
+        average = mean(value, na.rm = TRUE),
+        zustimmung = sum(value > 3, na.rm = TRUE),
+        zustimmung_perc = zustimmung / total_non_na,
+        .groups = "drop"
+    )
 
 # ANGEBOTE VOR ORT ---------------
 angebote_m <- get_mapping(
@@ -143,12 +145,13 @@ q <- find_q(tn_survey, "label", "Region.+?Ortsgruppe")
 col_name_region <- q$`col_name`
 # recode and assign
 m <- get_mapping(tn_choices, q$select_from_list_name)
+# remove inconsistency between TN and OG spelling
+m[m$name=="owl","label"]="Ostwestfalen-Lippe"
 TN_DATA$data$og_region <- tn_df %>%
     recode_values(m, col_name_region) %>%
     pull(!!col_name_region)
 
 # ORTSGRUPPE NAME --------
-# TODO make conditional on whether select with sonst option or open text field
 
 TN_DATA$data$og_name_orig <- tn_df %>%
     pull(!!tn_cfg$CN_OG_NAME)
@@ -340,5 +343,37 @@ TN_DATA$demo$kontakt_chrgl <- sample(
     length(kontaktpunkte_long$kontaktpunkt)
 )
 TN_DATA$long$kontakt_chrgl <- kontaktpunkte_long
+
+# RECODE TN OG_NAME -----
+# TODO: move to tn-processing
+og_recoding <- readr::read_csv(file.path(DIR_META, "og_recoding.csv"))
+og_recoding <- og_recoding %>%
+    rename(
+        og_name_orig = `Schreibweise in den Daten`,
+        og_name = Vereinheitlicht,
+        og_region = Landesverband
+    )
+
+# join to og data
+TN_DATA$data <- TN_DATA$data %>%
+    rename(og_region_orig = og_region) %>%
+    left_join(og_recoding, by = c("og_name_cleaned" = "og_name_orig"))
+    
+# Fill in regions where og_name is NA (but region isnt)
+idx <- is.na(TN_DATA$data$og_name) & is.na(TN_DATA$data$og_region)
+TN_DATA$data$og_region[idx] <- TN_DATA$data$og_region_orig[idx]
+
+# Replace NA in og_name
+TN_DATA$data$og_name_orig[TN_DATA$data$og_name_orig == ""] <- NA
+
+
+# GROUP TN og_region
+m_regions <- readr::read_csv("data/meta/region_mapping.csv")
+
+TN_DATA$data <- TN_DATA$data |>
+    left_join(
+        m_regions |> select(og_region, region_grouped),
+        by = "og_region"
+    )
 
 readr::write_rds(TN_DATA, file.path(DIR_CLEANED, "tn.rds"))
