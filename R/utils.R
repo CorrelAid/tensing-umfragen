@@ -1,5 +1,6 @@
 library(stringr)
 library(purrr)
+library(here)
 
 #' Find columns for a matrix question.
 #' @param meta_survey A data frame containing survey metadata.
@@ -200,7 +201,7 @@ survey_to_json <- function(survey_df) {
 }
 
 # Gets all years based on existing folders in data/cleaned
-get_all_years <- function(root = "data/cleaned") {
+get_all_years <- function(root = here("data/cleaned")) {
     folder_names <- dir(root)
     years <- as.integer(folder_names)
     years <- years[!is.na(years)]
@@ -208,7 +209,7 @@ get_all_years <- function(root = "data/cleaned") {
 }
 
 # Gets the current and previous year based on existing folders in data/cleaned
-get_current_and_previous_year <- function(root = "data/cleaned") {
+get_current_and_previous_year <- function(root = here("data/cleaned")) {
     years = get_all_years(root)
     current_year <- max(years)
     previous_year <- current_year - 1L
@@ -230,13 +231,14 @@ load_year <- function(y) {
             aussagen_choices = readr::read_csv(here::here("data/meta", y, "tn_aussagen_choices.csv")) %>% mutate(name = as.character(name)),
             eig = readr::read_csv(here("data/meta", y, "tn_eig.csv")),
             eig_choices = readr::read_csv(here::here("data/meta", y, "tn_eig_choices.csv")),
-            og_choices = readr::read_csv(here::here("data/meta", y, "og_choices.csv"))
+            og_choices = readr::read_csv(here::here("data/meta", y, "og_choices.csv")),
+            tn_choices = readr::read_csv(here::here("data/meta", y, "tn_choices.csv"))
         )
     )
 }
 
 load_all_years <- function() {
-    years <- get_all_years()
+    years <- get_available_years() 
     data_list <- purrr::map(years, load_year)
     names(data_list) <- years
     data_list
