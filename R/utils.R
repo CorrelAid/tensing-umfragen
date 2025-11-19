@@ -238,7 +238,7 @@ load_year <- function(y) {
 }
 
 load_all_years <- function() {
-    years <- get_available_years() 
+    years <- get_all_years() 
     data_list <- purrr::map(years, load_year)
     names(data_list) <- years
     data_list
