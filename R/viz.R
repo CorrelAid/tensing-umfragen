@@ -150,7 +150,7 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
 .ts_factor_year <- function(x) factor(x, levels = sort(unique(x)))
 
 .ts_palette_named <- function(levels, palette = NULL) {
-  base <- if (is.null(palette)) COLS_6 else unname(palette)   # drop names
+  base <- if (is.null(palette)) COLS_9 else unname(palette)   # drop names
   L <- length(base)
   idx <- ((seq_along(levels) - 1) %% L) + 1                   # 1..L cycling
   vals <- rev(base)[idx]                                      # reverse palette
@@ -250,7 +250,7 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
     geom <- ggiraph::geom_col_interactive(width = 0.6)
   } else if (variant == "stacked") { # stacked bars
     fill_levels <- levels(df$fill_factor)
-    fill_map <- .ts_palette_named(fill_levels, palette)
+    fill_map <- .ts_palette_named(fill_levels, rev(palette))
     fill_aes <- ggplot2::aes(fill = fill_factor, group = fill_factor)
     fill_scale <- ggplot2::scale_fill_manual(
       values = fill_map,
