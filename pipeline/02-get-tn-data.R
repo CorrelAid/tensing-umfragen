@@ -139,6 +139,8 @@ q <- find_q(tn_survey, "col_name", "stunden")
 col_name_stunden <- q$`col_name`
 
 TN_DATA$data$stunden_pro_woche <- as.numeric(tn_df[[col_name_stunden]])
+#remove outliers
+TN_DATA$data$stunden_pro_woche[TN_DATA$data$stunden_pro_woche >= 40] <- NA
 
 # REGION ------------
 q <- find_q(tn_survey, "label", "Region.+?Ortsgruppe")
@@ -186,7 +188,6 @@ m <- get_mapping(tn_choices, q$select_from_list_name)
 TN_DATA$data$teilnahme_dtlweit <- tn_df %>%
     recode_values(m, col_name_dtlweit) %>%
     pull(!!col_name_dtlweit)
-
 
 # gründe gegen teilnahme an deutschlandweite oder ortsübergreifende angebote
 # deutschlandweite angebote
@@ -292,13 +293,12 @@ TN_DATA$demo$gender <- sample(gender, length(gender))
 
 # Alter
 alter <- tn_df %>%
-    pull(!!tn_cfg$CN_DEMO_ALTER) %>%
-    as.integer()
-
-# recode implausible values as NA
-# TODO BUCKETS
-alter[alter > tn_cfg$INVALID_DEMO_ALTER] <- NA
+  mutate(
+    alter = as.integer(.data[[tn_cfg$CN_DEMO_ALTER]]),
+    alter = if_else(alter > tn_cfg$INVALID_DEMO_ALTER, NA_integer_, alter)
+  )
 TN_DATA$demo$alter <- sample(alter, length(alter))
+
 
 # Schule
 m <- get_mapping(tn_choices, tn_cfg$Q_DEMO_SCHULE$select_from_list_name)
@@ -366,6 +366,27 @@ TN_DATA$data$og_region[idx] <- TN_DATA$data$og_region_orig[idx]
 # Replace NA in og_name
 TN_DATA$data$og_name_orig[TN_DATA$data$og_name_orig == ""] <- NA
 
+# ALTER pro OG
+og_map <- TN_DATA$data %>%
+  dplyr::select(tn_id, og_name) %>%
+  dplyr::distinct()
+
+alter_by_og <- alter %>%
+  dplyr::select(tn_id, alter) %>%
+  dplyr::left_join(og_map, by = "tn_id") %>%
+  dplyr::group_by(og_name) %>%
+  dplyr::summarise(
+    avg_alter = round(mean(alter, na.rm = TRUE)),
+    n        = dplyr::n(),
+    .groups  = "drop"
+  )
+# supress for n<3
+alter_by_og_safe <- alter_by_og %>%
+  mutate(
+    avg_alter = if_else(n < 3, NA_real_, avg_alter)
+  ) 
+
+TN_DATA$agg$alter_by_og <-alter_by_og_safe
 
 # GROUP TN og_region
 m_regions <- readr::read_csv("data/meta/region_mapping.csv")
