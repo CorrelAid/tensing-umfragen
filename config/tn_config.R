@@ -56,8 +56,8 @@ cfg$Q_ZUGANGSWEGE_SONST <- find_qs(tn_survey, "col_name", "zugangsweg") %>%
     filter(type == "text")
 cfg$CN_ZUGANGSWEGE_SONST <- cfg$Q_ZUGANGSWEGE_SONST$col_name
 
-cfg$Q_BEGIN_AUSSAGEN_LIKERT <- find_qs(tn_survey, "col_name", "aussage") %>%
-    filter(str_detect(name, "header"))
+cfg$Q_BEGIN_AUSSAGEN_LIKERT <- find_qs(tn_survey, "label", "Aussage")
+
 cfg$QS_AUSSAGEN_LIKERT <- find_qs(tn_survey, "col_name", "aussage") %>%
     filter(type == "select_one") %>%
     filter(!str_detect(name, "header"))
@@ -76,6 +76,9 @@ cfg$CN_ANGEBOTE_VOR_ORT <- cfg$Q_ANGEBOTE_VOR_ORT$col_name
 cfg$Q_ANGEBOTE_VOR_ORT_SONST <- find_q(tn_survey, "col_name", "andere_angebote")
 cfg$CN_ANGEBOTE_VOR_ORT_SONST <- cfg$Q_ANGEBOTE_VOR_ORT_SONST$col_name
 
+cfg$Q_OG_REGION <-find_q(tn_survey, "name","ortsgruppe_region")
+cfg$CN_OG_REGION <-cfg$Q_OG_REGION$col_name
+
 cfg$Q_OG_NAME <- find_q(tn_survey, "label", "heißt.+?Ortsgruppe")
 cfg$CN_OG_NAME <- cfg$Q_OG_NAME$col_name
 
@@ -85,6 +88,12 @@ cfg$Q_VERANTWORTUNG_JANEIN <- find_q(
     "Übernimmst.+?Verantwortung\\?$"
 )
 cfg$CN_VERANTWORTUNG_JANEIN <- cfg$Q_VERANTWORTUNG_JANEIN$col_name
+
+cfg$Q_VERANST_REGION <-find_q(tn_survey, "col_name", "veranst_region")
+cfg$CN_VERANST_REGION <-cfg$Q_VERANST_REGION$col_name
+
+cfg$Q_VERANST_DE <-find_q(tn_survey, "col_name", "veranst_deut_weit")
+cfg$CN_VERANST_DE <-cfg$Q_VERANST_DE$col_name
 
 cfg$Q_VERANTWORTUNG_SUPPORT <- find_q(
     tn_survey,
