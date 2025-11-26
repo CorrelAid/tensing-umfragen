@@ -29,15 +29,13 @@ website:
       menu:
       - href: region/ostwerk.qmd
       - href: region/nord.qmd
-      - href: region/niederrhein.qmd
-      - href: region/blrg.qmd
       - href: region/sachsen.qmd
       - href: region/thueringen.qmd
-      - href: region/hessen.qmd
-      - href: region/owl.qmd
       - href: region/sueden.qmd
+    #  - href: region/westbund.qmd
     - themen.qmd
     - wirkung-pg.qmd
+    - trends.qmd
     right:
     - text: Hilfe
       href: hilfe.html
