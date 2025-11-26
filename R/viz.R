@@ -38,7 +38,12 @@ aussage_bar_chart <- function(data_long, var_filter, var_value) {
       legend.position = "bottom"
     )
 
-  ggiraph::girafe(ggobj = p)
+  ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
 }
 
 
@@ -82,7 +87,12 @@ bedarfe_bar_chart <- function(data_long, og_choices, og_cfg, bedarf) {
       plot.title = element_textbox_simple(margin = unit(c(0, 0, 10, 0), "pt"))
     )
 
-  ggiraph::girafe(ggobj = p)
+  ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
 }
 
 # rev_x so far always true
@@ -124,10 +134,10 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
     ) +
     scale_y_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
     labs(
-      x = "% Aktive",
+      x = "Bewertung",
       title = title,
       fill = NULL,
-      y = NULL
+      y = "% Aktive"
     ) +
     # guides(fill = "none") +
     theme(
@@ -136,7 +146,12 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
       # axis.text.x = element_text(size = 10.5)
       legend.position = "bottom"
     )
-  ggiraph::girafe(ggobj = p)
+  ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
 }
 
 
@@ -150,7 +165,7 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
 .ts_factor_year <- function(x) factor(x, levels = sort(unique(x)))
 
 .ts_palette_named <- function(levels, palette = NULL) {
-  base <- if (is.null(palette)) COLS_9 else unname(palette)   # drop names
+  base <- if (is.null(palette)) COLS_6 else unname(palette)   # drop names
   L <- length(base)
   idx <- ((seq_along(levels) - 1) %% L) + 1                   # 1..L cycling
   vals <- rev(base)[idx]                                      # reverse palette
@@ -250,7 +265,7 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
     geom <- ggiraph::geom_col_interactive(width = 0.6)
   } else if (variant == "stacked") { # stacked bars
     fill_levels <- levels(df$fill_factor)
-    fill_map <- .ts_palette_named(fill_levels, rev(palette))
+    fill_map <- .ts_palette_named(fill_levels, palette)
     fill_aes <- ggplot2::aes(fill = fill_factor, group = fill_factor)
     fill_scale <- ggplot2::scale_fill_manual(
       values = fill_map,
