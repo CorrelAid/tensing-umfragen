@@ -243,3 +243,8 @@ load_all_years <- function() {
     names(data_list) <- years
     data_list
 }
+
+
+drop_na_ka <- function(x) {
+  x[!is.na(x) & x != "keine Angabe"]
+}
