@@ -21,3 +21,41 @@ $btn-primary-hover-color: #212529;
 
 $link-color: $primary;
 $link-hover-color: $primary-light;
+
+/* Download button for static plots */
+.ts-plot-download-wrapper {
+  position: relative;
+}
+
+.ts-plot-download-wrapper .figure,
+.ts-plot-download-wrapper figure {
+  margin-bottom: 0;
+}
+
+.ts-plot-download-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.6rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.ts-plot-download-btn:hover,
+.ts-plot-download-btn:focus {
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+}
+
+.ts-plot-download-wrapper .anchorjs-link,
+.quarto-figure .anchorjs-link {
+  display: none;
+}

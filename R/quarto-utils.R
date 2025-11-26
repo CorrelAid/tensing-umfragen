@@ -108,3 +108,67 @@ render_year_tabset <- function(curr_data, prev_data, render_fn) {
   cat("\n\n:::\n")
   invisible(NULL)
 }
+
+# Ensure htmlwidget dependencies get registered even within results='asis' chunks
+render_widget_output <- function(widget) {
+  deps <- htmltools::findDependencies(widget)
+  if (length(deps) > 0 &&
+      isTRUE(getOption("knitr.in.progress")) &&
+      requireNamespace("knitr", quietly = TRUE)) {
+    knitr::knit_meta_add(deps)
+  }
+  print(htmltools::tagList(widget))
+}
+
+# Add download buttons to all static plots rendered via knitr's plot hook
+.ts_setup_plot_download_hook <- local({
+  initialized <- FALSE
+  function() {
+    if (initialized || !isTRUE(getOption("knitr.in.progress"))) {
+      return(invisible(NULL))
+    }
+
+    default_plot_hook <- knitr::knit_hooks$get("plot")
+
+    knitr::knit_hooks$set(plot = function(x, options) {
+      # keep default behavior for dump.qmd or if there is no plot output
+      if (identical(basename(knitr::current_input()), "dump.qmd") ||
+          length(x) == 0) {
+        return(default_plot_hook(x, options))
+      }
+
+      default_html <- default_plot_hook(x, options)
+
+      if (is.null(default_html)) {
+        return(default_html)
+      }
+
+      href <- x[1]
+      download_label <- if (!is.null(options$fig_download_label)) {
+        options$fig_download_label
+      } else {
+        "PNG speichern"
+      }
+
+      htmltools::doRenderTags(
+        htmltools::div(
+          class = "ts-plot-download-wrapper",
+          htmltools::HTML(default_html),
+          htmltools::a(
+            class = "ts-plot-download-btn",
+            href = href,
+            download = basename(href),
+            title = download_label,
+            `aria-label` = download_label,
+            htmltools::tags$span("⬇︎")
+          )
+        )
+      )
+    })
+
+    initialized <<- TRUE
+    invisible(NULL)
+  }
+})
+
+.ts_setup_plot_download_hook()
