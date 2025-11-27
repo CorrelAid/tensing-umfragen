@@ -171,4 +171,48 @@ render_widget_output <- function(widget) {
   }
 })
 
-.ts_setup_plot_download_hook()
+callout_datenquellen <- function(cfg, og_q = NULL, tn_q = NULL) {
+  # helper: resolve character names to real question objects
+  resolve <- function(x, cfg_part) {
+    if (is.character(x)) {
+      cfg_part[[x]]
+    } else {
+      x
+    }
+  }
+
+  tn_block <- ""
+  og_block <- ""
+
+  if (!is.null(tn_q) && length(tn_q) > 0) {
+    tn_resolved <- lapply(tn_q, resolve, cfg_part = cfg$tn_cfg)
+    tn_links <- purrr::map_chr(tn_resolved, ~ fmt_q(.x))
+    tn_src <- fmt_fragebogen("tn", url = cfg$tn_cfg$URL)
+
+    tn_block <- paste0(
+      "**Relevante Fragen (TN)** im ", tn_src, ":\n\n",
+      "- ", paste(tn_links, collapse = "\n- "), "\n\n"
+    )
+  }
+
+  if (!is.null(og_q) && length(og_q) > 0) {
+    og_resolved <- lapply(og_q, resolve, cfg_part = cfg$og_cfg)
+    og_links <- purrr::map_chr(og_resolved, ~ fmt_q(.x))
+    og_src <- fmt_fragebogen("og", url = cfg$og_cfg$URL)
+
+    og_block <- paste0(
+      "**Relevante Fragen (OG)** im ", og_src, ":\n\n",
+      "- ", paste(og_links, collapse = "\n- "), "\n\n"
+    )
+  }
+
+  paste0(
+    "\n\n",
+    "::: {.callout-note collapse=\"true\"}\n",
+    "## Datenquelle\n\n",
+    tn_block,
+    og_block,
+    ":::",
+    "\n\n"
+  )
+}
