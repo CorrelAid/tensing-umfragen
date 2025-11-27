@@ -47,12 +47,14 @@ cfg$CN_HAUPTAMT_STUNDEN <- cfg$Q_HAUPTAMT_STUNDEN$col_name
 # question block "wie viele Personen waren bei euch... aktiv?"
 cfg$Q_ANZAHL_BEGIN <- find_q(og_survey, "label", "Wie viele Personen.+aktiv?")
 
+cfg$Q_ANZAHL_MA <- find_q(og_survey, "col_name", "Mitarbeitende_inkl_Leitung")
+
 # TODO matrix
 
-cfg$Q_GESCHLECHT <-find_q(og_survey, "label", "identifizieren")
+cfg$Q_GESCHLECHT <- find_q(og_survey, "label", "identifizieren")
 cfg$CN_GESCHLECHT <- cfg$Q_GESCHLECHT$col_name
 
-cfg$Q_ALTERSGRUPPE <-find_q(og_survey, "col_name", "Altersgruppe")
+cfg$Q_ALTERSGRUPPE <- find_q(og_survey, "col_name", "Altersgruppe")
 cfg$CN_ALTERSGRUPPE <- cfg$Q_ALTERSGRUPPE$col_name
 
 
@@ -84,6 +86,13 @@ cfg$Q_TN_GEWINNUNG_MASSNAHMEN_SONST <- find_q(
 )
 cfg$CN_TN_GEWINNUNG_MASSNAHMEN_SONST <- cfg$Q_TN_GEWINNUNG_MASSNAHMEN_SONST$col_name
 
+cfg$QS_TN_GEWINNUNG_MASSNAHMEN_ERFOLG_BEGIN <- find_qs(
+    og_survey,
+    "col_name",
+    "(Erfolg.+?[Mm]assnahm)|block_erfolg_tngewinnung",
+) %>%
+    filter(str_detect(name, "header"))
+
 cfg$QS_TN_GEWINNUNG_MASSNAHMEN_ERFOLG <- find_qs(
     og_survey,
     "col_name",
@@ -92,7 +101,7 @@ cfg$QS_TN_GEWINNUNG_MASSNAHMEN_ERFOLG <- find_qs(
 ) %>%
     # header in survey design ist fälschlicherweise ein "select_one"
     filter(!str_detect(name, "header"))
-   
+
 cfg$Q_BEGIN_UNTERSTUETZUNGSBEDARFE <- find_qs(
     og_survey,
     "col_name",
@@ -114,5 +123,6 @@ cfg$CN_OG_REGION <- cfg$Q_OG_REGION$col_name
 
 cfg$Q_OG_NAME <- find_qs(og_survey, "col_name", "ortsgruppe_name$")
 cfg$CN_OG_NAME <- cfg$Q_OG_NAME$col_name
+
 
 cfg %>% readr::write_rds(file.path(DIR_CONFIG, "og_cfg.rds"))
