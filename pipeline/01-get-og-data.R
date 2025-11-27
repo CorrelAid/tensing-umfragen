@@ -309,20 +309,15 @@ OG_DATA$data$og_region <- og_df %>%
     pull(!!cfg$CN_OG_REGION)
 
 m <- get_mapping(og_choices, cfg$Q_OG_NAME$select_from_list_name)
-
 if (nrow(m)) {
     OG_DATA$data$og_name <- og_df %>%
         recode_values(m, cfg$CN_OG_NAME) %>%
         pull(!!cfg$CN_OG_NAME)
 } else {
+#TODO: delete?
     OG_DATA$data$og_name_orig <- og_df[[cfg$CN_OG_NAME]]
     OG_DATA$data$og_name_orig[OG_DATA$data$og_name_orig == ""] <- NA
 }
-
-
-# CALCULATE INSG AKTIVE
-OG_DATA$data <- OG_DATA$data %>%
-    dplyr::mutate(anzahl_insg = anzahl_tn + anzahl_ma_leitung)
 
 # add grouped regions
 m_regions <- readr::read_csv("data/meta/region_mapping.csv")
@@ -332,6 +327,10 @@ OG_DATA$data <- OG_DATA$data |>
         m_regions |> select(og_region, region_grouped),
         by = "og_region"
     )
+
+# CALCULATE INSG AKTIVE
+OG_DATA$data <- OG_DATA$data %>%
+    dplyr::mutate(anzahl_insg = anzahl_tn + anzahl_ma_leitung)
 
 
 OG_DATA %>% readr::write_rds(file.path(DIR_CLEANED, "og.rds"))
