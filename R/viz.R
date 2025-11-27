@@ -100,13 +100,29 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
   title <- unique(plot_data$eig_label)
 
   # reverses the x-axis levels
-  plot_data$choice_label <- factor(plot_data$choice_label,
-                                 levels = rev(levels(plot_data$choice_label)))
-
-  colors <- COLS_6 |> set_names(levels(plot_data$choice_label))
-
+  plot_data$choice_label <- factor(
+    plot_data$choice_label,
+    levels = rev(levels(plot_data$choice_label))
+  )
+  
   lvls <- levels(plot_data$choice_label)
   end_levels <- lvls[c(1, length(lvls))]
+
+  # add zero-percent rows for missing end levels so they still get colours in the legend
+  missing_end_levels <- setdiff(end_levels, as.character(plot_data$choice_label))
+  if (length(missing_end_levels) > 0) {
+    extra_rows <- tibble::tibble(
+      percent = 0,
+      choice_label = factor(missing_end_levels, levels = lvls)
+    )
+    # make sure class matches (ordered vs factor)
+    if (is.ordered(plot_data$choice_label)) {
+      extra_rows$choice_label <- ordered(extra_rows$choice_label, levels = lvls)
+    }
+    plot_data <- dplyr::bind_rows(plot_data, extra_rows)
+  }
+
+  colors <- COLS_6 |> set_names(levels(plot_data$choice_label))
 
   # swap the (1) and (6) labels for the legend
   legend_labels <- stringr::str_replace(
@@ -165,14 +181,13 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
 .ts_factor_year <- function(x) factor(x, levels = sort(unique(x)))
 
 .ts_palette_named <- function(levels, palette = NULL) {
-  base <- if (is.null(palette)) COLS_6 else unname(palette)   # drop names
+  base <- if (is.null(palette)) COLS_6 else unname(palette)
   L <- length(base)
-  idx <- ((seq_along(levels) - 1) %% L) + 1                   # 1..L cycling
-  vals <- rev(base)[idx]                                      # reverse palette
-  names(vals) <- levels                                       # keep level names
+  idx <- ((seq_along(levels) - 1) %% L) + 1
+  vals <- rev(base)[idx]
+  names(vals) <- levels
   vals
 }
-
 
 .ts_theme <- function() {
       base <- if (exists("theme_ts", inherits = TRUE)) theme_ts else theme_minimal()
@@ -231,7 +246,6 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
       }
     )
 
-  # keep empty groups visible
   if (!is.null(fill_col)) {
     df <- tidyr::complete(
       df, year_factor, fill_factor,
