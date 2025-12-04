@@ -1,49 +1,28 @@
 #' colors and palettes
-#' very messy, needs to be cleaned up
 library(ggplot2)
 library(ggtext)
 
-TS_GREEN <- "#b5c948"
-RED <- "#D81B60"
-cols_4 <- c(TS_GREEN, "#3E3D3C", "#1E88E5", RED)
-PAL_AMPEL <- c(TS_GREEN, "#FFFF00", RED)
+TS_FONT_FAMILY <- "Atkinson Hyperlegible"
 
-#hcl.pals(type = "diverging")
-#scales::show_col(hcl.colors(6, "Purple-Green"))
-cols_6 <- hcl.colors(6, "Purple-Green")
-COLS_6_orig <- c(
-  '#8c510a',
-  '#d8b365',
-  '#f6e8c3',
-  '#c7eae5',
-  '#5ab4ac',
-  '#01665e'
-)
+TS_GREEN <- "#b5c948"
+KEINE_ANGABE_GRAY <- "#676565"
 COLS_6 <- c('#7a4a0c', '#cfb77c', '#f4e9d2', '#c0e3dc', '#4ca89f', '#155c52')
 
-PAL5_DIV_orig <- c('#a6611a', '#dfc27d', '#f5f5f5', '#80cdc1', '#018571')
-PAL5_DIV <- c('#874d16', '#d6bb88', '#f0f0f0', '#75c4b9', '#116b5c')
-PAL5_UEB <- c(
-  `Nein` = '#a6611a',
-  `Eher nein` = '#dfc27d',
-  `Bin mir unsicher` = '#f5f5f5',
-  `Eher ja` = '#80cdc1',
-  `Ja` = '#018571'
-)
 theme_ts <- ggplot2::theme_minimal(
   base_size = 14,
-  base_family = "Atkinson Hyperlegible"
+  base_family = TS_FONT_FAMILY
 ) +
   ggplot2::theme(
     legend.position = "top",
     plot.title = element_text(
       face = "bold",
       size = 16,
-      colour = "black"
+      colour = "black",
+      hjust = 0.5,
+      family = TS_FONT_FAMILY
     ),
     plot.title.position = "plot"
   )
-
 
 PLACEHOLDER_PLOT <-
   ggplot(tibble::tibble(x = 1:3, y = 4:6), aes(x = x, y = y)) +
@@ -56,3 +35,86 @@ PLACEHOLDER_PLOT <-
     size = 16
   ) +
   labs(title = "Platzhalter")
+
+
+# New accessible palettes, incorporating TenSing Green
+
+pal_yes_no <- c(
+  "#b5c948",
+  "#1F2A4F"
+)
+
+pal_yes_no_3 <- c(
+  "#B5C948",
+  "#6A7A4C",
+  "#1F2A4F"
+)
+
+pal_yes_no_5 <- c(
+  "#B5C948",
+  "#88994A",
+  "#6A7A4C",
+  "#4C5A4D",
+  "#1F2A4F"
+)
+
+pal_yes_no_6 <- c(
+  "#B5C948",
+  "#97A949",
+  "#79894B",
+  "#5B6A4C",
+  "#3D4A4E",
+  "#1F2A4F"
+)
+
+pal_8 <- c(
+  "#b5c948",
+  "#7EA85A",
+  "#4F8D63",
+  "#3A6F78",
+  "#3E5F97",
+  "#2F4B70",
+  "#6C4C7A",
+  "#B18FBF"
+)
+
+pal_trends_10 <- c(
+  "#b5c948",
+  "#7F9C3A",
+  "#4F7A45",
+  "#3A6459",
+  "#345A72",
+  "#2F4E78",
+  "#3D3E63",
+  "#5A496F",
+  "#7B5C7D",
+  "#A38D3A"
+)
+
+pal_likert_11 <- c(
+  "#B5C948",
+  "#A6B949",
+  "#97A949",
+  "#88994A",
+  "#79894B",
+  "#6A7A4C",
+  "#5B6A4C",
+  "#4C5A4D",
+  "#3D4A4E",
+  "#2E3A4E",
+  "#1F2A4F"
+)
+
+# Mapping for info columns
+
+INFO_COLS <- c(
+  "ja"                      = pal_yes_no_5[1],
+  "Ja"                      = pal_yes_no_5[1],
+  "zum Teil"                = pal_yes_no_5[2],
+  "nein"                    = pal_yes_no_5[5],
+  "Nein"                    = pal_yes_no_5[5],
+  "keine Angabe"            = KEINE_ANGABE_GRAY,
+  "Genau wie bisher auch"   = pal_yes_no_5[1],
+  "Auf anderem Weg, und zwar:" = pal_yes_no_5[5]
+)
+
