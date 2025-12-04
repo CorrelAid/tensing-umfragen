@@ -6,10 +6,633 @@ execute:
 from: markdown+emoji
 ---
 
+```{r setup}
+#| include: false
+#| echo: false
+source("R/load_libs.R")
+source("R/load_data.R")
+ggplot2::theme_set(theme_ts)
 
-::: {.callout-caution}
-## Coming... 2025?!
+all_data = load_all_years()
+```
 
-Diese Seite kann erst befüllt werden, wenn die Umfrage mehrfach durchgeführt worden ist :) 
+```{r functions}
+
+# ---- OG: counts per year ----
+get_yearly_og_counts <- function(all_data) {
+  purrr::map_dfr(
+    all_data,
+    ~ tibble(
+      year = .x$year,
+      ortsgruppen = length(unique(.x$og$agg$total_tn_by_og$og_name))
+    )
+  )
+}
+
+get_yearly_og_counts_region <- function(all_data) {
+  purrr::map_dfr(
+    all_data,
+    ~ .x$og$agg$total_tn_by_og %>%
+        dplyr::group_by(region_grouped) %>%
+        dplyr::summarise(
+          ortsgruppen = dplyr::n_distinct(og_name),
+          .groups = "drop"
+        ) %>%
+        dplyr::mutate(year = .x$year)
+  )
+}
+
+# ---- TN+OG: counts per year ----
+get_yearly_tn_counts <- function(all_data) {
+  purrr::map_dfr(
+    all_data,
+    ~ tibble(
+      year = .x$year,
+      teilnehmende = sum(.x$og$agg$total_tn_by_og$anzahl_tn),
+      mitarbeitende=sum(.x$og$agg$total_tn_by_og$anzahl_ma_leitung),
+      insg=sum(.x$og$agg$total_tn_by_og$anzahl_insg),
+    )
+  )
+}
+
+get_yearly_tn_counts_region <- function(all_data) {
+  purrr::map_dfr(
+    all_data,
+    ~ .x$og$agg$total_tn_by_og %>%
+        dplyr::group_by(region_grouped) %>%
+        dplyr::summarise(
+          insg = sum(anzahl_insg),
+          .groups = "drop"
+        ) %>%
+        dplyr::mutate(year = .x$year)
+  )
+}
+
+# ---- TN: answer yes counts per year by col----
+get_yearly_ja_count <- function(all_data, col) {
+  purrr::map_dfr(
+    all_data,
+    ~ tibble(
+      year = .x$year,
+      count = sum(.x$tn$data[[col]] == "Ja", na.rm = TRUE)
+    )
+  )
+}
+
+```
+
+Ein Ziel der Umfrage ist es, ein langfristiges Bild der Entwicklungen bei TEN SING zu bekommen. Dafür werden ausgewählte Aspekte an dieser Stelle über die Jahre hinweg beleuchtet.
+
+## Generelle Entwicklung des TEN SING Netzwerks über die Jahre
+
+Hier soll ein Einblick entstehen, wie sich das TEN SING Netzwerk über die Jahre hinweg verändert..
+
+### Anzahl der Ortsgruppen
+
+::: {.panel-tabset}
+## Deutschlandweit
+Dieses Diagramm zeigt, wie sich die Anzahl der TEN SING Ortsgruppen in Deutschland im Laufe der Jahre verändert hat.
+
+```{r fig-ortsgroups-de}
+#| echo: false
+#| fig.width: 9
+#| fig.height: 6
+#| fig-cap: ""
+#| results: "asis"
+
+og_counts <- get_yearly_og_counts(all_data)
+
+year_bar_chart(
+  og_counts,
+  title="Anzahl TEN SING Ortsgruppen (Deutschlandweit)",
+  year_col = "year",
+  value_col = "ortsgruppen",
+  x_label = "Jahr",
+  y_label = "Anzahl der Ortsgruppen",
+  palette = pal_trends_10
+)
+
+```
+
+## Pro Region
+
+```{r fig-ortsgroups-region-facet}
+#| echo: false
+#| fig.width: 9
+#| fig.height: 8
+#| fig-cap: ""
+#| results: "asis"
+
+og_counts_region <- get_yearly_og_counts_region(all_data) %>%
+  dplyr::filter(!is.na(region_grouped),
+                region_grouped != "keine Angabe")
+
+region_order <- og_counts_region %>%
+  group_by(region_grouped) %>%
+  summarise(total = sum(ortsgruppen), .groups = "drop") %>%
+  arrange(desc(total))
+
+region_levels <- region_order$region_grouped
+years_all <- sort(unique(og_counts_region$year))
+
+plot_data <- og_counts_region %>%
+  mutate(og_region = as.character(region_grouped)) %>%
+  group_by(og_region, year) %>% 
+  summarise(ortsgruppen = sum(ortsgruppen), .groups = "drop") %>%
+  mutate(
+    og_region = fct_reorder(og_region, ortsgruppen, .fun = sum, .desc = TRUE)
+  ) %>%
+  complete(og_region, year = years_all, fill = list(ortsgruppen = 0)) %>%
+  mutate(
+    year_f  = factor(year, levels = years_all),
+    tooltip = glue("{year}: {comma(ortsgruppen)} Ortsgruppen ({og_region})"),
+    data_id = glue("og-region-{year}-{og_region}")
+  )
+
+fill_levels <- levels(plot_data$year_f)
+fill_map <- .ts_palette_named(fill_levels, pal_trends_10)
+
+p <- ggplot2::ggplot(
+    plot_data,
+    ggplot2::aes(
+      x    = year_f,
+      y    = ortsgruppen,
+      fill = year_f
+    )
+  ) +
+  ggiraph::geom_col_interactive(
+    ggplot2::aes(tooltip = tooltip, data_id = data_id),
+    width  = 0.8,
+    colour = NA
+  ) +
+  scale_fill_manual(values = fill_map, breaks = fill_levels, drop = FALSE, name = "Jahr") +
+  scale_y_continuous(labels = comma, expand = expansion(mult = c(0, 0.05))) +
+  labs(x = NULL, y = "Anzahl der Ortsgruppen", title = "Anzahl TEN SING Ortsgruppen (pro Region)") +
+  # facet_wrap(scales = "fixed")
+  facet_wrap(~ og_region, scales = "fixed", ncol = 3, strip.position = "bottom") +
+  theme_ts +
+  ggplot2::theme(
+    strip.text       = ggplot2::element_text(size = 11, face = "bold"),
+    strip.background = ggplot2::element_rect(fill = "grey90", colour = NA),
+    panel.spacing    = grid::unit(0.6, "lines"),
+    axis.text.x      = ggplot2::element_text(size = 9),
+    axis.title.x     = ggplot2::element_text(margin = ggplot2::margin(t = 6)),
+    legend.position  = "bottom"
+  )
+
+ggiraph::girafe(
+  code = print(p),
+  width_svg = 12,
+  height_svg = 8,
+  options = list(
+    ggiraph::opts_toolbar(saveaspng = TRUE)
+  )
+)
+
+```
 
 :::
+
+```{r datenquellen-ortsgroups}
+asis_output(callout_datenquellen(all_data[[1]]$cfg,
+tn_q=list("Q_OG_NAME","Q_OG_REGION"),
+og_q=list("Q_OG_NAME","Q_OG_REGION")))
+
+```
+
+### Anzahl TEN SINGende
+
+#### Deutschlandweit
+
+```{r fig-aktive-gesamt}
+#| echo: false
+#| fig.width: 9
+#| fig.height: 6
+#| fig-cap: ""
+#| results: "asis"
+tn_counts<- get_yearly_tn_counts(all_data)
+
+active_plot_data <- tn_counts |>
+  select(year, Teilnehmende = teilnehmende, Mitarbeitende = mitarbeitende) |>
+  tidyr::pivot_longer(
+    cols = c(Teilnehmende, Mitarbeitende),
+    names_to = "gruppe",
+    values_to = "anzahl"
+  ) |>
+  mutate(
+    gruppe = factor(gruppe, levels = c("Teilnehmende", "Mitarbeitende")),
+    tooltip = glue::glue("{year}: {scales::comma(anzahl)} {gruppe}"),
+    data_id = glue::glue("aktive-{year}-{gruppe}")
+  )
+
+year_bar_chart_grouped(
+  active_plot_data,
+  year_col = "gruppe",
+  value_col = "anzahl",
+  group_col = "year",
+  x_label = "Jahr",
+  y_label = "Anzahl",
+  title="Anzahl aller Teilnehmenden und Mitarbeitenden",
+  tooltip_col = "tooltip",
+  data_id_col = "data_id",
+  palette = pal_trends_10
+)
+```
+
+```{r datenquellen-aktive-gesamt}
+asis_output(callout_datenquellen(all_data[[1]]$cfg,
+tn_q=list("Q_OG_NAME","Q_OG_REGION"),
+og_q=list("Q_OG_NAME","Q_OG_REGION", "Q_ANZAHL_BEGIN"),
+extra="⚠️**Wie wurden Teilnehmer:innenzahlen berechnet?**
+
+Für Ortsgruppen mit ausgefülltem Ortsgruppen-Fragebogen nutzen wir die dort angegebenen offiziellen Zahlen.
+Für Ortsgruppen ohne ausgefüllten Ortsgruppen-Fragebogen verwenden wir die Anzahl der eingegangenen Teilnehmer*innen-Fragebögen als Schätzwert für die Größe der jeweiligen Gruppe."))
+
+```
+
+#### Pro Region
+
+::: {.panel-tabset}
+
+```{r aktive-regionen-setup}
+#| echo: false
+#| warning: false
+#| message: false
+
+render_tn_by_region <- function(all_data, region_name) {
+  df_all <- get_yearly_tn_counts_region(all_data)
+  r_df <- df_all |>
+    filter(region_grouped == region_name) |>
+    mutate(
+      tooltip = paste0(region_grouped, ": "),
+      data_id = paste(year, region_grouped, sep = "_")
+    )
+    year_bar_chart(
+    data        = r_df,
+    year_col    = "year",
+    value_col   = "insg",
+    x_label     = "Jahr",
+    y_label     = "Teilnehmende + Mitarbeitende",
+    tooltip_col = "tooltip",
+    data_id_col = "data_id",
+    title       = paste0("Teilnehmende pro Jahr – ", region_name),
+    palette = pal_trends_10
+  )
+}
+
+```
+
+## Nord
+
+```{r fig-aktive-region-nord}
+#| echo: false
+#| fig.width: 9
+#| fig.height: 6
+#| fig-cap: ""
+#| results: "asis"
+
+render_tn_by_region(all_data,  "Nord")
+
+```
+
+## Ostwerk
+
+```{r fig-aktive-region-ostwerk}
+#| echo: false
+#| fig.width: 9
+#| fig.height: 6
+#| fig-cap: ""
+#| results: "asis"
+
+render_tn_by_region(all_data, "Ostwerk")
+
+```
+
+## Sachsen
+
+```{r fig-aktive-region-sachsen}
+#| echo: false
+#| fig.width: 9
+#| fig.height: 6
+#| fig-cap: ""
+#| results: "asis"
+
+render_tn_by_region(all_data,  "Sachsen")
+
+```
+
+## Süden
+
+```{r fig-aktive-region-suden}
+#| echo: false
+#| fig.width: 9
+#| fig.height: 6
+#| fig-cap: ""
+#| results: "asis"
+
+render_tn_by_region(all_data, "Süden")
+
+```
+
+## Thüringen
+
+```{r fig-aktive-region-thuringen}
+#| echo: false
+#| fig.width: 9
+#| fig.height: 6
+#| fig-cap: ""
+#| results: "asis"
+
+render_tn_by_region(all_data, "Thüringen")
+
+```
+
+## Westbund
+
+```{r fig-aktive-westbund}
+#| echo: false
+#| fig.width: 9
+#| fig.height: 6
+#| fig-cap: ""
+#| results: "asis"
+
+render_tn_by_region(all_data, "Westbund")
+
+```
+
+:::
+
+```{r datenquellen-aktive-regionen}
+asis_output(callout_datenquellen(all_data[[1]]$cfg,
+tn_q=list("Q_OG_NAME","Q_OG_REGION"),
+og_q=list("Q_OG_NAME","Q_OG_REGION", "Q_ANZAHL_BEGIN"),
+extra="⚠️**Wie wurden Teilnehmer:innenzahlen berechnet?**
+
+Für Ortsgruppen mit ausgefülltem Ortsgruppen-Fragebogen nutzen wir die dort angegebenen offiziellen Zahlen.
+Für Ortsgruppen ohne ausgefüllten Ortsgruppen-Fragebogen verwenden wir die Anzahl der eingegangenen Teilnehmer*innen-Fragebögen als Schätzwert für die Größe der jeweiligen Gruppe."))
+```
+
+#### Auftritte pro Jahr
+
+```{r fig-events-year}
+#| echo: false
+#| fig.width: 9
+#| fig.height: 6
+#| fig-cap: ""
+#| results: "asis"
+
+get_yearly_auftritte <- function(all_data) {
+  purrr::map_dfr(
+    all_data,
+    ~ tibble(
+      year = .x$year,
+      auftritte = sum(.x$og$data$auftritte, na.rm = TRUE)
+    )
+  )
+}
+auftritte_counts=get_yearly_auftritte(all_data)
+
+year_bar_chart(
+  auftritte_counts,
+  year_col = "year",
+  title ="Anzahl Auftritte pro Jahr",
+  value_col = "auftritte",
+  x_label = "Jahr",
+  y_label = "Anzahl Auftritte",
+  palette = pal_trends_10
+)
+
+
+asis_output(callout_datenquellen(all_data[[1]]$cfg,
+og_q=list("Q_AUFTRITTE")))
+```
+
+## Welche Themen beschäftigen TEN SING über die Jahre?
+
+Hier seht ihr, welche Themen dem TEN SING Netzwerk über die Jahre wichtig sind bzw. wie sich die Sicht auf bestimmte Themen verändert.
+
+### Thematische Schwerpunkte
+
+```{r zustimmung_titles}
+#| echo: false
+
+zustimmung_tab_titles <- c(
+  entfaltung_kreativitae = "Kreativität",
+  neues_lernen           = "Neues lernen",
+  selbst_sein            = "Ich selbst sein",
+  glaube_spiritualitaet  = "Glaube & Spiritualität",
+  transfer               = "Transfer",
+  gute_entscheidung      = "Gute Entscheidung",
+  internationale_projekt = "Internationale Projekte",
+  eigene_entwicklung     = "Eigene Entwicklung",
+  ideeneinbringen        = "Ideen einbringen",
+  selbstbewusstsein      = "Selbstbewusstsein",
+  dinge_zutrauen         = "Zutrauen",
+  fehlerkultur           = "Fehlerkultur"
+)
+```
+
+```{r Thematische Schwerpunkte}
+#| echo: false
+
+
+agg_all <- purrr::map_dfr(
+  all_data,
+  ~ .x$tn$agg$aussagen |>
+    mutate(year = .x$year) |>
+    left_join(
+      .x$meta$aussagen |> dplyr::select(name, label),
+      by = c("aussage" = "name")
+    ) |>
+    mutate(
+      x_label = dplyr::if_else(
+        aussage %in% names(zustimmung_tab_titles),
+        zustimmung_tab_titles[aussage],
+        aussage
+      ),
+      tooltip_text = paste0(
+        label, "\n",
+        year, ": ",
+        scales::percent(zustimmung_perc, accuracy = 1)
+      )
+    )
+)
+
+```
+
+
+```{r zustimmung_trend_helper}
+#| echo: FALSE
+render_zustimmung_trend_chart <- function(df, aussage_name) {
+  df_a <- df |>
+    dplyr::filter(aussage == aussage_name) |>
+    dplyr::arrange(year) |>
+    dplyr::mutate(
+      year_f  = factor(year, levels = sort(unique(year))),
+      tooltip = paste0(
+        label, "\n",
+        year, ": ",
+        scales::percent(zustimmung_perc, accuracy = 1)
+      ),
+      data_id = paste(aussage, year, sep = "_")
+    )
+
+  p <- ggplot(df_a, aes(x = year_f, y = zustimmung_perc, group = 1)) +
+    ggiraph::geom_line_interactive(
+      aes(tooltip = tooltip, data_id = data_id),
+      size = 1.0,
+      colour = pal_trends_10[1]
+    ) +
+    ggiraph::geom_point_interactive(
+      aes(tooltip = tooltip, data_id = data_id),
+      size = 3,
+      colour = pal_trends_10[2],
+      fill = pal_trends_10[1]
+    ) +
+    scale_y_continuous(
+      labels = scales::label_percent(accuracy = 1),
+      limits = c(0, 1),
+      expand = expansion(mult = c(0.05, 0.05))
+    ) +
+    labs(
+      x = "Jahr",
+      y = "Zustimmung (%)",
+      title = "Zustimmungsanteile pro Aussage",
+      subtitle = stringr::str_wrap(
+        unique(df_a$label),
+        width = 64
+      )
+    ) +
+    theme_minimal(base_size = 13, base_family = TS_FONT_FAMILY) +
+    theme(
+      plot.title = element_text(
+        face = "bold",
+        size = 24,
+        hjust = 0.5,
+        family = TS_FONT_FAMILY
+      ),
+      plot.subtitle = element_text(size = 18, hjust = 0.5, family = TS_FONT_FAMILY),
+      axis.title.y = element_text(face = "bold", size = 12)
+    )
+
+  ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_tooltip(use_fill = TRUE),
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
+}
+
+render_zustimmung_trend_tabset <- function(df) {
+  aussagen_tbl <- df |>
+    dplyr::select(aussage, label) |>
+    dplyr::distinct() |>
+    dplyr::mutate(
+      tab_title  = as.character(zustimmung_tab_titles[aussage]),
+      sort_title = dplyr::coalesce(tab_title, label)
+    ) |>
+    dplyr::arrange(sort_title)
+
+  cat("::: {.panel-tabset}\n\n")
+
+  for (i in seq_len(nrow(aussagen_tbl))) {
+    aussage_name <- aussagen_tbl$aussage[i]
+    tab_title    <- aussagen_tbl$tab_title[i]
+    label_i      <- aussagen_tbl$label[i]
+
+    heading <- if (!is.na(tab_title) && nzchar(tab_title)) tab_title else label_i
+
+    cat("## ", heading, "\n\n", sep = "")
+
+    widget_i <- render_zustimmung_trend_chart(df, aussage_name)
+    print(htmltools::tagList(widget_i))
+
+    cat("\n\n")
+  }
+
+  cat(":::\n")
+  invisible(NULL)
+}
+
+```
+
+```{r zustimmung_trends}
+#| echo: FALSE
+#| results: 'asis'
+#| fig.width: 9
+#| fig.height: 6
+#| 
+
+render_zustimmung_trend_tabset(agg_all)
+
+asis_output(callout_datenquellen(all_data[[1]]$cfg,tn_q=list("Q_BEGIN_AUSSAGEN_LIKERT")))
+```
+
+
+## Wirkung der PG über die Jahre
+
+Hier seht ihr wie die Arbeit der PG über die Jahre hinweg wahrgenommen wird.
+
+
+<!-- IST NICHT TEIL DER <2025 UMFRAGEN
+
+#### Bekanntheit der bundesweiten Angebote
+
+```{r fig-bekanntheit}
+#| echo: false
+#| fig.width: 9
+#| fig.height: 6
+
+
+```
+-->
+
+#### Teilnehmendenzahlen bei DE-Veranstaltungen
+
+```{r fig-teilnahme-de}
+#| echo: false
+#| fig.width: 9
+#| fig.height: 6
+#| fig-cap: ""
+#| results: "asis"
+
+yearly_teilnahme=get_yearly_ja_count(all_data, "teilnahme_dtlweit")
+year_bar_chart(
+  yearly_teilnahme,
+  year_col = "year",
+  value_col = "count",
+  title="Teilnahmezahlen an deutschlandweiten Veranstaltungen",
+  x_label = "Jahr",
+  y_label = "Anzahl Teilnehmende",
+  palette = pal_trends_10
+)
+
+asis_output(callout_datenquellen(all_data[[1]]$cfg,tn_q=list("Q_DE_VERANST")))
+
+```
+
+#### Teilnehmendenzahlen bei überregionalen Veranstaltungen
+
+```{r fig-teilnahme-ueberregional}
+#| echo: false
+#| fig.width: 9
+#| fig.height: 6
+#| fig-cap: ""
+#| results: "asis"
+
+yearly_dt_teilnahme=get_yearly_ja_count(all_data, "teilnahme_og_uebergreifend")
+
+year_bar_chart(
+  yearly_dt_teilnahme,
+  year_col = "year",
+  title="Teilnahmezahlen an überregionalen Veranstaltungen",
+  value_col = "count",
+  x_label = "Jahr",
+  y_label = "Anzahl Teilnehmende",
+  palette = pal_trends_10
+)
+
+asis_output(callout_datenquellen(all_data[[1]]$cfg,tn_q=list("Q_RE_VERANST")))
+
+```
