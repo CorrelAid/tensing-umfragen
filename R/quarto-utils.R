@@ -1,7 +1,3 @@
-# TODO: not best practice to have this here.. should be passed to functions
-# tn_cfg <- readr::read_rds(here::here("config/tn_cfg.rds"))
-# og_cfg <- readr::read_rds(here::here("config/tn_cfg.rds"))
-
 #' Format a Question Label for Markdown Output
 #' @param Q element from the config object (prefix Q_)  -> a row from the survey metadata
 #' @param inline Logical; if \code{TRUE}, returns a markdown-formatted inline object (\code{I()}), otherwise plain text.
@@ -58,7 +54,6 @@ fmt_source <- function(Q, type, url, inline = TRUE) {
 #' @seealso \code{\link[base]{sprintf}}, \code{\link[base]{I}}
 #' @export
 fmt_fragebogen <- function(type, inline = TRUE, url) {
-  # TODO add link to Fragebogen
   if (type == "tn") {
     s <- sprintf("[%s Fragebogen](%s)", "Teilnehmer*innen", url)
   } else if (type == "og") {
@@ -81,24 +76,17 @@ get_pie_chart_data <- function(data, col) {
       perc = round(n * 100 / nrow(data), 1),
       pos = n / 2 + lead(csum, 1),
       pos = if_else(is.na(pos), n / 2, pos)
-    )
-}
-
-#' Format Character Vector as Markdown Bullet Point List
-#' @param char_vec A character vector to format.
-#' @return A single character string with each element of the vector as a markdown bullet point.
-#' @details Removes \code{NA} values and concatenates elements into a newline-separated bullet list using markdown syntax.
-#' @seealso \code{\link[base]{paste}}
-#' @export
-fmt_vec_to_bullet_point <- function(char_vec) {
-  char_vec <- char_vec[!is.na(char_vec)]
-  paste("- ", char_vec, collapse = "\n")
+  )
 }
 
 # Creates a Year Comparison Tabset in Quarto
 # Takes current and previous year data along with a rendering function and titles as input.
-render_year_tabset <- function(curr_data, prev_data, render_fn) {
+render_year_tabset <- function(curr_data, prev_data = NULL, render_fn) {
   stopifnot(is.function(render_fn))
+  if (is.null(prev_data)) {
+    render_fn(curr_data)
+    return(invisible(NULL))
+  }
   cat("::: {.panel-tabset}\n\n")
   cat("## ", curr_data$year, "\n\n", sep = "")
   render_fn(curr_data)
@@ -120,90 +108,39 @@ render_widget_output <- function(widget) {
   print(htmltools::tagList(widget))
 }
 
-# Add download buttons to all static plots rendered via knitr's plot hook
-.ts_setup_plot_download_hook <- local({
-  initialized <- FALSE
-  function() {
-    if (initialized || !isTRUE(getOption("knitr.in.progress"))) {
-      return(invisible(NULL))
-    }
-
-    default_plot_hook <- knitr::knit_hooks$get("plot")
-
-    knitr::knit_hooks$set(plot = function(x, options) {
-      # keep default behavior for dump.qmd or if there is no plot output
-      if (identical(basename(knitr::current_input()), "dump.qmd") ||
-          length(x) == 0) {
-        return(default_plot_hook(x, options))
-      }
-
-      default_html <- default_plot_hook(x, options)
-
-      if (is.null(default_html)) {
-        return(default_html)
-      }
-
-      href <- x[1]
-      download_label <- if (!is.null(options$fig_download_label)) {
-        options$fig_download_label
-      } else {
-        "PNG speichern"
-      }
-
-      htmltools::doRenderTags(
-        htmltools::div(
-          class = "ts-plot-download-wrapper",
-          htmltools::HTML(default_html),
-          htmltools::a(
-            class = "ts-plot-download-btn",
-            href = href,
-            download = basename(href),
-            title = download_label,
-            `aria-label` = download_label,
-            htmltools::tags$span("⬇︎")
-          )
-        )
-      )
-    })
-
-    initialized <<- TRUE
-    invisible(NULL)
-  }
-})
-
-callout_datenquellen <- function(cfg, og_q = NULL, tn_q = NULL) {
-  # helper: resolve character names to real question objects
+callout_datenquellen <- function(cfg, og_q = NULL, tn_q = NULL, extra = NULL) {
   resolve <- function(x, cfg_part) {
-    if (is.character(x)) {
-      cfg_part[[x]]
+    obj <- cfg_part[[x]]
+    if (tibble::is_tibble(obj) && nrow(obj) > 1) {
+      split(obj, seq_len(nrow(obj)))
     } else {
-      x
+      list(obj)
     }
   }
 
-  tn_block <- ""
-  og_block <- ""
+  build_block <- function(q_vec, cfg_part, fb_type) {
+    if (is.null(q_vec) || length(q_vec) == 0) {
+      return("")
+    }
 
-  if (!is.null(tn_q) && length(tn_q) > 0) {
-    tn_resolved <- lapply(tn_q, resolve, cfg_part = cfg$tn_cfg)
-    tn_links <- purrr::map_chr(tn_resolved, ~ fmt_q(.x))
-    tn_src <- fmt_fragebogen("tn", url = cfg$tn_cfg$URL)
+    resolved <- lapply(q_vec, resolve, cfg_part = cfg_part)
+    flat <- unlist(resolved, recursive = FALSE)
+    links <- purrr::map_chr(flat, fmt_q)
+    src <- fmt_fragebogen(fb_type, url = cfg_part$URL)
 
-    tn_block <- paste0(
-      "**Relevante Fragen (TN)** im ", tn_src, ":\n\n",
-      "- ", paste(tn_links, collapse = "\n- "), "\n\n"
+    paste0(
+      "**Relevante Fragen** im ", src, ":\n\n",
+      "- ", paste(links, collapse = "\n- "), "\n\n"
     )
   }
 
-  if (!is.null(og_q) && length(og_q) > 0) {
-    og_resolved <- lapply(og_q, resolve, cfg_part = cfg$og_cfg)
-    og_links <- purrr::map_chr(og_resolved, ~ fmt_q(.x))
-    og_src <- fmt_fragebogen("og", url = cfg$og_cfg$URL)
+  tn_block <- build_block(tn_q, cfg$tn_cfg, "tn")
+  og_block <- build_block(og_q, cfg$og_cfg, "og")
 
-    og_block <- paste0(
-      "**Relevante Fragen (OG)** im ", og_src, ":\n\n",
-      "- ", paste(og_links, collapse = "\n- "), "\n\n"
-    )
+  extra_block <- if (!is.null(extra) && nzchar(extra)) {
+    paste0(extra, "\n\n")
+  } else {
+    ""
   }
 
   paste0(
@@ -212,7 +149,9 @@ callout_datenquellen <- function(cfg, og_q = NULL, tn_q = NULL) {
     "## Datenquelle\n\n",
     tn_block,
     og_block,
+    extra_block,
     ":::",
     "\n\n"
   )
 }
+
