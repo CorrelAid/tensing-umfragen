@@ -6,187 +6,704 @@ execute:
 from: markdown+emoji
 ---
 
-```{r}
+```{r setup}
 #| include: false
-library(tidyverse)
-library(ggplot2)
-library(reactable)
-library(ggiraph)
-source("config/viz_config.R")
-source("R/quarto-utils.R")
+source("R/load_libs.R")
+source("R/load_data.R")
 ggplot2::theme_set(theme_ts) # defined in viz_config
 
-
-tn_cfg <- readr::read_rds("config/tn_cfg.rds")
-tn <- readr::read_rds("data/cleaned/tn.rds")
-tn_data <- tn$data
-
-og_cfg <- readr::read_rds("config/og_cfg.rds")
-og <- readr::read_rds("data/cleaned/og.rds")
-og_data <- og$data
-
-# choices for some reordering 
-og_choices <- readr::read_csv("data/meta/og_choices.csv")
-
-# slug remapping to link to region pages
-og_slugs <- readr::read_csv("data/meta/og_slug_mapping.csv")
+og_slugs <- readr::read_csv("data/meta/region_mapping.csv")
 ```
 
-```{r}
-n_og_og <- nrow(og_data)
-n_og_tn <- tn_data$og_name %>% unique() %>% length()
-
-tn_tn <- nrow(tn_data)
-tn_og <- sum(og_data$anzahl_tn, na.rm = T)
-
-leitung_og <- sum(og_data$anzahl_ma_leitung, na.rm = T)
-insgesamt_og <- sum(og_data$anzahl_insg, na.rm = T)
+```{r curr-tn-og-setup}
+og_nach_og <- nrow(curr$og$data)
+og_nach_tn <- curr$tn$data$og_name %>% unique() %>% drop_na_ka %>%length()
+tn_nach_tn <- nrow(curr$tn$data)
+tn_nach_og <- sum(curr$og$data$anzahl_tn, na.rm = T)
+leitung_og_curr <- sum(curr$og$data$anzahl_ma_leitung, na.rm = T)
+insgesamt_og_curr <- sum(curr$og$data$anzahl_insg, na.rm = T)
 ```
+
+Auf dieser Seite werden euch Ergebnisse der Befragung angezeigt, die das deutschlandweite TEN SING Netzwerk betreffen.
+
+## Deutschlandweites TEN SING Netzwerk
+Laut Schätzung der Ortsgruppen-Leitenden sind bei TEN SING ca. **`{r} tn_nach_og` Teilnehmer\*innen** aktiv.<sup>1</sup> 
+
+`{r} tn_nach_tn` haben wir davon über den Teilnehmer\*innen Fragebogen erreicht.<sup>2</sup> 
+
+Weitere **`{r} leitung_og_curr`** Personen sind als **Mitarbeitende** bei TEN SING aktiv.<sup>3</sup>
+
+Insgesamt engagieren sich über die Ortsgruppen verteilt aktuell also **`{r} insgesamt_og_curr`  Personen aktiv bei TEN SING.**<sup>4</sup>
+
+Deutschlandweit gibt es laut der Angaben von Teilnehmer*innen aktuell **`{r} og_nach_tn` Ortsgruppen** bei TEN SING. <sup>5</sup> Davon haben wir `{r} og_nach_og` über den Ortsgruppen Fragebogen erreicht.<sup>6</sup>
+
 
 ::: {.callout-note collapse="true"}
 ## Datenquellen
 
-**Anzahl Ortsgruppen**
+<sup>1</sup> Die entsprechende Frage im `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)` lautet: `{r} fmt_q(curr$cfg$og_cfg$Q_ANZAHL_BEGIN)`
 
-- `{r} n_og_tn` Anzahl von Antworten auf den `{r} fmt_fragebogen("og")`
-- `{r} n_og_tn` Anzahl verschiedener Werte bei den Antworten zur Frage `{r} I(fmt_source(tn_cfg$Q_OG_NAME, "tn"))`
+<sup>2</sup> Dies ist die Gesamtanzahl ausgefüllter Umfagen des `{r} fmt_fragebogen("tn", url=curr$cfg$tn_cfg$URL)`
+
+<sup>3</sup> Die entsprechenden Fragen im `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)` lautet: 
+- `{r} fmt_q(curr$cfg$og_cfg$Q_ANZAHL_BEGIN)`
+- `{r} fmt_q(curr$cfg$og_cfg$Q_ANZAHL_MA)`
+
+<sup>4</sup> Die entsprechende Frage im `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)` lautet: `{r} fmt_q(curr$cfg$og_cfg$Q_ANZAHL_BEGIN)`
+
+<sup>5</sup> Die entsprechende Frage im `{r} fmt_fragebogen("tn", url=curr$cfg$tn_cfg$URL)` lautet: `{r} fmt_q(curr$cfg$tn_cfg$Q_OG_NAME)`
+
+<sup>6</sup> Dies ist die Gesamtanzahl ausgefüllter Umfagen des `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)`
 
 **Anzahl Aktive**
 
 | Fragebogen                 | Teilnehmer\*innen | Mitarbeitende | Insgesamt                                 |
 |-----------------|-----------------|-----------------|----------------------|
-| `{r} fmt_fragebogen("tn")` | `{r} tn_tn`[^1]   | *nicht abgefragt*         | *nicht errechenbar*                       |
-| `{r} fmt_fragebogen("og")` | `{r} tn_og`       | `{r} leitung_og`          | `{r} sum(og_data$anzahl_insg, na.rm = T)` |
+| `{r} fmt_fragebogen("tn", url=curr$cfg$tn_cfg$URL)` | `{r} sum(curr$tn$data$verantwortung_janein == "Nein", na.rm = TRUE)
+`  | `{r} sum(curr$tn$data$verantwortung_janein == "Ja", na.rm = TRUE)
+`        | `{r} tn_nach_tn`<sup>*</sup>                      |
+| `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)` | `{r} tn_nach_og`       | `{r} leitung_og_curr`          | `{r} sum(curr$og$data$anzahl_insg, na.rm = T)` |
 
-: Anzahl Aktive {#tbl-summary}
-:::
-
-[^1]: Anzahl der Antworten auf den `{r} I(fmt_fragebogen(type = "tn"))`
-
-
-Es gibt **zwischen `{r} min(n_og_tn, n_og_og)` und `{r} max(n_og_tn, n_og_og)` Ortsgruppen.**
-
-Insgesamt sind in den Ortsgruppen von TEN SING **`{r} insgesamt_og` Personen aktiv**.
-
-Davon sind **zwischen `{r} min(tn_tn, tn_og)` und `{r} max(tn_tn, tn_og)` als Teilnehmer\*innen** engagiert.  **`{r} leitung_og`** Personen sind Mitarbeitende.
-
-# Regionen
-
-::: {.callout-note collapse="true"}
-## Datenquelle
-
-
-
-Relevante Fragen:
-
-- **Frage** `{r} fmt_source(og_cfg$Q_OG_REGION, "og")`
-- **Frage** `{r} fmt_source(og_cfg$Q_OG_NAME, "og")`
-- **Frage** `{r} fmt_source(tn_cfg$Q_OG_NAME, "tn")` 
-
-
-Ortsgruppen, die von Teilnehmenden genannt werden, bekommen das Label "TN" in der Spalte `Datenquelle`. Ortsgruppen, für die der Ortsgruppen-Fragebogen ausgefüllt wurde, bekommen das Label "OG" in der Spalte `Datenquelle`. 
-Beachte: Manche Ortsgruppen kommen nur im TN-Fragebogen vor, da die Ortsgruppenleitung den OG-Fragebogen nicht beantwortet hat
+<sup>*</sup>: Anzahl der Antworten auf den `{r} I(fmt_fragebogen(type = "tn", url=curr$cfg$tn_cfg$URL))`
 
 :::
+
+
+## Ein Blick auf die Regionen und Ortsgruppen
+
+Im Folgenden seht ihr eine Übersicht über die einzelnen TEN SING Regionen. Aufgelistet sind die Ortsgruppen jeder Region sowie die Anzahl der aktiven TEN SINGer*innen pro Ortsgruppe und aggregiert pro Region.
+
+::: {.callout-note collapse="false"}
+## Erklärung
+- **Teilnehmende** sind alle, die sich in den Ortsgruppen engagieren und an TEN SING Veranstaltungen teilnehmen, und dabei keine Verantwortungsfunktion übernehmen.
+- **Mitarbeitende** sind alle hauptamtlichen Mitarbeiter*innen in den Ortsgruppen und Ehrenamtlichen, die eine Verantwortungsfunktion übernehmen.
+- Die **Aktiven** sind alle Teilnehmenden und Mitarbeitenden zusammen.
+:::
+
 
 ::: callout-tip
-Mit einem Klick auf den :arrow_forward: kannst du jede Region öffnen und eine Liste ihrer Ortsgruppen sehen.
+
+Mit einem Klick auf den ▶ kannst du jede Region öffnen und eine Liste ihrer Ortsgruppen sehen.
+
 :::
 
-```{r}
-# create a dataset with the number of active people
-tn_tn <- tn_data %>% 
-  replace_na(list(og_region = "keine Angabe")) %>% 
-  count(og_region, name = "anzahl_tn") %>% 
-  mutate(src = "TN-FB")
+```{r region-table-fn}
+render_region_table <- function(y) {
+  # some ortsgruppen are not in the y$og$data -> calculate separately
+  og_tn_only <- y$tn$data %>% 
+    dplyr::filter(!og_name %in% y$og$data$og_name) |> 
+    tidyr::replace_na(list(region_grouped = "keine Angabe", og_name = "keine Angabe")) %>% 
+    # we use the verantwortungs question to proxy whether a person is "mitarbeitend"
+    dplyr::mutate(
+      verantwortung_ja = dplyr::if_else(
+        verantwortung_janein == "Ja", TRUE, FALSE, missing = FALSE
+      )
+    ) |> 
+    dplyr::group_by(region_grouped, og_name) |> 
+    dplyr::summarize(
+      anzahl_ma_leitung = sum(verantwortung_ja),
+      anzahl_tn = sum(!verantwortung_ja),
+      anzahl_insg = dplyr::n(),
+      .groups = "drop"
+    )
 
-og_tn <- og_data %>% 
-  group_by(og_region) %>% 
-  summarize(n = sum(anzahl_insg)) %>% 
-  mutate(src = "OG-FB")
+  # use reactable's aggregate functionality
+  og_region_df <- y$og$data %>%
+    dplyr::select(
+      region_grouped, og_region, og_name,
+      anzahl_insg, anzahl_tn, anzahl_ma_leitung
+    ) %>%
+    dplyr::rename(og_region_detail = og_region) %>%
+    dplyr::bind_rows(
+      og_tn_only |>
+        dplyr::mutate(og_region_detail = NA_character_)
+    ) %>%
+    dplyr::rename(og_region = region_grouped) %>%
+    dplyr::left_join(og_slugs, by = "og_region")
 
-```
+  og_region_agg <- og_region_df |> 
+    dplyr::group_by(og_region, slug) |> 
+    dplyr::summarize(
+      n_og = length(unique(og_name)),
+      anzahl_insg = sum(anzahl_insg, na.rm = TRUE),
+      anzahl_tn = sum(anzahl_tn, na.rm = TRUE),
+      anzahl_ma_leitung = sum(anzahl_ma_leitung, na.rm = TRUE),
+      .groups = "drop"
+    ) |> 
+    dplyr::arrange(og_region)
 
-::: {.panel-tabset}
+  p <- reactable::reactable(
+    og_region_agg,
+    columns = list(og_region = reactable::colDef(name = "Region",html = TRUE,
+        cell = function(region, index) {
+          if (region == "keine Angabe") return(region)
+          slug <- if (region == "Westbund") {
+            "westbund"
+          } else {
+            og_region_agg$slug[index]
+          }
+          sprintf('<a href="/region/%s.html">%s</a>', slug, region)
+        }
+      ),
+      n_og = reactable::colDef(name = "Ortsgruppen"),
+      anzahl_insg = reactable::colDef(name = "Aktive"),
+      anzahl_tn = reactable::colDef(name = "Teilnehmende"),
+      anzahl_ma_leitung = reactable::colDef(name = "Mitarbeitende"),
+      slug = reactable::colDef(show = FALSE)
+    ),
+    defaultSorted = list(og_region = "asc"),
+    details = function(index) {
+      region <- og_region_agg$og_region[index]
+      if (region == "keine Angabe") return(NULL)
 
-## Version 1
+      child <- og_region_df |>
+        dplyr::filter(og_region == region) |>
+        dplyr::arrange(og_name)
 
-```{r region-table}
-# some ortsgruppen are not in the og_data -> calculate separately
-og_tn_only <- tn_data %>% 
-  filter(!og_name %in% og_data$og_name) |> 
-  replace_na(list(og_region = "keine Angabe", og_name = "keine Angabe")) %>% 
-  # we use the verantwortungs question to proxy whether a person is "mitarbeitend"
-  mutate(verantwortung_ja = if_else(verantwortung_janein == "Ja", TRUE, FALSE, missing = FALSE)) |> 
-  group_by(og_region, og_name) |> 
-  summarize(anzahl_ma_leitung = sum(verantwortung_ja),
-            anzahl_tn = sum(!verantwortung_ja),
-            anzahl_insg = n())
-
-# here we use reactable's aggregate functionality
-og_region_df <- og_data %>%
-  select(og_region, og_name, anzahl_insg, anzahl_tn, anzahl_ma_leitung) |> 
-  bind_rows(og_tn_only) |> 
-  left_join(og_slugs, by = "og_region")
-
-reactable(
-  og_region_df,
-  groupBy = "og_region",
-  defaultSorted = list(og_name = "desc"),
-  columns = list(
-    og_region = colDef(name = "Region", html = TRUE, cell = function(region, index) {
-      sprintf('<a href="%s" target="_blank">%s</a>', og_region_df$slug[index], region)
-    }),
-    og_name = colDef(name = "Ortsgruppen", aggregate = "count"),
-    anzahl_insg = colDef(name = "Aktive", aggregate = "sum"),
-     anzahl_tn = colDef(name = "Teilnehmende", aggregate = "sum"),
-    anzahl_ma_leitung = colDef(name = "Mitarbeitende", aggregate = "sum"),
-    slug = colDef(name = "Details", html = TRUE, cell = function(value) { 
-      return("")
-    }, aggregate = JS("
-    function(values, rows) {
-      if (!values || values.length === 0 || !values[0]) return '';
-      const slug = values[0];
-      return '<a href=\"/region/' + slug + '.html\" rel=\"noopener noreferrer\" style=\"text-decoration: none;\">↗️</a>';
+      # Only for Westbund: append region in brackets
+      if (region == "Westbund") {
+        child <- child |>
+          dplyr::mutate(
+            og_name = ifelse(
+              !is.na(og_region_detail),
+              paste0(og_name, ' <span style="font-style: italic;">(', og_region_detail, ')</span>'), og_name
+            )
+          )
+      }
+      child <- child |>
+        dplyr::select(
+          og_name,
+          anzahl_insg, anzahl_tn, anzahl_ma_leitung, slug
+        )
+      htmltools::div(
+        style = "margin-left: 160px; margin-bottom: 40px",
+        reactable::reactable(
+          child,
+          columns = list(
+            og_name = reactable::colDef(
+              name = "Ortsgruppen",
+              html = TRUE,
+              width = 200
+            ),
+            anzahl_insg = reactable::colDef(
+              name = "Aktive",
+              width = 80
+            ),
+            anzahl_tn = reactable::colDef(name = "Teilnehmende"),
+            anzahl_ma_leitung = reactable::colDef(name = "Mitarbeitende"),
+            slug = reactable::colDef(show = FALSE)
+          ),
+          pagination = FALSE,
+          bordered = FALSE,
+          compact = TRUE,
+          highlight = TRUE
+        )
+      )
     }
-  "))
   )
-)
+  render_widget_output(p)
+}
 
 ```
 
+```{r render-render_region_table, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
 
-## Version 2
+render_year_tabset(curr_data = curr, prev_data = prev, render_fn = render_region_table)
 
-```{r region-table-2}
-og_region_agg <- og_region_df |> 
-  group_by(og_region, slug) |> 
-  summarize(
-    n_og = length(unique(og_name)),
-    anzahl_insg = sum(anzahl_insg, na.rm = TRUE),
-    anzahl_tn = sum(anzahl_tn, na.rm = TRUE),
-    anzahl_ma_leitung = sum(anzahl_ma_leitung, na.rm = TRUE))
+asis_output(callout_datenquellen(curr$cfg,
+og_q=list("Q_OG_REGION","Q_OG_NAME"),
+tn_q=list("Q_OG_REGION","Q_OG_NAME")))
 
-reactable(
-  og_region_agg,
-  columns = list(
-    og_region = colDef(name = "Region", html = TRUE, cell = function(region, index) {
-      if (region == "keine Angabe") return(region);
-      sprintf('<a href="/region/%s.html">%s</a>', og_region_agg$slug[index], region)
-    }),
-    n_og = colDef(name = "Ortsgruppen"),
-    anzahl_insg = colDef(name = "Aktive"),
-    anzahl_tn = colDef(name = "Teilnehmende"),
-    anzahl_ma_leitung = colDef(name = "Mitarbeitende"),
-    slug = colDef(show = FALSE)
-  ),
-  defaultSorted = list(n_og = "desc"),
-)
 ```
 
+## Menschen bei Ten Sing
+
+Im Folgenden seht ihr eine Übersicht über die Geschlechter- und Altersverteilung der Menschen bei TEN SING. 
+
+```{r plot_gender_by_participant_type}
+
+# aggregate per group
+plot_gender_by_participant_type <- function(y){
+  df <- y$og$long$gender_by_participant_type %>%
+    group_by(person_type, gender) %>%
+    summarise(total = sum(n), .groups = "drop") %>%
+    group_by(person_type) %>%
+    mutate(
+      csum = rev(cumsum(rev(total))),
+      perc = round(total * 100 / sum(total), 1),
+      pos  = total / 2 + dplyr::lead(csum, 1),
+      pos  = dplyr::if_else(is.na(pos), total / 2, pos)
+    ) %>%
+    ungroup()
+
+  p <- ggplot(df, aes(x = "", y = total, fill = gender)) +
+    ggiraph::geom_col_interactive(
+      aes(
+        tooltip = paste0(person_type, "\n", gender, ": ", total),
+        data_id = paste(person_type, gender, sep = "-")
+      ),
+      width = 1,
+      color = "white"
+    ) +
+    ggrepel::geom_label_repel(
+      aes(y = pos, label = paste0(perc, "%")),
+      size = 3.5,
+      nudge_x = 0.75,
+      show.legend = FALSE,
+      segment.color = "black"
+    ) +
+    coord_polar(theta = "y") +
+    facet_wrap(~person_type,scales = "free_y") +
+    labs(title = y$cfg$og_cfg$Q_GESCHLECHT$label, fill  = "Geschlecht" ) +
+    theme_void() +
+    scale_fill_manual(values=pal_8)+
+    theme(
+      strip.text = element_text(face = "bold", size = 12),
+      legend.position = "bottom",
+      plot.title   = element_text(
+        size   = 18,
+        face   = "bold",
+        hjust  = 0.5,
+        family = TS_FONT_FAMILY,
+        margin = margin(b = 20)
+      ) 
+    )
+
+  widget <- ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
+
+  render_widget_output(widget)
+}
+
+```
+
+```{r render-plot_gender_by_participant_type, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+
+render_year_tabset(curr_data = curr, prev_data = prev, render_fn = plot_gender_by_participant_type)
+
+asis_output(callout_datenquellen(curr$cfg,tn_q=list("Q_DEMO_GENDER")))
+```
+
+
+```{r plot_alter_by_participant_type}
+
+alter_totals <- curr$og$long$alter_by_participant_type |>
+  dplyr::group_by(person_type, alter) |>
+  dplyr::summarise(total = sum(n), .groups = "drop") |>
+  dplyr::pull(total)
+
+if (has_previous_year) {
+  prev_totals <- prev$og$long$alter_by_participant_type |>
+    dplyr::group_by(person_type, alter) |>
+    dplyr::summarise(total = sum(n), .groups = "drop") |>
+    dplyr::pull(total)
+  alter_totals <- c(alter_totals, prev_totals)
+}
+
+alter_max_total <- max(alter_totals, na.rm = TRUE)
+
+plot_alter_by_participant_type <- function(y) {
+  df <- y$og$long$alter_by_participant_type |>
+    dplyr::group_by(person_type, alter) |>
+    dplyr::summarise(total = sum(n), .groups = "drop")
+
+  age_levels <- c("Bis 13 Jahre",
+                "14-17 Jahre",
+                "18 bis 19 Jahre",
+                "20 Jahre und älter")
+
+  p <- ggplot2::ggplot(
+        df,
+        ggplot2::aes(
+          x = factor(alter, levels = age_levels),
+          y = total,
+          fill = alter
+        )
+      ) +
+        ggiraph::geom_col_interactive(
+          ggplot2::aes(
+            tooltip = paste0(person_type, "\n", alter, ": ", total),
+            data_id = paste(person_type, alter, sep = "-")
+          )
+        ) +
+        ggplot2::facet_wrap(~person_type) +
+        ggplot2::scale_y_continuous(
+          limits = c(0, alter_max_total),
+          expand = ggplot2::expansion(mult = c(0, 0.05))
+        ) +
+        ggplot2::labs(
+          title = y$cfg$og_cfg$Q_ALTER$label,
+          x     = NULL,
+          y     = "Anzahl",
+          fill  = "Altersgruppe"
+        ) +
+        ggplot2::scale_fill_manual(
+          values = pal_8,
+          breaks = age_levels # legend order
+        ) +
+        ggplot2::theme_minimal(base_family = TS_FONT_FAMILY) +
+        ggplot2::theme(
+          axis.text.x      = ggplot2::element_text(angle = 45, hjust = 1),
+          strip.text       = ggplot2::element_text(face = "bold", size = 12),
+          legend.position  = "bottom",
+          plot.title       = ggplot2::element_text(
+            size   = 18,
+            face   = "bold",
+            hjust  = 0.5,
+            family = TS_FONT_FAMILY,
+            margin = ggplot2::margin(b = 20)
+          )
+        )
+
+  widget <- ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
+
+  render_widget_output(widget)
+}
+
+```
+
+```{r render-plot_alter_by_participant_type, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+
+render_year_tabset(curr_data = curr, prev_data = prev, render_fn = plot_alter_by_participant_type)
+
+asis_output(callout_datenquellen(curr$cfg,tn_q=list("Q_DEMO_ALTER")))
+
+```
+
+::: {.callout-note collapse="true"}
+## Info
+Um die Privatsphäre aller Personen, die an der Umfrage teilgenommen haben, zu schützen, wird eine Übersicht über die Geschlechter- und Altersverteilung der Menschen bei TEN SING nur in aggregierter Form angezeigt. 
 :::
 
 
-# Zufriedenheit TN
+# Mitarbeit und aktive Gestaltung bei TEN SING
 
-Aussage Gute Entscheidung TEN SING 
+```{r curr_mitarbeit-und-aktive-gestaltung}
+
+ma_avg_stunden_curr = curr$og$data$hauptamt_stunden %>%  mean(na.rm = TRUE) %>% round(1)
+ma_total_stunden_curr <- round(sum(curr$og$data$hauptamt_stunden, na.rm = TRUE) * 52, 0)
+
+tn_avg_stunden_curr = curr$tn$data$stunden_pro_woche%>%  mean(na.rm = TRUE) %>% round(1)
+tn_total_stunden_curr = round(sum(curr$tn$data$stunden_pro_woche, na.rm = TRUE) * 52, 0)
+
+avg_dur_curr = round(60*mean(curr$og$long$wochentage$stunden),0)
+
+fav_day_curr = curr$og$long$wochentage %>%
+  count(wochentag, sort = TRUE) %>%
+  slice(1) %>%
+  pull(wochentag)
+
+avg_weekly_hours_curr = curr$og$long$wochentage %>%
+  group_by(og_id) %>%
+  summarise(sum_stunden = sum(stunden, na.rm = TRUE)) %>%
+  summarise(avg_stunden = round(mean(sum_stunden, na.rm = TRUE),1))
+avg_yearly_hours_curr = round(avg_weekly_hours_curr*52,0)
+avg_auftritte_curr <- round(mean(curr$og$data$auftritte),1)
+
+
+# add Tausenderpunkt
+ma_total_stunden_curr <- number(ma_total_stunden_curr, big.mark=".", decimal.mark=",")
+tn_total_stunden_curr <- number(tn_total_stunden_curr, big.mark=".", decimal.mark=",")
+```
+
+Im Durchschnitt haben die TEN SING Mitarbeitenden ein Stundenpensum von `{r} ma_avg_stunden_curr` Stunden pro Woche.<sup>1</sup> Über alle Ortsgruppen zusammen arbeiten Mitarbeitende `{r} ma_total_stunden_curr` Stunden für TEN SING pro Jahr.
+
+Pro Woche verbringen Teilnehmende im Schnitt `{r} tn_avg_stunden_curr` Stunden mit TEN SING.<sup>2</sup> Hochgerechnet auf ein Jahr sind das ganze `{r} as.character(tn_total_stunden_curr)
+` Stunden, die alle Teilnehmenden zusammen mit TEN SING verbringen.
+
+TEN SINGer*innen treffen sich am liebsten am `{r} fav_day_curr` in ihren Ortsgruppen.<sup>3</sup> Im Schnitt dauert ein Treffen `{r} avg_dur_curr` Minuten.<sup>4</sup> Auf ein Jahr hochgerechnet sind das `{r} avg_yearly_hours_curr` Stunden die sich jede Ortsgruppe im Durschnitt trifft. 
+
+**🎶 Pro Schuljahr finden ca. `{r} floor(avg_auftritte_curr)` bis `{r} ceiling(avg_auftritte_curr)` Auftritte statt.<sup>5</sup> 🎶**
+
+::: {.callout-note collapse="true"}
+## Datenquellen
+
+<sup>1</sup> Die entsprechende Frage im `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)` lautet: 
+`{r} fmt_q(curr$cfg$og_cfg$Q_HAUPTAMT_STUNDEN)`
+
+<sup>2</sup> Die entsprechende Frage im `{r} fmt_fragebogen("tn", url=curr$cfg$tn_cfg$URL)` lautet: 
+`{r} fmt_q(curr$cfg$tn_cfg$Q_STUNDEN)`
+
+<sup>3</sup> Die entsprechende Frage im `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)` lautet: 
+`{r} fmt_q(curr$cfg$og_cfg$Q_WOCHENTAG)`
+
+<sup>4</sup> Die entsprechenden Fragen im `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)` lauten: 
+`{r} fmt_q(curr$cfg$og_cfg$Q_WOCHENTAG_STUNDEN)`
+
+<sup>5</sup> Die entsprechende Frage im `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)` lautet: 
+`{r} fmt_q(curr$cfg$og_cfg$Q_AUFTRITTE)`
+:::
+
+# Verantwortung
+
+```{r verantwortung-data}
+prepare_verantwortung_data <- function(y) {
+  resp <- y$tn$data |>
+    dplyr::select(tn_id, verantwortung_janein)
+
+  long <- y$tn$long$verantwortung_hilfsangebote |>
+    dplyr::left_join(resp, by = "tn_id")
+
+  summary_tbl <- long |>
+    dplyr::filter(!is.na(verantwortung_janein)) |>
+    dplyr::mutate(
+      verantwortung_janein = factor(verantwortung_janein, levels = c("Ja", "Nein"))
+    ) |>
+    dplyr::group_by(hilfsangebot, verantwortung_janein) |>
+    dplyr::summarise(n = dplyr::n(), .groups = "drop")
+
+  verant_anteile <- resp |>
+    dplyr::group_by(verantwortung_janein) |>
+    dplyr::summarise(n = dplyr::n(), .groups = "drop") |>
+    dplyr::mutate(perc = round(n / sum(n) * 100, 1))
+
+  hilfsangebot_max <- function(df, antwort) {
+    df |>
+      dplyr::filter(verantwortung_janein == antwort) |>
+      dplyr::filter(n == max(n, na.rm = TRUE)) |>
+      dplyr::pull(hilfsangebot)
+  }
+
+  list(
+    year = y$year,
+    summary_tbl = summary_tbl,
+    verant_anteile = verant_anteile,
+    max_hilfsangebote = list(
+      ja = hilfsangebot_max(summary_tbl, "Ja"),
+      nein = hilfsangebot_max(summary_tbl, "Nein")
+    )
+  )
+}
+
+verantwortung_curr <- prepare_verantwortung_data(curr)
+verantwortung_prev <- if (has_previous_year) {
+  prepare_verantwortung_data(prev)
+} else {
+  NULL
+}
+```
+
+Neben der engagierten Mitarbeit aller Beteiligten, macht insbesondere auch das Übernehmen von Verantwortung TEN SING erst möglich. Deshalb wollten wir von euch wissen, wie viele von euch aktiv Verantwortung bei TEN SING übernehmen. Was unterstützt Menschen dabei Verantwortung zu übernehmen?
+
+Im Jahr `{r} curr$year` gaben `{r} dplyr::filter(verantwortung_curr$verant_anteile, verantwortung_janein == "Ja")$perc` % der befragten TEN SINGer*innen an, Verantwortung zu übernehmen.  Welche Hilfsangebote sich TEN SINGende mit und ohne Verantwortung wünschen, siehst du in der folgenden Visualisierung.
+
+```{r render-verantwortung, echo=FALSE}
+calc_verantwortung_max_pct <- function(summary_tbl) {
+  summary_tbl |>
+    dplyr::group_by(verantwortung_janein) |>
+    dplyr::mutate(pct = n / sum(n)) |>
+    dplyr::pull(pct) |>
+    max(na.rm = TRUE)
+}
+
+verantwortung_y_limit <- calc_verantwortung_max_pct(verantwortung_curr$summary_tbl)
+if (!is.null(verantwortung_prev)) {
+  verantwortung_y_limit <- max(
+    verantwortung_y_limit,
+    calc_verantwortung_max_pct(verantwortung_prev$summary_tbl)
+  )
+}
+
+render_verantwortung_plot <- function(data, y_limit = verantwortung_y_limit) {
+  summary_tbl_pct <- data$summary_tbl |>
+    dplyr::group_by(verantwortung_janein) |>
+    dplyr::mutate(
+      pct     = n / sum(n),
+      tooltip = paste0(
+        "Hilfsangebot: ", hilfsangebot, "\n",
+        "Verantwortung: ", verantwortung_janein, "\n",
+        "Anteil: ", scales::percent(pct, accuracy = 1)
+      ),
+      data_id = paste(hilfsangebot, verantwortung_janein, sep = "_")
+    ) |>
+    dplyr::ungroup()
+
+  if (is.null(y_limit) || !is.finite(y_limit)) {
+    y_limit <- max(summary_tbl_pct$pct, na.rm = TRUE)
+  }
+  if (!is.finite(y_limit) || y_limit <= 0) {
+    y_limit <- 1
+  }
+
+  p <- ggplot(
+      summary_tbl_pct,
+      aes(x = hilfsangebot, y = pct, fill = verantwortung_janein)
+    ) +
+      ggiraph::geom_col_interactive(position = position_dodge(),
+        aes(tooltip = tooltip, data_id = data_id)
+      ) +
+      scale_fill_manual(values = pal_yes_no) +
+      scale_y_continuous(
+        labels = scales::percent_format(accuracy = 1),
+        limits = c(0, y_limit),
+        expand = ggplot2::expansion(mult = c(0, 0.05))
+      ) +
+      scale_x_discrete(labels = function(x) stringr::str_wrap(x, width = 40)) +
+      labs(
+        title = stringr::str_wrap("Welche Hilfsangebote wünschen sich Personen mit und ohne Verantwortung?", width = 80),
+        x = "Hilfsangebot",
+        y = "Anteil",
+        fill = NULL
+      ) +
+      theme_minimal(base_size = 12, base_family = TS_FONT_FAMILY) +
+      theme(
+        axis.text.x = element_text(angle = 52, hjust = 1),
+        legend.position = "top",
+        plot.title = element_text(
+          size = 16,
+          face = "bold",
+          hjust = 0.5,
+          family = TS_FONT_FAMILY
+        )
+      )
+
+  widget <- ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_hover(css = "fill-opacity:0.7; cursor:pointer;"),
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
+
+  render_widget_output(widget)
+}
+```
+
+```{r render-verantwortung-tabset}
+#| echo: FALSE
+#| results: 'asis'
+#| fig.height: 8
+#| fig.width: 9
+
+render_year_tabset(
+  curr_data = verantwortung_curr,
+  prev_data = verantwortung_prev,
+  render_fn = function(tab_data) {
+    render_verantwortung_plot(tab_data, y_limit = verantwortung_y_limit)
+  }
+)
+```
+
+::: {.callout-note collapse="false"}
+
+## Interpretationshilfe 
+
+Das Übernehmen von Verantwortung wird unterschiedlich wahrgenommen je nachdem, ob eine Person aktiv Verantwortung übernimmt oder nicht. Im Jahr `{r} curr$year` wünschen sich TEN SINGende mit Verantwortung vor allem *"`{r} verantwortung_curr$max_hilfsangebote$ja`"* als Unterstützung. TEN SINGende ohne Verantwortung sagen, *"`{r} verantwortung_curr$max_hilfsangebote$nein`"* würde am meisten helfen, um Verantwortung zu übernehmen.
+
+:::
+
+```{r datenquellen-verantwortung} 
+knitr::asis_output(callout_datenquellen(curr$cfg,
+tn_q=list("Q_VERANTWORTUNG_JANEIN","Q_VERANTWORTUNG_SUPPORT"
+)))
+```
+
+
+# Zufriedenheit der TEN SINGenden
+
+Wir wollten von euch wissen, wie wahrscheinlich es ist, dass ihr Freund*innen oder Bekannten empfiehlt, auch mit in eure TEN SING Gruppe zu kommen. So habt ihr geantwortet!
+
+```{r plot_wahrsch_empfehlung}
+
+calc_wahrsch_empf_max_pct <- function(y) {
+  tibble::tibble(value = y$tn$data$wahrsch_empfehlung) |>
+    dplyr::filter(!is.na(value)) |>
+    dplyr::count(value) |>
+    dplyr::mutate(percent = n / sum(n) * 100) |>
+    dplyr::pull(percent) |>
+    max(na.rm = TRUE)
+}
+
+wahrsch_empf_y_limit <- calc_wahrsch_empf_max_pct(curr)
+if (!is.null(prev)) {
+  wahrsch_empf_y_limit <- max(
+    wahrsch_empf_y_limit,
+    calc_wahrsch_empf_max_pct(prev),
+    na.rm = TRUE
+  )
+}
+
+plot_wahrsch_empfehlung <- function(y, y_limit = wahrsch_empf_y_limit){
+  df <- tibble(value = y$tn$data$wahrsch_empfehlung) %>%
+    filter(!is.na(value)) %>%
+    count(value) %>%
+    mutate(percent = n / sum(n)*100)
+
+  if (is.null(y_limit) || !is.finite(y_limit)) {
+    y_limit <- max(df$percent, na.rm = TRUE)
+  }
+  if (!is.finite(y_limit) || y_limit <= 0) {
+    y_limit <- 100
+  }
+
+  p <- ggplot(df, aes(x = factor(value), y = percent, fill = factor(value))) +
+    ggiraph::geom_col_interactive(
+      aes(
+        tooltip = paste0(
+          "Bewertung ", value, ": ",
+          round(percent, 1), "%"
+        ),
+        data_id = value
+      )
+    ) +
+    scale_fill_manual(values = rev(pal_likert_11)) +
+    scale_x_discrete(breaks = as.character(0:10), labels = as.character(0:10)) +
+    scale_y_continuous(
+      labels = scales::label_percent(scale = 1),
+      limits = c(0, y_limit),
+      expand = ggplot2::expansion(mult = c(0, 0.05))
+    ) +
+    labs(
+      y = "% der Befragten",
+      x = "0 = gar nicht wahrscheinlich · 10 = sehr wahrscheinlich",
+      title = "Wie wahrscheinlich würdest du TEN SING weiterempfehlen?"
+    ) +
+    guides(fill = "none") +
+    theme(
+      strip.text = element_text(face = "bold", size = 12),
+      legend.position = "bottom",
+      plot.title = element_text(
+        size = 16,
+        face = "bold",
+        hjust = 0.5,
+        family = TS_FONT_FAMILY
+      )
+    )
+
+  widget <- ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
+
+  render_widget_output(widget)
+}
+
+```
+
+```{r render-plot_wahrsch_empfehlung, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+
+render_year_tabset(curr_data = curr, prev_data = prev, render_fn = plot_wahrsch_empfehlung)
+
+
+asis_output(callout_datenquellen(curr$cfg,tn_q=list("Q_EMPFEHLUNG")))
+
+```
