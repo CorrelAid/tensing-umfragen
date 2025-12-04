@@ -135,23 +135,18 @@ angebote_long <- angebote_long %>%
 TN_DATA$long$angebote_vor_ort <- angebote_long
 
 # STUNDEN -----------
-q <- find_q(tn_survey, "col_name", "stunden")
-col_name_stunden <- q$`col_name`
-
-TN_DATA$data$stunden_pro_woche <- as.numeric(tn_df[[col_name_stunden]])
+TN_DATA$data$stunden_pro_woche <- as.numeric(tn_df[[tn_cfg$CN_STUNDEN]])
 #remove outliers
 TN_DATA$data$stunden_pro_woche[TN_DATA$data$stunden_pro_woche >= 40] <- NA
 
 # REGION ------------
-q <- find_q(tn_survey, "label", "Region.+?Ortsgruppe")
-col_name_region <- q$`col_name`
 # recode and assign
-m <- get_mapping(tn_choices, q$select_from_list_name)
+m <- get_mapping(tn_choices, tn_cfg$Q_OG_REGION$select_from_list_name)
 # remove inconsistency between TN and OG spelling
 m[m$name=="owl","label"]="Ostwestfalen-Lippe"
 TN_DATA$data$og_region <- tn_df %>%
-    recode_values(m, col_name_region) %>%
-    pull(!!col_name_region)
+    recode_values(m, tn_cfg$CN_OG_REGION) %>%
+    pull(!!tn_cfg$CN_OG_REGION)
 
 # ORTSGRUPPE NAME --------
 
@@ -172,38 +167,30 @@ TN_DATA$data <- TN_DATA$data %>%
     )
 
 # ORTSUEBERGREIFENDE ANGEBOTE ------------
-q <- find_q(tn_survey, "label", "ortsgruppenübergreifenden")
-col_name_ogueber <- q$`col_name`
 # recode and assign
-m <- get_mapping(tn_choices, q$select_from_list_name)
+m <- get_mapping(tn_choices, tn_cfg$Q_RE_VERANST$select_from_list_name)
 TN_DATA$data$teilnahme_og_uebergreifend <- tn_df %>%
-    recode_values(m, col_name_ogueber) %>%
-    pull(!!col_name_ogueber)
+    recode_values(m, tn_cfg$CN_RE_VERANST) %>%
+    pull(!!tn_cfg$CN_RE_VERANST)
 
 # deutschlandweite angebote
-q <- find_q(tn_survey, "label", "Warst du.+?deutschlandweit")
-col_name_dtlweit <- q$`col_name`
 # recode and assign
-m <- get_mapping(tn_choices, q$select_from_list_name)
+m <- get_mapping(tn_choices, tn_cfg$Q_DE_VERANST$select_from_list_name)
 TN_DATA$data$teilnahme_dtlweit <- tn_df %>%
-    recode_values(m, col_name_dtlweit) %>%
-    pull(!!col_name_dtlweit)
+    recode_values(m, tn_cfg$CN_DE_VERANST) %>%
+    pull(!!tn_cfg$CN_DE_VERANST)
 
 # gründe gegen teilnahme an deutschlandweite oder ortsübergreifende angebote
 # deutschlandweite angebote
-q <- find_q(tn_survey, "label", "deutschlandweit.+?gegen.+?Gründe")
-col_name_gruende_gegen_tn <- q$`col_name`
-m <- get_mapping(tn_choices, q$select_from_list_name)
-gruende_long <- make_multiselect_long(tn_df, col_name_gruende_gegen_tn) %>%
-    rename(grund = !!col_name_gruende_gegen_tn)
+m <- get_mapping(tn_choices, tn_cfg$Q_VERANST_HUERDE$select_from_list_name)
+gruende_long <- make_multiselect_long(tn_df, tn_cfg$CN_VERANST_HUERDE) %>%
+    rename(grund = !!tn_cfg$CN_VERANST_HUERDE)
 
 # andere gründe
-q <- find_q(tn_survey, "col_name", "gruende.+?andere")
-col_name_gruende_andere <- q$`col_name`
 gruende_andere <- tn_df %>%
-    filter(!is.na(.data[[col_name_gruende_andere]])) %>%
+    filter(!is.na(.data[[tn_cfg$CN_VERANST_HUERDE_ANDERE ]])) %>%
     mutate(grund = "andere_gr_nde") %>%
-    select(tn_id, grund, andere_gruende = !!col_name_gruende_andere)
+    select(tn_id, grund, andere_gruende = !!tn_cfg$CN_VERANST_HUERDE_ANDERE)
 
 gruende_long <- left_join(
     gruende_long,
@@ -345,7 +332,6 @@ TN_DATA$demo$kontakt_chrgl <- sample(
 TN_DATA$long$kontakt_chrgl <- kontaktpunkte_long
 
 # RECODE TN OG_NAME -----
-# TODO: move to tn-processing
 og_recoding <- readr::read_csv(file.path(DIR_META, "og_recoding.csv"))
 og_recoding <- og_recoding %>%
     rename(

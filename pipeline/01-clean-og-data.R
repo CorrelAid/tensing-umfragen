@@ -73,7 +73,6 @@ wochentage <- og_df %>%
 #' the columns and puts them into long format.
 
 #' Ensure all expected columns exist in og_df
-#' TODO: delete when more submissions
 missing_cols <- setdiff(og_cfg$CN_WOCHENTAG_STUNDEN, names(og_df))
 if (length(missing_cols) > 0) {
     og_df[missing_cols] <- NA
@@ -131,28 +130,22 @@ OG_DATA$data$hauptamt_stunden <- og_df[[cfg$CN_HAUPTAMT_STUNDEN]] %>%
 
 # AKTIVE PERSONEN --------------
 # mitarbeitende + tn
-q <- find_q(og_survey, "col_name", "Mitarbeitende_inkl_Leitung")
-col_name_ma <- q$`col_name`
-OG_DATA$data$anzahl_ma_leitung <- og_df[[col_name_ma]] %>% as.integer()
+OG_DATA$data$anzahl_ma_leitung <- og_df[[og_cfg$CN_ANZAHL_MA]] %>% as.integer()
 
-# TODO weird bug where xpath has 002 suffix but data has not :eyes:
 OG_DATA$data$anzahl_tn <- og_df[[cfg$CN_ANZAHL_TN]] %>% as.integer()
-
 # GESCHLECHT MATRIX -------------
-gender_mat_begin <- find_qs(og_survey, "type", "begin_kobomatrix") %>%
-    filter(str_detect(label, "Geschlecht"))
 # name of the matrix. this is in all columns related to the matrix, so we can regex the colnames
-gender_mat_group_id <- gender_mat_begin$name
+gender_mat_group_id <- og_cfg$Q_GESCHLECHT_BEGIN$name
 gender_mat_cols <- colnames(og_df)[str_detect(
     colnames(og_df),
-    gender_mat_group_id
+    og_cfg$Q_GESCHLECHT_BEGIN$name
 )]
 
 # we use fuzzyjoins to merge the correct labels for the gender and the person_type
-gender_options <- get_mapping(og_choices, gender_mat_begin$`kobo--matrix_list`)
+gender_options <- get_mapping(og_choices, og_cfg$Q_GESCHLECHT_BEGIN$`kobo--matrix_list`)
 person_type_options <- find_matrix_header_qs(
     og_survey,
-    gender_mat_begin$`$kuid`
+    og_cfg$Q_GESCHLECHT_BEGIN$`$kuid`
 ) %>%
     select(name, label)
 
@@ -173,21 +166,18 @@ gender_long <- gender_long %>%
 OG_DATA$long$gender_by_participant_type <- gender_long
 
 # ALTER MATRIX --------------
-alter_mat_begin <- find_qs(og_survey, "type", "begin_kobomatrix") %>%
-    filter(str_detect(label, "Alter"))
 # name of the matrix. this is in all columns related to the matrix, so we can regex the colnames
-alter_mat_group_id <- alter_mat_begin$name
 alter_mat_cols <- colnames(og_df)[str_detect(
     colnames(og_df),
-    alter_mat_group_id
+    og_cfg$Q_ALTER_BEGIN$name
 )]
 
 
 # we use fuzzyjoins to merge the correct labels for the alter and the person_type
-alter_options <- get_mapping(og_choices, alter_mat_begin$`kobo--matrix_list`)
+alter_options <- get_mapping(og_choices, og_cfg$Q_ALTER_BEGIN$`kobo--matrix_list`)
 person_type_options <- find_matrix_header_qs(
     og_survey,
-    alter_mat_begin$`$kuid`
+    og_cfg$Q_ALTER_BEGIN$`$kuid`
 ) %>%
     select(name, label)
 
@@ -298,9 +288,7 @@ bedarfe_long <- bedarfe_long %>% recode_values(m, "bedarf_value")
 OG_DATA$long$unterstuetzungsbedarfe <- bedarfe_long
 
 # weitere
-q <- find_q(og_survey, "col_name", "[wW]eitereUnters")
-col_name_weitere_ub <- q$`col_name`
-OG_DATA$data$unterstuetzungsbedarfe_weitere <- og_df[[col_name_weitere_ub]]
+OG_DATA$data$unterstuetzungsbedarfe_weitere <- og_df[[og_cfg$CN_UNTERSTUETZUNGSBEDARFE_WEITERE]]
 
 # ORTSGRUPPE --------------
 m <- get_mapping(og_choices, cfg$Q_OG_REGION$select_from_list_name)
@@ -314,7 +302,6 @@ if (nrow(m)) {
         recode_values(m, cfg$CN_OG_NAME) %>%
         pull(!!cfg$CN_OG_NAME)
 } else {
-#TODO: delete?
     OG_DATA$data$og_name_orig <- og_df[[cfg$CN_OG_NAME]]
     OG_DATA$data$og_name_orig[OG_DATA$data$og_name_orig == ""] <- NA
 }
