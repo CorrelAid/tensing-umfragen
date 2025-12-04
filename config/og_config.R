@@ -48,14 +48,19 @@ cfg$CN_HAUPTAMT_STUNDEN <- cfg$Q_HAUPTAMT_STUNDEN$col_name
 cfg$Q_ANZAHL_BEGIN <- find_q(og_survey, "label", "Wie viele Personen.+aktiv?")
 
 cfg$Q_ANZAHL_MA <- find_q(og_survey, "col_name", "Mitarbeitende_inkl_Leitung")
-
+cfg$CN_ANZAHL_MA <- cfg$Q_ANZAHL_MA$col_name    
 # TODO matrix
 
 cfg$Q_GESCHLECHT <- find_q(og_survey, "label", "identifizieren")
 cfg$CN_GESCHLECHT <- cfg$Q_GESCHLECHT$col_name
 
+cfg$Q_GESCHLECHT_BEGIN<-find_qs(og_survey, "type", "begin_kobomatrix") %>%
+     filter(str_detect(label, "Geschlecht"))
+
 cfg$Q_ALTERSGRUPPE <- find_q(og_survey, "col_name", "Altersgruppe")
 cfg$CN_ALTERSGRUPPE <- cfg$Q_ALTERSGRUPPE$col_name
+cfg$Q_ALTER_BEGIN <- find_qs(og_survey, "type", "begin_kobomatrix") %>%
+    filter(str_detect(label, "Alter"))
 
 
 cfg$Q_ANZAHL_TN <- find_q(
@@ -105,18 +110,21 @@ cfg$QS_TN_GEWINNUNG_MASSNAHMEN_ERFOLG <- find_qs(
 cfg$Q_BEGIN_UNTERSTUETZUNGSBEDARFE <- find_qs(
     og_survey,
     "col_name",
-    "[Uu]nterstuetzungsbedarfe"
-) %>%
-    filter(type == "begin_group")
-
+    "[Uu]nterstuetzungsbedarfe",
+    "begin_group"
+)
 cfg$QS_UNTERSTUETZUNGSBEDARFE <- find_qs(
     og_survey,
     "col_name",
-    "[Uu]nterstuetzungsbedarfe"
+    "[Uu]nterstuetzungsbedarfe",
+    "select_one"
 ) %>%
-    filter(type == "select_one") %>%
     filter(!str_detect(col_name, "header"))
 cfg$CN_UNTERSTUETZUNGSBEDARFE <- cfg$QS_UNTERSTUETZUNGSBEDARFE$col_name
+
+cfg$Q_UNTERSTUETZUNGSBEDARFE_WEITERE <- find_q(og_survey, "col_name", "[wW]eitereUnters")
+cfg$CN_UNTERSTUETZUNGSBEDARFE_WEITERE <- cfg$Q_UNTERSTUETZUNGSBEDARFE_WEITERE$col_name
+
 
 cfg$Q_OG_REGION <- find_q(og_survey, "col_name", "region$")
 cfg$CN_OG_REGION <- cfg$Q_OG_REGION$col_name
