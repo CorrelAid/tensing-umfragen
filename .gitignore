@@ -8,6 +8,7 @@ Thumbs.db
 # r
 /renv
 .Rhistory
+renv.lock
 
 # web dev
 /node_modules
@@ -32,3 +33,11 @@ _freeze/
 
 # qgis
 qgis/
+**/*.quarto_ipynb
+
+
+preview/*
+
+*_files/
+
+*.html.json
