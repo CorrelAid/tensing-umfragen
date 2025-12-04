@@ -2,89 +2,62 @@ library(ggplot2)
 library(dplyr)
 library(ggtext)
 
-#' some functions for plots that need to be created multiple times
+ts_no_data_plot <- function(message = "Keine Daten verfügbar") {
+  ggplot2::ggplot(
+    data = data.frame(x = 0.5, y = 0.5, label = message),
+    mapping = ggplot2::aes(x = x, y = y, label = label)
+  ) +
+    ggplot2::geom_text(fontface = "bold", size = 5, colour = "#555555") +
+    ggplot2::xlim(0, 1) +
+    ggplot2::ylim(0, 1) +
+    ggplot2::labs(x = NULL, y = NULL) +
+    ggplot2::theme_void()
+}
 
-aussage_bar_chart <- function(data_long, var_filter, var_value) {
-  plot_data <- data_long %>%
-    dplyr::filter(.data[[var_filter]] == var_value) |>
-    dplyr::group_by(aussage, q_label, value, ch_label) %>%
-    dplyr::summarize(n = n(), percent = n / length(unique(data_long$tn_id)))
-
-  title <- unique(plot_data$q_label)
-
-  p <- ggplot(plot_data, aes(x = value, fill = value, y = percent)) +
-    geom_col() +
-    scale_fill_manual(
-      name   = "",
-      values = setNames(COLS_6, 1:6),
-      breaks = c(1, 6),
-      labels = c(
-        "1 = trifft überhaupt nicht zu",
-        "6 = trifft voll und ganz zu"
-      )
-    ) +
-    #scale_x_discrete(labels = meta_aussagen_choices$label)+
-    scale_y_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
-    labs(
-      y = "% Aktive",
-      title = str_wrap(title, 80),
-      # fill = NULL,
-      x = "Bewertung",
-      # subtitle = "Bewertung von trifft überhaupt nicht zu (1) zu trifft voll und ganz zu (6)"
-    ) +
-    # guides(fill = "none") +
-    theme(
-      plot.title = element_textbox_simple(margin = grid::unit(c(5, 0, 20, 0), "pt")),
-      legend.position = "bottom"
-    )
-
+ts_no_data_girafe <- function(message = "Keine Daten verfügbar") {
   ggiraph::girafe(
-    ggobj = p,
+    ggobj = ts_no_data_plot(message),
     options = list(
       ggiraph::opts_toolbar(saveaspng = TRUE)
     )
   )
 }
 
+#' some functions for plots that need to be created multiple times
 
-bedarfe_bar_chart <- function(data_long, og_choices, og_cfg, bedarf) {
-  order_df <- og_choices %>%
-    filter(
-      list_name %in% og_cfg$QS_UNTERSTUETZUNGSBEDARFE$select_from_list_name
-    ) %>%
-    mutate(order = c(1:2, 4:5, 3)) %>%
-    select(order, bedarf_value = label) %>%
-    arrange(order)
-
+aussage_bar_chart <- function(data_long, var_filter, var_value) {
   plot_data <- data_long %>%
-    left_join(order_df, by = "bedarf_value") %>%
-    dplyr::filter(bedarf == .env$bedarf) |>
-    dplyr::group_by(bedarf, bedarf_value, order, .drop = FALSE) %>%
-    dplyr::summarize(n = n(), percent = n / length(unique(data_long$og_id)))
+    dplyr::filter(.data[[var_filter]] == var_value, !is.na(value)) %>%
+    dplyr::group_by(aussage, q_label, value, ch_label) %>%
+    dplyr::summarize(n = n(),percent = n / length(unique(data_long$tn_id)))
 
-  title <- unique(plot_data$bedarf)
+  title <- unique(plot_data$q_label)
 
-  colors <- COLS_6[1:nrow(order_df)]
-  names(colors) <- order_df$bedarf_value
-
-  p <- ggplot(
-    plot_data,
-    aes(x = fct_reorder(bedarf_value, order), fill = bedarf_value, y = percent)
-  ) +
-    geom_col() +
-    #scale_x_discrete(labels = meta_aussagen_choices$label)+
-    scale_y_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
-    labs(
-      y = "% Aktive",
-      title = str_wrap(title, 80),
-      fill = NULL,
-      x = "Bewertung",
-      subtitle = "Bewertung nein bis ja"
+  p <- ggplot(plot_data, aes(x = value, fill = value, y = percent)) +
+    ggiraph::geom_col_interactive(
+      aes(
+        tooltip = paste0(ch_label, " (", value, ")\n", scales::percent(percent, accuracy = 0.1)),
+        data_id = paste(aussage, value, sep = "-")
+      )
     ) +
-    guides(fill = "none") +
+    scale_fill_manual(
+      name = "",
+      values = setNames(rev(pal_yes_no_6), 1:6),
+      breaks = c(1, 6),
+      labels = c(
+        "1 = trifft überhaupt nicht zu",
+        "6 = trifft voll und ganz zu"
+      )
+    ) +
+    scale_y_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
+    labs(y = "% Aktive", title = str_wrap(title, 80), x = "Bewertung") +
     theme(
-      plot.subtitle = element_textbox_simple(),
-      plot.title = element_textbox_simple(margin = unit(c(0, 0, 10, 0), "pt"))
+      plot.title = element_textbox_simple(
+        margin = grid::unit(c(5, 0, 20, 0), "pt"),
+        halign = 0.5,
+        family = TS_FONT_FAMILY
+      ),
+      legend.position = "bottom"
     )
 
   ggiraph::girafe(
@@ -122,7 +95,7 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
     plot_data <- dplyr::bind_rows(plot_data, extra_rows)
   }
 
-  colors <- COLS_6 |> set_names(levels(plot_data$choice_label))
+  colors <- rev(pal_yes_no_6) |> set_names(levels(plot_data$choice_label))
 
   # swap the (1) and (6) labels for the legend
   legend_labels <- stringr::str_replace(
@@ -136,6 +109,15 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
     aes(y = percent, fill = choice_label, x = choice_label)
   ) +
     geom_col() +
+    # ggiraph::geom_col_interactive(
+    #   aes(
+    #     tooltip = paste0(
+    #       choice_label, "\n",
+    #       scales::percent(percent, accuracy = 0.1)
+    #     ),
+    #     data_id = choice_label
+    #   )
+    # ) +
     scale_fill_manual(
       name   = "",
       values = colors,
@@ -158,7 +140,11 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
     # guides(fill = "none") +
     theme(
       plot.subtitle = element_textbox_simple(),
-      plot.title = element_textbox_simple(margin = unit(c(0, 0, 10, 0), "pt")),
+      plot.title = element_textbox_simple(
+        margin = unit(c(0, 0, 10, 0), "pt"),
+        halign = 0.5,
+        family = TS_FONT_FAMILY
+      ),
       # axis.text.x = element_text(size = 10.5)
       legend.position = "bottom"
     )
@@ -181,10 +167,10 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
 .ts_factor_year <- function(x) factor(x, levels = sort(unique(x)))
 
 .ts_palette_named <- function(levels, palette = NULL) {
-  base <- if (is.null(palette)) COLS_6 else unname(palette)
+  base <- if (is.null(palette)) pal_8 else unname(palette)
   L <- length(base)
   idx <- ((seq_along(levels) - 1) %% L) + 1
-  vals <- rev(base)[idx]
+  vals <- base[idx]
   names(vals) <- levels
   vals
 }
