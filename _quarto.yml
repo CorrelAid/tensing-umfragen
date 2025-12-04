@@ -1,45 +1,48 @@
 project:
   type: website
-  output-dir: _site
-  pre-render: 
-  - R/utils.R
-  - R/pre_render.R
-  - config/viz_config.R
-  - R/quarto-utils.R
+  output-dir: "preview" # for quarto preview. build.R supplies per-year output dir
+  resources:
+    - logos/**
   render:
-  - '!LICENSE'
-  - "!dump.qmd"
-  - '*qmd'
-  - "!qgis/"
+    - "*.qmd"
+    - "!LICENSE"
+    - "!qgis/"
 execute:
-  freeze: auto
+  freeze: false
+
 format:
   html:
     toc: true
     theme:
       - materia
       - styles.scss
+
 website:
   navbar:
     left:
-    - text: Start
-      href: index.html
-    - ueberblick.qmd
-    - text: Regionen
-      menu:
-      - href: region/ostwerk.qmd
-      - href: region/nord.qmd
-      - href: region/sachsen.qmd
-      - href: region/thueringen.qmd
-      - href: region/sueden.qmd
-    #  - href: region/westbund.qmd
-    - themen.qmd
-    - wirkung-pg.qmd
-    - trends.qmd
+      - text: "Start"
+        href: index.html
+
+      - ueberblick.qmd
+
+      - text: "Regionen"
+        menu:
+          - region/ostwerk.qmd
+          - region/nord.qmd
+          - region/sachsen.qmd
+          - region/thueringen.qmd
+          - region/sueden.qmd
+          - region/westbund.qmd
+
+      - themen.qmd
+      - wirkung-pg.qmd
+      - trends.qmd
+
     right:
-    - text: Hilfe
-      href: hilfe.html
-    - icon: github
-      href: https://github.com/
-      aria-label: GitHub
+      - text: "Hilfe"
+        href: hilfe.html
+      - icon: github
+        href: https://github.com/
+        aria-label: GitHub
+
   page-navigation: true
