@@ -5,98 +5,69 @@ execute:
   warning: false
 ---
 
-
-```{r}
+```{r setup}
 #| include: false
-library(tidyverse)
-library(wordcloud2)
-library(ggiraph)
-source("config/viz_config.R")
-source("R/quarto-utils.R")
-source("R/utils.R")
-source("R/viz.R")
+source("R/load_libs.R")
+source("R/load_data.R")
 
-ggplot2::theme_set(theme_ts) # defined in viz_config
+ggplot2::theme_set(theme_ts)
 
-tn <- readr::read_rds("data/cleaned/tn.rds")
-tn_data <- tn$data
-tn_cfg <- readr::read_rds("config/tn_cfg.rds")
+```
 
-og <- readr::read_rds("data/cleaned/og.rds")
-og_data <- og$data
-og_cfg <- readr::read_rds("config/og_cfg.rds")
+```{r prepare-aussagen-eig}
+mk_aussagen <- function(Y) {
+  Y$tn$wide$aussagen |>
+    pivot_longer(-tn_id, names_to = "aussage") |>
+    left_join(Y$meta$aussagen |> rename(q_label = label), by = c("aussage" = "$autoname")) |>
+    left_join(Y$meta$aussagen_choices |> rename(ch_label = label), by = c("value" = "name")) |>
+    mutate(year = Y$year)
+}
 
-tn_survey <- readr::read_csv("data/meta/tn_survey.csv")
-tn_choices <- readr::read_csv("data/meta/tn_choices.csv")
+mk_eig <- function(Y) {
+  meta_eig <- Y$meta$eig |>
+    mutate(
+      label_short = str_remove_all(label, "(Bei )?TEN SING.+?auf einer Skala"),
+      label_short = str_remove_all(label_short, ":"),
+      label_short = str_replace_all(label_short, "bis|und", "SEP"),
+      label_short = str_replace_all(label_short, "von|zwischen", ""),
+      label_short = str_remove_all(label_short, "\""),
+      y = row_number()
+    )
+  meta_eig_choices <- Y$meta$eig_choices |>
+    mutate(value = as.character(name)) |>
+    rename(label_value = label)
 
+  Y$tn$long$tensing_eigenschaften |>
+    left_join(meta_eig, by = c("eig" = "name")) |>
+    left_join(meta_eig_choices, by = c("select_from_list_name" = "list_name", "value")) |>
+    rename(choice_label = label_value) |>
+    mutate(year = Y$year)
+}
 
-meta_aussagen <- readr::read_csv("data/meta/tn/aussagen.csv")
-meta_aussagen_choices <- readr::read_csv("data/meta/tn/aussagen_choices.csv") %>% 
-  mutate(name = as.character(name))
+aussagen_list <- list(mk_aussagen(curr))
+eig_list <- list(mk_eig(curr))
+if (has_previous_year) {
+  aussagen_list <- c(list(mk_aussagen(prev)), aussagen_list)
+  eig_list <- c(list(mk_eig(prev)), eig_list)
+}
+aussagen_long <- dplyr::bind_rows(aussagen_list)
+eig_long <- dplyr::bind_rows(eig_list)
 
-fmt_aussage_label <- function(meta_data, aussage_short, inline = TRUE) {
-  label <- meta_data$label[meta_data$name == aussage_short]
-  if (length(label) == 0) stop(sprintf("Aussage %s does not exist.", aussage_short));
-  s <- sprintf('%s', label)
-  if (inline) {
-    return(I(s))
-  }
-  return(s)
+aussagen_long_curr <- dplyr::filter(aussagen_long, year == current_year)
+aussagen_long_prev <- if (has_previous_year) {
+  dplyr::filter(aussagen_long, year == previous_year)
+} else {
+  NULL
+}
+
+eig_long_curr <- dplyr::filter(eig_long, year == current_year)
+eig_long_prev <- if (has_previous_year) {
+  dplyr::filter(eig_long, year == previous_year)
+} else {
+  NULL
 }
 
 ```
-
-```{r aussagen-longify}
-# long format 
-aussagen_long <- tn$wide$aussagen %>% tidyr::pivot_longer(-tn_id, names_to = "aussage")
-aussagen_long <- aussagen_long %>% left_join(meta_aussagen %>% rename(q_label = label), by = c("aussage" = "$autoname"))
-aussagen_long <- aussagen_long %>% left_join(meta_aussagen_choices %>% rename(ch_label = label), by = c("value" = "name"))
-```
-
-```{r eig-data}
-meta_eig <- readr::read_csv("data/meta/tn/eig.csv")
-meta_eig_choices <- readr::read_csv("data/meta/tn/eig_choices.csv") %>% # here every question has its own scale
-  mutate(value = as.character(name)) %>% 
-  rename(label_value = label)
-
-meta_eig <- meta_eig %>% 
-  mutate(label_short = str_remove_all(label, "(Bei )?TEN SING.+?auf einer Skala"),
-         label_short = str_remove_all(label_short, ":"),
-         label_short = str_replace_all(label_short, "bis|und", "SEP"),
-         label_short = str_replace_all(label_short, "von|zwischen", ""),
-         label_short = str_remove_all(label_short, "\"")) %>% 
-  mutate(y = 1:n())
-
-eig_long <- tn$long$tensing_eigenschaften %>%
-  left_join(meta_eig, by = c("eig" = "name")) %>% 
-  left_join(meta_eig_choices, by = c("select_from_list_name" = "list_name", "value")) |> 
-  rename(choice_label = label_value)
-```
-
-
-::: {.callout-note collapse="true"}
-## Datenquellen
-
-**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_AUSSAGEN_LIKERT, "tn")`
-
-
-**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_EIGENSCHAFTEN, "tn")`
-
-Spalten im Roh-Datensatz - Aussagen:
-
-```{r}
-tn_cfg$QS_AUSSAGEN_LIKERT %>% select(name, col_name)
-```
-
-Spalten im Roh-Datensatz - Eigenschaften:
-
-```{r}
-tn_cfg$QS_EIGENSCHAFTEN %>% select(name, col_name)
-```
-
-:::
-
-
 
 ```{r eig-utility-fun}
 # we have to get the labels separately because there is no guarantee that all the values will be present in the data -> columns would be missing from the ggplot
@@ -120,214 +91,666 @@ get_eig_plot_data <- function(data_long, eig_choices_meta, eig) {
 }
 ```
 
- 
-# Glaube
+```{r year-tabset-helpers}
+#| include: false
+aussage_tabset_curr <- list(year = current_year, data = aussagen_long_curr)
+aussage_tabset_prev <- if (has_previous_year) {
+  list(year = previous_year, data = aussagen_long_prev)
+} else {
+  NULL
+}
 
-```{r}
-plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_offen_religionen")
-eig_bar_chart(plot_data)
+eig_choices_curr <- dplyr::mutate(curr$meta$eig_choices, label_value = label)
+eig_choices_prev <- if (has_previous_year) {
+  dplyr::mutate(prev$meta$eig_choices, label_value = label)
+} else {
+  NULL
+}
+
+eig_tabset_curr <- list(
+  year    = current_year,
+  data    = eig_long_curr,
+  choices = eig_choices_curr
+)
+
+eig_tabset_prev <- if (has_previous_year) {
+  list(
+    year    = previous_year,
+    data    = eig_long_prev,
+    choices = eig_choices_prev
+  )
+} else {
+  NULL
+}
+
+render_aussage_tabset <- function(aussage_name) {
+  render_year_tabset(
+    curr_data = aussage_tabset_curr,
+    prev_data = aussage_tabset_prev,
+    render_fn = function(tab_data) {
+      widget <- aussage_bar_chart(tab_data$data, "aussage", aussage_name)
+      render_widget_output(widget)
+    }
+  )
+}
+
+render_eig_tabset <- function(eig_name) {
+  render_year_tabset(
+    curr_data = eig_tabset_curr,
+    prev_data = eig_tabset_prev,
+    render_fn = function(tab_data) {
+      plot_data <- get_eig_plot_data(tab_data$data, tab_data$choices, eig_name)
+      widget <- eig_bar_chart(plot_data)
+      render_widget_output(widget)
+    }
+  )
+}
 ```
 
+```{r fmt-aussage-label}
+fmt_aussage_label <- function(meta_data, aussage_short, inline = TRUE) {
+  label <- meta_data$label[meta_data$name == aussage_short]
+  if (length(label) == 0) stop(sprintf("Aussage %s does not exist.", aussage_short));
+  s <- sprintf('%s', label)
+  if (inline) {
+    return(I(s))
+  }
+  return(s)
+}
 
-```{r}
-# does the person have any contact to christian faith outside of TEN SING?
-kontaktpunkt_data <- tn$long$kontakt_chrgl |> 
-  group_by(tn_id) |> 
-  summarize(has_kontaktpunkt = if_else(any(str_starts(kontaktpunkt, "Ja")), "Kontakt", "Kein Kontakt außerhalb von TEN SING")) |> 
-  filter(!is.na(has_kontaktpunkt))
-
-kontaktpunkt_pie <- get_pie_chart_data(kontaktpunkt_data, has_kontaktpunkt)
 ```
 
-```{r}
-glaube_rolle <- aussagen_long |> 
-  filter(aussage == "glaube_spiritualitaet") |> 
-  left_join(kontaktpunkt_data, by = "tn_id") |> 
-  filter(!is.na(has_kontaktpunkt)) # filter out missings
+Auf dieser Seite werden euch Ergebnisse der Befragung angezeigt, die sich mit dem Kern von TEN SING beschäftigen. Wir wollten wissen, wofür steht TEN SING und was verbindet ihr mit TEN SING!
 
-glaube_rolle_q <- tn_cfg$QS_AUSSAGEN_LIKERT |> filter(name == "glaube_spiritualitaet")
-glaube_rolle_agg <- janitor::tabyl(glaube_rolle, value, show_na = FALSE)
-share_eher_yes <- sum(glaube_rolle_agg$percent[glaube_rolle_agg$value >= 4])
-```
+::: {.callout-note collapse="true"}
 
-In der Mehrzahl setzen sich Aktive bei TEN SING mit ihrem Glauben auseinander. `{r} round(share_eher_yes * 100, 2)`% der Aktiven bewerten die Aussage "*`{r} glaube_rolle_q$label`*" eher bis voll und ganz zutreffend.
- 
-```{r}
-aussage_bar_chart(aussagen_long, "aussage", "glaube_spiritualitaet")
-```
+## Info
+**Ihr wundert euch, wieso wir euch zu manchen Themen ähnliche Fragen gestellt haben, die vermeintlich dasselbe oder sehr ähnliches abfragen? **
 
-
-**`{r} kontaktpunkt_pie$perc[kontaktpunkt_pie$has_kontaktpunkt == "Kontakt"]`%** der Aktiven haben außerhalb von TEN SING Kontakt zum christlichen Glauben, **`{r} kontaktpunkt_pie$perc[kontaktpunkt_pie$has_kontaktpunkt == "Kein Kontakt außerhalb von TEN SING"]`%** haben nur über TEN SING Kontakt. 
-
-
-
-::: {.callout-tip collapse="true"}
-## Tortendiagramm
-
-```{r} 
-kontakt_pie_plot <- ggplot(kontaktpunkt_pie, aes(x = "", y = n, fill = has_kontaktpunkt)) +
-  geom_col() +
-  ggrepel::geom_label_repel(
-aes(y = pos, label = paste0(perc, "%")),
-    size = 4.5,
-    nudge_x = 1,
-    show.legend = FALSE
-  ) +
-    coord_polar(theta = "y") +
-  labs(title = "Kontakt zum christlichen Glauben",
-subtitle = "außerhalb von Ten Sing",
-       x = NULL,
-       y = NULL,
-       fill = NULL) +
-         theme(panel.grid = element_blank(),
-        axis.text.x = element_blank()) +
-          scale_fill_manual(values = cols_4[c(1, 3, 4)])
-        
-        kontakt_pie_plot
-```
+In der Sozialforschung ist es durchaus üblich, Sachverhalte mit mehreren Fragen zu beleuchten, insbesondere wenn Dinge nicht objektiv messbar sind, wie bspw. die Temperatur. Dadurch versucht man, Messfehler auszugleichen und die Realität möglichst genau abzubilden, indem verschiedene Aspekte berücksichtigt werden.
 
 :::
 
-Es zeigt sich ein leichter Unterschied zwischen den Gruppen - Aktive, die auch außerhalb von TEN SING Kontakt mit dem christlichen Glauben haben, setzen sich eher auch bei TEN SING mit ihm auseinander. 
+## Eigenschaften, die Teilnehmende mit TEN SING verbinden
 
-```{r}
-glaube_rolle |> 
-  group_by(has_kontaktpunkt, value) |> 
-  tally(name = "nn") |>
-  group_by(has_kontaktpunkt) |> 
-  mutate(percent = nn / sum(nn)) |>
-  ggplot(aes(x = value, fill = has_kontaktpunkt, y = percent, group = has_kontaktpunkt))+
-  geom_col(position = "dodge")+
-  scale_fill_manual(values = cols_4)+
-  #scale_x_discrete(labels = meta_aussagen_choices$label)+
-  scale_y_continuous(labels = scales::label_percent())+
-  labs(y = "% Aktive", title = str_wrap(glaube_rolle_q$label, 60), x = "Bewertung",
-  subtitle = "Bewertung von trifft überhaupt nicht zu (1) zu trifft voll und ganz zu (6)")
+::: {.callout-note collapse="true"}
+
+## Erklärung
+Die Antworten der folgenden Visualisierungen verteilen sich entweder auf einer Skala von (1) „Die Aussage trifft überhaupt nicht auf mich zu.“ bis (6) „Die Aussage trifft voll und ganz auf mich zu.“
+oder z. B. von (1) „Traditionell“ bis (6) „Modern“.
+Die Werte dazwischen (2–5) liegen entsprechend zwischen den beiden Endpunkten und zeigen, in welche Richtung eure Einschätzung tendiert.
+
+⚠️ **Hinweis zur Skalenrichtung**
+
+Bei einigen Fragen wurde die ursprüngliche Skalenrichtung der Umfrage gedreht. Begriffe wie „Traditionell“, die im Fragebogen auf 6 standen, wurden in der Auswertung auf 1 gesetzt – und entsprechend umgekehrt.
+Der Grund: 6 steht in allen Visualisierungen für die jeweils höhere bzw. stärkere Ausprägung (z. B. von „nicht kreativ“ zu „kreativ“ oder von „stimme nicht zu“ zu „stimme voll zu“).
+So bleiben die Darstellungen über alle Fragen hinweg einheitlich und vergleichbar.
+
+:::
+
+```{r datenquellen-themen}
+knitr::asis_output(callout_datenquellen(curr$cfg,
+tn_q=list("QS_EIGENSCHAFTEN", "QS_AUSSAGEN_LIKERT")
+))
+
+```
+
+###  Gibt es bei TEN SING Raum für Kreativität und Abwechslung?
+
+Wir wollten von euch wissen, wie sehr ihr bei TEN SING eure Kreativität voll und ganz entfalten könnt.
+
+```{r render-entfaltung, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_aussage_tabset("entfaltung_kreativitae")
+```
+
+Zusätzlich haben wir euch gefragt, wo ihr TEN SING auf einer Skala von “nicht-kreativ” (1) bis “kreativ” (6) einordnet. So habt ihr geantwortet:
+
+
+```{r render-kreativ-unkreativ, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_eig_tabset("tensing_kreativ_unkreativ")
+```
+
+Auf einer Skala von “immer das Gleiche” (1) bis “abwechslungsreich” (6), so habt ihr TEN SING eingeordnet:
+
+```{r render-wechsel, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_eig_tabset("tensing_abwechslung")
+```
+
+
+### Offenheit und Fehlerkultur bei TEN SING
+
+Wir wollten von euch wissen, wie sehr ihr eure eigenen Ideen bei TEN SING einbringen könnt.
+
+
+```{r render-ideen, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_aussage_tabset("ideeneinbringen")
+```
+
+
+Auf einer Skala von “traditionell” (1) bis “modern” (6) nehmt ihr das Angebot bei TEN SING wie folgt wahr:
+
+```{r render-modern, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_eig_tabset("tensing_modern_traditionell_00")
+```
+
+
+Ihr schätzt TEN SING auf einer Skala zwischen “exklusiv” (1) und “offen für alle” so ein: 
+
+```{r render-offen-exklusiv, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_eig_tabset("tensing_offen_exklusiv")
+```
+
+
+
+Wenn euch bei TEN SING mal ein Fehler passiert, ist das überhaupt nicht schlimm?
+
+```{r render-fehlerkultur, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_aussage_tabset("fehlerkultur")
+```
+
+
+### Authentizität, Gemeinschaft und Safe Space
+
+```{r render-selbst-sein, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_aussage_tabset("selbst_sein")
 ```
 
 
 
 
 
-```{r}
-offenheit_religionen <- eig_long |> 
-  filter(eig == "tensing_offen_religionen") |> 
-  inner_join(kontaktpunkt_data, by = "tn_id")
-
-question <- offenheit_religionen$eig_label[1]
-```
-```{r}
-offenheit_religionen |> 
-  group_by(has_kontaktpunkt, value, .drop = TRUE) |> 
-  tally(name = "nn") |>
-  group_by(has_kontaktpunkt) |> 
-  mutate(percent = nn / sum(nn)) |>
-  ggplot(aes(x = value, fill = has_kontaktpunkt, y = percent, group = has_kontaktpunkt))+
-  geom_col(position = "dodge")+
-  scale_fill_manual(values = cols_4)+
-  #scale_x_discrete(labels = meta_aussagen_choices$label)+
-  scale_y_continuous(labels = scales::label_percent())+
-  labs(y = "% Aktive", title = str_wrap(question, 60), x = "Bewertung", fill = NULL)+
-  theme(legend.position = "bottom")
-```
-
-
-# Kreativität und Abwechslung
-```{r}
-aussage_bar_chart(aussagen_long, "aussage", "entfaltung_kreativitae")
-```
-```{r}
-plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_kreativ_unkreativ")
-eig_bar_chart(plot_data)
-```
-
-```{r}
-plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_abwechslung")
-eig_bar_chart(plot_data)
+```{r render-geschuetzt, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_eig_tabset("tengsing_geschuetzt")
 ```
 
 
 
-# Offenheit und Fehlerkultur
 
 
-```{r}
-aussage_bar_chart(aussagen_long, "aussage", "ideeneinbringen")
-```
 
-```{r}
-plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_modern_traditionell_00")
-eig_bar_chart(plot_data)
-```
-
-
-```{r}
-plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_offen_exklusiv")
-eig_bar_chart(plot_data)
+```{r render-achten, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_eig_tabset("tensing_achtenaufandere")
 ```
 
 
 
-```{r}
-aussage_bar_chart(aussagen_long, "aussage", "fehlerkultur")
-```
-
-# Authentizität, Gemeinschaft und Safe Space
 
 
-```{r}
-aussage_bar_chart(aussagen_long, "aussage", "selbst_sein")
-```
-
-```{r}
-plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tengsing_geschuetzt")
-eig_bar_chart(plot_data)
-```
-
-```{r}
-plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_achtenaufandere")
-eig_bar_chart(plot_data)
-```
-
-```{r}
-plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_gemeinschaft")
-eig_bar_chart(plot_data)
-```
-
-
-# Selbstvertrauen und Selbstwirksamkeit
-
-```{r}
-aussage_bar_chart(aussagen_long, "aussage", "selbstbewusstsein")
-```
-
-```{r}
-aussage_bar_chart(aussagen_long, "aussage", "dinge_zutrauen")
-```
-
-# Persönliche Entwicklung
-
-```{r}
-aussage_bar_chart(aussagen_long, "aussage", "eigene_entwicklung")
-```
-
-```{r}
-plot_data <- get_eig_plot_data(eig_long, meta_eig_choices, "tensing_ausprobieren")
-eig_bar_chart(plot_data)
+```{r render-gemeinschaft, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_eig_tabset("tensing_gemeinschaft")
 ```
 
 
 
-# Lernen und Transfer
 
-```{r}
-aussage_bar_chart(aussagen_long, "aussage", "transfer")
+
+### Selbstvertrauen und Selbstwirksamkeit
+
+```{r render-selbstbewusstsein, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_aussage_tabset("selbstbewusstsein")
 ```
 
 
-```{r}
-aussage_bar_chart(aussagen_long, "aussage", "neues_lernen")
+
+
+
+```{r render-zutrauen, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_aussage_tabset("dinge_zutrauen")
 ```
 
 
 
+
+
+###  Persönliche Entwicklung
+
+```{r render-eigene-entwicklung, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_aussage_tabset("eigene_entwicklung")
+```
+
+```{r render-ausprobieren, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_eig_tabset("tensing_ausprobieren")
+```
+
+
+
+
+
+###  Lernen und Transfer
+
+```{r render-transfer, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_aussage_tabset("transfer")
+```
+
+
+
+
+
+```{r render-neues-lernen, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_aussage_tabset("neues_lernen")
+```
+
+
+
+
+ 
+## TEN SING und der christliche Glaube
+
+In diesem Teil beschäftigen wir uns mit dem christlichen Glauben und seiner Bedeutung für TEN SING sowie für die Menschen, die sich dort engagieren. Um das herauszufinden, haben wir euch eine Reihe von Fragen gestellt und eure Antworten im Folgenden visualisiert.
+
+Wir wollten wissen: Ist TEN SING offen für alle Religionen oder nur für Christ*innen? - So habt ihr geantwortet:
+
+```{r render-offen-religionen, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_eig_tabset("tensing_offen_religionen")
+```
+
+
+
+```{r kontaktpunkt-data}
+build_kontaktpunkt_tab <- function(raw_data, year) {
+  data <- raw_data |>
+    dplyr::group_by(tn_id) |>
+    dplyr::summarize(
+      has_kontaktpunkt = dplyr::if_else(
+        any(stringr::str_starts(kontaktpunkt, "Ja")),
+        "Kontakt",
+        "Kein Kontakt außerhalb von TEN SING"
+      ),
+      .groups = "drop"
+    ) |>
+    dplyr::filter(!is.na(has_kontaktpunkt))
+
+  list(
+    year = year,
+    data = data,
+    pie = get_pie_chart_data(data, has_kontaktpunkt)
+  )
+}
+
+kontaktpunkt_tabs <- list(
+  curr = build_kontaktpunkt_tab(curr$tn$long$kontakt_chrgl, current_year),
+  prev = if (has_previous_year) {
+    build_kontaktpunkt_tab(prev$tn$long$kontakt_chrgl, previous_year)
+  } else {
+    NULL
+  }
+)
+```
+
+```{r kontakt-pie-render, echo=FALSE}
+#| include: false
+
+render_kontakt_pie_chart <- function(tab_data) {
+  pie <- get_pie_chart_data(tab_data$data, has_kontaktpunkt)
+
+  p <- ggplot(
+      pie,
+      aes(x = "", y = n, fill = has_kontaktpunkt)
+    ) +
+      ggiraph::geom_col_interactive(
+        aes(
+          tooltip = paste0(
+            has_kontaktpunkt, "\n",
+            n, " Personen (", round(perc), "%)"
+          ),
+          data_id = has_kontaktpunkt
+        )
+      ) +
+    ggrepel::geom_label_repel(
+      aes(y = pos, label = paste0(perc, "%")),
+      size = 4.5,
+      nudge_x = 0.75,
+      show.legend = FALSE
+    ) +
+      coord_polar(theta = "y") +
+      labs(
+        title = "Kontakt zum christlichen Glauben",
+        subtitle = "außerhalb von Ten Sing",
+        x = NULL,
+        y = NULL,
+        fill = NULL
+      ) +
+      theme_void() +
+      theme(
+        panel.grid = element_blank(),
+        axis.text.x = element_blank(),
+        plot.title = element_text(
+          size = 18,
+          face = "bold",
+          hjust = 0.5,
+          family = TS_FONT_FAMILY
+        ),
+        plot.subtitle = element_text(size = 14, hjust = 0.5, family = TS_FONT_FAMILY)
+      ) +
+      scale_fill_manual(values = pal_yes_no_6[c(3, 1)])
+
+  widget <- ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
+
+  render_widget_output(widget)
+}
+
+```
+
+
+```{r glaube-rolle-data}
+build_glaube_rolle_tab <- function(aussagen_long, kontakt_data, question_label, year) {
+  data <- aussagen_long |>
+    dplyr::filter(aussage == "glaube_spiritualitaet") |>
+    dplyr::left_join(kontakt_data, by = "tn_id") |>
+    dplyr::filter(!is.na(has_kontaktpunkt))
+
+  agg <- janitor::tabyl(data, value, show_na = FALSE)
+  share_eher_yes <- sum(agg$percent[agg$value >= 4])
+
+  list(
+    year = year,
+    data = data,
+    question = question_label,
+    share_eher_yes = share_eher_yes
+  )
+}
+
+glaube_rolle_tabs <- list(
+  curr = build_glaube_rolle_tab(
+    aussagen_long_curr,
+    kontaktpunkt_tabs$curr$data,
+    curr$cfg$tn_cfg$QS_AUSSAGEN_LIKERT |>
+      dplyr::filter(name == "glaube_spiritualitaet") |>
+      dplyr::pull(label),
+    current_year
+  )
+)
+
+glaube_rolle_tabs$prev <- if (has_previous_year) {
+  build_glaube_rolle_tab(
+    aussagen_long_prev,
+    kontaktpunkt_tabs$prev$data,
+    prev$cfg$tn_cfg$QS_AUSSAGEN_LIKERT |>
+      dplyr::filter(name == "glaube_spiritualitaet") |>
+      dplyr::pull(label),
+    previous_year
+  )
+} else {
+  NULL
+}
+```
+
+```{r glaube-rolle-render}
+#| include: false
+render_glaube_rolle_plot <- function(tab_data) {
+  axis_labels <- tab_data$data |>
+    dplyr::filter(!is.na(value)) |>
+    dplyr::distinct(value, ch_label) |>
+    dplyr::arrange(value)
+
+  plot_data <- tab_data$data |>
+    dplyr::filter(!is.na(value)) |>
+    dplyr::group_by(has_kontaktpunkt, value, .drop = TRUE) |>
+    dplyr::tally(name = "nn") |>
+    dplyr::group_by(has_kontaktpunkt) |>
+    dplyr::mutate(
+      percent = nn / sum(nn),
+      value_label = factor(
+        value,
+        levels = axis_labels$value,
+        labels = axis_labels$ch_label
+      )
+    )
+
+  p <- ggplot(
+    plot_data,
+    aes(
+      x = value_label,
+      fill = has_kontaktpunkt,
+      y = percent,
+      group = has_kontaktpunkt
+    )
+  ) +
+    ggiraph::geom_col_interactive(
+      aes(
+        tooltip = paste0(
+          "Kontakt: ", has_kontaktpunkt, "\n",
+          "Bewertung: ", value_label, "\n",
+          "Anteil: ", scales::percent(percent, accuracy = 0.1)
+        ),
+        data_id = paste(has_kontaktpunkt, value, sep = "-")
+      ),
+      position = "dodge"
+    ) +
+    scale_fill_manual(values = pal_yes_no_6[c(3, 1)]) +
+    scale_y_continuous(labels = scales::label_percent()) +
+    scale_x_discrete(
+      drop = FALSE,
+      labels = function(x) stringr::str_wrap(x, width = 14)
+    ) +
+    labs(
+      y = "% der Aktiven",
+      title = stringr::str_wrap(tab_data$question, 60),
+      x = "Bewertung",
+      fill = NULL
+    ) +
+    theme(legend.position = "bottom")
+
+  widget <- ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
+
+  render_widget_output(widget)
+}
+```
+
+
+Wie sehr setzen sich TEN SINGer*innen mit ihrem Glauben und Spiritualität auseinander?
+
+```{r render-glaube-spiritualitaet, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_aussage_tabset("glaube_spiritualitaet")
+```
+
+::: {.callout-note collapse="true"}
+
+## Interpretationshilfe
+
+In der Mehrzahl setzen sich Aktive bei TEN SING mit ihrem Glauben auseinander. `{r} round(glaube_rolle_tabs$curr$share_eher_yes * 100, 2)`% der Aktiven bewerten die Aussage "*`{r} glaube_rolle_tabs$curr$question`*" eher bis voll und ganz zutreffend.
+
+:::
+
+Wie viel Kontakt haben TEN SINGer*innen zum christlichen Glauben auch außerhalb von TEN SING?
+
+```{r render-kontakt-pie-tabset, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_year_tabset(
+  curr_data = kontaktpunkt_tabs$curr,
+  prev_data = kontaktpunkt_tabs$prev,
+  render_fn = render_kontakt_pie_chart
+)
+```
+
+**`{r} with(kontaktpunkt_tabs$curr$pie, perc[has_kontaktpunkt == "Kontakt"])`%** der Aktiven haben außerhalb von TEN SING Kontakt zum christlichen Glauben, **`{r} with(kontaktpunkt_tabs$curr$pie, perc[has_kontaktpunkt == "Kein Kontakt außerhalb von TEN SING"])`%** haben nur über TEN SING Kontakt. 
+
+::: {.callout-note collapse="false"}
+
+## Interpretationshilfe
+`{r} sum(kontaktpunkt_tabs$curr$pie$n) ` Personen haben diese Frage beantwortet. `{r} with(kontaktpunkt_tabs$curr$pie, perc[has_kontaktpunkt == "Kontakt"])`% Prozent entsprechen also `{r} with(kontaktpunkt_tabs$curr$pie, n[has_kontaktpunkt == "Kontakt"])
+` Personen.
+
+:::
+
+Zum Schluss interessiert uns noch, ob TEN SING die Auseinandersetzung mit dem christlichen Glauben fördert. Dazu haben wir die Antworten, die ihr zu den Fragen “Wie viel Kontakt hast du auch außerhalb von TEN SING zum christlichen Glauben?” sowie ob ihr euch bei "TEN SING mit eurem Glauben auseinandersetzt” kombiniert. 
+
+
+```{r render-glaube-rolle, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_year_tabset(
+  curr_data = glaube_rolle_tabs$curr,
+  prev_data = glaube_rolle_tabs$prev,
+  render_fn = render_glaube_rolle_plot
+)
+```
+
+```{r religionen-choices}
+religionen_choices <- curr$meta$eig_choices |>
+  dplyr::filter(list_name == curr$cfg$tn_cfg$Q_OFFENHEIT$select_from_list_name)
+```
+
+
+```{r offenheit-religionen-data}
+build_offenheit_tab <- function(eig_long, kontakt_data, year) {
+  data <- eig_long |>
+    dplyr::filter(eig == "tensing_offen_religionen") |>
+    dplyr::inner_join(kontakt_data, by = "tn_id")
+
+  list(
+    year = year,
+    data = data,
+    question = data$eig_label[1]
+  )
+}
+
+offenheit_religionen_tabs <- list(
+  curr = build_offenheit_tab(
+    eig_long_curr,
+    kontaktpunkt_tabs$curr$data,
+    current_year
+  ),
+  prev = if (has_previous_year) {
+    build_offenheit_tab(
+      eig_long_prev,
+      kontaktpunkt_tabs$prev$data,
+      previous_year
+    )
+  } else {
+    NULL
+  }
+)
+```
+```{r offenheit-religionen-render}
+#| include: false
+render_offenheit_plot <- function(tab_data) {
+  plot_data <- tab_data$data |>
+    dplyr::mutate(
+      value = factor(
+        value,
+        levels = religionen_choices$name,
+        labels = religionen_choices$label
+      )
+    ) |>
+    dplyr::group_by(has_kontaktpunkt, value, .drop = TRUE) |>
+    dplyr::tally(name = "nn") |>
+    dplyr::group_by(has_kontaktpunkt) |>
+    dplyr::mutate(percent = nn / sum(nn))
+
+  plot_data$value <- factor(plot_data$value, levels = rev(levels(plot_data$value)))
+
+  p <- ggplot(
+      plot_data,
+      aes(
+        x = value,
+        y = percent,
+        fill = has_kontaktpunkt,
+        group = has_kontaktpunkt
+      )
+    ) +
+      ggiraph::geom_col_interactive(
+        aes(
+          tooltip = paste0(
+            has_kontaktpunkt, "\n",
+            "Bewertung: ", value, "\n",
+            "Anteil: ", scales::percent(percent, accuracy = 0.1)
+          ),
+          data_id = paste(has_kontaktpunkt, value, sep = "-")
+        ),
+        position = "dodge"
+      ) +
+      scale_fill_manual(values = pal_yes_no_6[c(3, 1)]) +
+      scale_x_discrete(
+        drop = FALSE,
+        labels = function(x) {
+          swapped_labels <- stringr::str_replace(
+            x,
+            "(?<=\\()([16])(?=\\)$)",
+            function(m) ifelse(m == "1", "6", "1")
+          )
+          if (length(swapped_labels) > 2) {
+            mid <- 2:(length(swapped_labels) - 1)
+            swapped_labels[mid] <- rev(swapped_labels[mid])
+          }
+          stringr::str_wrap(swapped_labels, width = 12)
+        }
+      ) +
+      scale_y_continuous(labels = label_percent(), limits = c(0, 0.6)) +
+      labs(
+        y = "% der Aktiven",
+        x = "Bewertung",
+        title = stringr::str_wrap(tab_data$question, 60),
+        fill = NULL
+      ) +
+      theme(legend.position = "bottom")
+
+  widget <- ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
+
+  render_widget_output(widget)
+}
+```
+
+```{r render-offenheit-religionen, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_year_tabset(
+  curr_data = offenheit_religionen_tabs$curr,
+  prev_data = offenheit_religionen_tabs$prev,
+  render_fn = render_offenheit_plot
+)
+```
