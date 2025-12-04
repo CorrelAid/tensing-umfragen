@@ -1,41 +1,46 @@
 ---
-title: "Willkommen zur TEN SING Auswertung 2024!"
+title: ""
 execute:
   echo: false
 from: markdown+emoji
 ---
 
-```{r}
+```{r setup}
 #| include: false
-library(tidyverse)
-library(wordcloud2)
-source("R/quarto-utils.R")
-source("config/viz_config.R")
+source("R/load_libs.R")
+source("R/load_data.R")
 
-tn <- readr::read_rds("data/cleaned/tn.rds")
+tn <- curr$tn
 tn_data <- tn$data
 
-og <- readr::read_rds("data/cleaned/og.rds")
-
+og <- curr$og
 og_data <- og$data
-og_cfg <- readr::read_rds("config/og_cfg.rds")
+
+og_cfg <- curr$cfg$og_cfg
+tn_cfg <- curr$cfg$tn_cfg
+```
+
+```{r display-logo, out.width='250px', fig.align='center'}
+
+logo_path <- file.path("logos/tensing.png")
+
+if (file.exists(logo_path)) {
+  knitr::include_graphics(logo_path)
+}
 
 ```
 
-
-::: {.callout-note collapse="true"}
-## Datenquelle
-
-**Frage:** `{r} fmt_source(tn_cfg$Q_BEGIN_WORT, "tn")`
-
-Spalten im Roh-Datensatz:
-
-```{r}
-tn_cfg$QS_WORT %>% select(name, col_name)
+```{r welcome-title}
+#| results: asis
+cat(paste0("# Willkommen zur TEN SING Auswertung ", current_year, "!"))
 ```
+
+Wir wollten von euch wissen, was TEN SING für euch bedeutet. So habt ihr geantwortet.
+
+::: {.callout-tip collapse="false"}
+:computer_mouse: Wenn ihr mit dem Mauszeiger über die einzelnen Begriffe hovert, wird euch angezeigt, wie viele Personen mit dem jeweiligen Begriff geantwortet haben.
 :::
-
-```{r}
+```{r wordcloud-begriffe}
 woerter <- tn$long$woerter
 colorVec = rep(c(TS_GREEN, 'black'), length.out=nrow(demoFreq))
 
@@ -44,52 +49,83 @@ woerter %>%
   count(word, name = "freq") %>% 
   filter(freq > 4) %>% 
   wordcloud2::wordcloud2(color = colorVec, shape = "square")
+
 ```
 
-
-::: {.callout-caution}
-## Disclaimer
-
-Das hier ist nur ein Prototyp - viele Fragen fehlen, es gibt Typos und kleine Fehler in den Visualisierungen etc.! Bitte sammelt Feedback [hier](https://miro.com/app/board/uXjVNsyhzyg=/?moveToWidget=3458764616301779180&cot=14) oder in einem Text-Dokument :) Viel Erfolg bei eurem PG-Wochenende und LG aus Berlin,
-Leo
+::: {.callout-note collapse="true"}
+## Datenquelle
+- Die Visualisierung basiert auf den Antworten zur Frage: `{r} fmt_source(tn_cfg$Q_BEGIN_WORT, "tn", curr$cfg$tn$URL)`
+- Insgesamt haben `{r} length(unique(woerter$tn_id))` Personen diese Frage beantwortet.
 
 :::
 
 Hallo! Willkommen zur Auswertung der jährlichen TEN SING Umfrage. Wir freuen uns, euch Erkenntnisse aus zwei Umfragen mit insgesamt `{r} nrow(og_data) + nrow(tn_data)` Antworten präsentieren zu können.
+Hier das wichtigste in Kürze:
+
+- **Wieso gibt es diese Befragung?** Die Idee ist es, ein umfassenderes Bild der Arbeit von TEN SING zu bekommen: Was macht TEN SING für die Teilnehmenden aus? Wieso engagieren sich Menschen bei TEN SING? Welche Wünsche und Bedürfnisse haben sie? Und welche regionalen Unterschiede gibt es? - All das sind Fragen, die helfen, einen Überblick über das TEN SING Netzwerk zu bekommen und die Angebote noch besser auszurichten.
+
+- **Wer wurde befragt?** `{r} nrow(tn_data)` Personen aus dem deutschlandweiten TEN SING Netzwerk haben an der Befragung teilgenommen. Darunter sind Teilnehmende, Gruppenleiter\*innen und hauptamtliche Mitarbeitende. Adressiert wurden dabei alle Aktiven des TEN SING Netzwerks und jede*r Interessierte konnte sich beteiligen.
+
+- **Wie wurde dabei vorgegangen?** Die Befragung ist aufgeteilt in zwei unterschiedliche Fragebögen (mehr dazu unter [“Fragebögen & Daten"](#fragebögen--daten)). Diese konnten in einem Zeitraum von Oktober bis Dezember beantwortet werden. Die Befragung wird jährlich wiederholt.
 
 
-
-
-
-#### :rocket: Gespannt auf die Ergebnisse? Dann starte am besten [mit der deskriptiven Auswertung](deskriptiv.html)!
+#### :rocket: Gespannt auf die Ergebnisse? Dann starte am besten [mit der deskriptiven Auswertung](ueberblick.html)!
 #### :question: Noch Fragen, wie du dich hier zurechtfindest? Dann fang mit der [Hilfe](hilfe.html) an! 
-#### :exploding_head: Verwirrung ist bei Daten normal! Tips und Ressourcen findest du jederzeit in der [Hilfe](hilfe.html)
-#### :memo: Feedback! 
-
-::: {.callout-tip}
-## Disclaimer: Daten verstehen ist nicht immer einfach
-
-1. Datenanalysen zu lesen und zu verstehen ist nicht immer einfach. Es ist normal, wenn du erst einmal verwirrt bist beim Anblick eines Balkendiagramms, einer Heatmap oder eines Kuchendiagramms. :exploding_head: Was dann helfen kann:
-
-- nimm dir Zeit und lies den Titel und die Achsenbeschriftungen 
-- klicke auf die Hinweise zur Datenquelle und klicke dich durch zur konkreten Frage im Fragebogen.  
-- nutze die Interpretationshilfe (wenn vorhanden - wir arbeiten dran)
-
-2. Daten so aufzubereiten, dass sie verständlich sind, ist nicht immer einfach, gerade wenn man tief im Thema drinsteckt so wie wir Datenanalyst*innen. :) 
-Deshalb: Wenn Grafiken oder Texte trotz aufmerksamen Lesens noch unklar/unverständlich sind, feedbacke uns das gerne über Antonio und wir schauen es uns nochmal an! :handshake:
-
-:::
-
 
 ## Fragebögen & Daten
+Der Großteil der dargestellten Ergebnisse basiert auf den Daten, die im Herbst `{r} current_year` erhoben wurden. Darüber hinaus gibt es auch eine [Trend-Seite](trends.html), die eine Auswahl an historischen Daten der Umfragen von Herbst 2024 bis heute zeigt. 
 
-Die Analyse basiert auf Daten, die im Herbst 2024 erhoben wurden. Es wurden zwei Online-Umfragen durchgeführt:
+::: {.callout-tip}
+## Jahrgang wechseln
+`r {
+  years <- get_all_years()
+  other_years <- sort(setdiff(years, current_year), decreasing = TRUE)
 
-1. eine Umfrage unter den Ortsgruppen mit dem `{r} fmt_fragebogen(type = "og")`
-2. eine Umfrage unter TEN SING Teilnehmenden mit dem `{r} fmt_fragebogen(type = "tn")`
+  if (length(other_years) == 0) {
+    glue(
+      "Die Auswertung erscheint jedes Jahr als eigene Website. ",
+      "Du siehst gerade die Ausgabe {current_year}. ",
+      "Weitere Jahrgänge sind noch nicht veröffentlicht."
+    )
+  } else {
+    links <- sprintf("- [%s](../%s/index.html)", other_years, other_years)
+    glue(
+      "Die Auswertung erscheint jedes Jahr als eigene Website. ",
+      "Du siehst gerade die Ausgabe {current_year}. ",
+      "Die Websites der anderen Jahrgänge findest du hier:\n\n",
+      paste(links, collapse = "\n")
+    )
+  }
+}`
+:::
 
+::: {.callout-note}
+## Info
+Als Daten bezeichnen wir hier die Antworten, die auf die durchgeführte Befragung eingegangen sind.
+:::
+
+1. Der `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)` richtet sich an die unterschiedlichen Ortsgruppen und wurde einmal pro Ortsgruppe ausgefüllt.
+
+2. Der `{r} fmt_fragebogen("tn", url=curr$cfg$tn_cfg$URL)` richtet sich an alle TEN SINGer\*innen.
+
+::: {.callout-note}
+
+## Info
+
+Die dargestellten Ergebnisse sind als Annäherung an die Realität zu interpretieren. Was heißt das genau? Bei einer Umfrage wie dieser, schafft man es nie, wirklich alle Personen der Zielgruppe zu erreichen. Je mehr Menschen die Fragebögen ausfüllen, desto besser kann man ein Bild der Realität gewinnen. Indem Fragen zu bestimmten Themen sowohl an Ortsgruppen als auch an individuelle Teilnehmer*innen adressiert wurden, konnten die Ergebnisse weiter präzisiert werden. 
+:::
 
 ## Ansprechpersonen und Kontakt
-- Probleme mit der Umfrage und Feedback zur Umfragegestaltung:  
-- Probleme mit der Auswertung / Feedback: Leo Preu ([Civic Data Lab](https://civic-data.de) / [CorrelAid e.V.](https://correlaid.org)), am besten erreichbar unter [info@correlaid.org](mailto:info@correlaid.org). 
 
+**Wer steckt hinter dieser Befragung?** Entwickelt wurden die Fragebögen im Rahmen eines Projekts im [Civic Data Lab](https://civic-data.de/output-monitoring-ten-sing/) gemeinsam mit Mitarbeiter\*innen der Evangelischen Hochschule Nürnberg. TEN SINGer\*innen wurden mit ihrer inhaltlichen Expertise an der Erstellung der Fragebögen beteiligt.
+
+**Wer führt die aktuelle Befragung durch?** Die jährliche Befragung wird von der Programmgruppe TEN SING Deutschland durchgeführt.
+
+Kontakt bei Fragen, Problemen und Feedback: [info@correlaid.org](mailto:info@correlaid.org)
+
+## Feedback
+Daten so aufzubereiten, dass sie verständlich sind, ist nicht immer einfach, gerade wenn man tief im Thema drin steckt. :) 
+
+Deshalb: Wenn Grafiken oder Texte trotz aufmerksamen Lesens noch unklar sind, melde dich gerne bei [info@correlaid.org](mailto:info@correlaid.org) und wir bemühen uns, die Erklärung verständlicher zu gestalten.
+
+:tada: Und jetzt, viel Spaß mit den Ergebnissen der Umfrage! 
