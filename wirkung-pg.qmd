@@ -6,385 +6,788 @@ execute:
 ---
 
 
-```{r}
-
+```{r setup}
 #| include: false
-library(tidyverse)
-library(ggiraph)
-library(patchwork)
-
-source("config/viz_config.R")
-source("R/quarto-utils.R")
-source("R/viz.R")
+source("R/load_libs.R")
+source("R/load_data.R")
 
 ggplot2::theme_set(theme_ts) # defined in viz_config
 
-tn <- readr::read_rds("data/cleaned/tn.rds")
-tn_data <- tn$data
-tn_cfg <- readr::read_rds("config/tn_cfg.rds")
-
-og <- readr::read_rds("data/cleaned/og.rds")
-og_data <- og$data
-og_cfg <- readr::read_rds(here::here("config/og_cfg.rds"))
-
-tn_survey <- readr::read_csv("data/meta/tn_survey.csv")
-og_choices <- readr::read_csv(here::here("data/meta/og_choices.csv"))
-
-
 ```
 
-
-# Informationskanäle  
-
-```{r}
-info_komplett_data <- tn_data %>% 
-  count(info_komplett) %>% 
-  mutate(csum = rev(cumsum(rev(n))),
-         perc = round(n * 100 / nrow(tn_data), 1),
-         pos = n/2 + lead(csum, 1),
-         pos = if_else(is.na(pos), n/2, pos)) 
-
-ja_share <- info_komplett_data %>% 
-  filter(info_komplett == "ja") %>% pull(perc)
-
-# aenderungswunsch
-info_aenderung <- tn_data %>% 
-  count(info_wege_aenderung) %>% 
-  mutate(csum = rev(cumsum(rev(n))),
-       perc = round(n * 100 / nrow(tn_data), 1),
-       pos = n/2 + lead(csum, 1),
-       pos = if_else(is.na(pos), n/2, pos)) 
-
-ja_change <- info_aenderung %>% 
-  filter(stringr::str_starts(info_wege_aenderung, "Auf")) %>% pull(perc)
-
-nein_change <- info_aenderung %>% 
-  filter(stringr::str_starts(info_wege_aenderung, "Genau")) %>% pull(perc)
-```
-
-::: {.callout-note collapse="true"}
-## Datenquellen
-
-```{r}
-tn_cfg$Q_INFO_WEGE_AENDERUNG
-```
-
-**Fragen** aus dem `{r} fmt_fragebogen("tn")`:
-
-- `{r} fmt_q(tn_cfg$Q_INFO_KOMPLETT)`
-- `{r} fmt_q(tn_cfg$Q_INFO_WEGE_AENDERUNG)`
-
-
-:::
-
-
-Die TEN SINGenden fühlen sich zu `{r} ja_share`% gut informiert. 
-
-`{r} ja_change`% möchten auf anderem Wege informiert werden, `{r} nein_change`% sind mit den bisherigen Informationskanälen zufrieden. 
-
-::: {.panel-tabset}
-
-## Sind TN informiert?
-
-```{r}
-info_komplett_plot <- ggplot(info_komplett_data, aes(x = "", y = n, fill = info_komplett)) +
-  geom_col() +
-  ggrepel::geom_label_repel(
-    aes(y = pos, label = paste0(perc, "%")),
-    size = 4.5,
-    nudge_x = 1,
-    show.legend = FALSE
-  ) +
-  coord_polar(theta = "y") +
-  labs(title = "Fühlen sich TN komplett informiert?",
-       x = NULL,
-       y = NULL,
-       fill = NULL) +
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank()) +
-  scale_fill_manual(values = cols_4[c(1, 3, 4)])
-
-info_komplett_plot
-```
-
-
-```{r}
-#| output: asis
-?knit_child
-
-cat("::: {.callout-caution}") 
-
-cat("\n:::")
-```
-
-
-## Änderungswunsch Informationskanäle
-
-```{r}
-info_aenderung_plot <- ggplot(info_aenderung, aes(x = "", y = n, fill = fct_rev(info_wege_aenderung))) +
-  geom_col() +
-  ggrepel::geom_label_repel(
-    aes(y = pos, label = paste0(perc, "%")),
-    size = 4.5,
-    nudge_x = 1,
-    show.legend = FALSE
-  ) +
-  coord_polar(theta = "y") +
-  labs(title = "Möchten die TN anders informiert werden?",
-       x = NULL,
-       y = NULL,
-       fill = NULL) +
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank())  +
-  scale_fill_manual(values = cols_4[c(1, 3, 4)])
-
-info_aenderung_plot
-```
-:::
-
-
-
-# Deutschlandweites Netzwerk und Angebote
-
-**TODO**
-
-###  Warst du schon mal auf einem ortsgruppenübergreifenden Seminar oder einer Veranstaltung von TEN SING, die in deiner Region stattfand?
-
-```{r tn-deutschlandweite-regionale-veranst}
-dtl_pie <- tn_data |> 
-  get_pie_chart_data(teilnahme_dtlweit)
-
-p_tn_dtlweit <- ggplot(dtl_pie, aes(x = "", y = n, fill = fct_rev(teilnahme_dtlweit))) +
-  geom_col() +
-  ggrepel::geom_label_repel(
-    aes(y = pos, label = paste0(perc, "%")),
-    size = 4.5,
-    nudge_x = 1,
-    show.legend = FALSE
-  ) +
-  coord_polar(theta = "y") +
-  labs(title = "Teilnahme deutschlandweite Veranstaltung",
-       x = NULL,
-       y = NULL,
-       fill = NULL) +
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank())  +
-  scale_fill_manual(values = cols_4[c(1, 3, 4)])
-
-ggiraph::girafe(ggobj = p_tn_dtlweit)
-
-```
-
-```{r}
-og_ue_pie <- tn_data |> 
-  get_pie_chart_data(teilnahme_og_uebergreifend)
-
-p_tn_og_ue <- ggplot(og_ue_pie, aes(x = "", y = n, fill = fct_rev(teilnahme_og_uebergreifend))) +
-  geom_col() +
-  ggrepel::geom_label_repel(
-    aes(y = pos, label = paste0(perc, "%")),
-    size = 4.5,
-    nudge_x = 1,
-    show.legend = FALSE
-  ) +
-  coord_polar(theta = "y") +
-  labs(title = str_wrap("Teilnahme ortsgrupenübergreifende / regionale Veranstaltung", 60),
-       x = NULL,
-       y = NULL,
-       fill = NULL) +
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank())  +
-  scale_fill_manual(values = cols_4[c(1, 3, 4)])
-
-ggiraph::girafe(ggobj = p_tn_og_ue)
-```
-
-```{r}
-og_ue_pie2 <- og_ue_pie |> 
-  mutate(type_veranst = "ortsgruppenübergreifend / regional") |> 
-  rename(teilnahme = teilnahme_og_uebergreifend)
-
-dtl_pie2 <- dtl_pie |> 
-  mutate(type_veranst = "deutschlandweit") |> 
-  rename(teilnahme = teilnahme_dtlweit)
-
-colors <- cols_4[c(1, 3, 4)]
-names(colors) <- c("Ja", "Nein", "NA")
-pie_common <- dplyr::bind_rows(dtl_pie2, og_ue_pie2) |> mutate(perc = perc / 100)
-bar_chart <- ggplot(pie_common, aes(y = type_veranst, x = perc, fill = teilnahme, group = teilnahme))+
-  geom_col(position = "dodge")+
-  scale_x_continuous(limits = c(0, 1), labels = scales::label_percent())+
-  scale_y_discrete(labels = scales::label_wrap(30))+
-  labs(title = "Teilnahme an Veranstaltungen", y = NULL, x = "% der Aktiven", fill = NULL)+
-  scale_fill_manual(values = colors)+
-  theme(legend.position = "bottom")
-ggiraph::girafe(ggobj = bar_chart)
-
-```
-
-### Welche Hürden bestehen für eine Teilnahme?
-
-```{r}
-pie_common
-tn$long$teilnahme_dtlweit_gruende_dagegen$tn_id |> unique() |> length()
-```
-```{r}
-nicht_teilgenommen <- tn_data |> 
-  filter(teilnahme_og_uebergreifend == "Nein" | teilnahme_dtlweit == "Nein") |>
-  pull(tn_id)
-
-gruende_dagegen <- tn$long$teilnahme_dtlweit_gruende_dagegen |> 
-  filter(tn_id %in% nicht_teilgenommen) |> 
-  group_by(grund) |>
-  summarize(percent = n() / length(nicht_teilgenommen)) # TODO was ist grundlage?
-
-p_gruende_dagegen <- ggplot(gruende_dagegen, aes(y = forcats::fct_reorder(grund, percent), x = percent))+
-  geom_col(fill = TS_GREEN)+
-  scale_x_continuous(limits = c(0, 1), labels = scales::label_percent())+
-  scale_y_discrete(labels = scales::label_wrap(40))+
-  labs(y = NULL, x = "%", title = "Teilnahmehürden", subtitle = "an deutschlandweiten oder regionalen Veranstaltungen")
-
-ggiraph::girafe(ggobj = p_gruende_dagegen)
-```
-
-::: {.callout-tip appearance="simple" collapse="true"}
-
-## Weitere Gründe (offene Antworten):
-
-```{r}
-#| results: asis
-andere <- tn$long$teilnahme_dtlweit_gruende_dagegen |> 
-  filter(grund == "andere Gründe") |> 
-  filter(!is.na(andere_gruende)) |> 
-  pull(andere_gruende) 
-
-cat(paste("- ", andere, collapse = "\n"))
-```
-
-:::
-
-
-### Unterstützungsbedarfe der Ortsgruppen 
-
-
-::: {.panel-tabset}
-
-```{r}
-# get values
-order_df <- og_choices %>% 
-  filter(list_name %in% og_cfg$QS_UNTERSTUETZUNGSBEDARFE$select_from_list_name) %>% 
-  mutate(order = c(1:2, 4:5, 3)) %>% 
-  select(order, bedarf_value = label) %>% 
-  arrange(order)
-
-unterst_long_plotdata <- og$long$unterstuetzungsbedarfe %>% 
-  left_join(order_df) %>% 
-  add_count(bedarf, name = "n_antwort") %>% 
-  count(bedarf, n_antwort, bedarf_value, order, .drop = FALSE) %>% 
-  mutate(prop = n / n_antwort) 
-
-```
-
-::: {.callout-note collapse="true"}
-
-## Datenquelle
- 
-**Frage:** `{r} fmt_source(og_cfg$Q_BEGIN_UNTERSTUETZUNGSBEDARFE, "og")`
-
-Spalten im Roh-Datensatz:
-
-```{r}
-og_cfg$QS_UNTERSTUETZUNGSBEDARFE %>% pull(col_name)
-```
-:::
-
-## Balkendiagramm
-
-
-```{r}
-#| out-width: "100%"
-#| fig-width: 8
-
-
-# long format 
-p <- ggplot(unterst_long_plotdata, aes(fill = bedarf_value, y = bedarf, x = prop, tooltip = paste0(bedarf, "\n", bedarf_value, ": ", round(prop * 100), "% der Ortsgruppen")))+
-  geom_col_interactive(position = position_stack(reverse = TRUE))+
-  scale_x_continuous(labels = scales::percent)+
-  scale_y_discrete(labels = scales::label_wrap(30))+
-  scale_fill_manual_interactive(labels = order_df$bedarf_value, values = hcl.colors(5, "Purple-Green"))+
-  labs(fill = NULL, y = NULL, x = "% der Ortsgruppen", title = "Unterstützungsbedarfe in den Ortsgruppen")+
-  theme(legend.position = "top", axis.text.y = element_text(size = 12))
-
-ggiraph::girafe(ggobj = p)
-```
-## Heatmap
-
-```{r}
-
-  
-p_unterst_heatmap <-
-  ggplot(
-    unterst_long_plotdata,
-    aes(
-      y = bedarf,
-      x = fct_reorder(bedarf_value, order),
-      group = bedarf_value,
-      fill = prop * 100,
-      label = scales::percent(prop, accuracy = 1)
+Auf dieser Seite seht ihr alle Antworten zu Fragen, die die Programmgruppe betreffen. - Also euer Feedback an uns! 
+
+## Wie informiert fühlen sich TEN SINGende? Und welche Informationskanäle wünschen sie sich?
+
+```{r info_komplett_data_curr}
+prepare_info_data <- function(y){
+  info_komplett_data <- y$tn$data %>%
+    dplyr::mutate(
+      info_komplett = replace_na_with_ka(info_komplett),
+      info_komplett = factor(
+        info_komplett,
+        levels = c("ja", "zum Teil", "nein", "keine Angabe")
+      )
+    ) %>%
+    dplyr::count(info_komplett) %>%
+    dplyr::mutate(
+      csum = rev(cumsum(rev(n))),
+      perc = round(n * 100 / nrow(y$tn$data), 1),
+      pos  = n/2 + dplyr::lead(csum, 1),
+      pos  = dplyr::if_else(is.na(pos), n/2, pos)
     )
-  ) +
-  geom_tile() +
-  scale_y_discrete(labels = scales::label_wrap(30))+
-  geom_text(color = "white", size = 3) +
-  scale_fill_continuous(limits = c(0, 100)) +
-  labs(y = NULL, x = NULL, title = "Unterstützungsbedarfe in den Ortsgruppen", fill = "% der Ortsgruppen") +
-  theme(legend.position = "bottom")
 
-ggiraph::girafe(ggobj = p_unterst_heatmap)
+  ja_share <- info_komplett_data %>%
+    dplyr::filter(info_komplett == "ja") %>%
+    dplyr::pull(perc)
+
+  info_aenderung <- y$tn$data %>%
+    dplyr::mutate(
+      info_wege_aenderung = replace_na_with_ka(info_wege_aenderung),
+      info_wege_aenderung = factor(
+        info_wege_aenderung,
+        levels = c(
+          "Genau wie bisher auch",
+          "Auf anderem Weg, und zwar:",
+          "keine Angabe"
+        )
+      )
+    ) %>%
+    dplyr::count(info_wege_aenderung) %>%
+    dplyr::mutate(
+      csum = rev(cumsum(rev(n))),
+      perc = round(n * 100 / nrow(y$tn$data), 1),
+      pos  = n/2 + dplyr::lead(csum, 1),
+      pos  = dplyr::if_else(is.na(pos), n/2, pos)
+    )
+
+  ja_change <- info_aenderung %>%
+    dplyr::filter(stringr::str_starts(info_wege_aenderung, "Auf")) %>%
+    dplyr::pull(perc)
+
+  nein_change <- info_aenderung %>%
+    dplyr::filter(stringr::str_starts(info_wege_aenderung, "Genau")) %>%
+    dplyr::pull(perc)
+  
+  list(
+    year              = y$year,
+    info_komplett_data = info_komplett_data,
+    ja_share          = ja_share,
+    info_aenderung    = info_aenderung,
+    ja_change         = ja_change,
+    nein_change       = nein_change
+  )
+}
+
+
 ```
+
+```{r info_data_prepared}
+info_curr <- prepare_info_data(curr)
+info_prev <- if (has_previous_year) prepare_info_data(prev) else NULL
+```
+
+```{r render_info_plots}
+render_info_plots <- function(info_data) {
+  info_komplett_plot <- ggplot(
+    info_data$info_komplett_data,
+    aes(x = "", y = n, fill = info_komplett)
+  ) +
+    ggiraph::geom_col_interactive(
+      aes(
+        tooltip = paste0(info_komplett, "\n", perc, "%"),
+        data_id = info_komplett
+      )
+    ) +
+    coord_polar(theta = "y") +
+    scale_fill_manual(
+      values = INFO_COLS,
+      drop = FALSE,
+      labels = function(x) stringr::str_wrap(x, width = 15)
+    ) +
+    labs(
+      title = stringr::str_wrap("Fühlen sich TEN SINGende komplett informiert?", width = 40),
+      x = NULL,
+      y = NULL,
+      fill = NULL
+    ) +
+    theme_void() +
+    theme(
+      legend.position = "bottom",
+      plot.title = element_text(hjust = 0.5, family = TS_FONT_FAMILY)
+    )
+
+  info_aenderung_plot <- ggplot(
+    info_data$info_aenderung,
+    aes(x = "", y = n, fill = info_wege_aenderung)
+  ) +
+    ggiraph::geom_col_interactive(
+      aes(
+        tooltip = paste0(info_wege_aenderung, "\n", perc, "%"),
+        data_id = info_wege_aenderung
+      )
+    ) +
+    coord_polar(theta = "y") +
+    scale_fill_manual(
+      values = INFO_COLS,
+      drop   = FALSE,
+      labels = function(x) {
+        x <- gsub(", und zwar:", "", x, fixed = TRUE)
+        stringr::str_wrap(x, width = 15)
+      }
+    ) +
+    labs(
+      title = stringr::str_wrap("Möchten die Teilnehmer*innen anders informiert werden?", width = 40),
+      x = NULL,
+      y = NULL,
+      fill = NULL
+    ) +
+    theme_void() +
+    theme(
+      legend.position = "bottom",
+      plot.title = element_text(hjust = 0.5, family = TS_FONT_FAMILY)
+    )
+
+  combined_plot <- (info_komplett_plot | info_aenderung_plot) +
+    patchwork::plot_annotation(
+      title = "Informiertheit der Teilnehmenden und gewünschte Informationswege",
+      theme = theme(
+        plot.title = element_text(
+          hjust  = 0.5,
+          size   = 18,
+          face   = "bold",
+          family = TS_FONT_FAMILY,
+          margin = margin(b = 10)
+        )
+      )
+    )
+
+  widget <- ggiraph::girafe(
+    ggobj = combined_plot,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
+  render_widget_output(widget)
+}
+
+```
+
+```{r render-info-tabset, echo=FALSE, results='asis', fig.width=9, fig.height=6, out.width="100%"}
+render_year_tabset(
+  curr_data = info_curr,
+  prev_data = info_prev,
+  render_fn = render_info_plots
+)
+```
+
+::: {.callout-tip collapse="true"}
+
+## Interpretationshilfe
+
+Prozente zu verstehen ist nicht immer ganz einfach. Deshalb soll euch dieses Beispiel beim Verstehen der Ergebnisse oben helfen: 80% bedeuten, dass die Aussage auf 8 von 10 befragten Personen zutrifft.
 
 :::
 
+```{r datenquellen-informiertheit} 
+knitr::asis_output(callout_datenquellen(curr$cfg,
+tn_q=list("Q_INFO_WEGE_AENDERUNG","Q_INFO_KOMPLETT"
+)))
+```
 
-```{r}
-bedarf <- "Angebot von  deutschlandweiten Seminaren / Workshops"
-  order_df <- og_choices %>% 
-    filter(list_name %in% og_cfg$QS_UNTERSTUETZUNGSBEDARFE$select_from_list_name) %>% 
-    mutate(order = c(1:2, 4:5, 3)) %>% 
-    select(order, bedarf_value = label) %>% 
-    arrange(order)
-  
-  plot_data <- og$long$unterstuetzungsbedarfe %>%
-    left_join(order_df, by = "bedarf_value") %>% 
-    dplyr::filter(bedarf == .env$bedarf) |>
-    dplyr::group_by(bedarf, bedarf_value, order, .drop = FALSE) %>%
-    dplyr::summarize(n = n(), percent = n / length(unique(og$long$unterstuetzungsbedarfe$og_id)))
+Um euch über die “richtigen” Informationskanäle zu informieren, wollten wir von euch wissen, über welche Wege wir euch gut erreichen können und welche Kanäle ihr vielleicht gar nicht so sehr braucht.
 
-  title <- "Wunsch nach Begleitung / Unterstützung"
+### Welche Informationkanäle werden am meisten benutzt?
 
-  colors <- COLS_6[1:nrow(order_df)]
-  names(colors) <- order_df$bedarf_value
+```{r info-channel-helpers}
+prepare_info_channel_data <- function(y, data, plot_title, levels, y_limits = NULL, y_breaks = NULL) {
+  agg <- data %>%
+    dplyr::mutate(
+      info_weg = factor(info_weg, levels = levels)
+    ) %>%
+    dplyr::count(info_weg, name = "n", .drop = FALSE)
 
-  p <- ggplot(plot_data, aes(x = fct_reorder(bedarf_value, order), fill = bedarf_value, y = percent)) +
-    geom_col() +
-    #scale_x_discrete(labels = meta_aussagen_choices$label)+
-    scale_fill_manual(values = colors)+
-    scale_y_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
-    labs(
-      y = "% Ortsgruppen",
-      title = str_wrap(title, 80),
-      fill = NULL,
-      x = "Zustimmung",
-      subtitle = unique(plot_data$bedarf)
+  list(
+    year = y$year,
+    agg = agg,
+    plot_title = plot_title,
+    y_limits = y_limits,
+    y_breaks = y_breaks
+  )
+}
+
+render_info_channel_plot <- function(channel_data) {
+  agg <- channel_data$agg
+
+  p <- ggplot(agg, aes(x = info_weg, y = n, fill = info_weg)) +
+    ggiraph::geom_col_interactive(
+      aes(
+        tooltip = paste0(info_weg, "\n", n, " Antworten"),
+        data_id = info_weg
+      )
     ) +
-    guides(fill = "none")
-  
-  ggiraph::girafe(ggobj = p)
+    scale_x_discrete(labels = function(x) str_wrap(x, width = 12)) +
+    scale_fill_manual(values = pal_8) +
+    theme_minimal(base_size = 12, base_family = TS_FONT_FAMILY) +
+    # scale_y_continuous(breaks = scales::pretty_breaks(n = 4)) +
+    theme(
+      panel.grid.minor.y = element_blank(),
+      legend.position = "none",
+      axis.text.x = element_text(angle = 0, vjust = 1, hjust = 0.5),
+      plot.title = element_text(
+        size = 16,
+        face = "bold",
+        hjust = 0.5,
+        family = TS_FONT_FAMILY,
+        margin = margin(t = 10, b = 10)
+      ),
+      plot.caption = element_text(
+        hjust = 0.5,
+        family = TS_FONT_FAMILY,
+        margin = margin(t = 10)
+      ),
+      plot.caption.position = "plot"
+    ) +
+    labs(
+      title = channel_data$plot_title,
+      x = NULL,
+      y = "Anzahl",
+      caption = "Informationskanäle"
+    )
+
+  if (!is.null(channel_data$y_limits)) {
+    breaks <- if (is.null(channel_data$y_breaks)) waiver() else channel_data$y_breaks
+    p <- p + scale_y_continuous(limits = channel_data$y_limits, breaks = breaks)
+  }
+
+  widget <- ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
+
+  render_widget_output(widget)
+}
 
 ```
 
-### Ist das deutschlandweite Netzwerk bekannt (Ortsübergreifende Angebote im Fragebogen)?
+```{r info-kanal-usage-data}
+info_levels <- curr$tn$long$info_wege_aktuell$info_weg
+if (has_previous_year) {
+  info_levels <- c(info_levels, prev$tn$long$info_wege_aktuell$info_weg)
+}
+info_levels <- sort(unique(info_levels))
 
-### Wird es genutzt?
- 
-### Was braucht ein deutschlandweites Seminar um daran teilzunehmen? Welche Hürden bestehen?
+info_channel_usage_curr <- prepare_info_channel_data(
+  y = curr,
+  data = curr$tn$long$info_wege_aktuell,
+  plot_title = "Meistgenutzte Informationskanäle",
+  levels = info_levels
+)
+
+info_channel_usage_prev <- if (has_previous_year) {
+  prepare_info_channel_data(
+    y = prev,
+    data = prev$tn$long$info_wege_aktuell,
+    plot_title = "Meistgenutzte Informationskanäle",
+    levels = info_levels
+  )
+} else {
+  NULL
+}
+
+```
+
+```{r render-info-kanal-usage, echo=FALSE, results='asis', fig.width=9, fig.height=6, out.width="100%"}
+render_year_tabset(
+  curr_data = info_channel_usage_curr,
+  prev_data = info_channel_usage_prev,
+  render_fn = render_info_channel_plot
+)
+```
+
+```{r datenquellen-info-kanal-usage} 
+knitr::asis_output(callout_datenquellen(curr$cfg,
+tn_q=list("Q_INFO_WEGE_AKTUELL", "Q_INFO_WEGE_AENDERUNG"
+)))
+```
+
+Und welche Informationskanäle wünscht ihr euch darüber hinaus?
+
+```{r info-kanal-wunsch-data}
+info_wunsch_levels <- curr$tn$long$info_wege_wunsch$info_weg
+if (has_previous_year) {
+  info_wunsch_levels <- c(info_wunsch_levels, prev$tn$long$info_wege_wunsch$info_weg)
+}
+info_wunsch_levels <- sort(unique(info_wunsch_levels))
+
+info_channel_wunsch_curr <- prepare_info_channel_data(
+  y         = curr,
+  data      = curr$tn$long$info_wege_wunsch,
+  plot_title = "Gewünschte zusätzliche Informationskanäle",
+  levels    = info_wunsch_levels,
+  y_limits  = c(0, 10),
+  y_breaks  = 0:10
+)
+
+info_channel_wunsch_prev <- if (has_previous_year) {
+  prepare_info_channel_data(
+    y         = prev,
+    data      = prev$tn$long$info_wege_wunsch,
+    plot_title = "Gewünschte zusätzliche Informationskanäle",
+    levels    = info_wunsch_levels,
+    y_limits  = c(0, 10),
+    y_breaks  = 0:10
+  )
+} else {
+  NULL
+}
+
+```
+
+```{r render-info-kanal-wunsch, echo=FALSE, results='asis', fig.width=9, fig.height=6, out.width="100%"}
+render_year_tabset(
+  curr_data = info_channel_wunsch_curr,
+  prev_data = info_channel_wunsch_prev,
+  render_fn = render_info_channel_plot
+)
+
+knitr::asis_output(callout_datenquellen(curr$cfg,
+tn_q=list("Q_INFO_WEGE_AENDERUNG"
+)))
+
+```
+
+
+## Deutschlandweites Netzwerk und Angebote
+
+Um die deutschlandweiten und ortsübergreifenden Seminare und Veranstaltungen besser an eure Wünsche anzupassen und bestehende Hürden besser abbauen zu können, wollten wir von euch wissen, ob ihr an solchen Angeboten bereits teilgenommen habt und falls nicht, was euch daran gehindert hat.
+
+
+<!-- ab 2026?
+Zunächst wollten wir erst einmal wissen, wie bekannt das deutschlandweite Netzwerk unter den TEN SINGer*innen überhaupt ist. Dafür haben wir euch gefragt, ob ihr schonmal von ortsübergreifenden und deutschlandweiten Angeboten mitbekommen habt. -->
+
+```{r participation-data}
+summarise_participation_by_region <- function(df, column) {
+  column <- rlang::enquo(column)
+  df %>%
+    filter(!is.na(region_grouped), region_grouped != "keine Angabe") %>%
+    group_by(region_grouped) %>%
+    summarise(
+      anz_ja = sum((!!column) == "Ja", na.rm = TRUE),
+      anz_nein = sum((!!column) == "Nein", na.rm = TRUE),
+      anz_total = n(),
+      pct_ja = mean((!!column) == "Ja", na.rm = TRUE) * 100,
+      .groups = "drop"
+    )
+}
+
+prepare_participation_data <- function(y) {
+  dtl_pie <- y$tn$data |>
+    get_pie_chart_data(teilnahme_dtlweit)
+
+  regional_pie <- y$tn$data |>
+    get_pie_chart_data(teilnahme_og_uebergreifend)
+
+  non_participants <- y$tn$data |>
+    filter(teilnahme_og_uebergreifend == "Nein" | teilnahme_dtlweit == "Nein") |>
+    pull(tn_id)
+
+  barriers <- if (length(non_participants) > 0) {
+    y$tn$long$teilnahme_dtlweit_gruende_dagegen |>
+      filter(tn_id %in% non_participants) |>
+      count(grund, name = "n") |>
+      mutate(percent = n / length(non_participants))
+  } else {
+    tibble(grund = character(), percent = numeric())
+  }
+
+  list(
+    year = y$year,
+    dtl_pie = dtl_pie,
+    regional_pie = regional_pie,
+    dtl_region_summary = summarise_participation_by_region(y$tn$data, teilnahme_dtlweit),
+    regional_region_summary = summarise_participation_by_region(y$tn$data, teilnahme_og_uebergreifend),
+    barriers = barriers
+  )
+}
+
+participation_curr <- prepare_participation_data(curr)
+participation_prev <- if (has_previous_year) {
+  prepare_participation_data(prev)
+} else {
+  NULL
+}
+
+```
+
+```{r participation-renderers}
+render_region_participation_plot <- function(summary_tbl, plot_title) {
+  p <- ggplot(summary_tbl, aes(x = region_grouped, y = pct_ja, fill = region_grouped)) +
+    ggiraph::geom_col_interactive(
+      aes(
+        tooltip = paste0(region_grouped, "\n", round(pct_ja, 1), "% Ja"),
+        data_id = region_grouped
+      )
+    ) +
+    scale_x_discrete(labels = function(x) {
+      parsed <- ifelse(x == "Deutschlandweit", "bold('Deutschlandweit')", x)
+      scales::label_parse()(parsed)
+    }) +
+    scale_y_continuous(
+      limits = c(0, 100),
+      breaks = seq(0, 100, by = 25),
+      labels = function(x) paste0(x, "%")
+    ) +
+    scale_fill_manual(values = pal_8) +
+    theme_minimal(base_size = 12, base_family = TS_FONT_FAMILY) +
+    theme(
+      legend.position = "none",
+      axis.text.x = element_text(angle = 0, vjust = 1, hjust = 0.5),
+      plot.title = element_text(
+        size = 16,
+        face = "bold",
+        hjust = 0.5,
+        family = TS_FONT_FAMILY,
+        margin = margin(t = 10, b = 10)
+      ),
+      plot.caption = element_text(
+        hjust = 0.5,
+        family = TS_FONT_FAMILY,
+        margin = margin(t = 10)
+      ),
+      plot.caption.position = "plot"
+    ) +
+    labs(
+      title = plot_title,
+      x = NULL,
+      y = "% der Teilnehmenden pro Ortsgruppe",
+      caption = "Regionen"
+    )
+
+  widget <- ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
+
+  render_widget_output(widget)
+}
+
+render_dtl_region_plot <- function(data) {
+  de_pct <- data$dtl_pie |>
+    dplyr::filter(teilnahme_dtlweit == "Ja") |>
+    dplyr::pull(perc)
+
+  summary_tbl <- data$dtl_region_summary |>
+    dplyr::bind_rows(
+      tibble::tibble(region_grouped = "Deutschlandweit",pct_ja = de_pct)
+    ) |>
+    dplyr::mutate(
+      region_grouped = factor(
+        region_grouped,
+        levels = c(
+          "Deutschlandweit",
+          sort(setdiff(unique(region_grouped), "Deutschlandweit"))
+        )
+      )
+    )
+
+  render_region_participation_plot(
+    summary_tbl = summary_tbl,
+    plot_title = "Teilnahme an deutschlandweiten Veranstaltungen"
+  )
+}
+
+render_regional_region_plot <- function(data) {
+  de_pct <- data$regional_pie |>
+    dplyr::filter(teilnahme_og_uebergreifend == "Ja") |>
+    dplyr::pull(perc)
+
+  summary_tbl <- data$regional_region_summary |>
+    dplyr::bind_rows(
+      tibble::tibble(
+        region_grouped = "Deutschlandweit",
+        pct_ja = de_pct
+      )
+    ) |>
+    dplyr::mutate(
+      region_grouped = factor(
+        region_grouped,
+        levels = c(
+          "Deutschlandweit",
+          sort(setdiff(unique(region_grouped), "Deutschlandweit"))
+        )
+      )
+    )
+
+  render_region_participation_plot(
+    summary_tbl = summary_tbl,
+    plot_title = "Teilnahme an Veranstaltungen vor Ort"
+  )
+}
+
+render_participation_comparison <- function(data) {
+  og <- data$regional_pie |>
+    mutate(
+      type_veranst = "ortsgruppenübergreifend / regional",
+      teilnahme = teilnahme_og_uebergreifend
+    )
+
+  dtl <- data$dtl_pie |>
+    mutate(
+      type_veranst = "deutschlandweit",
+      teilnahme = teilnahme_dtlweit
+    )
+
+  colors <- c(
+    "Ja"           = pal_yes_no[1],
+    "Nein"         = pal_yes_no[2],
+    "keine Angabe" = KEINE_ANGABE_GRAY
+  )
+
+  combined <- dplyr::bind_rows(dtl, og) |>
+    mutate(
+      perc = perc / 100,
+      teilnahme = replace_na_with_ka(teilnahme),
+      teilnahme = forcats::fct_relevel(teilnahme, "Ja", "Nein", "keine Angabe")
+    )
+
+  p <- ggplot(combined, aes(y = type_veranst, x = perc, fill = teilnahme, group = teilnahme)) +
+    geom_col(position = "dodge") +
+    scale_x_continuous(limits = c(0, 1), labels = scales::label_percent()) +
+    scale_y_discrete(labels = scales::label_wrap(30)) +
+    labs(
+      title = "Teilnahme an Veranstaltungen",
+      y = NULL,
+      x = "% der Aktiven",
+      fill = NULL
+    ) +
+    scale_fill_manual(values = colors) +
+    theme(
+      legend.position = "bottom",
+      plot.title = element_text(hjust = 0.5, family = TS_FONT_FAMILY)
+    )
+
+  render_widget_output(
+    ggiraph::girafe(
+      ggobj = p,
+      options = list(
+        ggiraph::opts_toolbar(saveaspng = TRUE)
+      )
+    )
+  )
+}
+
+render_participation_barriers <- function(data) {
+  barriers <- data$barriers
+  if (nrow(barriers) == 0) {
+    cat("Keine Angaben zu Teilnahmehürden vorhanden.")
+    return(invisible(NULL))
+  }
+
+  barriers <- barriers |>
+    dplyr::mutate(grund = factor(grund, levels = sort(unique(grund))))
+
+  p <- ggplot(barriers, aes(y = grund, x = percent)) +
+    geom_col(fill = TS_GREEN) +
+    scale_x_continuous(labels = scales::label_percent()) +
+    scale_y_discrete(labels = scales::label_wrap(40)) +
+    labs(
+      y = NULL,
+      x = "%",
+      title = "Teilnahmehürden",
+      subtitle = "an deutschlandweiten oder regionalen Veranstaltungen"
+    ) +
+    theme(
+      plot.title = element_text(hjust = 0.5, family = TS_FONT_FAMILY),
+      plot.subtitle = element_text(hjust = 0.5, family = TS_FONT_FAMILY)
+    )
+
+  render_widget_output(
+    ggiraph::girafe(
+      ggobj = p,
+      options = list(
+        ggiraph::opts_toolbar(saveaspng = TRUE)
+      )
+    )
+  )
+}
+
+```
+
+#### Deutschlandweite Veranstaltungen
+Wir wollten wissen, ob ihr im letzten Jahr an einer deutschlandweiten Veranstaltung teilgenommen habt.
+
+
+Gibt es regionale Unterschiede bezüglich der Teilnahme an deutschlandweiten Veranstaltungen ?
+
+```{r render-dtl-region, echo=FALSE, results='asis', fig.width=9, fig.height=6, out.width="100%"}
+render_year_tabset(
+  curr_data = participation_curr,
+  prev_data = participation_prev,
+  render_fn = render_dtl_region_plot
+)
+
+knitr::asis_output(callout_datenquellen(curr$cfg,
+tn_q=list("Q_DE_VERANST"
+)))
+
+```
+
+#### Regionale Veranstaltungen
+
+
+Wie sieht es bei den regionalen Veranstaltungen aus? So fiel hier die Teilnahme im letzten Jahr aus.
+
+
+Gibt es Unterschiede zwischen den Regionen?
+
+```{r render-regional-region, echo=FALSE, results='asis', fig.width=9, fig.height=6, out.width="100%"}
+render_year_tabset(
+  curr_data = participation_curr,
+  prev_data = participation_prev,
+  render_fn = render_regional_region_plot
+)
+
+knitr::asis_output(callout_datenquellen(curr$cfg,
+tn_q=list("Q_RE_VERANST"
+)))
+
+```
+
+#### Deutschlandweite und Regionale Veranstaltungen im Vergleich
+
+Gehen TEN SINGer*innen lieber zu deutschlandweiten Veranstaltungen oder regionalen Veranstaltungen? 
+Hier sehr ihr den Vergleich: 
+
+```{r render-participation-comparison, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_year_tabset(
+  curr_data = participation_curr,
+  prev_data = participation_prev,
+  render_fn = render_participation_comparison
+)
+
+knitr::asis_output(callout_datenquellen(curr$cfg,
+tn_q=list("Q_RE_VERANST", "Q_DE_VERANST"
+)))
+
+```
+
+
+### Teilnahmehürden
+
+Um Teilnahmehürden gut abbauen zu können und so möglichst vielen TEN SINGer*innen die Teilnahme an überregionalen und deutschlandweiten Veranstaltungen und Seminaren ermöglichen zu können, wollten wir von euch wissen, welche Gründe es gibt, dass ihr an diesen Angeboten nicht teilnehmt.
+
+Im Folgenden seht ihr die häufigsten Gründe, warum Personen nicht an überregionalen und deutschlandweiten Angeboten teilgenommen haben. 
+
+```{r render-participation-barriers, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_year_tabset(
+  curr_data = participation_curr,
+  prev_data = participation_prev,
+  render_fn = render_participation_barriers
+)
+
+knitr::asis_output(callout_datenquellen(curr$cfg,
+tn_q=list( "Q_VERANST_HUERDE"
+)))
+
+```
+
+### Unterstützungsbedarfe 
+
+Und zu guter Letzt wollten wir von euch wissen, wie wir euch als Programmgruppe gut unterstützen können.
+
+Diese Unterstützungsbedarfe wünscht ihr euch von uns:
+
+```{r unterstuetzungsbedarfe-data}
+prepare_unterstuetzung_data <- function(y) {
+  order_df <- y$meta$og_choices %>%
+    filter(list_name %in% y$cfg$og_cfg$QS_UNTERSTUETZUNGSBEDARFE$select_from_list_name) %>%
+    mutate(order = c(1:2, 4:5, 3)) %>%
+    select(order, bedarf_value = label) %>%
+    arrange(order)
+
+  plot_data <- y$og$long$unterstuetzungsbedarfe %>%
+    left_join(order_df, by = dplyr::join_by(bedarf_value)) %>%
+    add_count(bedarf, name = "n_antwort") %>%
+    count(bedarf, n_antwort, bedarf_value, order, .drop = FALSE) %>%
+    mutate(prop = n / n_antwort)
+
+  list(
+    year = y$year,
+    order_df = order_df,
+    plot_data = plot_data
+  )
+}
+
+render_unterstuetzung_plot <- function(data) {
+  plot_data <- data$plot_data
+  order_df <- data$order_df
+
+  p_bar <- ggplot(
+      plot_data,
+      aes(
+        fill = bedarf_value,
+        y = bedarf,
+        x = prop,
+        tooltip = paste0(bedarf, "\n", bedarf_value, ": ", round(prop * 100), "% der Ortsgruppen")
+      )
+    ) +
+    geom_col_interactive(position = position_stack(reverse = TRUE)) +
+    scale_x_continuous(labels = scales::percent) +
+    scale_y_discrete(labels = scales::label_wrap(30)) +
+    scale_fill_manual_interactive(labels = order_df$bedarf_value, values = rev(pal_yes_no_5)) +
+    labs(
+      fill = NULL,
+      y = NULL,
+      x = "% der Ortsgruppen",
+      title = "Balkendiagramm: Unterstützungsbedarfe in den Ortsgruppen"
+    ) +
+    theme(
+      legend.position = "top",
+      legend.box.just   = "left",
+      legend.justification = "left",
+      axis.text.y = element_text(size = 12),
+      plot.title = element_text(hjust = 0.5, family = TS_FONT_FAMILY)
+    )
+
+  render_widget_output(
+    ggiraph::girafe(
+      ggobj = p_bar,
+      options = list(
+        ggiraph::opts_toolbar(saveaspng = TRUE)
+      )
+    )
+  )
+}
+
+unterstuetzung_curr <- prepare_unterstuetzung_data(curr)
+unterstuetzung_prev <- if (has_previous_year) {
+  prepare_unterstuetzung_data(prev)
+} else {
+  NULL
+}
+```
+
+```{r render-unterstuetzung, echo=FALSE, results='asis'}
+#| fig.width: 9
+#| fig.height: 6
+render_year_tabset(
+  curr_data = unterstuetzung_curr,
+  prev_data = unterstuetzung_prev,
+  render_fn = render_unterstuetzung_plot
+)
+
+knitr::asis_output(callout_datenquellen(curr$cfg,
+og_q=list( "Q_BEGIN_UNTERSTUETZUNGSBEDARFE","QS_UNTERSTUETZUNGSBEDARFE"
+)))
+```
+
+Vielen Dank, dass du Teil dieser Befragung warst oder dich mit den Ergebnissen auseinandergestezt hast. Wenn du Fragen hast kannst du dich jederzeit an tensing@cvjm.de wenden. Bitte hilf uns die Befragung auch in den kommenden Jahren weiterhin durchführen zu können und Teile den aktuellen Link zur Befragung oder gib uns Feedback was wir besser machen können.
