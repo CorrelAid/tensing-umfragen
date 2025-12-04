@@ -1,0 +1,3 @@
+project:
+  # Override preview output-dir so build renders directly into _site/<year>
+  output-dir: "."
