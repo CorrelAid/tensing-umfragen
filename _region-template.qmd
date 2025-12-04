@@ -83,7 +83,7 @@ insgesamt_og_curr <- sum(curr$og$data$anzahl_insg, na.rm = T)
 
 ```{r display-logo}
 
-logo_path <- file.path("..", "logos", paste0(params$region, ".png"))
+logo_path <- file.path("..", "logos", paste0(tolower(params$region), ".png"))
 
 if (file.exists(logo_path)) {
 knitr::include_graphics(logo_path)
