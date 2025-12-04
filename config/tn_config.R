@@ -11,16 +11,15 @@ source("R/utils.R")
 dotenv::load_dot_env()
 
 # METADATA ----
-tn_survey <- readr::read_csv(file.path(DIR_META,"tn_survey.csv"))
-tn_choices <- readr::read_csv(file.path(DIR_META,"tn_choices.csv"))
+tn_survey <- readr::read_csv(file.path(DIR_META, "tn_survey.csv"))
+tn_choices <- readr::read_csv(file.path(DIR_META, "tn_choices.csv"))
 
 cfg <- list()
 
-cfg$URL <- "https://ee-eu.kobotoolbox.org/single/UgaA9dLH"
+cfg$URL <- Sys.getenv(paste0(YEAR, "_TN_URL"))
 
 # IDENTIFY QUESTIONS --
-cfg$Q_BEGIN_WORT <- find_qs(tn_survey, "label", "Wort") %>%
-    filter(type == "begin_group")
+cfg$Q_BEGIN_WORT <- find_qs(tn_survey, "label", "Wort", "begin_group")
 cfg$QS_WORT <- find_qs(tn_survey, "col_name", "Wort")
 
 cfg$Q_BEGIN_EIGENSCHAFTEN <- find_q(tn_survey, "label", "Eigenschaften")
@@ -28,17 +27,19 @@ stopifnot(cfg$Q_BEGIN_EIGENSCHAFTEN$type == "begin_group") # todo design functio
 cfg$QS_EIGENSCHAFTEN <- find_qs(
     tn_survey,
     "col_name",
-    cfg$Q_BEGIN_EIGENSCHAFTEN$name
-) %>%
-    filter(type == "select_one")
+    cfg$Q_BEGIN_EIGENSCHAFTEN$name,
+    "select_one"
+)
 
 
 cfg$QS_EIGENSCHAFTEN %>% write_csv(file.path(DIR_META, "tn_eig.csv"))
 eig_choices <- tn_choices %>% filter(list_name %in% cfg$QS_EIGENSCHAFTEN$select_from_list_name)
-eig_choices %>% write_csv(file.path(DIR_META,"tn_eig_choices.csv"))
+eig_choices %>% write_csv(file.path(DIR_META, "tn_eig_choices.csv"))
 
-cfg$Q_ZUGANGSWEGE <- find_qs(tn_survey, "col_name", "zugangsweg") %>%
-    filter(type == "select_multiple")
+cfg$Q_OFFENHEIT <- find_q(tn_survey, "col_name", "religion")
+cfg$CN_OFFENHEIT <- cfg$Q_OFFENHEIT$col_name
+
+cfg$Q_ZUGANGSWEGE <- find_qs(tn_survey, "col_name", "zugangsweg", "select_multiple")
 cfg$LABEL_ZUGANGSWEGE <- c(
     "Mitgenommen von anderer Person",
     "Aufführung",
@@ -52,31 +53,30 @@ cfg$LABEL_ZUGANGSWEGE <- c(
 )
 cfg$CN_ZUGANGSWEGE <- cfg$Q_ZUGANGSWEGE$col_name
 
-cfg$Q_ZUGANGSWEGE_SONST <- find_qs(tn_survey, "col_name", "zugangsweg") %>%
-    filter(type == "text")
+cfg$Q_ZUGANGSWEGE_SONST <- find_qs(tn_survey, "col_name", "zugangsweg", "text")
 cfg$CN_ZUGANGSWEGE_SONST <- cfg$Q_ZUGANGSWEGE_SONST$col_name
 
 cfg$Q_BEGIN_AUSSAGEN_LIKERT <- find_qs(tn_survey, "col_name", "aussage") %>%
     filter(str_detect(name, "header"))
-cfg$QS_AUSSAGEN_LIKERT <- find_qs(tn_survey, "col_name", "aussage") %>%
-    filter(type == "select_one") %>%
+cfg$QS_AUSSAGEN_LIKERT <- find_qs(tn_survey, "col_name", "aussage", "select_one") %>%
     filter(!str_detect(name, "header"))
 cfg$CN_AUSSAGEN_LIKERT <- cfg$QS_AUSSAGEN_LIKERT$col_name
 
 cfg$QS_AUSSAGEN_LIKERT %>%
     arrange(name) %>%
-    write_csv(file.path(DIR_META,"tn_aussagen.csv"))
+    write_csv(file.path(DIR_META, "tn_aussagen.csv"))
 
 tn_choices %>%
     filter(list_name == cfg$QS_AUSSAGEN_LIKERT$select_from_list_name[1]) %>%
-    write_csv(file.path(DIR_META,"tn_aussagen_choices.csv"))
+    write_csv(file.path(DIR_META, "tn_aussagen_choices.csv"))
 
 cfg$Q_ANGEBOTE_VOR_ORT <- find_q(tn_survey, "label", "An welchen Angeboten")
 cfg$CN_ANGEBOTE_VOR_ORT <- cfg$Q_ANGEBOTE_VOR_ORT$col_name
 cfg$Q_ANGEBOTE_VOR_ORT_SONST <- find_q(tn_survey, "col_name", "andere_angebote")
 cfg$CN_ANGEBOTE_VOR_ORT_SONST <- cfg$Q_ANGEBOTE_VOR_ORT_SONST$col_name
 
-cfg$Q_STUNDEN<- find_q(tn_survey, "label", "Stunden")
+cfg$Q_STUNDEN <- find_q(tn_survey, "label", "Stunden")
+cfg$CN_STUNDEN <- cfg$Q_STUNDEN$col_name
 
 cfg$Q_OG_NAME <- find_q(tn_survey, "label", "heißt.+?Ortsgruppe")
 cfg$CN_OG_NAME <- cfg$Q_OG_NAME$col_name
@@ -84,16 +84,20 @@ cfg$CN_OG_NAME <- cfg$Q_OG_NAME$col_name
 cfg$Q_OG_REGION <- find_q(tn_survey, "col_name", "ortsgruppe_region")
 cfg$CN_OG_REGION <- cfg$Q_OG_REGION$col_name
 
-#veranstaltungen & angebote
+# veranstaltungen & angebote
 # ortsgruppenübergreifenden
 cfg$Q_RE_VERANST <- find_q(tn_survey, "label", "ortsgruppenübergreifenden")
 cfg$CN_RE_VERANST <- cfg$Q_RE_VERANST$col_name
 # DE
 cfg$Q_DE_VERANST <- find_q(tn_survey, "label", "Warst du.+?deutschlandweit")
 cfg$CN_DE_VERANST <- cfg$Q_DE_VERANST$col_name
-#hürden
+# hürden
 cfg$Q_VERANST_HUERDE <- find_q(tn_survey, "label", "deutschlandweit.+?gegen.+?Gründe")
-cfg$CN_VERANST_HUERDE  <- cfg$Q_VERANST_HUERDE$col_name
+cfg$CN_VERANST_HUERDE <- cfg$Q_VERANST_HUERDE$col_name
+
+#andere
+cfg$Q_VERANST_HUERDE_ANDERE <- find_q(tn_survey, "col_name", "gruende.+?andere")
+cfg$CN_VERANST_HUERDE_ANDERE <- cfg$Q_VERANST_HUERDE_ANDERE$col_name
 
 
 cfg$Q_VERANTWORTUNG_JANEIN <- find_q(
@@ -173,4 +177,4 @@ cfg$Q_CHR_GLAUBEN_KONTAKT_SONST <- find_q(
 cfg$CN_CHR_GLAUBEN_KONTAKT_SONST <- cfg$Q_CHR_GLAUBEN_KONTAKT_SONST$col_name
 
 
-cfg %>% readr::write_rds(file.path(DIR_CONFIG,"tn_cfg.rds"))
+cfg %>% readr::write_rds(file.path(DIR_CONFIG, "tn_cfg.rds"))
