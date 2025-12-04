@@ -1,133 +1,77 @@
-# TEN SING Annual Survey Report
+# TEN SING Annual Survey – Data & Website
 
-This repository contains code for the annual TEN SING survey. 
+Code for the yearly TEN SING surveys and the public Quarto site that publishes the results. Two questionnaires run each autumn:
 
-## Background
-Each autumn, TEN SING Germany conducts two surveys among its members:
+- **OG (Ortsgruppen)** – one submission per local group (headcounts, activities, staffing).
+- **TN (Teilnehmende)** – individual submissions from participants and staff.
 
-- a survey among its local groups. Each local group answers once and reports data on the local level (e.g. number of events, participants) (de: Ortsgruppen -> prefix "og" in this repo). 
-- a survey among its members. each  member can report on their experience, preferences, wishes, etc. (de: Teilnehmende -> prefix "tn" in this repo)
+The repo contains both the data pipeline (Kobo pull, cleaning, year-specific tweaks) and the Quarto project that reads the cleaned data.
 
-The surveys are conducted using the open source tool [KoboToolbox](https://www.kobotoolbox.org/), more specifically the [EU instance](https://eu.kobotoolbox.org/accounts/login/).
+## Requirements
 
-**So far, the survey has only been conducted in 2024, but the second wave is being rolled out in early October 2025.**
+- R with `renv`
+- Quarto CLI
+- Access to the EU KoboToolbox instance
+- `.env` with credentials and survey identifiers
 
-## General setup
+### Environment
 
-Package management is done with [`renv`](https://cran.r-project.org/web/packages/renv/index.html). To restore necessary packages:
+Create `.env` from `.env-template` and add one block per survey year:
 
 ```
+KOBO_EU_TOKEN="apitoken from kobo instance"
+2025_OG="asset id of OG survey"
+2025_TN="asset id of TN survey"
+2025_OG_URL="public link to OG questionnaire"
+2025_TN_URL="public link to OG questionnaire"
+```
+
+Add further `<YEAR>_…` pairs for every year you process.
+
+## Setup
+
+```r
 renv::restore()
 ```
 
-To interact with KoboToolbox API for data processing, you need an API token and access to the surveys. Create an account on [the EU instance](https://eu.kobotoolbox.org/accounts/login/) and contact CorrelAid to get access.
+## Running the pipeline
 
+- `Rscript pipeline/run_pipeline.R` – runs metadata download, config generation, cleaning, optional year-specific fixes, and OG/TN merging for every year detected under `data/cleaned/<year>/`. Create a new empty `data/cleaned/<year>/` directory to include another year.
+- Expected outputs: `config/<year>/og_cfg.rds`, `config/<year>/tn_cfg.rds`, `data/cleaned/<year>/og.rds`, `data/cleaned/<year>/tn.rds`, plus raw/metadata CSVs under `data/meta/<year>/` and `data/raw/<year>/`.
 
-### .env file
-Refer to the .env-template
+### Pipeline stages (per year)
 
-## Repository structure 
-This repository contains code for: 
-- data processing and data wranglig 
-- and the static HTML report/website
+1) `pipeline/setup.R` – ensures year-specific directories exist.
+2) `pipeline/00-get-metadata.R` – pulls Kobo survey structure and choice lists.
+3) `config/og_config.R` and `config/tn_config.R` – derive column mappings and URLs.
+4) `pipeline/01-clean-og-data.R` / `02-clean-tn-data.R` – download, clean, reshape, and save `og.rds` / `tn.rds`.
+5) `pipeline/03-year_specific-processing/process_<year>.R` – optional one-off fixes (deduplication, recoding).
+6) `pipeline/04-tn-og-processing.R` – combines OG and TN outputs for region aggregates.
 
+-> `pipeline/run_pipeline.R` runs the pipeline for all existing years
 
-## Data processing & data wrangling
-To understand the data processing, it is important to understand that KoboToolbox uses **the [xlsform](https://xlsform.org/en/) format** which represents metadata of surveys/forms in an excel sheet. Consequences of this: 
+## Rendering the website
 
-- one question can have multiple columns
-- columns have very specific naming patterns, e.g. using various levels of prefixes to group columns together (e.g. for question matrixes). This is particularly relevant for question matrixes. 
-- not all columns contain actual response data, some only contain introductory text or other metadata.
+- **All years** (pipeline + render): `Rscript build.R`
+  - Uses `get_all_years()` to loop through years found in `data/cleaned/<year>/`.
+  - Renders each year with Quarto’s `build` profile into `_site/<year>/` (clearing any previous build).
+- **Single year only**: `RENDER_YEAR=2025 quarto render . --profile build --output-dir _site/2025`
+  - Without `RENDER_YEAR`, Quarto uses the most recent year in `data/cleaned`.
+  - `quarto render .` without `--profile build` writes to `preview/` for local viewing.
 
-### Run data processing
+## Data outputs (short)
 
-- execute scripts in `pipeline` in order
-- or using `make` (see `Makefile`)
+- `og.rds`: `data` (one row per OG with regions, headcounts, hours), `long` (multiselect/matrix tables such as `wochentage`, `unterstuetzungsbedarfe`), `agg` (regional totals).
+- `tn.rds`: `data` (cleaned OG names/regions, hours, participation flags), `long` (e.g., `woerter`, `zugangsweg`, `angebote_vor_ort`, `info_wege_*`, `kontakt_chrgl`), `wide` (`aussagen` Likert block), `agg` (Likert and age summaries), `demo` (scrambled vectors for safer display).
 
-```
-make data
-```
+## Repository layout
 
-### Developer info: Data pipeline scripts
+- `pipeline/` – end-to-end scripts listed above.
+- `config/` – metadata-driven question mappings, visual settings (`viz_config.R`), per-year cfg RDS files.
+- `data/` – `meta/`, `raw/`, `cleaned/` per year; region and OG recoding CSVs.
+- `R/` – shared helpers for both pipeline and Quarto (`load_libs.R`, `load_data.R`, `utils.R`, `quarto-utils.R`, `viz.R`).
+- `*.qmd` – Quarto pages; `_region-template*.qmd` power the region subpages; `_quarto.yml` configures the site.
 
-data processing is separated in **several R scripts** which are in the folder `pipeline`. Abstractly, the pipeline does the following:
+## License
 
-**Get data from Kobo**
-
-- get metadata for the two surveys
-- get data for local group (`og`) survey
-- get data for member (`tn`) survey
-
-The purpose and working of each script is explained in more detail in its header. 
-
-
-We use the [kbtbr](https://github.com/CorrelAid/kbtbr) package for interacting with the KoboToolbox API.
-
-**cleanup**
-
-- recoding of open answers to "what is your local group called?" question. this was only done in 2024, from 2025 onwards this will be a single-select question.
-- deletion of duplicate answers to the local group survey
-
-The purpose and working of each script is explained in more detail in its header. 
-
-
-### Developer info: Other relevant files
-
-**configuration** related to data processing:
-
-
-- `config/og_config.R`
-- `config/tn_config.R`
-
-Those files contain "configuration" to identify the acutal column(s) for each question. This is done to avoid hardcoding those column names in the data processing pipeline. 
-
-The purpose and workings of each script is explained in more detail in its header. 
-
-- `R/utils.R` contains functions related to data processing. 
-    - relevant for `config/*`: `find_q` and `find_qs` to identify the columns
-    - relevant for `pipeline` scripts `get_[tn|og]_data`: `make_multiselect_long` and `pivot_cols_long`
-
-
-## Quarto website
-The report is a [quarto website](https://quarto.org/docs/websites/). It contains several pages. 
-
-Tools:
-- `ggplot`: plots
-- `ggiraph`: make ggplots interactive
-- `reactable`: for tables
-
-### Develop and build
-
-Development server: 
-
-```
-quarto preview
-```
-
-Build the website -> outputs to `_site`
-
-```
-quarto render
-```
-
-or using make (see `Makefile`):
-
-```
-make website
-```
-
-### Developer info: Relevant files
-
-- configuration of website in `_quarto.yml`.
-- `R/quarto-utils.R`: utility functions (e.g. extracting question text for a question, formatting text)
-- `R/viz-utils.R`: functions for recurring plots
-
-# 2024 -> 2025 survey changes
-
-## Both surveys
-- question on local group name is now a single select (previously open text)
-- better metadata labels for blocks (now "speaking" question groups)
-- some minor changes to options
-
-## Local group (`og`)
-- fixed type bug where number of people was text field instead of integer/numeric entry
+See `LICENCE.md`.
