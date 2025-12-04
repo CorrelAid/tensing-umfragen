@@ -127,7 +127,7 @@ recode_values <- function(df, mapping, col_name) {
     df["name"] <- df[[col_name]]
     df <- df %>% dplyr::left_join(mapping, by = "name")
     df[col_name] <- df$label
-    df$name <- NULL # TODO: not sure whether we should actually delete the original value --> retain it? However, then we would have two columns .. maybe this function should be used in the quarto directly on demand and not during preprocessing/data wrangling
+    df$name <- NULL 
     df$label <- NULL
     return(df)
 }
@@ -202,18 +202,56 @@ survey_to_json <- function(survey_df) {
 
 # Gets all years based on existing folders in data/cleaned
 get_all_years <- function(root = here("data/cleaned")) {
-    folder_names <- dir(root)
-    years <- as.integer(folder_names)
+    entries <- dir(root, full.names = TRUE)
+    entry_names <- basename(entries)
+    is_year_dir <- file.info(entries)$isdir & stringr::str_detect(entry_names, "^[0-9]{4}$")
+    years <- as.integer(entry_names[is_year_dir])
     years <- years[!is.na(years)]
     sort.int(years)
 }
 
-# Gets the current and previous year based on existing folders in data/cleaned
+# Lists the current and previous year  as integer based on existing folders in data/cleaned
 get_current_and_previous_year <- function(root = here("data/cleaned")) {
-    years = get_all_years(root)
-    current_year <- max(years)
+    years <- get_all_years(root)
+    if (length(years) == 0) {
+        stop(sprintf("No year folders found in %s", root))
+    }
+    
+    default_year <- max(years)
+    env_year_raw <- Sys.getenv("RENDER_YEAR", "")
+
+    if (nzchar(env_year_raw)) {
+        candidate <- suppressWarnings(as.integer(env_year_raw))
+        if (is.na(candidate)) {
+            stop(
+                sprintf(
+                    "RENDER_YEAR='%s' is not a valid integer. Available years: %s",
+                    env_year_raw,
+                    paste(years, collapse = ", ")
+                )
+            )
+        }
+    } else {
+        candidate <- default_year
+    }
+
+    if (!(candidate %in% years)) {
+        stop(
+            sprintf(
+                "Requested current year %d is not available. Available years: %s",
+                candidate,
+                paste(years, collapse = ", ")
+            )
+        )
+    }
+
+    current_year <- candidate
     previous_year <- current_year - 1L
-    c(current_year, previous_year)
+    if (!(previous_year %in% years)) {
+        previous_year <- NA_integer_
+    }
+
+    c(current_year = current_year, previous_year = previous_year)
 }
 
 # Loads all relevant data for a given year
@@ -244,7 +282,22 @@ load_all_years <- function() {
     data_list
 }
 
-
 drop_na_ka <- function(x) {
   x[!is.na(x) & x != "keine Angabe"]
+}
+
+replace_na_with_ka <- function(x) {
+  if (is.factor(x)) {
+    x <- forcats::fct_explicit_na(x, na_level = "keine Angabe")
+  } else {
+    x[is.na(x)] <- "keine Angabe"
+  }
+  x
+}
+
+clean_dir <- function(path) {
+    if (dir.exists(path)) {
+        message("=== Removing stale directory: ", path, " ===")
+        unlink(path, recursive = TRUE, force = TRUE)
+    }
 }
