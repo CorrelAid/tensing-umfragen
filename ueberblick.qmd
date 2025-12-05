@@ -142,7 +142,7 @@ render_region_table <- function(y) {
           } else {
             og_region_agg$slug[index]
           }
-          sprintf('<a href="/region/%s.html">%s</a>', slug, region)
+          sprintf('<a href="region/%s.html">%s</a>', slug, region)
         }
       ),
       n_og = reactable::colDef(name = "Ortsgruppen"),
