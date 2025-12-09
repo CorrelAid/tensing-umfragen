@@ -44,5 +44,5 @@ website:
       - icon: github
         href: https://github.com/
         aria-label: GitHub
-
+  favicon: logos/tensing.ico
   page-navigation: true
