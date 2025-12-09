@@ -28,6 +28,8 @@ KOBO_EU_TOKEN="apitoken from kobo instance"
 
 Add further `<YEAR>_…` pairs for every year you process.
 
+see `.env-template` for example for 2024 and 2025.
+
 ## Setup
 
 ```r
@@ -50,6 +52,8 @@ renv::restore()
 
 -> `pipeline/run_pipeline.R` runs the pipeline for all existing years
 
+More details on individual steps in `docs/architecture.md`.
+
 ## Rendering the website
 
 - **All years** (pipeline + render): `Rscript build.R`
@@ -64,6 +68,8 @@ renv::restore()
 - `og.rds`: `data` (one row per OG with regions, headcounts, hours), `long` (multiselect/matrix tables such as `wochentage`, `unterstuetzungsbedarfe`), `agg` (regional totals).
 - `tn.rds`: `data` (cleaned OG names/regions, hours, participation flags), `long` (e.g., `woerter`, `zugangsweg`, `angebote_vor_ort`, `info_wege_*`, `kontakt_chrgl`), `wide` (`aussagen` Likert block), `agg` (Likert and age summaries), `demo` (scrambled vectors for safer display).
 
+More details in `docs/architecture.md`.
+
 ## Repository layout
 
 - `pipeline/` – end-to-end scripts listed above.
@@ -71,6 +77,8 @@ renv::restore()
 - `data/` – `meta/`, `raw/`, `cleaned/` per year; region and OG recoding CSVs.
 - `R/` – shared helpers for both pipeline and Quarto (`load_libs.R`, `load_data.R`, `utils.R`, `quarto-utils.R`, `viz.R`).
 - `*.qmd` – Quarto pages; `_region-template*.qmd` power the region subpages; `_quarto.yml` configures the site.
+
+More details in `docs/architecture.md`.
 
 ## License
 
