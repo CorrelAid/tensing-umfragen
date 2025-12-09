@@ -11,9 +11,9 @@
 1) **Orchestration**: `pipeline/run_pipeline.R` loops over all years detected under `data/cleaned/` (folder names that look like `^[0-9]{4}$`), assigns `YEAR` globally, and runs the steps below. To process a new year, create an empty `data/cleaned/<year>/` folder first.
 2) **Setup**: `pipeline/setup.R` ensures the year-specific directories exist (`data/meta`, `data/raw`, `data/cleaned`, `config`).
 3) **Metadata pull**: `pipeline/00-get-metadata.R` loads `.env`, uses `kbtbr` against `https://eu.kobotoolbox.org/`, and writes survey/choice metadata for OG and TN to `data/meta/<year>/`.
-4) **Column mapping**: `config/og_config.R` and `config/tn_config.R` derive column names and choice mappings from the metadata and save them to `config/<year>/og_cfg.rds` and `config/<year>/tn_cfg.rds`. OG uses `<YEAR>_OG_URL` from the environment for questionnaire deep links; the TN URL is currently hardcoded in `tn_config.R`.
-5) **Cleaning – OG**: `pipeline/01-clean-og-data.R` downloads OG submissions, drops system columns, reshapes checkboxes/matrices, recodes answers, attaches grouped regions from `data/meta/region_mapping.csv`, and saves `data/cleaned/<year>/og.rds`.
-6) **Cleaning – TN**: `pipeline/02-clean-tn-data.R` downloads TN submissions, reshapes multiselect/matrix answers, builds aggregates (Likert summaries, age by OG), applies OG recoding from `data/meta/<year>/og_recoding.csv`, scrambles demographic vectors for safer display, and saves `data/cleaned/<year>/tn.rds`.
+4) **Column mapping**: `config/og_config.R` and `config/tn_config.R` derive column names and choice mappings from the metadata and save them to `config/<year>/og_cfg.rds` and `config/<year>/tn_cfg.rds`. OG uses `<YEAR>_OG_URL` from the environment for questionnaire deep links; the TN URL in `tn_config.R` is constructed analogously using the `<YEAR>_TN_URL` environment variable.
+5) **Cleaning – OG**: `pipeline/01-clean-og-data.R` runs `config/og_config.R` for the current year to create `config/<YEAR>/og_cfg.rds`, downloads OG submissions, drops system columns, reshapes checkboxes/matrices, recodes answers, attaches grouped regions from `data/meta/region_mapping.csv`, and saves the data object `data/cleaned/<year>/og.rds` (see data shapes below). 
+6) **Cleaning – TN**: `pipeline/02-clean-tn-data.R` runs `config/tn_config.R` for the current year to create `config/<YEAR>/tn_cfg.rds`, downloads TN submissions, reshapes multiselect/matrix answers, builds aggregates (Likert summaries, age by OG), applies OG recoding from `data/meta/<year>/og_recoding.csv`, scrambles demographic vectors for safer display, and saves the data object `data/cleaned/<year>/tn.rds` (see data shapes below).
 7) **Optional year tweaks**: `pipeline/03-year_specific-processing/process_<year>.R` contains ad-hoc fixes (e.g., deduplicating OG responses, recoding OG names).
 8) **Joint aggregation**: `pipeline/04-tn-og-processing.R` merges OG/TN outputs to produce region-level totals and writes back to `og.rds`.
 
@@ -50,8 +50,8 @@
 ## Adding a new survey year
 
 1) Create `data/cleaned/<year>/` (empty) so `run_pipeline.R` can detect the year.
-2) Add env vars in `.env`: `KOBO_EU_TOKEN`, `<YEAR>_OG`, `<YEAR>_TN`, and `<YEAR>_OG_URL` (plus update the TN URL in `config/tn_config.R` if it changes).
-3) If this year's data needs any additional fixes, add a script  `process_<YEAR>.R `  in `03-year-süecific-processing`. If OG names need to be harmonized, add a mapping table to `data/meta/<YEAR>/og_recoding.csv`
+2) Add env vars in `.env`: `KOBO_EU_TOKEN`, `<YEAR>_OG`, `<YEAR>_TN`, `<YEAR>_OG_URL` and `<YEAR>_TN_URL`.
+3) If this year's data needs any additional fixes, add a script  `process_<YEAR>.R `  in `pipeline/03-year-specific-processing`. If OG names need to be harmonized, add a mapping table to `data/meta/<YEAR>/og_recoding.csv`
 4) Run `pipeline/run_pipeline.R` (or `build.R` to run the pipeline and render). Verify `config/<year>/` and `data/cleaned/<year>/` contain the new artifacts.
 5) Render the site: `quarto render .` for a single year (uses `RENDER_YEAR` if set) or `Rscript build.R` to render every available year into `_site/<year>/`.
 
