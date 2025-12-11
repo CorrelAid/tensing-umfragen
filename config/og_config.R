@@ -1,9 +1,9 @@
 #' contains "configuration" aka column finding code
 #' to identify the column(s) for each question.
-#' creates config/og_cfg.rds object which is used in get-og-data.R
+#' creates config/og_cfg.rds object which is used in 01-clean-og-data.R
 #' see readme for background
 #' this is not complete, for some questions this is also done
-#' directly in get-og-data.R
+#' directly in 01-clean-og-data.R
 library(kbtbr)
 library(dotenv)
 library(dplyr)

@@ -1,9 +1,9 @@
 #' contains "configuration" aka column finding code
 #' to identify the column(s) for each question.
 #' see readme for background
-#' creates config/tn_cfg.rds object which is used in get_tn_data.R
+#' creates config/tn_cfg.rds object which is used in 02-clean-tn-data.R
 #' this is not complete, for some questions this is also done
-#' directly in get_tn_data.R
+#' directly in 02-clean-tn-data.R
 library(kbtbr)
 library(dotenv)
 library(dplyr)
