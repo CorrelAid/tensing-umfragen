@@ -58,4 +58,4 @@
 ## Deployment notes
 
 - Built sites live in `_site/<year>/`. The `preview/` folder is only for `quarto preview`.
-- `.github/workflows/static.yml` is currently commented out; static hosting would upload `_site/` to GitHub Pages.
+- Site is hosted on GitHub Pages. Pushes to _site trigger a GitHub Action, see .github/workflows/static.yml . Due to GDPR reasons, the GA Action doesn't do preprocessing nor building - it only deploys the built Quarto site to GitHub Pages. Data preprocessing and building needs to happen locally.

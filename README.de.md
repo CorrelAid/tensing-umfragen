@@ -45,7 +45,7 @@ renv::restore()
 1. `pipeline/setup.R` – legt die Jahres-Verzeichnisse an.
 2. `pipeline/00-get-metadata.R` – zieht Fragebogenstruktur und Antwortoptionen von Kobo.
 3. `config/og_config.R` und `config/tn_config.R` – leiten Spalten-Mappings und URLs ab.
-4. `pipeline/01-clean-og-data.R` / `02-clean-tn-data.R` – laden, bereinigen, umformen und speichern `og.rds` / `tn.rds`.
+4. `pipeline/01-clean-og-data.R` / `02-clean-tn-data.R` – _config Scripts ausführen, laden, bereinigen, umformen und speichern `og.rds` / `tn.rds`.
 5. `pipeline/03-year_specific-processing/process_<year>.R` – optionale Einzelanpassungen (z. B. Deduplizieren).
 6. `pipeline/04-tn-og-processing.R` – kombiniert OG- und TN-Outputs für Regions-Aggregate.
 
