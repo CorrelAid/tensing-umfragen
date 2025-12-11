@@ -97,7 +97,19 @@ render_year_tabset <- function(curr_data, prev_data = NULL, render_fn) {
   invisible(NULL)
 }
 
-# Ensure htmlwidget dependencies get registered even within results='asis' chunks
+#' Render an htmlwidget in a results='asis' chunk
+#' Registers the widget's JS/CSS dependencies with knitr before emitting the
+#' HTML, so dependencies are not dropped when the output is injected with
+#' `results='asis'` (which bypasses `knit_print.htmlwidget`).
+#' @param widget An htmlwidget (or htmltools tag list) to render.
+#' @return Invisibly returns NULL; the widget is printed for its side effect.
+#' @details Steps:
+#'   1. Collect dependencies via `htmltools::findDependencies(widget)`.
+#'   2. If knitting is in progress and knitr is available, add those deps to
+#'      knitr's metadata with `knitr::knit_meta_add()` so they are bundled into
+#'      the page.
+#'   3. Print the widget wrapped in `htmltools::tagList()` to keep the deps
+#'      attached to the HTML output.
 render_widget_output <- function(widget) {
   deps <- htmltools::findDependencies(widget)
   if (length(deps) > 0 &&
@@ -108,6 +120,21 @@ render_widget_output <- function(widget) {
   print(htmltools::tagList(widget))
 }
 
+#' Build a "Datenquelle" callout dropdown indicating which questions of TN/ OG survey where used. 
+#' @param cfg List containing `tn_cfg` and `og_cfg` (This is created in load_year()); each is the survey config
+#'   with question objects keyed by name and a `URL` entry for the questionnaire. 
+#' @param og_q Optional character vector of OG questions, eg. c("Q_WORKSHOPS") as defined in og_conifg.
+#'   If variables contains several questions eg. "QS_EIGENSCHAFTEN", all questions are listed seperately. 
+#' @param tn_q Optional character vector of TN questions as defined in TN_config,
+#'   handled the same way as `og_q`.
+#' @param extra Optional character string of additional markdown to append inside
+#'   the callout (e.g. data caveats or external sources).
+#' @return A single markdown string containing the collapsible callout with bullet
+#'   lists of formatted question labels linking to the relevant questionnaire.
+#' @details Each non-empty question vector is resolved against the matching
+#'   config, flattened, turned into labels via `fmt_q()`, and prefixed with a
+#'   link to the appropriate questionnaire via `fmt_fragebogen()`. Empty inputs
+#'   yield empty blocks, so you can omit TN or OG lists when not needed.
 callout_datenquellen <- function(cfg, og_q = NULL, tn_q = NULL, extra = NULL) {
   resolve <- function(x, cfg_part) {
     obj <- cfg_part[[x]]
