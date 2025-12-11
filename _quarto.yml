@@ -7,6 +7,7 @@ project:
     - "*.qmd"
     - "!LICENSE"
     - "!qgis/"
+    - "!docs/"
 execute:
   freeze: false
 
@@ -16,9 +17,10 @@ format:
     theme:
       - materia
       - styles.scss
-
+    sidebar: false
 website:
   navbar:
+    pinned: true
     left:
       - text: "Start"
         href: index.html
@@ -44,5 +46,27 @@ website:
       - icon: github
         href: https://github.com/
         aria-label: GitHub
+  sidebar:
+    - title: "main"
+      collapse-level: 2
+      contents:
+        - text: "Start"
+          href: index.qmd
+        - ueberblick.qmd
+        - text: "Region: Ostwerk"
+          href: region/ostwerk.qmd
+        - text: "Region: Nord"
+          href: region/nord.qmd
+        - text: "Region Sachsen"
+          href: region/sachsen.qmd
+        - text: "Region: Thüringen"
+          href: region/thueringen.qmd
+        - text: "Region: Süden"
+          href: region/sueden.qmd
+        - text: "Region: Westbund"
+          href: region/westbund.qmd
+        - themen.qmd
+        - wirkung-pg.qmd
+        - trends.qmd
   favicon: logos/tensing.ico
   page-navigation: true
