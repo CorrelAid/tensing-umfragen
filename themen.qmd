@@ -435,13 +435,14 @@ render_kontakt_pie_chart <- function(tab_data) {
     ggrepel::geom_label_repel(
       aes(y = pos, label = paste0(perc, "%")),
       size = 4.5,
+      fill = "white", 
       nudge_x = 0.75,
       show.legend = FALSE
     ) +
       coord_polar(theta = "y") +
       labs(
         title = "Kontakt zum christlichen Glauben",
-        subtitle = "außerhalb von Ten Sing",
+        subtitle = "außerhalb von TEN SING",
         x = NULL,
         y = NULL,
         fill = NULL

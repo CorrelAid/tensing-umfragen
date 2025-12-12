@@ -1,0 +1,37 @@
+---
+echo: false
+results: false
+warning: false
+---
+```{r}
+library(chromote)
+# create chromote session for screenshots
+source(here::here("config/viz_config.R"))
+source(here::here("docs/color_blindness_check/utils.R"))
+cbc_dir <- here::here("docs/color_blindness_check/")
+```
+
+```{r}
+# check whether document is rendered on its own, then set pal_name to a value for testing
+if (!"pal_name" %in% ls()) {
+    pal_name <- "pal_yes_no"
+}
+```
+
+## `r pal_name`
+```{r}
+#| include: false
+pal <- rlang::env_get(rlang::global_env(), pal_name)
+pal_url <- get_colorblindness_check_url(pal)
+if (do_take_screenshots) {
+    take_screenshots(cbc_dir, pal_url, pal_name)
+}
+```
+
+Visit URL for full information from "Coloring for Colorblindness": [Color blindness check for `r pal_name`](`r pal_url`)
+
+#### Screenshots `r pal_name`
+```{r}
+#| results: asis
+embed_screenshots(cbc_dir, pal_name)
+```

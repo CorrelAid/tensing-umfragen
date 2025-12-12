@@ -1,0 +1,139 @@
+
+---
+echo: false
+warning: false
+results: false
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    toc-expand: 2
+---
+
+# Color blindness check for palettes
+
+checking color palettes defined in `viz_config.R` for color blindness using [https://davidmathlogic.com/colorblind/](https://davidmathlogic.com/colorblind/). Thanks to David Nichols for implementing "Coloring for Colorblindness".
+
+```{r}
+library(chromote)
+source(here::here("config/viz_config.R"))
+do_take_screenshots <- FALSE # set to true (globally or before individual include sections if you need to take screenshots using take_screenshots function). once they were taken, they are stored in screenshots folder and can just be embedded. no need to do it again:)
+```
+
+
+```{r}
+#| results: markup
+pals <- ls()[stringr::str_starts(ls(), "pal_|INFO")]
+pals
+```
+
+
+```{r}
+pal_name <- "pal_yes_no"
+```
+
+{{< include _template_one_pal.qmd >}}
+
+
+```{r}
+pal_name <- "pal_yes_no_3"
+```
+
+{{< include _template_one_pal.qmd >}}
+
+```{r}
+pal_name <- "pal_yes_no_5"
+```
+
+{{< include _template_one_pal.qmd >}}
+
+```{r}
+pal_name <- "pal_yes_no_6"
+```
+
+{{< include _template_one_pal.qmd >}}
+```{r}
+pal_name <- "pal_8"
+```
+
+{{< include _template_one_pal.qmd >}}
+
+```{r}
+pal_name <- "pal_trends_10"
+```
+
+{{< include _template_one_pal.qmd >}}
+
+
+```{r}
+pal_name <- "pal_likert_11"
+```
+
+{{< include _template_one_pal.qmd >}}
+
+```{r}
+pal_name <- "INFO_COLS"
+```
+
+{{< include _template_one_pal.qmd >}}
+
+
+# Individual cases
+
+## Split bar charts etc.
+
+- [Trends -> Anzahl TEN SINGende -> deutschlandweit](https://correlaid.github.io/tensing-umfragen/2025/trends.html#deutschlandweit-1) -> the palette used here is [`pal_trends_10`](#pal_trends_10)
+    - right now only the first two colors are relevant because we only have two years. it looks wuite good for the next two or so years, then it gets a bit hard. at the same time, year is inherently sorted.
+    - instead, we could go for a facet plot again (one plot for Mitarbeitende, one for Teilnehmende), making the year visible on the x axis. 
+- [Überblick -> Menschen bei TEN SING -> Altersgruppe split by Mitarbeitende/Teilnehmende](https://correlaid.github.io/tensing-umfragen/2025/ueberblick.html#menschen-bei-ten-sing)
+    - palette used `pal_8`
+
+- [Unterstützungsbedarfe Balkendiagramm](https://correlaid.github.io/tensing-umfragen/2025/wirkung-pg.html#unterst%C3%BCtzungsbedarfe) 
+    - palette used: `pal_yes_no_5`
+    - ok! ✅
+
+## Labels for pie charts
+
+for Pie Charts, we use labels that show the percentage. Sometimes, those labels are not well readable:
+
+
+### [Überblick -> Menschen bei TEN SING -> wie viele Personen identifizieren sich als..](https://correlaid.github.io/tensing-umfragen/2025/ueberblick.html#menschen-bei-ten-sing)  
+
+palette used is `pal_8` (only the first 3 colors are used)
+
+```{r}
+#| output: true
+scales::show_col(pal_8[1:3])
+```
+
+putting the three colors in [whocanuse](https://www.whocanuse.com/)
+
+```{r}
+#| output: asis
+cat(sprintf("[%s](https://www.whocanuse.com/?bg=%s&fg=000000&)\n", pal_8[1:3], stringr::str_remove_all(pal_8[1:3], "#")), sep = "\n")
+```
+
+overall the last color is not as great (only AA), but the rest is good (AAA! :)). however, due to the small font size, i propose changing this.
+
+### [Themen -> TEN SING und der christliche Glaube](https://correlaid.github.io/tensing-umfragen/2025/themen.html#ten-sing-und-der-christliche-glaube)
+
+colors used: `pal_yes_no_6[c(3, 1)]`
+
+```{r}
+#| output: true
+cols_tmp <- pal_yes_no_6[c(3, 1)]
+scales::show_col(cols_tmp)
+```
+
+putting the colors in [whocanuse](https://www.whocanuse.com/)
+
+```{r}
+#| output: asis
+cat(sprintf("[%s](https://www.whocanuse.com/?bg=%s&fg=000000&)\n", cols_tmp, stringr::str_remove_all(cols_tmp, "#")), sep = "\n")
+```
+
+one AA, one AAA -> again, due to the small font size, I'd suggest we just switch to white background. 
+
+### [Wirkung PG -> "Wie informiert..."](https://correlaid.github.io/tensing-umfragen/2025/wirkung-pg.html#wie-informiert-f%C3%BChlen-sich-ten-singende-und-welche-informationskan%C3%A4le-w%C3%BCnschen-sie-sich) 
+
+-> nur interaktiv: weiße Schrift auf schwarzem Grund ✅

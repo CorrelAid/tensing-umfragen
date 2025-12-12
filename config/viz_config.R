@@ -6,7 +6,6 @@ TS_FONT_FAMILY <- "Atkinson Hyperlegible"
 
 TS_GREEN <- "#b5c948"
 KEINE_ANGABE_GRAY <- "#676565"
-COLS_6 <- c('#7a4a0c', '#cfb77c', '#f4e9d2', '#c0e3dc', '#4ca89f', '#155c52')
 
 theme_ts <- ggplot2::theme_minimal(
   base_size = 14,

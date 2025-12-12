@@ -218,7 +218,7 @@ tn_q=list("Q_OG_REGION","Q_OG_NAME")))
 
 ```
 
-## Menschen bei Ten Sing
+## Menschen bei TEN SING
 
 Im Folgenden seht ihr eine Übersicht über die Geschlechter- und Altersverteilung der Menschen bei TEN SING. 
 
@@ -250,6 +250,7 @@ plot_gender_by_participant_type <- function(y){
     ggrepel::geom_label_repel(
       aes(y = pos, label = paste0(perc, "%")),
       size = 3.5,
+      fill = "white",
       nudge_x = 0.75,
       show.legend = FALSE,
       segment.color = "black"
