@@ -53,8 +53,39 @@ website:
         - text: "Start"
           href: index.qmd
         - ueberblick.qmd
-        - themen.qmd
+        - text: "zu den Themen"
+          href: themen.qmd
         - wirkung-pg.qmd
         - trends.qmd
+    - title: "ostwerk"
+      collapse-level: 2
+      contents:
+        - region/ostwerk.qmd
+        - themen.qmd
+    - title: "nord"
+      collapse-level: 2
+      contents:
+        - region/nord.qmd
+        - themen.qmd
+    - title: "sachsen"
+      collapse-level: 2
+      contents:
+        - region/sachsen.qmd
+        - themen.qmd
+    - title: "sueden"
+      collapse-level: 2
+      contents:
+        - region/sueden.qmd
+        - themen.qmd
+    - title: "thueringen"
+      collapse-level: 2
+      contents:
+        - region/thueringen.qmd
+        - themen.qmd
+    - title: "westbund"
+      collapse-level: 2
+      contents:
+        - region/westbund.qmd
+        - themen.qmd
   favicon: logos/tensing.ico
   page-navigation: true
