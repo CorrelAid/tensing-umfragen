@@ -707,3 +707,14 @@ render_year_tabset(curr_data = curr, prev_data = prev, render_fn = plot_wahrsch_
 asis_output(callout_datenquellen(curr$cfg,tn_q=list("Q_EMPFEHLUNG")))
 
 ```
+
+
+::: {.callout-tip}
+## Region
+
+du willst mehr zu deiner Region erfahren...?!
+
+- [ostwerk](./region/ostwerk.qmd)
+- ....
+
+:::
