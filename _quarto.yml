@@ -53,18 +53,6 @@ website:
         - text: "Start"
           href: index.qmd
         - ueberblick.qmd
-        - text: "Region: Ostwerk"
-          href: region/ostwerk.qmd
-        - text: "Region: Nord"
-          href: region/nord.qmd
-        - text: "Region Sachsen"
-          href: region/sachsen.qmd
-        - text: "Region: Thüringen"
-          href: region/thueringen.qmd
-        - text: "Region: Süden"
-          href: region/sueden.qmd
-        - text: "Region: Westbund"
-          href: region/westbund.qmd
         - themen.qmd
         - wirkung-pg.qmd
         - trends.qmd
