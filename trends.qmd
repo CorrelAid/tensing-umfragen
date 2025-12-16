@@ -83,15 +83,15 @@ get_yearly_ja_count <- function(all_data, col) {
 
 Ein Ziel der Umfrage ist es, ein langfristiges Bild der Entwicklungen bei TEN SING zu bekommen. Dafür werden ausgewählte Aspekte an dieser Stelle über die Jahre hinweg beleuchtet.
 
-## Generelle Entwicklung des TEN SING Netzwerks über die Jahre
+## Entwicklung des TEN SING Netzwerks
 
-Hier soll ein Einblick entstehen, wie sich das TEN SING Netzwerk über die Jahre hinweg verändert..
+Hier soll ein Einblick entstehen, wie sich das TEN SING Netzwerk über die Jahre hinweg verändert hat. Dazu werfen wir zunächst einen Blick auf die Größe des Netzwerks: Wie viele Ortsgruppen waren über die Jahre aktiv? Wie viele Aktive engagierten sich bei TEN SING? Und wie viele Auftritte gab es über die Jahre? 
 
 ### Anzahl der Ortsgruppen
 
 ::: {.panel-tabset}
 ## Deutschlandweit
-Dieses Diagramm zeigt, wie sich die Anzahl der TEN SING Ortsgruppen in Deutschland im Laufe der Jahre verändert hat.
+Diese Grafik zeigt, wie sich die Anzahl der TEN SING Ortsgruppen in Deutschland im Laufe der Jahre verändert hat.
 
 ```{r fig-ortsgroups-de}
 #| echo: false
@@ -202,6 +202,9 @@ og_q=list("Q_OG_NAME","Q_OG_REGION")))
 
 ### Anzahl TEN SINGende
 
+Die Arbeit von TEN SING lebt von den Menschen, die sich lokal und deutschlandweit engagieren. Deshalb wollen wir einen Blick auf die Entwicklung der Teilnehmenden- und Mitarbeitendenzahlen werfen - deutschlandweit und pro Region.
+
+
 #### Deutschlandweit
 
 ```{r fig-aktive-gesamt}
@@ -243,9 +246,9 @@ year_bar_chart_grouped(
 asis_output(callout_datenquellen(all_data[[1]]$cfg,
 tn_q=list("Q_OG_NAME","Q_OG_REGION"),
 og_q=list("Q_OG_NAME","Q_OG_REGION", "Q_ANZAHL_BEGIN"),
-extra="⚠️**Wie wurden Teilnehmer:innenzahlen berechnet?**
+extra="⚠️**Wie wurden Teilnehmer*innenzahlen berechnet?**
 
-Für Ortsgruppen mit ausgefülltem Ortsgruppen-Fragebogen nutzen wir die dort angegebenen offiziellen Zahlen.
+Für Ortsgruppen mit ausgefülltem Ortsgruppen-Fragebogen nutzen wir die dort angegebenen Zahlen.
 Für Ortsgruppen ohne ausgefüllten Ortsgruppen-Fragebogen verwenden wir die Anzahl der eingegangenen Teilnehmer*innen-Fragebögen als Schätzwert für die Größe der jeweiligen Gruppe."))
 
 ```
@@ -261,13 +264,14 @@ Für Ortsgruppen ohne ausgefüllten Ortsgruppen-Fragebogen verwenden wir die Anz
 
 render_tn_by_region <- function(all_data, region_name) {
   df_all <- get_yearly_tn_counts_region(all_data)
+  y_global_max <- max(df_all$insg)
   r_df <- df_all |>
     filter(region_grouped == region_name) |>
     mutate(
-      tooltip = paste0(region_grouped, ": "),
+      tooltip = paste0(region_grouped, ": ", insg),
       data_id = paste(year, region_grouped, sep = "_")
     )
-    year_bar_chart(
+  year_bar_chart(
     data        = r_df,
     year_col    = "year",
     value_col   = "insg",
@@ -276,10 +280,9 @@ render_tn_by_region <- function(all_data, region_name) {
     tooltip_col = "tooltip",
     data_id_col = "data_id",
     title       = paste0("Teilnehmende pro Jahr – ", region_name),
-    palette = pal_trends_10
-  )
+    palette = pal_trends_10,
+    y_max = y_global_max)
 }
-
 ```
 
 ## Nord
@@ -374,6 +377,10 @@ Für Ortsgruppen ohne ausgefüllten Ortsgruppen-Fragebogen verwenden wir die Anz
 
 #### Auftritte pro Jahr
 
+Auftritte sind das Herzstück von TEN SING. Sie tragen die viele Arbeit der Aktiven nach außen und machen sie sichtbar.
+So hat sich die Anzahl der Auftritte über die Jahre verändert:
+
+
 ```{r fig-events-year}
 #| echo: false
 #| fig.width: 9
@@ -409,7 +416,7 @@ og_q=list("Q_AUFTRITTE")))
 
 ## Welche Themen beschäftigen TEN SING über die Jahre?
 
-Hier seht ihr, welche Themen dem TEN SING Netzwerk über die Jahre wichtig sind bzw. wie sich die Sicht auf bestimmte Themen verändert.
+Hat sich der Kern von TEN SING über die Jahre verändert? Und wenn ja, wie? An dieser Stelle beleuchten wir, wie sich die Sicht auf bestimmte Themen im TEN SING Netzwerk über die Jahre gewandelt hat. 
 
 ### Thematische Schwerpunkte
 
@@ -566,13 +573,17 @@ render_zustimmung_trend_tabset <- function(df) {
 
 render_zustimmung_trend_tabset(agg_all)
 
-asis_output(callout_datenquellen(all_data[[1]]$cfg,tn_q=list("Q_BEGIN_AUSSAGEN_LIKERT")))
 ```
 
+```{r datenquellen-themen}
+knitr::asis_output(callout_datenquellen(curr$cfg,
+tn_q=list("QS_AUSSAGEN_LIKERT")
+))
+```
 
 ## Wirkung der PG über die Jahre
 
-Hier seht ihr wie die Arbeit der PG über die Jahre hinweg wahrgenommen wird.
+Um die Arbeit in der Programmgruppe an den konkreten Bedarfen der TEN SINGenden auszurichten, ist es uns wichtig zu erfahren, wie unsere Arbeit wirkt. Eine der Aufgaben der PG ist die Organisation der überregionalen und deutschlandweiten Veranstaltungen. Deshalb ist es spannend zu sehen, wie sehr dieses Angebot über die Jahre angenommen wird.
 
 
 <!-- IST NICHT TEIL DER <2025 UMFRAGEN
@@ -588,7 +599,7 @@ Hier seht ihr wie die Arbeit der PG über die Jahre hinweg wahrgenommen wird.
 ```
 -->
 
-#### Teilnehmendenzahlen bei DE-Veranstaltungen
+#### Teilnehmendenzahlen bei deutschlandweiten Veranstaltungen
 
 ```{r fig-teilnahme-de}
 #| echo: false

@@ -169,6 +169,7 @@ Auf dieser Seite werden euch Ergebnisse der Befragung angezeigt, die sich mit de
 
 In der Sozialforschung ist es durchaus üblich, Sachverhalte mit mehreren Fragen zu beleuchten, insbesondere wenn Dinge nicht objektiv messbar sind, wie bspw. die Temperatur. Dadurch versucht man, Messfehler auszugleichen und die Realität möglichst genau abzubilden, indem verschiedene Aspekte berücksichtigt werden.
 
+**Hinweis**: Die Datenquellen werden euch gebündelt am Ende der Seite angezeigt.
 :::
 
 ## Eigenschaften, die Teilnehmende mit TEN SING verbinden
@@ -188,12 +189,6 @@ So bleiben die Darstellungen über alle Fragen hinweg einheitlich und vergleichb
 
 :::
 
-```{r datenquellen-themen}
-knitr::asis_output(callout_datenquellen(curr$cfg,
-tn_q=list("QS_EIGENSCHAFTEN", "QS_AUSSAGEN_LIKERT")
-))
-
-```
 
 ###  Gibt es bei TEN SING Raum für Kreativität und Abwechslung?
 
@@ -265,6 +260,10 @@ render_aussage_tabset("fehlerkultur")
 
 ### Authentizität, Gemeinschaft und Safe Space
 
+Die folgenden Visualisierungen gehen Fragen rund um das Gefühl der Gemeinschaft nach. Wie geschützt und wertschätzend geht es bei TEN SING zu? Entsteht für euch das Gefühl eines Safe Space?
+
+Zunächst wollten wir dafür von euch wissen, ob ihr bei TEN SING so sein könnt, wie ihr das gerne möchtet.
+
 ```{r render-selbst-sein, echo=FALSE, results='asis'}
 #| fig.width: 9
 #| fig.height: 6
@@ -273,6 +272,7 @@ render_aussage_tabset("selbst_sein")
 
 
 
+Ist TEN SING ein geschützter Raum für euch?
 
 
 ```{r render-geschuetzt, echo=FALSE, results='asis'}
@@ -282,6 +282,7 @@ render_eig_tabset("tengsing_geschuetzt")
 ```
 
 
+Wie sehr achten die TEN SINGenden aufeinander?
 
 
 
@@ -293,7 +294,7 @@ render_eig_tabset("tensing_achtenaufandere")
 ```
 
 
-
+Auch wollten wir von euch wissen, ob bei TEN SING ein Gefühl von Gemeinschaft herrscht.
 
 
 ```{r render-gemeinschaft, echo=FALSE, results='asis'}
@@ -308,6 +309,11 @@ render_eig_tabset("tensing_gemeinschaft")
 
 ### Selbstvertrauen und Selbstwirksamkeit
 
+In diesem Teil gehen wir der Frage nach, inwiefern Menschen, die sich bei TEN SING engagieren, durch die Arbeit an Selbstvertrauen und Selbstwirksamkeit dazugewinnen.
+
+Dafür wollten wir von euch wissen, ob ihr euch durch euer Engagement bei TEN SING selbstbewusster fühlt. So habt ihr geantwortet:
+
+
 ```{r render-selbstbewusstsein, echo=FALSE, results='asis'}
 #| fig.width: 9
 #| fig.height: 6
@@ -315,6 +321,7 @@ render_aussage_tabset("selbstbewusstsein")
 ```
 
 
+Auch hat uns interessiert, ob ihr euch durch die Arbeit bei TEN SING Dinge zutraut, die ihr euch davor nicht getraut habt. Die Abbildung zeigt eure Antworten:
 
 
 
@@ -330,11 +337,19 @@ render_aussage_tabset("dinge_zutrauen")
 
 ###  Persönliche Entwicklung
 
+Die Arbeit bei TEN SING ist gemeinschaftlich. Und dennoch ist die Entwicklung jeder einzelnen Person wichtig. In diesem Abschnitt beleuchten wir deshalb eure persönliche Entwicklung.
+
+Wie sehr habt ihr das Gefühl, euch weiterentwickelt zu haben, seitdem ihr bei TEN SING aktiv seid?
+
+
 ```{r render-eigene-entwicklung, echo=FALSE, results='asis'}
 #| fig.width: 9
 #| fig.height: 6
 render_aussage_tabset("eigene_entwicklung")
 ```
+
+Habt ihr das Gefühl, euch bei TEN SING ausprobieren zu können?
+
 
 ```{r render-ausprobieren, echo=FALSE, results='asis'}
 #| fig.width: 9
@@ -348,6 +363,9 @@ render_eig_tabset("tensing_ausprobieren")
 
 ###  Lernen und Transfer
 
+Und zu guter Letzt wollten wir wissen, wie gut ihr Dinge, die ihr bei TEN SING erlernt, auch außerhalb einsetzen könnt.
+
+
 ```{r render-transfer, echo=FALSE, results='asis'}
 #| fig.width: 9
 #| fig.height: 6
@@ -356,6 +374,7 @@ render_aussage_tabset("transfer")
 
 
 
+Lernt ihr bei TEN SING neue Dinge?
 
 
 ```{r render-neues-lernen, echo=FALSE, results='asis'}
@@ -593,11 +612,11 @@ Wie sehr setzen sich TEN SINGer*innen mit ihrem Glauben und Spiritualität ausei
 render_aussage_tabset("glaube_spiritualitaet")
 ```
 
-::: {.callout-note collapse="true"}
+::: {.callout-tip collapse="true"}
 
 ## Interpretationshilfe
 
-In der Mehrzahl setzen sich Aktive bei TEN SING mit ihrem Glauben auseinander. `{r} round(glaube_rolle_tabs$curr$share_eher_yes * 100, 2)`% der Aktiven bewerten die Aussage "*`{r} glaube_rolle_tabs$curr$question`*" eher bis voll und ganz zutreffend.
+In der Mehrzahl setzen sich Aktive bei TEN SING mit ihrem Glauben auseinander. `{r} round(glaube_rolle_tabs$curr$share_eher_yes * 100, 2)`% der Aktiven bewerten die Aussage "*`{r} glaube_rolle_tabs$curr$question`*" als eher bis voll und ganz zutreffend.
 
 :::
 
@@ -615,7 +634,7 @@ render_year_tabset(
 
 **`{r} with(kontaktpunkt_tabs$curr$pie, perc[has_kontaktpunkt == "Kontakt"])`%** der Aktiven haben außerhalb von TEN SING Kontakt zum christlichen Glauben, **`{r} with(kontaktpunkt_tabs$curr$pie, perc[has_kontaktpunkt == "Kein Kontakt außerhalb von TEN SING"])`%** haben nur über TEN SING Kontakt. 
 
-::: {.callout-note collapse="false"}
+::: {.callout-tip collapse="true"}
 
 ## Interpretationshilfe
 `{r} sum(kontaktpunkt_tabs$curr$pie$n) ` Personen haben diese Frage beantwortet. `{r} with(kontaktpunkt_tabs$curr$pie, perc[has_kontaktpunkt == "Kontakt"])`% Prozent entsprechen also `{r} with(kontaktpunkt_tabs$curr$pie, n[has_kontaktpunkt == "Kontakt"])
@@ -754,4 +773,12 @@ render_year_tabset(
   prev_data = offenheit_religionen_tabs$prev,
   render_fn = render_offenheit_plot
 )
+```
+
+
+```{r datenquellen-themen}
+knitr::asis_output(callout_datenquellen(curr$cfg,
+tn_q=list("QS_EIGENSCHAFTEN", "QS_AUSSAGEN_LIKERT")
+))
+
 ```
