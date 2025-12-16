@@ -208,7 +208,9 @@ prepare_info_channel_data <- function(y, data, plot_title, levels, y_limits = NU
     dplyr::mutate(
       info_weg = factor(info_weg, levels = levels)
     ) %>%
-    dplyr::count(info_weg, name = "n", .drop = FALSE)
+    dplyr::count(info_weg, name = "n", .drop = FALSE) |> 
+    dplyr::mutate(perc = 100 * n / length(unique(data$tn_id)),
+                  n_tensingende = length(unique(data$tn_id)))
 
   list(
     year = y$year,
@@ -222,10 +224,64 @@ prepare_info_channel_data <- function(y, data, plot_title, levels, y_limits = NU
 render_info_channel_plot <- function(channel_data) {
   agg <- channel_data$agg
 
+  p <- ggplot(agg, aes(x = info_weg, y = perc, fill = info_weg)) +
+    ggiraph::geom_col_interactive(
+      aes(
+        tooltip = sprintf("%.2f%% (%i von %i):\n%s", round(perc, 2), n, n_tensingende, info_weg),
+        data_id = info_weg
+      )
+    ) +
+    scale_x_discrete(labels = function(x) str_wrap(x, width = 12)) +
+    scale_fill_manual(values = pal_8) +
+    theme_minimal(base_size = 12, base_family = TS_FONT_FAMILY) +
+    # scale_y_continuous(breaks = scales::pretty_breaks(n = 4)) +
+    theme(
+      panel.grid.minor.y = element_blank(),
+      legend.position = "none",
+      axis.text.x = element_text(angle = 0, vjust = 1, hjust = 0.5),
+      plot.title = element_text(
+        size = 16,
+        face = "bold",
+        hjust = 0.5,
+        family = TS_FONT_FAMILY,
+        margin = margin(t = 10, b = 10)
+      ),
+      plot.caption = element_text(
+        hjust = 0.5,
+        family = TS_FONT_FAMILY,
+        margin = margin(t = 10)
+      ),
+      plot.caption.position = "plot"
+    ) +
+    labs(
+      title = channel_data$plot_title,
+      x = NULL,
+      y = "% der TEN SINGenden",
+      caption = "Informationskanäle"
+    )
+
+  if (!is.null(channel_data$y_limits)) {
+    breaks <- if (is.null(channel_data$y_breaks)) waiver() else channel_data$y_breaks
+    p <- p + scale_y_continuous(limits = channel_data$y_limits, breaks = breaks)
+  }
+
+  widget <- ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
+
+  render_widget_output(widget)
+}
+
+render_gewuenschte_info_channel_plot <- function(channel_data) {
+  agg <- channel_data$agg
+
   p <- ggplot(agg, aes(x = info_weg, y = n, fill = info_weg)) +
     ggiraph::geom_col_interactive(
       aes(
-        tooltip = paste0(info_weg, "\n", n, " Antworten"),
+        tooltip = sprintf("%s: %i", info_weg, n),
         data_id = info_weg
       )
     ) +
@@ -272,7 +328,6 @@ render_info_channel_plot <- function(channel_data) {
 
   render_widget_output(widget)
 }
-
 ```
 
 ```{r info-kanal-usage-data}
@@ -286,7 +341,9 @@ info_channel_usage_curr <- prepare_info_channel_data(
   y = curr,
   data = curr$tn$long$info_wege_aktuell,
   plot_title = "Meistgenutzte Informationskanäle",
-  levels = info_levels
+  levels = info_levels,
+  y_limits  = c(0, 100),
+  y_breaks  = seq(0, 100, 25)
 )
 
 info_channel_usage_prev <- if (has_previous_year) {
@@ -294,7 +351,9 @@ info_channel_usage_prev <- if (has_previous_year) {
     y = prev,
     data = prev$tn$long$info_wege_aktuell,
     plot_title = "Meistgenutzte Informationskanäle",
-    levels = info_levels
+    levels = info_levels,
+    y_limits  = c(0, 100),
+    y_breaks  = seq(0, 100, 25)
   )
 } else {
   NULL
@@ -353,7 +412,7 @@ info_channel_wunsch_prev <- if (has_previous_year) {
 render_year_tabset(
   curr_data = info_channel_wunsch_curr,
   prev_data = info_channel_wunsch_prev,
-  render_fn = render_info_channel_plot
+  render_fn = render_gewuenschte_info_channel_plot
 )
 
 knitr::asis_output(callout_datenquellen(curr$cfg,
