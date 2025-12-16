@@ -15,9 +15,12 @@ ggplot2::theme_set(theme_ts) # defined in viz_config
 
 ```
 
-Auf dieser Seite seht ihr alle Antworten zu Fragen, die die Programmgruppe betreffen. - Also euer Feedback an uns! 
+Auf dieser Seite seht ihr alle Antworten zu Fragen, die die Programmgruppe (PG) betreffen - also euer Feedback an uns! 
 
-## Wie informiert fühlen sich TEN SINGende? Und welche Informationskanäle wünschen sie sich?
+## Informationskanäle bei TEN SING
+
+Wie informiert fühlen sich TEN SINGende? Und welche Informationskanäle wünschen sie sich?
+
 
 ```{r info_komplett_data_curr}
 prepare_info_data <- function(y){
@@ -96,7 +99,7 @@ render_info_plots <- function(info_data) {
     ggiraph::geom_col_interactive(
       aes(
         tooltip = paste0(info_komplett, "\n", perc, "%"),
-        data_id = info_komplett
+        data_id = paste0("left_", info_komplett)
       )
     ) +
     coord_polar(theta = "y") +
@@ -124,7 +127,7 @@ render_info_plots <- function(info_data) {
     ggiraph::geom_col_interactive(
       aes(
         tooltip = paste0(info_wege_aenderung, "\n", perc, "%"),
-        data_id = info_wege_aenderung
+        data_id = paste0("right_", info_wege_aenderung)
       )
     ) +
     coord_polar(theta = "y") +
@@ -660,8 +663,8 @@ tn_q=list("Q_RE_VERANST"
 
 #### Deutschlandweite und Regionale Veranstaltungen im Vergleich
 
-Gehen TEN SINGer*innen lieber zu deutschlandweiten Veranstaltungen oder regionalen Veranstaltungen? 
-Hier sehr ihr den Vergleich: 
+Gehen TEN SINGer*innen lieber zu deutschlandweiten oder regionalen Veranstaltungen? 
+Hier seht ihr den Vergleich: 
 
 ```{r render-participation-comparison, echo=FALSE, results='asis'}
 #| fig.width: 9
@@ -790,4 +793,4 @@ og_q=list( "Q_BEGIN_UNTERSTUETZUNGSBEDARFE","QS_UNTERSTUETZUNGSBEDARFE"
 )))
 ```
 
-Vielen Dank, dass du Teil dieser Befragung warst oder dich mit den Ergebnissen auseinandergestezt hast. Wenn du Fragen hast kannst du dich jederzeit an tensing@cvjm.de wenden. Bitte hilf uns die Befragung auch in den kommenden Jahren weiterhin durchführen zu können und Teile den aktuellen Link zur Befragung oder gib uns Feedback was wir besser machen können.
+Vielen Dank, dass du Teil dieser Befragung warst oder dich mit den Ergebnissen auseinandergesetzt hast. Wenn du Fragen hast, kannst du dich jederzeit an [tensing@cvjm.de](mailto:tensing@cvjm.de) wenden. Bitte hilf uns, die Befragung auch in den kommenden Jahren weiterhin durchführen zu können und Teile den aktuellen Link zur Befragung oder gib uns Feedback, was wir besser machen können.
