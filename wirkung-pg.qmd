@@ -427,6 +427,7 @@ tn_q=list("Q_INFO_WEGE_AENDERUNG"
 Um die deutschlandweiten und ortsübergreifenden Seminare und Veranstaltungen besser an eure Wünsche anzupassen und bestehende Hürden besser abbauen zu können, wollten wir von euch wissen, ob ihr an solchen Angeboten bereits teilgenommen habt und falls nicht, was euch daran gehindert hat.
 
 
+
 <!-- ab 2026?
 Zunächst wollten wir erst einmal wissen, wie bekannt das deutschlandweite Netzwerk unter den TEN SINGer*innen überhaupt ist. Dafür haben wir euch gefragt, ob ihr schonmal von ortsübergreifenden und deutschlandweiten Angeboten mitbekommen habt. -->
 
@@ -617,17 +618,17 @@ render_participation_comparison <- function(data) {
       teilnahme = forcats::fct_relevel(teilnahme, "Ja", "Nein", "keine Angabe")
     )
 
-  p <- ggplot(combined, aes(y = type_veranst, x = perc, fill = teilnahme, group = teilnahme)) +
-    geom_col(position = "dodge") +
+  p <- ggplot(combined, aes(y = type_veranst, x = perc, fill = teilnahme, group = forcats::fct_rev(teilnahme))) +
+    ggiraph::geom_col_interactive(aes(tooltip = sprintf("Teilnahme %s: %s\n%.2f%% aller Aktiven", type_veranst, teilnahme, perc * 100)), position = "dodge") +
     scale_x_continuous(limits = c(0, 1), labels = scales::label_percent()) +
     scale_y_discrete(labels = scales::label_wrap(30)) +
     labs(
       title = "Teilnahme an Veranstaltungen",
       y = NULL,
       x = "% der Aktiven",
-      fill = NULL
+      fill = "Teilnahme"
     ) +
-    scale_fill_manual(values = colors) +
+    scale_fill_manual(values = colors) + # alternatively to legend label: , labels = c("teilgenommen", "nicht teilgenommen", "keine Angabe")
     theme(
       legend.position = "bottom",
       plot.title = element_text(hjust = 0.5, family = TS_FONT_FAMILY)
@@ -654,8 +655,8 @@ render_participation_barriers <- function(data) {
     dplyr::mutate(grund = factor(grund, levels = sort(unique(grund))))
 
   p <- ggplot(barriers, aes(y = grund, x = percent)) +
-    geom_col(fill = TS_GREEN) +
-    scale_x_continuous(labels = scales::label_percent()) +
+    geom_col_interactive(aes(tooltip = sprintf("%.2f%%", percent * 100)), fill = TS_GREEN) +
+    scale_x_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
     scale_y_discrete(labels = scales::label_wrap(40)) +
     labs(
       y = NULL,
@@ -680,11 +681,19 @@ render_participation_barriers <- function(data) {
 
 ```
 
+### Veranstaltungen 
+
 #### Deutschlandweite Veranstaltungen
 Wir wollten wissen, ob ihr im letzten Jahr an einer deutschlandweiten Veranstaltung teilgenommen habt.
 
+```{r}
+westbund_perc_yes <- participation_curr$dtl_region_summary |> filter(region_grouped == "Westbund") |> pull(pct_ja)
+```
 
-Gibt es regionale Unterschiede bezüglich der Teilnahme an deutschlandweiten Veranstaltungen ?
+Spannend ist dabei zu sehen, ob es bei der Teilnahme an deutschlandweiten Veranstaltungen regionale Unterschiede gibt. Dafür haben wir pro Region visualisiert, welcher Anteil der Menschen, die die Umfrage ausgefüllt haben, bereits an einer deutschlandweiten Veranstaltung teilgenommen hat. Am Beispiel des Westbunds heißt das, dass `r round(westbund_perc_yes, 2)`% der Menschen, die die Umfrage ausgefüllt haben und sich dem Westbund zugehörig fühlen, auch mal eine deutschlandweite Veranstaltung besucht haben.
+Gekennzeichnet mit „deutschlandweit“ seht ihr wie viel Prozent der Umfrageteilnehmenden über alle Umfragen hinweg bereits an einem deutschlandweiten Angebot teilgenommen haben.
+
+
 
 ```{r render-dtl-region, echo=FALSE, results='asis', fig.width=9, fig.height=6, out.width="100%"}
 render_year_tabset(
@@ -702,10 +711,8 @@ tn_q=list("Q_DE_VERANST"
 #### Regionale Veranstaltungen
 
 
-Wie sieht es bei den regionalen Veranstaltungen aus? So fiel hier die Teilnahme im letzten Jahr aus.
+Wie sieht es bei den regionalen Veranstaltungen aus? Gibt es Unterschiede zwischen den Regionen? Auch hier haben wir die Antworten für jede der TEN SING Regionen visualisiert.
 
-
-Gibt es Unterschiede zwischen den Regionen?
 
 ```{r render-regional-region, echo=FALSE, results='asis', fig.width=9, fig.height=6, out.width="100%"}
 render_year_tabset(
@@ -722,8 +729,7 @@ tn_q=list("Q_RE_VERANST"
 
 #### Deutschlandweite und Regionale Veranstaltungen im Vergleich
 
-Gehen TEN SINGer*innen lieber zu deutschlandweiten oder regionalen Veranstaltungen? 
-Hier seht ihr den Vergleich: 
+Gehen TEN SINGer*innen lieber zu deutschlandweiten oder regionalen Veranstaltungen? Hier seht ihr den Vergleich.
 
 ```{r render-participation-comparison, echo=FALSE, results='asis'}
 #| fig.width: 9
