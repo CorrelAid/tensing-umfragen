@@ -27,15 +27,39 @@ insgesamt_og_curr <- sum(curr$og$data$anzahl_insg, na.rm = T)
 Auf dieser Seite werden euch Ergebnisse der Befragung angezeigt, die das deutschlandweite TEN SING Netzwerk betreffen.
 
 ## Deutschlandweites TEN SING Netzwerk
-Laut Schätzung der Ortsgruppen-Leitenden sind bei TEN SING ca. **`{r} tn_nach_og` Teilnehmer\*innen** aktiv.<sup>1</sup> 
 
-`{r} tn_nach_tn` haben wir davon über den Teilnehmer\*innen Fragebogen erreicht.<sup>2</sup> 
+```{r}
+#| results: asis
+
+if (tn_nach_og >= tn_nach_tn) {
+   s <- sprintf("Laut Schätzung der Ortsgruppen-Leitenden sind bei TEN SING ca. <b>%i Teilnehmer\\*innen</b> aktiv.<sup>1</sup> <br><br>%i haben wir davon über den Teilnehmer\\*innen Fragebogen erreicht.<sup>2</sup>", tn_nach_og, tn_nach_tn)
+} else {
+  s <- sprintf("<b>%i TEN SINGende</b> haben den Teilnehmer*innen-Fragebogen ausgefüllt.<sup>2</sup> <br><br>Laut Schätzung der Ortsgruppen-Leitenden sind bei TEN SING aber nur ca. <b>%i Teilnehmer\\*innen</b> aktiv. Diese Differenz kann daran liegen, dass (noch) nicht genügend Ortsgruppenleitungen den Ortsgruppen-Fragebogen ausgefüllt haben.<sup>1</sup>", tn_nach_tn, tn_nach_og)
+}
+
+cat(s, sep = "\n")
+```
+
 
 Weitere **`{r} leitung_og_curr`** Personen sind als **Mitarbeitende** bei TEN SING aktiv.<sup>3</sup>
 
 Insgesamt engagieren sich über die Ortsgruppen verteilt aktuell also **`{r} insgesamt_og_curr`  Personen aktiv bei TEN SING.**<sup>4</sup>
 
-Deutschlandweit gibt es laut der Angaben von Teilnehmer*innen aktuell **`{r} og_nach_tn` Ortsgruppen** bei TEN SING. <sup>5</sup> Davon haben wir `{r} og_nach_og` über den Ortsgruppen Fragebogen erreicht.<sup>6</sup>
+```{r}
+#| results: asis
+if (og_nach_tn >= og_nach_og) {
+   s <- sprintf("
+  Deutschlandweit gibt es laut der Angaben von Teilnehmer*innen aktuell <b>%i Ortsgruppen</b> bei TEN SING.<sup>5</sup> Davon haben wir %i über den Ortsgruppen-Fragebogen erreicht.<sup>6</sup>", og_nach_tn, og_nach_og)
+} else {
+  s <- sprintf("
+  <b>%i Ortsgruppen</b> haben den Ortsgruppen-Fragebogen ausgefüllt.<sup>6</sup> Aus %i Ortsgruppen haben TEN SINGende den Teilnehmer*innen-Fragebogen beantwortet.<sup>5</sup>", params$region, og_nach_og, og_nach_tn)
+}
+
+if (og_nach_og == 0) {
+  s <- paste(s, "Deshalb können einige Grafiken leider nicht angezeigt werden, da die Daten fehlen.")
+}
+cat(s, sep = "\n")
+```
 
 
 ::: {.callout-note collapse="true"}
