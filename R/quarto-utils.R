@@ -122,7 +122,7 @@ render_widget_output <- function(widget) {
   print(htmltools::tagList(widget))
 }
 
-#' Build a "Datenquelle" callout dropdown indicating which questions of TN/ OG survey where used.
+#' Build a "Datenquellen" callout dropdown indicating which questions of TN/ OG survey where used.
 #' @param cfg List containing `tn_cfg` and `og_cfg` (This is created in load_year()); each is the survey config
 #'   with question objects keyed by name and a `URL` entry for the questionnaire.
 #' @param og_q Optional character vector of OG questions, eg. c("Q_WORKSHOPS") as defined in og_conifg.
@@ -177,7 +177,7 @@ callout_datenquellen <- function(cfg, og_q = NULL, tn_q = NULL, extra = NULL) {
   paste0(
     "\n\n",
     "::: {.callout-note collapse=\"true\"}\n",
-    "## Datenquelle(n)\n\n",
+    "## Datenquellen\n\n",
     tn_block,
     og_block,
     extra_block,
