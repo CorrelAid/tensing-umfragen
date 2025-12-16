@@ -714,7 +714,7 @@ angebot_perc_theater=round(100*angebot_anz_theater/angebot_anz_ges,2)
 :::{.callout-tip collapse="false"}
 
 ## Interpretationshilfe
-Insgesamt `{r} angebot_anz_ges` Personen haben im Jahr `{r} current_year` eine Antwort auf diese Frage gegeben. `{r} angebot_anz_theater` Personen gaben wiederum an, dass sie gerne am Theaterworkshop/Theaterangebot teilnehmen. `{r} angebot_anz_theater` von `{r} angebot_anz_ges` Personen entspricht `{r} angebot_perc_theater`% Prozent. Diesen Wert seht ihr im oberen Schaubild visualisiert.
+Insgesamt `{r} angebot_anz_ges` Personen haben im Jahr `{r} current_year` eine Antwort auf diese Frage gegeben. `{r} angebot_anz_theater` Personen gaben wiederum an, dass sie gerne am Theaterworkshop/Theaterangebot teilnehmen. `{r} angebot_anz_theater` von `{r} angebot_anz_ges` Personen entspricht `{r} angebot_perc_theater`% Prozent. Diesen Wert seht ihr im oberen Schaubild visualisiert. Da eine Mehrfachauswahl möglich war, summieren sich die Werte auf mehr als 100%.
 
 :::
 

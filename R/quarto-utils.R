@@ -155,9 +155,11 @@ callout_datenquellen <- function(cfg, og_q = NULL, tn_q = NULL, extra = NULL) {
     links <- purrr::map_chr(flat, fmt_q)
     src <- fmt_fragebogen(fb_type, url = cfg_part$URL)
 
-    paste0(
-      "**Relevante Fragen** im ", src, ":\n\n",
-      "- ", paste(links, collapse = "\n- "), "\n\n"
+    sprintf(
+      "**Relevante %s** im %s:\n\n- %s\n\n",
+      if (length(links) == 1) "Frage" else "Fragen",
+      src,
+      paste(links, collapse = "\n- ")
     )
   }
 
