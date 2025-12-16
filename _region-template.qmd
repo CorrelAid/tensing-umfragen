@@ -96,7 +96,8 @@ Auf dieser Seite werden euch Ergebnisse der Befragung angezeigt, die die TEN SIN
 Im Folgenden seht ihr eine Übersicht über die einzelnen Ortsgruppen der Region `{r} params$region`.
 Laut Teilnehmer*innen-Fragebogen gibt es `{r} og_nach_tn` Ortsgruppe(n).<sup>1</sup> Davon haben wir `{r} og_nach_og` über den Ortsgruppen Fragebogen erreicht.<sup>2</sup> 
 
-Aufgelistet sind die Anzahl der aktiven TEN SINGer*innen pro Ortsgruppe sowie die Anzahl der Auftritte pro Jahr.
+Aufgelistet sind die Anzahl der aktiven TEN SINGer*innen pro Ortsgruppe, ihr Durchschnittsalter sowie die Anzahl der Auftritte pro Jahr.
+
 
 ::: {.callout-note collapse="false"}
 
@@ -1150,7 +1151,7 @@ Um eure Ortsgruppe gezielt unterstützen zu können, bspw. bei der Gewinnung neu
 
 ### Gibt es gerade Probleme neue Teilnehmende zu finden?
 
-Hier seht ihr die Antworten der Ortsgruppen. Wenn Vorjahresdaten vorhanden sind, werden die Jahre `{r} current_year` und `{r} previous_year` gegenübergestellt. 
+Hier seht ihr die Antworten der Ortsgruppen. Wenn Vorjahresdaten vorhanden sind, werden euch das aktuelle und letzte Jahr angezeigt. 
 
 ```{r tn-gewinnung-probleme}
 #| fig.width: 9
@@ -1401,7 +1402,7 @@ add_explanation_to_bedarf <- function(og_ueb_sum){
   og_ueb_sum <- og_ueb_sum %>%
   mutate(
     erklärung_bedarf = case_when(
-      bedarf_label == "hoch"   ~ "Der Bedarf ist hoch und",
+      bedarf_label == "hoch"   ~ "Der Bedarf ist hoch",
       bedarf_label == "mittel" ~ "Der Bedarf ist mittel ",
       bedarf_label == "gering" ~ "Der Bedarf ist gering ",
       TRUE ~NA_character_
