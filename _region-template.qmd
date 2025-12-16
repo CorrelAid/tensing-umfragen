@@ -743,7 +743,7 @@ if (!is_westbund) {
   angebot_perc_theater = round(100 * angebot_anz_theater / angebot_anz_ges, 2)
 
   callout <- sprintf(
-    "::: {.callout-tip} \n ## Interpretationshilfe \n\n Insgesamt %d Personen haben im Jahr %s eine Antwort auf diese Frage gegeben. %d Personen gaben wiederum an, dass sie gerne am Theaterworkshop/Theaterangebot teilnehmen. %d von %d Personen entspricht %.1f%% Prozent. Diesen Wert seht ihr im oberen Schaubild visualisiert. Da eine Mehrfachauswahl möglich war, summieren sich die Werte auf mehr als 100%%.\n:::",
+    "::: {.callout-tip collapse=\"false\"} \n## Interpretationshilfe\n\n Insgesamt %d Personen haben im Jahr %s eine Antwort auf diese Frage gegeben. %d Personen gaben wiederum an, dass sie gerne am Theaterworkshop/Theaterangebot teilnehmen. %d von %d Personen entspricht %.1f%% Prozent. Diesen Wert seht ihr im oberen Schaubild visualisiert. Da eine Mehrfachauswahl möglich war, summieren sich die Werte auf mehr als 100%%.\n:::",
     angebot_anz_ges,
     current_year,
     angebot_anz_theater,
