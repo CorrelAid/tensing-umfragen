@@ -15,9 +15,12 @@ ggplot2::theme_set(theme_ts) # defined in viz_config
 
 ```
 
-Auf dieser Seite seht ihr alle Antworten zu Fragen, die die Programmgruppe betreffen. - Also euer Feedback an uns! 
+Auf dieser Seite seht ihr alle Antworten zu Fragen, die die Programmgruppe (PG) betreffen - also euer Feedback an uns! 
 
-## Wie informiert fühlen sich TEN SINGende? Und welche Informationskanäle wünschen sie sich?
+## Informationskanäle bei TEN SING
+
+Wie informiert fühlen sich TEN SINGende? Und welche Informationskanäle wünschen sie sich?
+
 
 ```{r info_komplett_data_curr}
 prepare_info_data <- function(y){
@@ -96,7 +99,7 @@ render_info_plots <- function(info_data) {
     ggiraph::geom_col_interactive(
       aes(
         tooltip = paste0(info_komplett, "\n", perc, "%"),
-        data_id = info_komplett
+        data_id = paste0("left_", info_komplett)
       )
     ) +
     coord_polar(theta = "y") +
@@ -124,7 +127,7 @@ render_info_plots <- function(info_data) {
     ggiraph::geom_col_interactive(
       aes(
         tooltip = paste0(info_wege_aenderung, "\n", perc, "%"),
-        data_id = info_wege_aenderung
+        data_id = paste0("right_", info_wege_aenderung)
       )
     ) +
     coord_polar(theta = "y") +
@@ -205,7 +208,9 @@ prepare_info_channel_data <- function(y, data, plot_title, levels, y_limits = NU
     dplyr::mutate(
       info_weg = factor(info_weg, levels = levels)
     ) %>%
-    dplyr::count(info_weg, name = "n", .drop = FALSE)
+    dplyr::count(info_weg, name = "n", .drop = FALSE) |> 
+    dplyr::mutate(perc = 100 * n / length(unique(data$tn_id)),
+                  n_tensingende = length(unique(data$tn_id)))
 
   list(
     year = y$year,
@@ -219,10 +224,64 @@ prepare_info_channel_data <- function(y, data, plot_title, levels, y_limits = NU
 render_info_channel_plot <- function(channel_data) {
   agg <- channel_data$agg
 
+  p <- ggplot(agg, aes(x = info_weg, y = perc, fill = info_weg)) +
+    ggiraph::geom_col_interactive(
+      aes(
+        tooltip = sprintf("%.2f%% (%i von %i):\n%s", round(perc, 2), n, n_tensingende, info_weg),
+        data_id = info_weg
+      )
+    ) +
+    scale_x_discrete(labels = function(x) str_wrap(x, width = 12)) +
+    scale_fill_manual(values = pal_8) +
+    theme_minimal(base_size = 12, base_family = TS_FONT_FAMILY) +
+    # scale_y_continuous(breaks = scales::pretty_breaks(n = 4)) +
+    theme(
+      panel.grid.minor.y = element_blank(),
+      legend.position = "none",
+      axis.text.x = element_text(angle = 0, vjust = 1, hjust = 0.5),
+      plot.title = element_text(
+        size = 16,
+        face = "bold",
+        hjust = 0.5,
+        family = TS_FONT_FAMILY,
+        margin = margin(t = 10, b = 10)
+      ),
+      plot.caption = element_text(
+        hjust = 0.5,
+        family = TS_FONT_FAMILY,
+        margin = margin(t = 10)
+      ),
+      plot.caption.position = "plot"
+    ) +
+    labs(
+      title = channel_data$plot_title,
+      x = NULL,
+      y = "% der TEN SINGenden",
+      caption = "Informationskanäle"
+    )
+
+  if (!is.null(channel_data$y_limits)) {
+    breaks <- if (is.null(channel_data$y_breaks)) waiver() else channel_data$y_breaks
+    p <- p + scale_y_continuous(limits = channel_data$y_limits, breaks = breaks)
+  }
+
+  widget <- ggiraph::girafe(
+    ggobj = p,
+    options = list(
+      ggiraph::opts_toolbar(saveaspng = TRUE)
+    )
+  )
+
+  render_widget_output(widget)
+}
+
+render_gewuenschte_info_channel_plot <- function(channel_data) {
+  agg <- channel_data$agg
+
   p <- ggplot(agg, aes(x = info_weg, y = n, fill = info_weg)) +
     ggiraph::geom_col_interactive(
       aes(
-        tooltip = paste0(info_weg, "\n", n, " Antworten"),
+        tooltip = sprintf("%s: %i", info_weg, n),
         data_id = info_weg
       )
     ) +
@@ -269,7 +328,6 @@ render_info_channel_plot <- function(channel_data) {
 
   render_widget_output(widget)
 }
-
 ```
 
 ```{r info-kanal-usage-data}
@@ -283,7 +341,9 @@ info_channel_usage_curr <- prepare_info_channel_data(
   y = curr,
   data = curr$tn$long$info_wege_aktuell,
   plot_title = "Meistgenutzte Informationskanäle",
-  levels = info_levels
+  levels = info_levels,
+  y_limits  = c(0, 100),
+  y_breaks  = seq(0, 100, 25)
 )
 
 info_channel_usage_prev <- if (has_previous_year) {
@@ -291,7 +351,9 @@ info_channel_usage_prev <- if (has_previous_year) {
     y = prev,
     data = prev$tn$long$info_wege_aktuell,
     plot_title = "Meistgenutzte Informationskanäle",
-    levels = info_levels
+    levels = info_levels,
+    y_limits  = c(0, 100),
+    y_breaks  = seq(0, 100, 25)
   )
 } else {
   NULL
@@ -350,7 +412,7 @@ info_channel_wunsch_prev <- if (has_previous_year) {
 render_year_tabset(
   curr_data = info_channel_wunsch_curr,
   prev_data = info_channel_wunsch_prev,
-  render_fn = render_info_channel_plot
+  render_fn = render_gewuenschte_info_channel_plot
 )
 
 knitr::asis_output(callout_datenquellen(curr$cfg,
@@ -363,6 +425,7 @@ tn_q=list("Q_INFO_WEGE_AENDERUNG"
 ## Deutschlandweites Netzwerk und Angebote
 
 Um die deutschlandweiten und ortsübergreifenden Seminare und Veranstaltungen besser an eure Wünsche anzupassen und bestehende Hürden besser abbauen zu können, wollten wir von euch wissen, ob ihr an solchen Angeboten bereits teilgenommen habt und falls nicht, was euch daran gehindert hat.
+
 
 
 <!-- ab 2026?
@@ -555,17 +618,17 @@ render_participation_comparison <- function(data) {
       teilnahme = forcats::fct_relevel(teilnahme, "Ja", "Nein", "keine Angabe")
     )
 
-  p <- ggplot(combined, aes(y = type_veranst, x = perc, fill = teilnahme, group = teilnahme)) +
-    geom_col(position = "dodge") +
+  p <- ggplot(combined, aes(y = type_veranst, x = perc, fill = teilnahme, group = forcats::fct_rev(teilnahme))) +
+    ggiraph::geom_col_interactive(aes(tooltip = sprintf("Teilnahme %s: %s\n%.2f%% aller Aktiven", type_veranst, teilnahme, perc * 100)), position = "dodge") +
     scale_x_continuous(limits = c(0, 1), labels = scales::label_percent()) +
     scale_y_discrete(labels = scales::label_wrap(30)) +
     labs(
       title = "Teilnahme an Veranstaltungen",
       y = NULL,
       x = "% der Aktiven",
-      fill = NULL
+      fill = "Teilnahme"
     ) +
-    scale_fill_manual(values = colors) +
+    scale_fill_manual(values = colors) + # alternatively to legend label: , labels = c("teilgenommen", "nicht teilgenommen", "keine Angabe")
     theme(
       legend.position = "bottom",
       plot.title = element_text(hjust = 0.5, family = TS_FONT_FAMILY)
@@ -592,8 +655,8 @@ render_participation_barriers <- function(data) {
     dplyr::mutate(grund = factor(grund, levels = sort(unique(grund))))
 
   p <- ggplot(barriers, aes(y = grund, x = percent)) +
-    geom_col(fill = TS_GREEN) +
-    scale_x_continuous(labels = scales::label_percent()) +
+    geom_col_interactive(aes(tooltip = sprintf("%.2f%%", percent * 100)), fill = TS_GREEN) +
+    scale_x_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
     scale_y_discrete(labels = scales::label_wrap(40)) +
     labs(
       y = NULL,
@@ -618,11 +681,19 @@ render_participation_barriers <- function(data) {
 
 ```
 
+### Veranstaltungen 
+
 #### Deutschlandweite Veranstaltungen
 Wir wollten wissen, ob ihr im letzten Jahr an einer deutschlandweiten Veranstaltung teilgenommen habt.
 
+```{r}
+westbund_perc_yes <- participation_curr$dtl_region_summary |> filter(region_grouped == "Westbund") |> pull(pct_ja)
+```
 
-Gibt es regionale Unterschiede bezüglich der Teilnahme an deutschlandweiten Veranstaltungen ?
+Spannend ist dabei zu sehen, ob es bei der Teilnahme an deutschlandweiten Veranstaltungen regionale Unterschiede gibt. Dafür haben wir pro Region visualisiert, welcher Anteil der Menschen, die die Umfrage ausgefüllt haben, bereits an einer deutschlandweiten Veranstaltung teilgenommen hat. Am Beispiel des Westbunds heißt das, dass `r round(westbund_perc_yes, 2)`% der Menschen, die die Umfrage ausgefüllt haben und sich dem Westbund zugehörig fühlen, auch mal eine deutschlandweite Veranstaltung besucht haben.
+Gekennzeichnet mit „deutschlandweit“ seht ihr wie viel Prozent der Umfrageteilnehmenden über alle Umfragen hinweg bereits an einem deutschlandweiten Angebot teilgenommen haben.
+
+
 
 ```{r render-dtl-region, echo=FALSE, results='asis', fig.width=9, fig.height=6, out.width="100%"}
 render_year_tabset(
@@ -640,10 +711,8 @@ tn_q=list("Q_DE_VERANST"
 #### Regionale Veranstaltungen
 
 
-Wie sieht es bei den regionalen Veranstaltungen aus? So fiel hier die Teilnahme im letzten Jahr aus.
+Wie sieht es bei den regionalen Veranstaltungen aus? Gibt es Unterschiede zwischen den Regionen? Auch hier haben wir die Antworten für jede der TEN SING Regionen visualisiert.
 
-
-Gibt es Unterschiede zwischen den Regionen?
 
 ```{r render-regional-region, echo=FALSE, results='asis', fig.width=9, fig.height=6, out.width="100%"}
 render_year_tabset(
@@ -660,8 +729,7 @@ tn_q=list("Q_RE_VERANST"
 
 #### Deutschlandweite und Regionale Veranstaltungen im Vergleich
 
-Gehen TEN SINGer*innen lieber zu deutschlandweiten Veranstaltungen oder regionalen Veranstaltungen? 
-Hier sehr ihr den Vergleich: 
+Gehen TEN SINGer*innen lieber zu deutschlandweiten oder regionalen Veranstaltungen? Hier seht ihr den Vergleich.
 
 ```{r render-participation-comparison, echo=FALSE, results='asis'}
 #| fig.width: 9
@@ -790,4 +858,4 @@ og_q=list( "Q_BEGIN_UNTERSTUETZUNGSBEDARFE","QS_UNTERSTUETZUNGSBEDARFE"
 )))
 ```
 
-Vielen Dank, dass du Teil dieser Befragung warst oder dich mit den Ergebnissen auseinandergestezt hast. Wenn du Fragen hast kannst du dich jederzeit an tensing@cvjm.de wenden. Bitte hilf uns die Befragung auch in den kommenden Jahren weiterhin durchführen zu können und Teile den aktuellen Link zur Befragung oder gib uns Feedback was wir besser machen können.
+Vielen Dank, dass du Teil dieser Befragung warst oder dich mit den Ergebnissen auseinandergesetzt hast. Wenn du Fragen hast, kannst du dich jederzeit an [tensing@cvjm.de](mailto:tensing@cvjm.de) wenden. Bitte hilf uns, die Befragung auch in den kommenden Jahren weiterhin durchführen zu können und Teile den aktuellen Link zur Befragung oder gib uns Feedback, was wir besser machen können.

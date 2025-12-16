@@ -27,15 +27,39 @@ insgesamt_og_curr <- sum(curr$og$data$anzahl_insg, na.rm = T)
 Auf dieser Seite werden euch Ergebnisse der Befragung angezeigt, die das deutschlandweite TEN SING Netzwerk betreffen.
 
 ## Deutschlandweites TEN SING Netzwerk
-Laut Schätzung der Ortsgruppen-Leitenden sind bei TEN SING ca. **`{r} tn_nach_og` Teilnehmer\*innen** aktiv.<sup>1</sup> 
 
-`{r} tn_nach_tn` haben wir davon über den Teilnehmer\*innen Fragebogen erreicht.<sup>2</sup> 
+```{r}
+#| results: asis
+
+if (tn_nach_og >= tn_nach_tn) {
+   s <- sprintf("Laut Schätzung der Ortsgruppen-Leitenden sind bei TEN SING ca. <b>%i Teilnehmer\\*innen</b> aktiv.<sup>1</sup> <br><br>%i haben wir davon über den Teilnehmer\\*innen Fragebogen erreicht.<sup>2</sup>", tn_nach_og, tn_nach_tn)
+} else {
+  s <- sprintf("<b>%i TEN SINGende</b> haben den Teilnehmer*innen-Fragebogen ausgefüllt.<sup>2</sup> <br><br>Laut Schätzung der Ortsgruppen-Leitenden sind bei TEN SING aber nur ca. <b>%i Teilnehmer\\*innen</b> aktiv. Diese Differenz kann daran liegen, dass (noch) nicht genügend Ortsgruppenleitungen den Ortsgruppen-Fragebogen ausgefüllt haben.<sup>1</sup>", tn_nach_tn, tn_nach_og)
+}
+
+cat(s, sep = "\n")
+```
+
 
 Weitere **`{r} leitung_og_curr`** Personen sind als **Mitarbeitende** bei TEN SING aktiv.<sup>3</sup>
 
 Insgesamt engagieren sich über die Ortsgruppen verteilt aktuell also **`{r} insgesamt_og_curr`  Personen aktiv bei TEN SING.**<sup>4</sup>
 
-Deutschlandweit gibt es laut der Angaben von Teilnehmer*innen aktuell **`{r} og_nach_tn` Ortsgruppen** bei TEN SING. <sup>5</sup> Davon haben wir `{r} og_nach_og` über den Ortsgruppen Fragebogen erreicht.<sup>6</sup>
+```{r}
+#| results: asis
+if (og_nach_tn >= og_nach_og) {
+   s <- sprintf("
+  Deutschlandweit gibt es laut der Angaben von Teilnehmer*innen aktuell <b>%i Ortsgruppen</b> bei TEN SING.<sup>5</sup> Davon haben wir %i über den Ortsgruppen-Fragebogen erreicht.<sup>6</sup>", og_nach_tn, og_nach_og)
+} else {
+  s <- sprintf("
+  <b>%i Ortsgruppen</b> haben den Ortsgruppen-Fragebogen ausgefüllt.<sup>6</sup> Aus %i Ortsgruppen haben TEN SINGende den Teilnehmer*innen-Fragebogen beantwortet.<sup>5</sup>", params$region, og_nach_og, og_nach_tn)
+}
+
+if (og_nach_og == 0) {
+  s <- paste(s, "Deshalb können einige Grafiken leider nicht angezeigt werden, da die Daten fehlen.")
+}
+cat(s, sep = "\n")
+```
 
 
 ::: {.callout-note collapse="true"}
@@ -45,7 +69,7 @@ Deutschlandweit gibt es laut der Angaben von Teilnehmer*innen aktuell **`{r} og_
 
 <sup>2</sup> Dies ist die Gesamtanzahl ausgefüllter Umfagen des `{r} fmt_fragebogen("tn", url=curr$cfg$tn_cfg$URL)`
 
-<sup>3</sup> Die entsprechenden Fragen im `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)` lautet: 
+<sup>3</sup> Die entsprechenden Frage im `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)` lautet: 
 - `{r} fmt_q(curr$cfg$og_cfg$Q_ANZAHL_BEGIN)`
 - `{r} fmt_q(curr$cfg$og_cfg$Q_ANZAHL_MA)`
 
@@ -53,7 +77,7 @@ Deutschlandweit gibt es laut der Angaben von Teilnehmer*innen aktuell **`{r} og_
 
 <sup>5</sup> Die entsprechende Frage im `{r} fmt_fragebogen("tn", url=curr$cfg$tn_cfg$URL)` lautet: `{r} fmt_q(curr$cfg$tn_cfg$Q_OG_NAME)`
 
-<sup>6</sup> Dies ist die Gesamtanzahl ausgefüllter Umfagen des `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)`
+<sup>6</sup> Dies ist die Gesamtanzahl ausgefüllter Umfragen des `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)`s
 
 **Anzahl Aktive**
 
@@ -427,7 +451,7 @@ Im Durchschnitt haben die TEN SING Mitarbeitenden ein Stundenpensum von `{r} ma_
 Pro Woche verbringen Teilnehmende im Schnitt `{r} tn_avg_stunden_curr` Stunden mit TEN SING.<sup>2</sup> Hochgerechnet auf ein Jahr sind das ganze `{r} as.character(tn_total_stunden_curr)
 ` Stunden, die alle Teilnehmenden zusammen mit TEN SING verbringen.
 
-TEN SINGer*innen treffen sich am liebsten am `{r} fav_day_curr` in ihren Ortsgruppen.<sup>3</sup> Im Schnitt dauert ein Treffen `{r} avg_dur_curr` Minuten.<sup>4</sup> Auf ein Jahr hochgerechnet sind das `{r} avg_yearly_hours_curr` Stunden die sich jede Ortsgruppe im Durschnitt trifft. 
+TEN SINGer*innen treffen sich am liebsten am `{r} fav_day_curr` in ihren Ortsgruppen.<sup>3</sup> Im Schnitt dauert ein Treffen `{r} avg_dur_curr` Minuten.<sup>4</sup> Auf ein Jahr hochgerechnet sind das `{r} avg_yearly_hours_curr` Stunden, die sich jede Ortsgruppe im Durchschnitt trifft. 
 
 **🎶 Pro Schuljahr finden ca. `{r} floor(avg_auftritte_curr)` bis `{r} ceiling(avg_auftritte_curr)` Auftritte statt.<sup>5</sup> 🎶**
 
@@ -499,7 +523,7 @@ verantwortung_prev <- if (has_previous_year) {
 }
 ```
 
-Neben der engagierten Mitarbeit aller Beteiligten, macht insbesondere auch das Übernehmen von Verantwortung TEN SING erst möglich. Deshalb wollten wir von euch wissen, wie viele von euch aktiv Verantwortung bei TEN SING übernehmen. Was unterstützt Menschen dabei Verantwortung zu übernehmen?
+Neben der engagierten Mitarbeit aller Beteiligten, macht insbesondere auch das Übernehmen von Verantwortung TEN SING erst möglich. Deshalb wollten wir von euch wissen, wie viele von euch aktiv Verantwortung bei TEN SING übernehmen. Was unterstützt Menschen dabei, Verantwortung zu übernehmen?
 
 Im Jahr `{r} curr$year` gaben `{r} dplyr::filter(verantwortung_curr$verant_anteile, verantwortung_janein == "Ja")$perc` % der befragten TEN SINGer*innen an, Verantwortung zu übernehmen.  Welche Hilfsangebote sich TEN SINGende mit und ohne Verantwortung wünschen, siehst du in der folgenden Visualisierung.
 
@@ -548,7 +572,7 @@ render_verantwortung_plot <- function(data, y_limit = verantwortung_y_limit) {
       ggiraph::geom_col_interactive(position = position_dodge(),
         aes(tooltip = tooltip, data_id = data_id)
       ) +
-      scale_fill_manual(values = pal_yes_no) +
+      scale_fill_manual(values = pal_yes_no, labels = c("Personen mit Verantwortung", "Personen ohne Verantwortung")) +
       scale_y_continuous(
         labels = scales::percent_format(accuracy = 1),
         limits = c(0, y_limit),
@@ -600,7 +624,7 @@ render_year_tabset(
 )
 ```
 
-::: {.callout-note collapse="false"}
+::: {.callout-tip collapse="false"}
 
 ## Interpretationshilfe 
 
@@ -711,11 +735,17 @@ asis_output(callout_datenquellen(curr$cfg,tn_q=list("Q_EMPFEHLUNG")))
 
 
 ::: {.callout-tip}
-## Region
 
-du willst mehr zu deiner Region erfahren...?!
+## Du willst mehr zu einer Region erfahren?
 
-- [ostwerk](./region/ostwerk.qmd)
-- ....
+Dann springe direkt zur Region...
+
+- ... [Ostwerk](./region/ostwerk.qmd)
+- ... [Nord](./region/nord.qmd)
+- ... [Sachsen](./region/sachsen.qmd)
+- ... [Thüringen](./region/thueringen.qmd)
+- ... [Süden](./region/sueden.qmd)
+- ... [Westbund](./region/sueden.qmd)
+
 
 :::

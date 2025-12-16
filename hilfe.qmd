@@ -20,42 +20,51 @@ tn_cfg <- curr$cfg$tn_cfg
 ```
 
 
+Daten zu verstehen, ist nicht immer einfach! Daten so aufzubereiten, dass sie verständlich sind, ist aber auch nicht immer einfach, gerade wenn man tief im Thema drinsteckt, so wie wir Datenanalyst*innen. :) Deshalb haben wir auf dieser Seite Ressourcen zusammengetragen, die dich dabei unterstützen sollen, die Datenanalysen zu lesen und zu verstehen.
+
+Wenn Grafiken oder Texte aber trotz aufmerksamen Lesens noch unklar oder unverständlich sind, gib uns gerne Feedback und wir schauen es uns nochmal an! 🤝 Auch wenn du über technische oder visuelle Hürden stolpern solltest, melde dich gerne bei uns.
+Entweder du kontaktierst dafür die Programmgruppe ([tensing@cvjm.de](mailto:tensing@cvjm.de)) oder CorrelAid (mailto:info@correlaid.org). Wir freuen uns auf dein Feedback!
+
+
 # Verwirrt von den Auswertungen?
 
-**Daten verstehen ist nicht immer einfach!**
+Datenanalysen zu lesen und zu verstehen ist nicht immer einfach. Es ist normal, wenn du beim Anblick eines Balkendiagramms, einer Heatmap oder eines Kuchendiagramms erst einmal verwirrt bist. 🤯 Was dann helfen kann:
 
-1. Datenanalysen zu lesen und zu verstehen ist nicht immer einfach. Es ist normal, wenn du erst einmal verwirrt bist beim Anblick eines Balkendiagramms, einer Heatmap oder eines Kuchendiagramms. :exploding_head: Was dann helfen kann:
 
-- nimm dir Zeit und lies den Titel und die Achsenbeschriftungen 
-- klicke auf die Hinweise zur Datenquelle und klicke dich durch zur konkreten Frage im Fragebogen.  
-- nutze die Interpretationshilfe (wenn vorhanden - wir arbeiten dran)
+- Nimm dir Zeit und lies den Titel und die Achsenbeschriftungen.
+- Klicke auf die Hinweise zur Datenquelle und arbeite dich zur konkreten Frage im Fragebogen vor.
+- Nutze die Interpretationshilfe, die wir unter bestimmten Grafiken eingebunden haben. 
 
-2. Daten so aufzubereiten, dass sie verständlich sind, ist nicht immer einfach, gerade wenn man tief im Thema drinsteckt so wie wir Datenanalyst*innen. :) 
-Deshalb: Wenn Grafiken oder Texte trotz aufmerksamen Lesens noch unklar/unverständlich sind, feedbacke uns das gerne über Antonio und wir schauen es uns nochmal an! :handshake:
 
+
+
+::: {.callout-tip } 
+## Tipp
+Achte darauf, dass sich Achsenbeschriftungen ändern können! Prüfe deshalb immer genau, in welcher Einheit etwas abgebildet ist.
+:::
 
 # Verloren auf der Website?
 
-Hier findest du Hilfe zur Struktur und den Bedienelementen dieser Website, wenn du dich noch nicht gut auf dieser Seite zurecht findest.
+Wenn du dich auf dieser Seite noch nicht gut zurechtfindest, findest du hier Hilfe zur Struktur und den Bedienelementen dieser Webseite.
 
- 
-## Struktur der Auswertung
-Die Auswertung bzw. der Report ist in Form einer Website gestaltet. Die Website hat mehrere Unterseiten:
+Die Auswertung bzw. der Report ist in Form einer Webseite gestaltet. Die Webseite hat mehrere Unterseiten:
 
-- [Überblick](/ueberblick.html): diese Seite gibt euch einen ersten deskriptiven/beschreibenden Überblick. Hier findet ihr Zahlen zur Anzahl der Ortsgruppen, Geschlecht- und Altersverteilungen etc.
-- [Kern von TEN SING](themen.html): was macht TEN SING aus? Wie nehmen die TENSINGenden TEN SING wahr? 
-- [Evaluation der PG-Arbeit](wirkung-pg.html): Informationskanäle, ...
-- [TEN SING über die Jahre hinweg](trends.html) 
+- [Überblick](/ueberblick.html): Diese Seite gibt euch einen ersten deskriptiven (beschreibenden) Überblick über das gesamte TEN SING Netzwerk. Hier findet ihr Zahlen zur Anzahl der Ortsgruppen, Geschlechter- und Altersverteilungen etc.
+- Regionen: Auf den Unterseiten zu den einzelnen Regionen bekommt ihr detaillierte Einblicke in die jeweilige Region und die dazugehörenden Ortsgruppen: [Ostwerk](region/ostwerk.qmd), [Nord](region/nord.qmd), [Sachsen](region/sachsen.qmd), [Thüringen](region/thueringen.qmd), [Süden](region/sueden.qmd) und dem [Westbund](region/westbund.qmd).
+- [Themen](themen.html): Was ist der Kern von TEN SING? Auf dieser Unterseite gehen wir dieser Frage nach.
+- [Wirkung PG](wirkung-pg.html): Auf dieser Seite seht ihr alle Antworten zu Fragen, die die Programmgruppe betreffen.
+- [Trends](trends.html): Wie verändert sich das TEN SING Netzwerk über die Jahre? Diese Entwicklung wird auf der Trends-Unterseite dargestellt.
 
-Du kannst über die Menüleiste zwischen den Unterseiten navigieren. 
+Über die Menüleiste kannst du zwischen den Unterseiten navigieren.
 
 ## Grafiken
+Im Report findest du viele Grafiken.
 
-Im Report findest du viele Grafiken. 
+Manche Grafiken sind interaktiv, das heißt, wenn du mit der Maus über sie fährst oder sie auf deinem Smartphone antippst, erscheinen zusätzliche Informationen. 
 
-Manche Grafiken sind **interaktiv**, das heißt wenn du mit der Maus über sie fährst oder sie auf deinem Smartphone antippst, erscheinen zusätzliche Informationen. Bei interaktiven Grafiken findest du oben rechts einen kleinen **Download Button**. Damit kannst du die Grafik als `.png` Datei herunterladen.
+Du kannst die Grafiken als `.png` Datei herunterladen. Dazu findest du bei jeder Grafik oben rechts einen kleinen Download Button. 
+Wir hoffen, dass die Visualisierungen verständlich sind. Bei manchen Grafiken gibt es eine Interpretationshilfe, die du aufklappen kannst. Dort findest du einen Text, der dir beispielhaft zeigt, wie du die Grafik interpretieren kannst.
 
-Wir hoffen, dass die Visualisierungen verständlich sind. Bei manchen Grafiken gibt es eine **Interpretationshilfe**, die du aufklappen kannst. Dort findest du einen Text, der dir beispielhaft zeigt, wie du die Grafik interpretieren kannst.
 
 ::: {.callout-tip collapse="true"} 
 ## Interpretationshilfe
@@ -65,34 +74,34 @@ Hier wird erklärt, wie man die Grafik liest und interpretiert.
 
 Mithilfe von **Tabs** gruppieren wir Grafiken um Platz zu sparen. 
 
-Meistens findest du in den Tabs alternative **Grafiken für die gleiche Frage**:
+Meistens findest du in den Tabs Grafiken mit den Daten aus dem Vorjahr:
 
 ::: {.panel-tabset}
 
-## Grafik zu Frage A
+## 2025
 ```{r beispiel-grafik-a}
-print("hier ist eine Grafik")
+print("hier ist eine Grafik mit den aktuellen Daten")
 ```
 
-## Alternative Grafik zu Frage A
+## 2024
 ```{r beispiel-grafik-a-alt}
-print("hier ist eine Grafik, die Frage A noch einmal anders darstellt")
+print("hier ist eine Grafik mit den Daten aus dem letzten Jahr")
 ```
 
 ::: 
 
-In anderen Fällen fassen die Tabs **Grafiken zu verwandten Fragen** zusammen: 
+In anderen Fällen dienen die Tabs dazu, unterschiedliche Aspekte einer Frage zu visualisieren, also z.B. jeweils eine Grafik für die unterschiedlichen Regionen anzuzeigen.
 
 ::: {.panel-tabset}
 
-## Grafik zu Frage A
+## Grafik für die Region Nord
 ```{r beispiel-grafik-a-tabset}
-print("hier ist eine Grafik zu Frage A")
+print("hier ist eine Grafik für die Region Nord")
 ```
 
-## Grafik zu Frage B
+## Grafik für die Region Ostwerk
 ```{r beispiel-grafik-b}
-print("hier ist eine Grafik zu Frage B")
+print("hier ist eine Grafik für die Region Ostwerk")
 ```
 
 ::: 
@@ -102,58 +111,106 @@ print("hier ist eine Grafik zu Frage B")
 
 ## Hinweise
 
-Warnhinweise sollen dir **Denkanstöße für die Einordnung, Interpretation und Verwendung** der Ergebnisse geben. 
-
-::: {.callout-warning} 
-
-## Für die Einordnung
-
-Hier steht etwas wichtiges zur Einordnung der Ergebnisse.
-
-:::
-
-
-Datenquellen-Hinweise dienen der **Nachvollziehbarkeit** der Analyse für dich. Ihr Inhalt ist erstmal verborgen, aber wenn du sie anklickst, öffnet sich der Hinweis und du erfährst mehr dazu, aus welchen Daten sich die Grafik oder ein Text speist. 
-
-::: {.callout-note collapse="true"} 
-
-## Datenquelle
-
-hier steht etwas dazu aus welcher Frage sich die Analyse/Grafik speist.
-
-:::
-
-In den "Mehr Infos"-Hinweisen findest du **zusätzliche Analysen und Informationen zu den Daten**. Diese sind erst einmal verborgen, um Platz zu sparen, aber wenn du sie anklickst, öffnet sich der Hinweis und du findest z.B. tiefergehende statistische Details. 
-
+Hinweise dienen im Allgemeinen dazu, dir die Navigation durch die Webseite zu erleichtern oder dich dabei zu unterstützen, die aufbereiteten Informationen besser zu verstehen. Ihr Inhalt ist manchmal erstmal verborgen, wenn du sie aber anklickst, öffnet sich der Hinweis und du erfährst mehr.
 
 ::: {.callout-tip collapse="true"} 
 
-## Mehr Infos
+## Klicken zum Öffnen!
 
-Hier stehen weitere Zahlen oder Listen. 
+Eine nützliche Information.
 
 :::
 
-Wir verwenden den gleichen Hinweis auch um dir **Hinweise zur Bedienung** zu geben:
+Mit einem 💡-Symbol gekennzeichnet sind **Tipps**, die dir helfen sollen, Grafiken leichter zu interpretieren, oder dich auf bestimmte Funktionalitäten in der Interaktion mit den Darstellungen und der Webseite im Allgemeinen hinweisen und dir helfen, diese zu entdecken.
 
 ::: {.callout-tip} 
 
-## Hinweis zur Bedienung
+## Tipp
 
-Du kannst die ...
+Hier steht ein Tipp zur Bedienung.
 
 :::
+
+Wie bereits oben erklärt, haben wir für manche Grafiken **Interpretationshilfen** geschrieben. Auch diese sind mit dem 💡-Symbol gekennzeichnet:
+
+
+::: {.callout-tip collapse="true"} 
+## Interpretationshilfe
+
+Hier wird erklärt, wie man die Grafik liest und interpretiert. 
+::: 
+
+
+Mit einem ℹ️-Symbol gekennzeichnet, sind Hinweise, die weiterführende Informationen enthalten. Das sind z.B. Quellenangaben oder Erklärungen, wieso etwas auf eine bestimmte Art gemacht wurde. Mit einem ℹ️-Symbol sind die folgenden Hinweise gekennzeichnet: 
+
+Hinweise zu **Datenquellen** dienen dazu, dass du die Analysen nachvollziehen kannst, indem du erfährst, aus welchen Daten sich die Grafik oder ein Text speist.
+
+::: {.callout-note collapse="true"} 
+
+## Datenquellen
+
+Hier findest du mehr Infos dazu, woher die Daten stammen, die für eine Grafik, Analyse oder die Ermittlung einer Information genutzt wurden. Konkret heißt das z.B., dass alle relevanten Fragen aus dem Fragebogen aufgelistet werden oder erklärt wird, wie eine Berechnung gemacht wurde.
+
+:::
+
+**Infos** geben dir weiterführende Einblicke in Begriffe der Statistik oder bestimmte Vorgehensweisen. Die zusätzlichen Informationen sollen dir helfen, ein umfassenderes Verständnis für die Analysen zu bekommen, sind aber nicht unbedingt notwendig, um ein erstes Verständnis zu erhalten.
+
+::: {.callout-note collapse="true"} 
+
+## Info
+
+Hier findest du weiterführende Informationen.
+
+:::
+
+**Erklärungen** helfen dir zu verstehen, wie bei der Erstellung bestimmter Grafiken vorgegangen wurde und schaffen ein gemeinsames Verständnis von Begrifflichkeiten, die verwendet werden.
+
+
+::: {.callout-note collapse="true"} 
+
+## Erklärung
+
+Hier findest du Erklärungen zu Begrifflichkeiten aus den Grafiken und zum Vorgehen.
+
+:::
+
+
+Mit einem ⚠️-Symbol gekennzeichnet sind **Warnungen**, die dich darauf hinweisen, wenn z.B. die Interpretation der Ergebnisse nur eingeschränkt möglich ist. 
+
+::: {.callout-warning} 
+
+## Warnung!
+
+Hier steht etwas Wichtiges zur Einordnung der Ergebnisse.
+
+:::
+
 
 
 ## Fußnoten
 
-Neben den Datenquellen-Hinweisen verwenden wir auch Fußnoten, um die Nachvollziehbarkeit zu gewährleisten. Das machen wir vor allem bei Zahlen, die im Fließtext auftauchen.
+Neben den Datenquellen-Hinweisen verwenden wir auch Fußnoten, um die Nachvollziehbarkeit zu gewährleisten. 
 
-Zum Beispiel: Durchschnittlich hat eine Ortsgruppe `{r} mean(og_data$anzahl_tn, na.rm = TRUE) %>% round(2)`^[Mittelwert von `{r} fmt_q(og_cfg$Q_ANZAHL_TN)` unter `{r} fmt_source(og_cfg$Q_ANZAHL_BEGIN, type = "og", curr$cfg$og_cfg$URL)`] Teilnehmer*innen. 
+Eine Fußnote wird durch eine kleine hochgestellte Zahl gekennzeichnet, wie zum Beispiel am Ende dieses Satzes.<sup>1</sup>
 
+Du findest die Erklärung der Fußnote in der Regel in der nächsten Hinweis-Box:
 
-## Accessibility
+::: {.callout-note collapse="true"} 
 
-Gerade befindet sich diese Website in einer Prototyp-Phase. Deshalb konnten wir leider noch nicht daran arbeiten, sicherzustellen, dass die Website zugänglich für alle ist. Das wird bald nachgeholt und dann findest du hier mehr Hinweise zur Accessibility. 
- 
+## Erklärung
 
+<sup>1</sup> Hier steht die Erklärung zur Fußnote.
+
+:::
+
+# Glossar
+Ein Glossar ist ein Ort, an dem Begriffe erklärt werden, die in einem bestimmten Kontext wichtig sind. An dieser Stelle sammeln wir deshalb Begrifflichkeiten, zu denen es wichtig ist, dass wir ein gemeinsames Verständnis haben.
+
+#### Teilnehmende
+Teilnehmende sind alle, die sich in den Ortsgruppen engagieren und an TEN SING Veranstaltungen teilnehmen, und dabei keine Verantwortungsfunktion übernehmen.
+
+#### Mitarbeitende
+Mitarbeitende sind alle hauptamtlichen Mitarbeiter*innen in den Ortsgruppen und Ehrenamtlichen, die eine Verantwortungsfunktion übernehmen.
+
+#### Aktive
+Die Aktiven sind alle Teilnehmenden und Mitarbeitenden zusammen.
