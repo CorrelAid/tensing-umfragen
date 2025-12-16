@@ -124,19 +124,19 @@ create_region_stats_table_default <- function(region_overview){
     region_overview |> 
       dplyr::select(og_name, hat_hauptamt, dplyr::starts_with("anzahl"), auftritte, hat_probleme_tn_gewinnung, avg_alter),
     columns = list(
-      og_name = colDef(name = "Ortsgruppe", footer = "Summe", show = TRUE),
+      og_name = colDef(name = "Orts-<br>gruppe", footer = "Summe / <br> Gesamt", show = TRUE, html = TRUE),
       hat_hauptamt = colDef(name = "Hauptamt", footer = function(values) sprintf("%d", length(drop_na_ka(values[values == "Ja"]))), show = TRUE),
       anzahl_insg = colDef(name = "Aktive", footer = function(values) sprintf("%d", sum(values, na.rm = TRUE)), show = TRUE),
       anzahl_tn = colDef(name = "Teiln.", footer = function(values) sprintf("%d", sum(values, na.rm = TRUE)), show = TRUE),
       anzahl_ma_leitung = colDef(name = "Mitarb.", footer = function(values) sprintf("%d", sum(values, na.rm = TRUE)), show = TRUE),
       auftritte = colDef(name = "Auftritte", footer = function(values) sprintf("%d", sum(drop_na_ka(values))), show = TRUE),
       avg_alter = colDef(
-        name = "Durchschnittsalter*",
+        name = "Durch-<br>schnitts-<br>alter*",
         footer = function(values) {
           if (is.na(weighted_avg)) return("–")
           sprintf("%d", round(weighted_avg))
         },
-        show = TRUE
+        show = TRUE, html = TRUE
       )
     ),
     defaultColDef = colDef(footerStyle = list(fontWeight = "bold"), show = FALSE)
@@ -192,7 +192,7 @@ create_region_stats_table_westbund <- function(region_overview) {
     og_region_agg,
     columns = list(
       og_region = reactable::colDef(name = "Region", minWidth = 140, maxWidth = 150),
-      n_og = reactable::colDef(name = "Ortsgruppen", footer = function(values) total_og, minWidth = 110, maxWidth = 120),
+      n_og = reactable::colDef(name = "Ortsgruppen", footer = function(values) total_og, minWidth = 110, maxWidth = 120, html = TRUE),
       anzahl_insg = reactable::colDef(name = "Aktive", footer = function(values) total_aktive, minWidth = 65, maxWidth = 120),
       anzahl_tn = reactable::colDef(name = "Teiln.", footer = function(values) total_tn, minWidth = 60, maxWidth = 120),
       anzahl_ma_leitung = reactable::colDef(name = "Mitarb.", footer = function(values) total_ma, minWidth = 70, maxWidth = 120),
@@ -201,7 +201,7 @@ create_region_stats_table_westbund <- function(region_overview) {
         name   = "Durchschnittsalter*",
         format = reactable::colFormat(digits = 0),
         footer = function(values) sprintf("%d", round(overall_avg)),
-        minWidth = 160, maxWidth = 165
+        minWidth = 160, maxWidth = 165, html = TRUE
       )
     ),
     defaultColDef = reactable::colDef(
