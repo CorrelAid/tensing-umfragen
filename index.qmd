@@ -53,7 +53,7 @@ woerter %>%
 ```
 
 ::: {.callout-note collapse="true"}
-## Datenquelle
+## Datenquellen
 - Die Visualisierung basiert auf den Antworten zur Frage: `{r} fmt_source(tn_cfg$Q_BEGIN_WORT, "tn", curr$cfg$tn$URL)`
 - Insgesamt haben `{r} length(unique(woerter$tn_id))` Personen diese Frage beantwortet.
 

@@ -29,14 +29,20 @@ aussage_bar_chart <- function(data_long, var_filter, var_value) {
   plot_data <- data_long %>%
     dplyr::filter(.data[[var_filter]] == var_value, !is.na(value)) %>%
     dplyr::group_by(aussage, q_label, value, ch_label) %>%
-    dplyr::summarize(n = n(),percent = n / length(unique(data_long$tn_id)))
+    dplyr::summarize(n = n(), percent = n / length(unique(data_long$tn_id)))
 
   title <- unique(plot_data$q_label)
 
   p <- ggplot(plot_data, aes(x = value, fill = value, y = percent)) +
     ggiraph::geom_col_interactive(
       aes(
-        tooltip = paste0(ch_label, " (", value, ")\n", scales::percent(percent, accuracy = 0.1)),
+        tooltip = paste0(
+          ch_label,
+          " (",
+          value,
+          ")\n",
+          scales::percent(percent, accuracy = 0.1)
+        ),
         data_id = paste(aussage, value, sep = "-")
       )
     ) +
@@ -77,12 +83,15 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
     plot_data$choice_label,
     levels = rev(levels(plot_data$choice_label))
   )
-  
+
   lvls <- levels(plot_data$choice_label)
   end_levels <- lvls[c(1, length(lvls))]
 
   # add zero-percent rows for missing end levels so they still get colours in the legend
-  missing_end_levels <- setdiff(end_levels, as.character(plot_data$choice_label))
+  missing_end_levels <- setdiff(
+    end_levels,
+    as.character(plot_data$choice_label)
+  )
   if (length(missing_end_levels) > 0) {
     extra_rows <- tibble::tibble(
       percent = 0,
@@ -119,7 +128,7 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
     #   )
     # ) +
     scale_fill_manual(
-      name   = "",
+      name = "",
       values = colors,
       breaks = end_levels,
       labels = legend_labels,
@@ -176,48 +185,59 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
 }
 
 .ts_theme <- function() {
-      base <- if (exists("theme_ts", inherits = TRUE)) theme_ts else theme_minimal()
-      base + ggplot2::theme(
-        legend.position   = "bottom",
-        legend.text       = ggplot2::element_text(size = 9),
-        legend.key.width  = grid::unit(10, "pt"),
-        legend.key.height = grid::unit(10, "pt"),
-        legend.spacing.x  = grid::unit(6, "pt"),
-        legend.box.margin = ggplot2::margin(t = 4, r = 0, b = 0, l = 0),
-        panel.ontop = FALSE,
-        panel.grid.minor.y = ggplot2::element_blank(),
-        panel.grid.major.y = ggplot2::element_blank()
-      )
-    }
+  base <- if (exists("theme_ts", inherits = TRUE)) theme_ts else theme_minimal()
+  base +
+    ggplot2::theme(
+      legend.position = "bottom",
+      legend.text = ggplot2::element_text(size = 9),
+      legend.key.width = grid::unit(10, "pt"),
+      legend.key.height = grid::unit(10, "pt"),
+      legend.spacing.x = grid::unit(6, "pt"),
+      legend.box.margin = ggplot2::margin(t = 4, r = 0, b = 0, l = 0),
+      panel.ontop = FALSE,
+      panel.grid.minor.y = ggplot2::element_blank(),
+      panel.grid.major.y = ggplot2::element_blank()
+    )
+}
 
 # bar chart variants: "single", "stacked", "grouped"
-.year_bar_chart_core <- function(data,
-                                 year_col,
-                                 value_col,
-                                 fill_col = NULL,
-                                 variant = c("single", "stacked", "grouped"),
-                                 x_label = "Jahr",
-                                 y_label = "Anzahl",
-                                 title = NULL,
-                                 tooltip_col = NULL,
-                                 data_id_col = NULL,
-                                 palette = NULL,
-                                 legend = TRUE,
-                                 dodge_width = 0.6,
-                                 bar_width = 0.5,
-                                 stack_reverse = FALSE) {
+.year_bar_chart_core <- function(
+  data,
+  year_col,
+  value_col,
+  fill_col = NULL,
+  variant = c("single", "stacked", "grouped"),
+  x_label = "Jahr",
+  y_label = "Anzahl",
+  title = NULL,
+  tooltip_col = NULL,
+  data_id_col = NULL,
+  palette = NULL,
+  legend = TRUE,
+  dodge_width = 0.6,
+  bar_width = 0.5,
+  stack_reverse = FALSE,
+  y_max = NULL
+) {
   variant <- match.arg(variant)
 
   need <- c(year_col, value_col)
-  if (!is.null(fill_col)) need <- c(need, fill_col)
+  if (!is.null(fill_col)) {
+    need <- c(need, fill_col)
+  }
   .ts_assert_cols(data, need)
 
   df <- data |>
     dplyr::mutate(
       year_factor = .ts_factor_year(.data[[year_col]]),
-      fill_factor = if (is.null(fill_col)) NULL else {
-        if (is.factor(.data[[fill_col]])) .data[[fill_col]]
-        else factor(.data[[fill_col]])
+      fill_factor = if (is.null(fill_col)) {
+        NULL
+      } else {
+        if (is.factor(.data[[fill_col]])) {
+          .data[[fill_col]]
+        } else {
+          factor(.data[[fill_col]])
+        }
       },
       tooltip_value = if (is.null(tooltip_col)) {
         scales::comma(.data[[value_col]])
@@ -225,8 +245,11 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
         as.character(.data[[tooltip_col]])
       },
       data_id_value = if (is.null(data_id_col)) {
-        if (is.null(fill_col)) as.character(year_factor)
-        else paste(year_factor, fill_factor, sep = "-")
+        if (is.null(fill_col)) {
+          as.character(year_factor)
+        } else {
+          paste(year_factor, fill_factor, sep = "-")
+        }
       } else {
         as.character(.data[[data_id_col]])
       }
@@ -234,12 +257,15 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
 
   if (!is.null(fill_col)) {
     df <- tidyr::complete(
-      df, year_factor, fill_factor,
+      df,
+      year_factor,
+      fill_factor,
       fill = stats::setNames(list(0), value_col)
     )
   } else {
     df <- tidyr::complete(
-      df, year_factor,
+      df,
+      year_factor,
       fill = stats::setNames(list(0), value_col)
     )
   }
@@ -249,12 +275,13 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
       dplyr::group_by(year_factor) %>%
       dplyr::mutate(
         .ord = dplyr::min_rank(.data[[value_col]]) +
-               1e-9 * as.integer(fill_factor)
+          1e-9 * as.integer(fill_factor)
       ) %>%
       dplyr::ungroup()
   }
 
-  if (variant == "single") { #single bar
+  if (variant == "single") {
+    #single bar
     fill_levels <- levels(df$year_factor)
     fill_map <- .ts_palette_named(fill_levels, palette)
     fill_aes <- ggplot2::aes(fill = year_factor)
@@ -263,21 +290,26 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
       guide = "none"
     )
     geom <- ggiraph::geom_col_interactive(width = 0.6)
-  } else if (variant == "stacked") { # stacked bars
+  } else if (variant == "stacked") {
+    # stacked bars
     fill_levels <- levels(df$fill_factor)
     fill_map <- .ts_palette_named(fill_levels, palette)
     fill_aes <- ggplot2::aes(fill = fill_factor, group = fill_factor)
     fill_scale <- ggplot2::scale_fill_manual(
       values = fill_map,
-      guide = if (legend) ggplot2::guide_legend(title = NULL, nrow = 4, byrow = TRUE) else "none"
+      guide = if (legend) {
+        ggplot2::guide_legend(title = NULL, nrow = 4, byrow = TRUE)
+      } else {
+        "none"
+      }
     )
     geom <- ggiraph::geom_col_interactive(
-      mapping  = ggplot2::aes(order = if (stack_reverse) .ord else - .ord),
-      width    = 0.6,
+      mapping = ggplot2::aes(order = if (stack_reverse) .ord else -.ord),
+      width = 0.6,
       position = ggplot2::position_stack(reverse = stack_reverse)
     )
-
-  } else { # grouped bars
+  } else {
+    # grouped bars
     fill_levels <- levels(df$fill_factor)
     fill_map <- .ts_palette_named(fill_levels, palette)
     fill_aes <- ggplot2::aes(fill = fill_factor)
@@ -291,6 +323,18 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
     )
   }
 
+  # scale_y
+  if (!is.null(y_max)) {
+    y_scale <- ggplot2::scale_y_continuous(
+      labels = scales::comma,
+      limits = c(0, y_max)
+    )
+  } else {
+    y_scale <- ggplot2::scale_y_continuous(
+      labels = scales::comma,
+      expand = ggplot2::expansion(mult = c(0, 0.08))
+    )
+  }
   p <- ggplot2::ggplot(
     df,
     ggplot2::aes(
@@ -303,10 +347,7 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
     geom +
     fill_aes +
     fill_scale +
-    ggplot2::scale_y_continuous(
-      labels = scales::comma,
-      expand = ggplot2::expansion(mult = c(0, 0.08))
-    ) +
+    y_scale +
     ggplot2::labs(x = x_label, y = y_label, title = title) +
     .ts_theme() +
     ggplot2::theme(
@@ -324,15 +365,18 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
 
 # ---- year bar chart variant wrappers ----
 
-year_bar_chart <- function(data,
-                           year_col = "year",
-                           value_col = "value",
-                           x_label = "Jahr",
-                           y_label = "Anzahl",
-                           title = NULL,
-                           tooltip_col = NULL,
-                           data_id_col = NULL,
-                           palette = NULL) {
+year_bar_chart <- function(
+  data,
+  year_col = "year",
+  value_col = "value",
+  x_label = "Jahr",
+  y_label = "Anzahl",
+  title = NULL,
+  tooltip_col = NULL,
+  data_id_col = NULL,
+  palette = NULL,
+  y_max = NULL
+) {
   .year_bar_chart_core(
     data = data,
     year_col = year_col,
@@ -344,22 +388,26 @@ year_bar_chart <- function(data,
     title = title,
     tooltip_col = tooltip_col,
     data_id_col = data_id_col,
-    palette = palette
+    palette = palette,
+    y_max = y_max
   )
 }
 
-year_bar_chart_stacked <- function(data,
-                                   year_col = "year",
-                                   value_col = "value",
-                                   stack_col,
-                                   x_label = "Jahr",
-                                   y_label = "Anzahl",
-                                   title = NULL,
-                                   tooltip_col = NULL,
-                                   data_id_col = NULL,
-                                   palette = NULL,
-                                   legend = TRUE,
-                                   stack_reverse = FALSE) {
+year_bar_chart_stacked <- function(
+  data,
+  year_col = "year",
+  value_col = "value",
+  stack_col,
+  x_label = "Jahr",
+  y_label = "Anzahl",
+  title = NULL,
+  tooltip_col = NULL,
+  data_id_col = NULL,
+  palette = NULL,
+  legend = TRUE,
+  stack_reverse = FALSE,
+  y_max = NULL
+) {
   .year_bar_chart_core(
     data = data,
     year_col = year_col,
@@ -373,23 +421,27 @@ year_bar_chart_stacked <- function(data,
     data_id_col = data_id_col,
     palette = palette,
     legend = legend,
-    stack_reverse = stack_reverse
+    stack_reverse = stack_reverse,
+    y_max = y_max
   )
 }
 
-year_bar_chart_grouped <- function(data,
-                                   year_col = "year",
-                                   value_col = "value",
-                                   group_col,
-                                   x_label = "Jahr",
-                                   y_label = "Anzahl",
-                                   title = NULL,
-                                   tooltip_col = NULL,
-                                   data_id_col = NULL,
-                                   palette = NULL,
-                                   legend = TRUE,
-                                   dodge_width = 0.6,
-                                   bar_width = 0.5) {
+year_bar_chart_grouped <- function(
+  data,
+  year_col = "year",
+  value_col = "value",
+  group_col,
+  x_label = "Jahr",
+  y_label = "Anzahl",
+  title = NULL,
+  tooltip_col = NULL,
+  data_id_col = NULL,
+  palette = NULL,
+  legend = TRUE,
+  dodge_width = 0.6,
+  bar_width = 0.5,
+  y_max = NULL
+) {
   .year_bar_chart_core(
     data = data,
     year_col = year_col,
@@ -404,6 +456,7 @@ year_bar_chart_grouped <- function(data,
     palette = palette,
     legend = legend,
     dodge_width = dodge_width,
-    bar_width = bar_width
+    bar_width = bar_width,
+    y_max = y_max
   )
 }

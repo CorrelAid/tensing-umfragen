@@ -76,7 +76,7 @@ get_pie_chart_data <- function(data, col) {
       perc = round(n * 100 / nrow(data), 1),
       pos = n / 2 + lead(csum, 1),
       pos = if_else(is.na(pos), n / 2, pos)
-  )
+    )
 }
 
 # Creates a Year Comparison Tabset in Quarto
@@ -112,19 +112,21 @@ render_year_tabset <- function(curr_data, prev_data = NULL, render_fn) {
 #'      attached to the HTML output.
 render_widget_output <- function(widget) {
   deps <- htmltools::findDependencies(widget)
-  if (length(deps) > 0 &&
+  if (
+    length(deps) > 0 &&
       isTRUE(getOption("knitr.in.progress")) &&
-      requireNamespace("knitr", quietly = TRUE)) {
+      requireNamespace("knitr", quietly = TRUE)
+  ) {
     knitr::knit_meta_add(deps)
   }
   print(htmltools::tagList(widget))
 }
 
-#' Build a "Datenquelle" callout dropdown indicating which questions of TN/ OG survey where used. 
+#' Build a "Datenquelle" callout dropdown indicating which questions of TN/ OG survey where used.
 #' @param cfg List containing `tn_cfg` and `og_cfg` (This is created in load_year()); each is the survey config
-#'   with question objects keyed by name and a `URL` entry for the questionnaire. 
+#'   with question objects keyed by name and a `URL` entry for the questionnaire.
 #' @param og_q Optional character vector of OG questions, eg. c("Q_WORKSHOPS") as defined in og_conifg.
-#'   If variables contains several questions eg. "QS_EIGENSCHAFTEN", all questions are listed seperately. 
+#'   If variables contains several questions eg. "QS_EIGENSCHAFTEN", all questions are listed seperately.
 #' @param tn_q Optional character vector of TN questions as defined in TN_config,
 #'   handled the same way as `og_q`.
 #' @param extra Optional character string of additional markdown to append inside
@@ -175,7 +177,7 @@ callout_datenquellen <- function(cfg, og_q = NULL, tn_q = NULL, extra = NULL) {
   paste0(
     "\n\n",
     "::: {.callout-note collapse=\"true\"}\n",
-    "## Datenquelle\n\n",
+    "## Datenquelle(n)\n\n",
     tn_block,
     og_block,
     extra_block,
@@ -183,4 +185,3 @@ callout_datenquellen <- function(cfg, og_q = NULL, tn_q = NULL, extra = NULL) {
     "\n\n"
   )
 }
-

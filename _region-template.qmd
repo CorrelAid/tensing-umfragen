@@ -380,7 +380,7 @@ render_year_tabset(
 
 ::: {.callout-note collapse="true"}
 
-## Datenquelle
+## Datenquelle(n)
 
 ⚠️ Durchschnittsalter: 
 
