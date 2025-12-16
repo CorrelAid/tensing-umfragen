@@ -633,13 +633,17 @@ plot_agg_angebot <- function(angebote_agg) {
     angebote_agg,
     aes(y = angebot, x = percent)
   ) +
-    geom_col(fill = TS_GREEN) +
+    ggiraph::geom_col_interactive(
+      aes(tooltip = paste0(angebot, "\n", round(percent * 100, 2), "%")),
+      fill = TS_GREEN
+    ) +
     scale_y_discrete(limits = rev) +  
     scale_x_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
     labs(
       y = NULL,
       x = "% der Teilnehmenden",
-      title = region_title
+      title = region_title,
+      caption = "% summieren nicht zu 100, da Mehrfachauswahl möglich."
     )
 
   ggiraph::girafe(
@@ -825,7 +829,7 @@ plot_zugang_prob <- function(zugang_prop) {
     labs(
       y = NULL,
       x = "% der Teilnehmenden",
-      caption = "% summieren nicht zu 100, da Mehrfachauswahl möglich.\n",
+      caption = "% summieren nicht zu 100, da Mehrfachauswahl möglich.",
       title = title
     )
 
