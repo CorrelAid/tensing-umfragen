@@ -93,25 +93,34 @@ knitr::include_graphics(logo_path)
 
 Auf dieser Seite werden euch Ergebnisse der Befragung angezeigt, die die TEN SING Region `{r} params$region` betreffen.
 
-Im Folgenden seht ihr eine Übersicht über die einzelnen Ortsgruppen der Region `{r} params$region`.
-Laut Teilnehmer*innen-Fragebogen gibt es `{r} og_nach_tn` Ortsgruppe(n).<sup>1</sup> Davon haben wir `{r} og_nach_og` über den Ortsgruppen Fragebogen erreicht.<sup>2</sup> 
+```{r}
+#| results: asis
+if (og_nach_tn >= og_nach_og) {
+   s <- sprintf("
+  Im Folgenden seht ihr eine Übersicht über die einzelnen Ortsgruppen der Region %s. Laut Teilnehmer*innen-Fragebogen gibt es %i Ortsgruppe(n).<sup>1</sup> Für %i Ortsgruppen wurde der Ortsgruppen-Fragebogen ausgefüllt.<sup>2</sup>", params$region, og_nach_tn, og_nach_og)
+} else {
+  s <- sprintf("
+  Im Folgenden seht ihr eine Übersicht über die einzelnen Ortsgruppen der Region %s. Für %i Ortsgruppen wurde der Ortsgruppen-Fragebogen ausgefüllt.<sup>2</sup> Aus %i Ortsgruppen haben TEN SINGende den Teilnehmer*innen-Fragebogen beantwortet.<sup>1</sup>", params$region, og_nach_og, og_nach_tn)
+}
+
+if (og_nach_og == 0) {
+  s <- paste(s, "Deshalb können einige Grafiken leider nicht angezeigt werden, da die Daten fehlen.")
+}
+cat(s, sep = "\n")
+```
+
+
+::: {.callout-note collapse="true"}
+## Datenquellen
+
+<sup>1</sup> Anzahl unterschiedlicher Angaben auf die Frage `{r} fmt_q(curr$cfg$tn_cfg$Q_OG_NAME)` im `{r} fmt_fragebogen("tn", url=curr$cfg$tn_cfg$URL)`, die in die Region `r params$region` fallen.
+
+<sup>2</sup> Anzahl Ortsgruppen, die bei der Frage `{r} fmt_q(curr$cfg$og_cfg$Q_OG_REGION)` im `{r} fmt_fragebogen("og", url=curr$cfg$og_cfg$URL)` "`r params$region`" angegeben haben.
+:::
 
 Aufgelistet sind die Anzahl der aktiven TEN SINGer*innen pro Ortsgruppe, ihr Durchschnittsalter sowie die Anzahl der Auftritte pro Jahr.
 
 
-::: {.callout-note collapse="false"}
-
-## Erklärung
-
-- **Teilnehmende** sind alle, die sich in den Ortsgruppen engagieren und an TEN SING Veranstaltungen teilnehmen, und dabei keine offizielle Leitungsfunktion übernehmen.
-
-- **Mitarbeitende** sind alle hauptamtlichen Mitarbeiter*innen in den Ortsgruppen und Ehrenamtlichen, die eine Verantwortungsfunktion übernehmen.
-
-- Zusätzlich gibt die Spalte **“Hauptamt”** an, ob eine Ortsgruppe hauptamtliche Mitarbeitende hat.
-
-- Die **Aktiven** sind alle Teilnehmenden und Mitarbeitenden zusammen.
-
-:::
 
 ```{r region-table-functions}
 create_region_stats_table_default <- function(region_overview){
@@ -352,6 +361,22 @@ render_year_tabset(
   render_fn = render_region_overview
 )
 ```
+
+
+::: {.callout-note collapse="false"}
+
+## Erklärung
+
+- **Teilnehmende** sind alle, die sich in den Ortsgruppen engagieren und an TEN SING Veranstaltungen teilnehmen, und dabei keine offizielle Leitungsfunktion übernehmen.
+
+- **Mitarbeitende** sind alle hauptamtlichen Mitarbeiter*innen in den Ortsgruppen und Ehrenamtlichen, die eine Verantwortungsfunktion übernehmen.
+
+- Zusätzlich gibt die Spalte **“Hauptamt”** an, ob eine Ortsgruppe hauptamtliche Mitarbeitende hat.
+
+- Die **Aktiven** sind alle Teilnehmenden und Mitarbeitenden zusammen.
+
+:::
+
 
 ::: {.callout-note collapse="true"}
 
