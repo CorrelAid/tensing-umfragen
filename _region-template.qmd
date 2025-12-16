@@ -380,7 +380,7 @@ render_year_tabset(
 
 ::: {.callout-note collapse="true"}
 
-## Datenquelle
+## Datenquellen
 
 ⚠️ Durchschnittsalter: 
 
@@ -648,11 +648,9 @@ plot_agg_angebot <- function(angebote_agg) {
   region_title <- NULL
   reg <- unique(angebote_agg$og_region)
   reg <- reg[!is.na(reg)]
-  if (length(reg) == 1) {
-    region_title <- paste0("An welchen Angeboten nehmen TEN SINGende teil? – ", reg)
-  } else {
-    region_title <- "An welchen Angeboten nehmen TEN SINGende teil?"
-  }
+
+  region_title <- "An welchen Angeboten nehmen TEN SINGende teil?"
+  region_subtitle <- if (length(reg) == 1) reg else NULL;
 
   p_ang_tn <- ggplot(
     angebote_agg,
@@ -668,8 +666,11 @@ plot_agg_angebot <- function(angebote_agg) {
       y = NULL,
       x = "% der Teilnehmenden",
       title = region_title,
+      subtitle = region_subtitle,
       caption = "% summieren nicht zu 100, da Mehrfachauswahl möglich."
-    )
+    ) + 
+    theme(plot.subtitle = element_text(hjust = 0.5))
+
 
   ggiraph::girafe(
     ggobj = p_ang_tn,
@@ -700,6 +701,16 @@ angebote_agg_tabs$prev <- if (has_previous_year) {
   NULL
 }
 
+
+render_ihilfe <- function (data) {
+  cat("::: {.callout-tip}\n\n")
+  print(data)
+  s <- "Insgesamt `{r} angebot_anz_ges` Personen haben im Jahr `{r} current_year` eine Antwort auf diese Frage gegeben. `{r} angebot_anz_theater` Personen gaben an, dass sie gerne am Theaterworkshop/Theaterangebot teilnehmen. `{r} angebot_anz_theater` von `{r} angebot_anz_ges` Personen entspricht `{r} angebot_perc_theater`% Prozent. Diesen Wert seht ihr im oberen Schaubild visualisiert. Da eine Mehrfachauswahl möglich war, summieren sich die Werte auf mehr als 100%."
+  cat("## Hallo\n\n")
+  cat(s, sep = "\n")
+  cat(":::\n")
+}
+
 render_angebote_agg_plot <- function(tab_data) {
   angebote_agg <- tab_data$data
   regions <- sort(unique(angebote_agg$og_region[!is.na(angebote_agg$og_region)]))
@@ -718,28 +729,47 @@ render_angebote_agg_plot <- function(tab_data) {
     render_widget_output(
       plot_agg_angebot(region_data)
     )
+    render_ihilfe(region_data)
     cat("\n\n")
   }
   cat(":::\n")
 }
 
+
 render_year_tabset(
   curr_data = angebote_agg_tabs$curr,
   prev_data = angebote_agg_tabs$prev,
-  render_fn = render_angebote_agg_plot
+  render_fn = render_angebote_agg_plot,
+  render_callout = render_ihilfe
 )
-angebot_anz_ges<-length(unique(curr$tn$long$angebote_vor_ort$tn_id))
-angebot_anz_theater <- curr$tn$long$angebote_vor_ort %>%
-  filter(angebot == "Theater") %>%
-  pull(tn_id) %>%
-  n_distinct()
-angebot_perc_theater=round(100*angebot_anz_theater/angebot_anz_ges,2)
 ```
 
+
+```{r}
+if (is_westbund) {
+  angebot_anz_ges <- length(unique(curr$tn$long$angebote_vor_ort$tn_id))
+  angebot_anz_theater <- curr$tn$long$angebote_vor_ort %>%
+    filter(angebot == "Theater") %>%
+    pull(tn_id) %>%
+    n_distinct()
+  angebot_perc_theater = round(100 * angebot_anz_theater / angebot_anz_ges, 2)
+} else {
+  angebot_anz_ges <- length(unique(curr$tn$long$angebote_vor_ort$tn_id))
+  angebot_anz_theater <- curr$tn$long$angebote_vor_ort %>%
+    filter(angebot == "Theater") %>%
+    pull(tn_id) %>%
+    n_distinct()
+  angebot_perc_theater = round(100 * angebot_anz_theater / angebot_anz_ges, 2)
+}
+```
 :::{.callout-tip collapse="false"}
 
+```{r}
+curr$tn$long$angebote_vor_ort
+```
+
 ## Interpretationshilfe
-Insgesamt `{r} angebot_anz_ges` Personen haben im Jahr `{r} current_year` eine Antwort auf diese Frage gegeben. `{r} angebot_anz_theater` Personen gaben wiederum an, dass sie gerne am Theaterworkshop/Theaterangebot teilnehmen. `{r} angebot_anz_theater` von `{r} angebot_anz_ges` Personen entspricht `{r} angebot_perc_theater`% Prozent. Diesen Wert seht ihr im oberen Schaubild visualisiert. Da eine Mehrfachauswahl möglich war, summieren sich die Werte auf mehr als 100%.
+Insgesamt `{r} angebot_anz_ges` Personen haben im Jahr `{r} current_year` eine Antwort auf diese Frage gegeben. `{r} angebot_anz_theater` Personen gaben an, dass sie gerne am Theaterworkshop/Theaterangebot teilnehmen. `{r} angebot_anz_theater` von `{r} angebot_anz_ges` Personen entspricht `{r} angebot_perc_theater`% Prozent. Diesen Wert seht ihr im oberen Schaubild visualisiert. Da eine Mehrfachauswahl möglich war, summieren sich die Werte auf mehr als 100%.
 
 :::
 
