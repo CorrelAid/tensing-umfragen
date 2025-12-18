@@ -23,7 +23,7 @@ tn_cfg <- curr$cfg$tn_cfg
 Daten zu verstehen, ist nicht immer einfach! Daten so aufzubereiten, dass sie verständlich sind, ist aber auch nicht immer einfach, gerade wenn man tief im Thema drinsteckt, so wie wir Datenanalyst*innen. :) Deshalb haben wir auf dieser Seite Ressourcen zusammengetragen, die dich dabei unterstützen sollen, die Datenanalysen zu lesen und zu verstehen.
 
 Wenn Grafiken oder Texte aber trotz aufmerksamen Lesens noch unklar oder unverständlich sind, gib uns gerne Feedback und wir schauen es uns nochmal an! 🤝 Auch wenn du über technische oder visuelle Hürden stolpern solltest, melde dich gerne bei uns.
-Entweder du kontaktierst dafür die Programmgruppe ([tensing@cvjm.de](mailto:tensing@cvjm.de)) oder CorrelAid (mailto:info@correlaid.org). Wir freuen uns auf dein Feedback!
+Entweder du kontaktierst dafür die Programmgruppe ([tensing@cvjm.de](mailto:tensing@cvjm.de)) oder CorrelAid ([info@correlaid.org](mailto:info@correlaid.org)). Wir freuen uns auf dein Feedback!
 
 
 # Verwirrt von den Auswertungen?
