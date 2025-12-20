@@ -20,14 +20,13 @@ og_cfg <- curr$cfg$og_cfg
 tn_cfg <- curr$cfg$tn_cfg
 ```
 
-```{r display-logo, out.width='250px', fig.align='center'}
-
-logo_path <- file.path("logos/tensing.png")
-
-if (file.exists(logo_path)) {
-  knitr::include_graphics(logo_path)
-}
-
+```{r display-logo, results='asis'}
+cat('
+<div style="display:flex; justify-content:center; align-items:center; gap:16px;">
+  <img src="logos/tensing.png" style="height:150px; width:auto;">
+  <img src="logos/ecics_81_94.png" style="height:150px; width:auto;">
+</div>
+')
 ```
 
 ```{r welcome-title}
