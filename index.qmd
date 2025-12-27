@@ -47,7 +47,7 @@ woerter %>%
   rename(word = wort) %>% 
   count(word, name = "freq") %>% 
   filter(freq > 4) %>% 
-  wordcloud2::wordcloud2(color = colorVec, shape = "square")
+  wordcloud2::wordcloud2(color = colorVec, size=0.4,shape = "square")
 
 ```
 
