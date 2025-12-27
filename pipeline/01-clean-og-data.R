@@ -34,6 +34,9 @@ og_cfg <- readr::read_rds(file.path(DIR_CONFIG, "og_cfg.rds"))
 
 # Ortsgruppe Daten -----------
 og_df <- kobo$get_submissions(og_id)
+# remove submissions after submission deadline (set as January of the following year)
+og_df<- og_df %>%
+    filter(end < as.Date(paste0(YEAR + 1, "-01-01")))
 
 # drop system columns
 og_df <- og_df %>%

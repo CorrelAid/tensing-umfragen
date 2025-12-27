@@ -30,6 +30,11 @@ tn_cfg <- readr::read_rds(file.path(DIR_CONFIG, "tn_cfg.rds"))
 # TN Daten -----------
 tn_df <- kobo$get_submissions(tn_id)
 
+# remove submissions after submission deadline (set as January of the following year)
+tn_df <- tn_df %>%
+    filter(end < as.Date(paste0(YEAR + 1, "-01-01")))
+
+
 # drop system columns
 tn_df <- tn_df %>%
     rename(tn_id = `_id`) %>%
