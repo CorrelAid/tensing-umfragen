@@ -16,3 +16,5 @@ source(here::here("config/viz_config.R"))
 source(here::here("R/quarto-utils.R"))
 source(here::here("R/utils.R"))
 source(here::here("R/viz.R"))
+ 
+options(OutDec = ",")
