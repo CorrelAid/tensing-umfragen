@@ -36,13 +36,7 @@ aussage_bar_chart <- function(data_long, var_filter, var_value) {
   p <- ggplot(plot_data, aes(x = value, fill = value, y = percent)) +
     ggiraph::geom_col_interactive(
       aes(
-        tooltip = paste0(
-          ch_label,
-          " (",
-          value,
-          ")\n",
-          scales::percent(percent, accuracy = 0.1, decimal.mark = ",")
-        ),
+        tooltip = paste0(ch_label,fmt_perc(percent)),
         data_id = paste(aussage, value, sep = "-")
       )
     ) +
@@ -118,15 +112,15 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
     aes(y = percent, fill = choice_label, x = choice_label)
   ) +
     geom_col() +
-    # ggiraph::geom_col_interactive(
-    #   aes(
-    #     tooltip = paste0(
-    #       choice_label, "\n",
-    #       scales::percent(percent, accuracy = 0.1)
-    #     ),
-    #     data_id = choice_label
-    #   )
-    # ) +
+    ggiraph::geom_col_interactive(
+      aes(
+        tooltip = paste0(
+          choice_label, "\n",
+          fmt_perc(percent)
+        ),
+        data_id = choice_label
+      )
+    ) +
     scale_fill_manual(
       name = "",
       values = colors,

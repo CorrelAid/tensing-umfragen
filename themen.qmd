@@ -446,7 +446,7 @@ render_kontakt_pie_chart <- function(tab_data) {
         aes(
           tooltip = paste0(
             has_kontaktpunkt, "\n",
-            n, " Personen (", round(perc), "%)"
+            n, " Personen (", fmt_perc(perc/100), ")"
           ),
           data_id = has_kontaktpunkt
         )
@@ -563,7 +563,7 @@ render_glaube_rolle_plot <- function(tab_data) {
     aes(
       x = value_label,
       fill = has_kontaktpunkt,
-      y = fmt_perc(percent),
+      y = percent,
       group = has_kontaktpunkt
     )
   ) +
@@ -579,7 +579,7 @@ render_glaube_rolle_plot <- function(tab_data) {
       position = "dodge"
     ) +
     scale_fill_manual(values = pal_yes_no_6[c(3, 1)]) +
-    scale_y_continuous(labels = fmt_perc(percent)) +
+    scale_y_continuous(labels = fmt_perc) +
     scale_x_discrete(
       drop = FALSE,
       labels = function(x) stringr::str_wrap(x, width = 14)
@@ -713,7 +713,7 @@ render_offenheit_plot <- function(tab_data) {
       plot_data,
       aes(
         x = value,
-        y = fmt_perc(percent),
+        y = percent,
         fill = has_kontaktpunkt,
         group = has_kontaktpunkt
       )
@@ -745,7 +745,7 @@ render_offenheit_plot <- function(tab_data) {
           stringr::str_wrap(swapped_labels, width = 12)
         }
       ) +
-      scale_y_continuous(labels = label_percent(), limits = c(0, 0.6)) +
+      scale_y_continuous(labels = fmt_perc, limits = c(0, 0.6)) +
       labs(
         y = "% der Aktiven",
         x = "Bewertung",
