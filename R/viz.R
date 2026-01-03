@@ -41,7 +41,7 @@ aussage_bar_chart <- function(data_long, var_filter, var_value) {
           " (",
           value,
           ")\n",
-          scales::percent(percent, accuracy = 0.1)
+          scales::percent(percent, accuracy = 0.1, decimal.mark = ",")
         ),
         data_id = paste(aussage, value, sep = "-")
       )
@@ -55,7 +55,7 @@ aussage_bar_chart <- function(data_long, var_filter, var_value) {
         "6 = trifft voll und ganz zu"
       )
     ) +
-    scale_y_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
+    scale_y_continuous(labels = scales::label_percent(decimal.mark = ","), limits = c(0, 1)) +
     labs(y = "% Aktive", title = str_wrap(title, 80), x = "Bewertung") +
     theme(
       plot.title = element_textbox_simple(
@@ -139,7 +139,7 @@ eig_bar_chart <- function(plot_data, rev_x = TRUE) {
       # labels = function(x) sub(".*\\((\\d+)\\)$", "\\1", x)
       labels = function(x) as.character(seq_along(x)) # sets x-axis labels to 1-6
     ) +
-    scale_y_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
+    scale_y_continuous(labels = scales::label_percent(decimal.mark = ","), limits = c(0, 1)) +
     labs(
       x = "Bewertung",
       title = title,

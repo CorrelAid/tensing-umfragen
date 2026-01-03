@@ -563,7 +563,7 @@ render_glaube_rolle_plot <- function(tab_data) {
     aes(
       x = value_label,
       fill = has_kontaktpunkt,
-      y = percent,
+      y = fmt_perc(percent),
       group = has_kontaktpunkt
     )
   ) +
@@ -572,14 +572,14 @@ render_glaube_rolle_plot <- function(tab_data) {
         tooltip = paste0(
           "Kontakt: ", has_kontaktpunkt, "\n",
           "Bewertung: ", value_label, "\n",
-          "Anteil: ", scales::percent(percent, accuracy = 0.1)
+          "Anteil: ", fmt_perc(percent)
         ),
         data_id = paste(has_kontaktpunkt, value, sep = "-")
       ),
       position = "dodge"
     ) +
     scale_fill_manual(values = pal_yes_no_6[c(3, 1)]) +
-    scale_y_continuous(labels = scales::label_percent()) +
+    scale_y_continuous(labels = fmt_perc(percent)) +
     scale_x_discrete(
       drop = FALSE,
       labels = function(x) stringr::str_wrap(x, width = 14)
@@ -713,7 +713,7 @@ render_offenheit_plot <- function(tab_data) {
       plot_data,
       aes(
         x = value,
-        y = percent,
+        y = fmt_perc(percent),
         fill = has_kontaktpunkt,
         group = has_kontaktpunkt
       )
@@ -723,7 +723,7 @@ render_offenheit_plot <- function(tab_data) {
           tooltip = paste0(
             has_kontaktpunkt, "\n",
             "Bewertung: ", value, "\n",
-            "Anteil: ", scales::percent(percent, accuracy = 0.1)
+            "Anteil: ", fmt_perc(percent)
           ),
           data_id = paste(has_kontaktpunkt, value, sep = "-")
         ),

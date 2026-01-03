@@ -185,3 +185,20 @@ callout_datenquellen <- function(cfg, og_q = NULL, tn_q = NULL, extra = NULL) {
     "\n\n"
   )
 }
+
+
+# Format number with dot as thousands separator
+fmt_num <- function(x) {
+  format(x, big.mark = ".", trim = TRUE)
+}
+
+fmt_perc <- function(x, digits = 1) {
+  paste0(
+    format(
+      round(x * 100, digits),
+      nsmall = digits,
+      decimal.mark = ","
+    ),
+    "%"
+  )
+}
