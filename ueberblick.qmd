@@ -552,7 +552,7 @@ render_verantwortung_plot <- function(data, y_limit = verantwortung_y_limit) {
       tooltip = paste0(
         "Hilfsangebot: ", hilfsangebot, "\n",
         "Verantwortung: ", verantwortung_janein, "\n",
-        "Anteil: ", scales::percent(pct, accuracy = 1)
+        "Anteil: ", fmt_perc(pct)
       ),
       data_id = paste(hilfsangebot, verantwortung_janein, sep = "_")
     ) |>
@@ -574,7 +574,7 @@ render_verantwortung_plot <- function(data, y_limit = verantwortung_y_limit) {
       ) +
       scale_fill_manual(values = pal_yes_no, labels = c("Personen mit Verantwortung", "Personen ohne Verantwortung")) +
       scale_y_continuous(
-        labels = scales::percent_format(accuracy = 1),
+        labels = fmt_perc,
         limits = c(0, y_limit),
         expand = ggplot2::expansion(mult = c(0, 0.05))
       ) +
@@ -680,8 +680,7 @@ plot_wahrsch_empfehlung <- function(y, y_limit = wahrsch_empf_y_limit){
     ggiraph::geom_col_interactive(
       aes(
         tooltip = paste0(
-          "Bewertung ", value, ": ",
-          round(percent, 1), "%"
+          "Bewertung ", value, ": ",fmt_perc(percent)
         ),
         data_id = value
       )
@@ -689,7 +688,7 @@ plot_wahrsch_empfehlung <- function(y, y_limit = wahrsch_empf_y_limit){
     scale_fill_manual(values = rev(pal_likert_11)) +
     scale_x_discrete(breaks = as.character(0:10), labels = as.character(0:10)) +
     scale_y_continuous(
-      labels = scales::label_percent(scale = 1),
+      labels = fmt_perc,
       limits = c(0, y_limit),
       expand = ggplot2::expansion(mult = c(0, 0.05))
     ) +
