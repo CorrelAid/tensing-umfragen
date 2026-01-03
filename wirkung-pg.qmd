@@ -35,7 +35,7 @@ prepare_info_data <- function(y){
     dplyr::count(info_komplett) %>%
     dplyr::mutate(
       csum = rev(cumsum(rev(n))),
-      perc = round(n * 100 / nrow(y$tn$data), 1),
+      perc = n / nrow(y$tn$data),
       pos  = n/2 + dplyr::lead(csum, 1),
       pos  = dplyr::if_else(is.na(pos), n/2, pos)
     )
@@ -59,7 +59,7 @@ prepare_info_data <- function(y){
     dplyr::count(info_wege_aenderung) %>%
     dplyr::mutate(
       csum = rev(cumsum(rev(n))),
-      perc = round(n * 100 / nrow(y$tn$data), 1),
+      perc = n/ nrow(y$tn$data),
       pos  = n/2 + dplyr::lead(csum, 1),
       pos  = dplyr::if_else(is.na(pos), n/2, pos)
     )
@@ -98,7 +98,7 @@ render_info_plots <- function(info_data) {
   ) +
     ggiraph::geom_col_interactive(
       aes(
-        tooltip = paste0(info_komplett, "\n", perc, "%"),
+        tooltip = paste0(info_komplett, "\n", fmt_perc(perc)),
         data_id = paste0("left_", info_komplett)
       )
     ) +
@@ -126,7 +126,7 @@ render_info_plots <- function(info_data) {
   ) +
     ggiraph::geom_col_interactive(
       aes(
-        tooltip = paste0(info_wege_aenderung, "\n", perc, "%"),
+        tooltip = paste0(info_wege_aenderung, "\n", fmt_perc(perc)),
         data_id = paste0("right_", info_wege_aenderung)
       )
     ) +
@@ -227,7 +227,7 @@ render_info_channel_plot <- function(channel_data) {
   p <- ggplot(agg, aes(x = info_weg, y = perc, fill = info_weg)) +
     ggiraph::geom_col_interactive(
       aes(
-        tooltip = sprintf("%.2f%% (%i von %i):\n%s", round(perc, 2), n, n_tensingende, info_weg),
+        tooltip = paste0(fmt_perc(perc/100), " (", n, " von ", n_tensingende, "):\n",info_weg),
         data_id = info_weg
       )
     ) +
@@ -655,7 +655,7 @@ render_participation_barriers <- function(data) {
     dplyr::mutate(grund = factor(grund, levels = sort(unique(grund))))
 
   p <- ggplot(barriers, aes(y = grund, x = percent)) +
-    geom_col_interactive(aes(tooltip = sprintf("%.2f%%", percent * 100)), fill = TS_GREEN) +
+    geom_col_interactive(aes(tooltip = fmt_perc(percent)), fill = TS_GREEN) +
     scale_x_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
     scale_y_discrete(labels = scales::label_wrap(40)) +
     labs(
@@ -805,7 +805,7 @@ render_unterstuetzung_plot <- function(data) {
         fill = bedarf_value,
         y = bedarf,
         x = prop,
-        tooltip = paste0(bedarf, "\n", bedarf_value, ": ", round(prop * 100), "% der Ortsgruppen")
+        tooltip = paste0(bedarf, "\n", bedarf_value, ": ", fmt_perc(prop), " der Ortsgruppen")
       )
     ) +
     geom_col_interactive(position = position_stack(reverse = TRUE)) +
