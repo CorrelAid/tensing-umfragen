@@ -457,11 +457,6 @@ agg_all <- purrr::map_dfr(
         zustimmung_tab_titles[aussage],
         aussage
       ),
-      tooltip_text = paste0(
-        label, "\n",
-        year, ": ",
-        scales::percent(zustimmung_perc, accuracy = 1)
-      )
     )
 )
 
@@ -479,7 +474,7 @@ render_zustimmung_trend_chart <- function(df, aussage_name) {
       tooltip = paste0(
         label, "\n",
         year, ": ",
-        scales::percent(zustimmung_perc, accuracy = 1)
+        fmt_perc(zustimmung_perc)
       ),
       data_id = paste(aussage, year, sep = "_")
     )
