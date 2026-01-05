@@ -649,7 +649,7 @@ calc_wahrsch_empf_max_pct <- function(y) {
   tibble::tibble(value = y$tn$data$wahrsch_empfehlung) |>
     dplyr::filter(!is.na(value)) |>
     dplyr::count(value) |>
-    dplyr::mutate(percent = n / sum(n) * 100) |>
+    dplyr::mutate(percent = n / sum(n)) |>
     dplyr::pull(percent) |>
     max(na.rm = TRUE)
 }
@@ -667,13 +667,13 @@ plot_wahrsch_empfehlung <- function(y, y_limit = wahrsch_empf_y_limit){
   df <- tibble(value = y$tn$data$wahrsch_empfehlung) %>%
     filter(!is.na(value)) %>%
     count(value) %>%
-    mutate(percent = n / sum(n)*100)
+    mutate(percent = n / sum(n))
 
   if (is.null(y_limit) || !is.finite(y_limit)) {
     y_limit <- max(df$percent, na.rm = TRUE)
   }
   if (!is.finite(y_limit) || y_limit <= 0) {
-    y_limit <- 100
+    y_limit <- 1
   }
 
   p <- ggplot(df, aes(x = factor(value), y = percent, fill = factor(value))) +

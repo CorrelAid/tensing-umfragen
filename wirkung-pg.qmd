@@ -619,7 +619,7 @@ render_participation_comparison <- function(data) {
     )
 
   p <- ggplot(combined, aes(y = type_veranst, x = perc, fill = teilnahme, group = forcats::fct_rev(teilnahme))) +
-    ggiraph::geom_col_interactive(aes(tooltip = sprintf("Teilnahme %s: %s\n%.2f%% aller Aktiven", type_veranst, teilnahme, perc * 100)), position = "dodge") +
+    ggiraph::geom_col_interactive(aes(tooltip = sprintf("Teilnahme %s: %s\n%s aller Aktiven", type_veranst, teilnahme, fmt_perc(perc))), position = "dodge") +
     scale_x_continuous(limits = c(0, 1), labels = scales::label_percent()) +
     scale_y_discrete(labels = scales::label_wrap(30)) +
     labs(

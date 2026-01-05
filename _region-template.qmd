@@ -13,7 +13,7 @@ source(here::here("R/load_data.R"))
 ggplot2::theme_set(theme_ts)
 
 # DEBUG
-# params <- list(region = "Ostwerk")
+#params <- list(region = "Ostwerk")
 # params <- list(region = "Süden")
 
 ```
@@ -859,12 +859,12 @@ plot_zugang_prob <- function(zugang_prop) {
     aes(y = label_short, x = prop)
   ) +
     ggiraph::geom_col_interactive(
-      aes(tooltip = paste0(label_manual, "\n", round(prop * 100), "%")),
+      aes(tooltip = paste0(label_manual, "\n", fmt_perc(prop))),
       fill = TS_GREEN
     ) +
     scale_y_discrete(limits = rev) +  
 
-    scale_x_continuous(labels = scales::label_percent(), limits = c(0, 1)) +
+    scale_x_continuous(labels = fmt_perc, limits = c(0, 1)) +
     labs(
       y = NULL,
       x = "% der Teilnehmenden",
@@ -1033,8 +1033,11 @@ plot_massnahmen <- function(mass_count_agg) {
 
   max_n <- max(mass_count_agg$n, na.rm = TRUE)
 
-  p <- ggplot(mass_count_agg, aes(y = label_short, x = n, tooltip = massnahme)) +
-    ggiraph::geom_col_interactive(fill = TS_GREEN) +
+  p <- ggplot(mass_count_agg, aes(y = label_short, x = n)) +
+    ggiraph::geom_col_interactive(fill = TS_GREEN,    aes(
+      tooltip = paste0(massnahme, "\nAnzahl: ", n),
+      data_id = paste0(massnahme, "_", label_short)
+    )) +
     scale_y_discrete(limits = rev) +  
 
     scale_x_continuous(breaks = seq(0, max_n, by = 1)) +
@@ -1313,13 +1316,13 @@ if (!tn_has_subregions) {
           tooltip = paste0(
             og_region, "\n",
             hat_probleme_tn_gewinnung, ": ",
-            scales::percent(perc, accuracy = 1)
+            fmt_perc(perc)
           ),
           data_id = paste(og_region, hat_probleme_tn_gewinnung, sep = "-")
         )
       ) +
       scale_x_discrete(drop = FALSE) +
-      scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+      scale_y_continuous(labels = fmt_perc) +
       scale_fill_manual(values = c(pal_yes_no_3)) +
       labs(
         title = "Probleme bei Teilnehmendengewinnung",

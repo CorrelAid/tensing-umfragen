@@ -36,7 +36,7 @@ aussage_bar_chart <- function(data_long, var_filter, var_value) {
   p <- ggplot(plot_data, aes(x = value, fill = value, y = percent)) +
     ggiraph::geom_col_interactive(
       aes(
-        tooltip = paste0(ch_label,fmt_perc(percent)),
+        tooltip = paste0(ch_label,"\n",fmt_perc(percent)),
         data_id = paste(aussage, value, sep = "-")
       )
     ) +
@@ -49,7 +49,7 @@ aussage_bar_chart <- function(data_long, var_filter, var_value) {
         "6 = trifft voll und ganz zu"
       )
     ) +
-    scale_y_continuous(labels = scales::label_percent(decimal.mark = ","), limits = c(0, 1)) +
+    scale_y_continuous(labels = fmt_perc, limits = c(0, 1)) +
     labs(y = "% Aktive", title = str_wrap(title, 80), x = "Bewertung") +
     theme(
       plot.title = element_textbox_simple(
