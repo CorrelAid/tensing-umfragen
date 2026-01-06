@@ -740,16 +740,16 @@ if (!is_westbund) {
     filter(angebot == "Theater") %>%
     pull(tn_id) %>%
     n_distinct()
-  angebot_perc_theater = round(100 * angebot_anz_theater / angebot_anz_ges, 2)
+  angebot_perc_theater = round(angebot_anz_theater / angebot_anz_ges, 2)
 
   callout <- sprintf(
-    "::: {.callout-tip collapse=\"false\"} \n## Interpretationshilfe\n\n Insgesamt %d Personen haben im Jahr %s eine Antwort auf diese Frage gegeben. %d Personen gaben wiederum an, dass sie gerne am Theaterworkshop/Theaterangebot teilnehmen. %d von %d Personen entspricht %.1f%% Prozent. Diesen Wert seht ihr im oberen Schaubild visualisiert. Da eine Mehrfachauswahl möglich war, summieren sich die Werte auf mehr als 100%%.\n:::",
+    "::: {.callout-tip collapse=\"false\"} \n## Interpretationshilfe\n\n Insgesamt %d Personen haben im Jahr %s eine Antwort auf diese Frage gegeben. %d Personen gaben wiederum an, dass sie gerne am Theaterworkshop/Theaterangebot teilnehmen. %d von %d Personen entspricht %s Prozent. Diesen Wert seht ihr im oberen Schaubild visualisiert. Da eine Mehrfachauswahl möglich war, summieren sich die Werte auf mehr als 100%%.\n:::",
     angebot_anz_ges,
     current_year,
     angebot_anz_theater,
     angebot_anz_theater,
     angebot_anz_ges,
-    angebot_perc_theater
+    fmt_perc(angebot_perc_theater)
   )
 
   cat(callout)
@@ -941,8 +941,7 @@ zugang_has_subregions <- is_westbund
 if (!zugang_has_subregions) {
   example_proz_curr <- zugang_prop_curr %>% 
     dplyr::filter(label_short == "Andere Person") %>% 
-    dplyr::pull(prop) %>% 
-    `*`(100)
+    dplyr::pull(prop)
 }
 ```
 
@@ -954,7 +953,7 @@ if (!zugang_has_subregions) {
 - x-Achse/waagerechte Achse: Prozentzahl der Teilnehmer\*innen, die diese Option als _eine ihrer Antworten_ ausgewählt haben. 
 - `r if (zugang_has_subregions) "Mehrfachauswahl: Prozentzahlen summieren sich innerhalb der Unterregionen nicht auf 100%." else sprintf("Mehrfachauswahl: Die Prozentzahlen summieren sich im Jahr %s auf %s%%, da mehrere Antworten möglich waren.", current_year, round(sum(zugang_prop_curr$prop) * 100,1))`
 
-`r if (!zugang_has_subregions) sprintf("**Beispielinterpretation**: %.1f%% der Teilnehmenden gaben im Jahr %s **als einen** ihrer Zugangswege zu TEN SING an, von einer anderen Person mitgenommen worden zu sein.", round(example_proz_curr,1), current_year) else ""`
+`r if (!zugang_has_subregions) sprintf("**Beispielinterpretation**: %sder Teilnehmenden gaben im Jahr %s **als einen** ihrer Zugangswege zu TEN SING an, von einer anderen Person mitgenommen worden zu sein.", fmt_perc(example_proz_curr), current_year) else ""`
 
 :::
 
