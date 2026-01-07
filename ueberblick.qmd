@@ -744,7 +744,7 @@ Dann springe direkt zur Region...
 - ... [Sachsen](./region/sachsen.qmd)
 - ... [Thüringen](./region/thueringen.qmd)
 - ... [Süden](./region/sueden.qmd)
-- ... [Westbund](./region/sueden.qmd)
+- ... [Westbund](./region/westbund.qmd)
 
 
 :::
